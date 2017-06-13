@@ -21,7 +21,7 @@ public class Recipes {
         String D = "gemDiamond";
         String E = "gemEmerald";
         String I = "ingotIron";
-        String G = "IngotGold";
+        String G = "ingotGold";
         String O = "obsidian";
         String S = "stone";
         String W = "logWood";

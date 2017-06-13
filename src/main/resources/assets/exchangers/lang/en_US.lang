@@ -1,0 +1,14 @@
+#Creative Tab
+itemGroup.exchangers=Exchangers
+
+#Materials
+item.exchangers.exchanger_core.name=§dExchanger Core
+
+#Exchangers
+item.exchangers.wooden_exchanger.name=§bWooden Exchanger
+item.exchangers.stone_exchanger.name=§bStone Exchanger
+item.exchangers.golden_exchanger.name=§bGolden Exchanger
+item.exchangers.iron_exchanger.name=§bIron Exchanger
+item.exchangers.diamond_exchanger.name=§bDiamond Exchanger
+item.exchangers.emerald_exchanger.name=§bEmerald Exchanger
+item.exchangers.obsidian_exchanger.name=§bObsidian Exchanger

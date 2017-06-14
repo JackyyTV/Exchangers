@@ -1,6 +1,10 @@
 #Creative Tab
 itemGroup.exchangers=Exchangers
 
+#Key Bindings
+key.categories.exchangers=Exchangers
+key.exchangermode=Exchanger Mode Switch
+
 #Materials
 item.exchangers.exchanger_core.name=§dExchanger Core
 

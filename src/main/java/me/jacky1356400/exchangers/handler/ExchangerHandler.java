@@ -134,7 +134,7 @@ public class ExchangerHandler {
         EnumFacing[] facesAround = getFacings(side);
 
         for (EnumFacing dir : facesAround){
-            BlockPos newPos = pos.offset(dir);
+            BlockPos newPos = pos.offset(side);
 
             if (checkedList.contains(newPos) || !blockInRange(origin, newPos, range)){
                 continue;

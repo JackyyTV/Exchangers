@@ -43,7 +43,7 @@ public class ItemObsidianExchanger extends Item {
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
-    public static final int MODE_INITIAL = 0;
+    public static final int MODE_INITIAL = 2;
     public static final int MODE_1X1 = 0;
     public static final int MODE_3X3 = 1;
     public static final int MODE_5X5 = 2;
@@ -54,8 +54,9 @@ public class ItemObsidianExchanger extends Item {
     public static final int MODE_15X15 = 7;
 
 
-    public static final String[] modeSwitchList = new String[] {"1x1", "3x3", "5x5", "7x7", "9x9", "11x11", "13x13", "15X15"};
+    public static final String[] modeSwitchList = new String[] {"1x1", "3x3", "5x5", "7x7", "9x9", "11x11", "13x13", "15x15"};
     public static final Integer[] modeSwitchRange = new Integer[] {0, 1, 2, 3, 4, 5, 6, 7};
+    public static final Integer[] modeSwitchRanges = new Integer[] {1, 3, 5, 7, 9, 11, 13, 15};
 
     public void switchMode(EntityPlayer player, ItemStack stack) {
         if (stackTagCompoundNull(stack)) setDefaultTagCompound(stack);
@@ -63,7 +64,7 @@ public class ItemObsidianExchanger extends Item {
         int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
         modeSwitch++;
 
-        if (modeSwitch > MODE_15X15) modeSwitch = MODE_INITIAL;
+        if (modeSwitch > MODE_15X15) modeSwitch = 0;
 
         stack.getTagCompound().setInteger("ExchangeMode", modeSwitch);
         msgPlayer(player, "Exchanger mode set to " + modeSwitchList[modeSwitch]);
@@ -115,11 +116,41 @@ public class ItemObsidianExchanger extends Item {
         } else {
             if (ExchangerHandler.blockSuitableForExchange(stack, player, world, pos)) {
 
-                boolean success = ExchangerHandler.exchangeBlocks(stack, player, world, pos, facing);
+                int mode = stack.getTagCompound().getInteger("ExchangeMode");
+
+                boolean success = false;
+
+                switch (facing.getIndex()){
+                    case 0:
+                        for(int x = 0; x < (modeSwitchRanges[mode]+1); x++){
+                            for (int z = 0; z < (modeSwitchRanges[mode]+1); z++){
+                                BlockPos pos2 = pos.add(x, 0, z);
+                                if(world.isAirBlock(pos2)) continue;
+                                if(!success){
+                                    success = ExchangerHandler.exchangeBlocks(stack, player, world, pos2, facing);
+                                } else {
+                                    ExchangerHandler.exchangeBlocks(stack, player, world, pos2, facing);
+                                }
+                            }
+                        }
+                        break;
+                    case 1:
+                        for(int x = 0; x < (modeSwitchRanges[mode]+1); x++){
+                            for (int z = 0; z < (modeSwitchRanges[mode]+1); z++){
+                                BlockPos pos2 = pos.add(x, 0, z);
+                                if(world.isAirBlock(pos2)) continue;
+                                if(!success){
+                                    success = ExchangerHandler.exchangeBlocks(stack, player, world, pos2, facing);
+                                } else {
+                                    ExchangerHandler.exchangeBlocks(stack, player, world, pos2, facing);
+                                }
+                            }
+                        }
+                        break;
+                }
 
                 if (success) {
                     return EnumActionResult.SUCCESS;
-
                 }
 
             } else {
@@ -138,7 +169,7 @@ public class ItemObsidianExchanger extends Item {
         stack.setTagCompound(new NBTTagCompound());
         stack.getTagCompound().setString("BlockName", "");
         stack.getTagCompound().setInteger("BlockData", 0);
-        stack.getTagCompound().setInteger("ExchangeMode", 0);
+        stack.getTagCompound().setInteger("ExchangeMode", 3);
     }
 
 }

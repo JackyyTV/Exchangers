@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "exchangers:items/exchanger_core"
+        "layer0": "exchangers:items/exchanger_core_tier3"
     }
 }

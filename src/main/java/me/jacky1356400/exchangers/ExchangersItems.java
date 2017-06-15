@@ -11,7 +11,10 @@ public class ExchangersItems {
     public static ItemDiamondExchanger diamondExchanger;
     public static ItemEmeraldExchanger emeraldExchanger;
     public static ItemObsidianExchanger obsidianExchanger;
-    public static ItemExchangerCore exchangerCore;
+    public static ItemTuberousExchanger tuberousExchanger;
+    public static ItemExchangerCoreT1 exchangerCoreT1;
+    public static ItemExchangerCoreT2 exchangerCoreT2;
+    public static ItemExchangerCoreT3 exchangerCoreT3;
 
     public static void init(){
         woodenExchanger = GameRegistry.register(new ItemWoodenExchanger());
@@ -21,7 +24,10 @@ public class ExchangersItems {
         diamondExchanger = GameRegistry.register(new ItemDiamondExchanger());
         emeraldExchanger = GameRegistry.register(new ItemEmeraldExchanger());
         obsidianExchanger = GameRegistry.register(new ItemObsidianExchanger());
-        exchangerCore = GameRegistry.register(new ItemExchangerCore());
+        tuberousExchanger = GameRegistry.register(new ItemTuberousExchanger());
+        exchangerCoreT1 = GameRegistry.register(new ItemExchangerCoreT1());
+        exchangerCoreT2 = GameRegistry.register(new ItemExchangerCoreT2());
+        exchangerCoreT3 = GameRegistry.register(new ItemExchangerCoreT3());
     }
 
     public static void initModels(){
@@ -32,7 +38,10 @@ public class ExchangersItems {
         diamondExchanger.initModel();
         emeraldExchanger.initModel();
         obsidianExchanger.initModel();
-        exchangerCore.initModel();
+        tuberousExchanger.initModel();
+        exchangerCoreT1.initModel();
+        exchangerCoreT2.initModel();
+        exchangerCoreT3.initModel();
     }
 
 }

@@ -34,7 +34,7 @@ public class RenderOverlayHandler {
 
         RayTraceResult mouseOver = mc.objectMouseOver;
 
-        if (stack != null && stack.getItem() instanceof ItemObsidianExchanger  && stack.getTagCompound() != null
+        if (stack != null && stack.getItem() instanceof ItemExchangerBase  && stack.getTagCompound() != null
                 && mouseOver != null && mouseOver.getBlockPos() != null && mouseOver.sideHit != null) {
             List<BlockPos> blocks = ExchangerHandler.getBlocksToExchange(stack, mouseOver.getBlockPos(), world, mc.objectMouseOver.sideHit);
 

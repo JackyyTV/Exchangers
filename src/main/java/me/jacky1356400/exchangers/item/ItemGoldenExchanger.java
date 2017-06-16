@@ -9,7 +9,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemGoldenExchanger extends Item {
+public class ItemGoldenExchanger extends ItemExchangerBase {
 
     public ItemGoldenExchanger(){
         setRegistryName(Exchangers.MODID + ":golden_exchanger");
@@ -17,10 +17,6 @@ public class ItemGoldenExchanger extends Item {
         setMaxStackSize(1);
         setMaxDamage(Config.goldenExchangerMaxDamage);
         setCreativeTab(Exchangers.exchangersCreativeTab);
-    }
-
-    public boolean showDurabilityBar(ItemStack stack){
-        return stack.isItemDamaged();
     }
 
     @SideOnly(Side.CLIENT)

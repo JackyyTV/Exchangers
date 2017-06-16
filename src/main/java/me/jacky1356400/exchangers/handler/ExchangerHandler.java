@@ -106,7 +106,7 @@ public class ExchangerHandler {
     public static List<BlockPos> getBlocksToExchange(ItemStack stack, BlockPos pos, World world, EnumFacing side) {
 
         int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
-        int range = me.jacky1356400.exchangers.item.ItemObsidianExchanger.modeSwitchRange[modeSwitch];
+        int range = me.jacky1356400.exchangers.item.ItemExchangerBase.modeSwitchRange[modeSwitch];
         IBlockState state = world.getBlockState(pos);
 
         List<BlockPos> exchangeList = new ArrayList<BlockPos>();

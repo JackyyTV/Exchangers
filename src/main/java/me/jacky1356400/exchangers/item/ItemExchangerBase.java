@@ -13,6 +13,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import java.util.List;
 
@@ -26,39 +28,16 @@ public class ItemExchangerBase extends Item {
 
     public static final String[] modeSwitchList = new String[] {"1x1", "3x3", "5x5", "7x7", "9x9", "11x11", "13x13", "15x15"};
     public static final Integer[] modeSwitchRange = new Integer[] {0, 1, 2, 3, 4, 5, 6, 7};
-    public static final Integer[] modeSwitchRanges = new Integer[] {1, 3, 5, 7, 9, 11, 13, 15};
 
     public static void setDefaultTagCompound(ItemStack stack) {
         stack.setTagCompound(new NBTTagCompound());
         stack.getTagCompound().setString("BlockName", "");
         stack.getTagCompound().setInteger("BlockData", 0);
-        stack.getTagCompound().setInteger("ExchangeMode", 3);
+        stack.getTagCompound().setInteger("ExchangeMode", 0);
     }
 
     public static boolean stackTagCompoundNull(ItemStack stack) {
         return stack.getTagCompound() == null;
-    }
-
-    public static final int MODE_INITIAL = 2;
-    public static final int MODE_1X1 = 0;
-    public static final int MODE_3X3 = 1;
-    public static final int MODE_5X5 = 2;
-    public static final int MODE_7X7 = 3;
-    public static final int MODE_9X9 = 4;
-    public static final int MODE_11X11 = 5;
-    public static final int MODE_13X13 = 6;
-    public static final int MODE_15X15 = 7;
-
-    public void switchMode(EntityPlayer player, ItemStack stack) {
-        if (stackTagCompoundNull(stack)) setDefaultTagCompound(stack);
-
-        int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
-        modeSwitch++;
-
-        if (modeSwitch > MODE_15X15) modeSwitch = 0;
-
-        stack.getTagCompound().setInteger("ExchangeMode", modeSwitch);
-        msgPlayer(player, "Exchanger mode set to " + modeSwitchList[modeSwitch]);
     }
 
     @Override
@@ -82,7 +61,7 @@ public class ItemExchangerBase extends Item {
 
         tooltip.add("Sneak right click on block to select.");
         tooltip.add("Right click on a block to exchange.");
-        tooltip.add("Mode key (default 'comma') to switch modes.");
+        tooltip.add("Use the mode key (default 'COMMA') to switch modes.");
     }
 
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -97,51 +76,19 @@ public class ItemExchangerBase extends Item {
         if (player.isSneaking()) {
 
             if (ExchangerHandler.blockSuitableForSelection(player, world, pos)) {
-                msgPlayer(player, "Selected Block - " + ExchangerHandler.getBlockName(block, meta));
                 ExchangerHandler.setSelectedBlock(stack, block, state);
                 return EnumActionResult.SUCCESS;
             } else {
-                msgPlayer(player, "Invalid Selected Block - " + ExchangerHandler.getBlockName(block, meta));
                 return EnumActionResult.FAIL;
             }
         } else {
             if (ExchangerHandler.blockSuitableForExchange(stack, player, world, pos)) {
 
-                int mode = stack.getTagCompound().getInteger("ExchangeMode");
-
-                boolean success = false;
-
-                switch (facing.getIndex()){
-                    case 0:
-                        for(int x = 0; x < (modeSwitchRanges[mode]+1); x++){
-                            for (int z = 0; z < (modeSwitchRanges[mode]+1); z++){
-                                BlockPos pos2 = pos.add(x, 0, z);
-                                if(world.isAirBlock(pos2)) continue;
-                                if(!success){
-                                    success = ExchangerHandler.exchangeBlocks(stack, player, world, pos2, facing);
-                                } else {
-                                    ExchangerHandler.exchangeBlocks(stack, player, world, pos2, facing);
-                                }
-                            }
-                        }
-                        break;
-                    case 1:
-                        for(int x = 0; x < (modeSwitchRanges[mode]+1); x++){
-                            for (int z = 0; z < (modeSwitchRanges[mode]+1); z++){
-                                BlockPos pos2 = pos.add(x, 0, z);
-                                if(world.isAirBlock(pos2)) continue;
-                                if(!success){
-                                    success = ExchangerHandler.exchangeBlocks(stack, player, world, pos2, facing);
-                                } else {
-                                    ExchangerHandler.exchangeBlocks(stack, player, world, pos2, facing);
-                                }
-                            }
-                        }
-                        break;
-                }
+                boolean success = ExchangerHandler.exchangeBlocks(stack, player, world, pos, facing);
 
                 if (success) {
                     return EnumActionResult.SUCCESS;
+
                 }
 
             } else {
@@ -150,6 +97,56 @@ public class ItemExchangerBase extends Item {
         }
 
         return EnumActionResult.SUCCESS;
+    }
+
+    public static final int MODE_INITIAL = 0;
+    public static final int MODE_1X1 = 0;
+    public static final int MODE_3X3 = 1;
+    public static final int MODE_5X5 = 2;
+    public static final int MODE_7X7 = 3;
+    public static final int MODE_9X9 = 4;
+    public static final int MODE_11X11 = 5;
+    public static final int MODE_13X13 = 6;
+    public static final int MODE_15X15 = 7;
+
+    public void switchMode(EntityPlayer player, ItemStack stack, EnumHand hand, MessageContext context) {
+        if (stackTagCompoundNull(stack)) setDefaultTagCompound(stack);
+
+        int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
+        modeSwitch++;
+
+        EntityPlayerMP playerMP = context.getServerHandler().playerEntity;
+        ItemStack heldItem = playerMP.getHeldItemMainhand();
+
+        if (heldItem != null) {
+            if (heldItem.getItem() instanceof ItemObsidianExchanger) {
+                if (modeSwitch > MODE_15X15) modeSwitch = MODE_INITIAL;
+            }
+            if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
+                if (modeSwitch > MODE_13X13) modeSwitch = MODE_INITIAL;
+            }
+            if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
+                if (modeSwitch > MODE_11X11) modeSwitch = MODE_INITIAL;
+            }
+            if (heldItem.getItem() instanceof ItemDiamondExchanger) {
+                if (modeSwitch > MODE_9X9) modeSwitch = MODE_INITIAL;
+            }
+            if (heldItem.getItem() instanceof ItemIronExchanger) {
+                if (modeSwitch > MODE_7X7) modeSwitch = MODE_INITIAL;
+            }
+            if (heldItem.getItem() instanceof ItemGoldenExchanger) {
+                if (modeSwitch > MODE_5X5) modeSwitch = MODE_INITIAL;
+            }
+            if (heldItem.getItem() instanceof ItemStoneExchanger) {
+                if (modeSwitch > MODE_3X3) modeSwitch = MODE_INITIAL;
+            }
+            if (heldItem.getItem() instanceof ItemWoodenExchanger) {
+                if (modeSwitch > MODE_1X1) modeSwitch = MODE_INITIAL;
+            }
+        }
+
+        stack.getTagCompound().setInteger("ExchangeMode", modeSwitch);
+        msgPlayer(player, "Exchanger mode set to " + modeSwitchList[modeSwitch]);
     }
 
 }

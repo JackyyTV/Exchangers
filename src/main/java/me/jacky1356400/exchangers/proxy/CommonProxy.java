@@ -28,13 +28,14 @@ public class CommonProxy {
         config = new Configuration(new File(configDir.getPath(), "exchangers.cfg"));
         Config.readConfig();
         ExchangersItems.init();
+        Recipes.init();
         PacketHandler.registerMessages(Exchangers.MODID);
-        ExchangerHandler.initSpecialBlockLists();
     }
 
     public void init(FMLInitializationEvent e){
         Exchangers.logger.info("proxy");
-        Recipes.init();
+        MinecraftForge.EVENT_BUS.register(new KeyBindingsHandler());
+        Keys.init();
         MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
     }

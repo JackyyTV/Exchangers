@@ -1,5 +1,6 @@
 package me.jacky1356400.exchangers.handler;
 
+import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -91,12 +92,11 @@ public class ExchangerHandler {
         int worldMeta = worldBlock.getMetaFromState(world.getBlockState(pos));
 
         if (!blockSuitableForSelection(player, world, pos)) {
-            msgPlayer(player, "Invalid Block - " + getBlockName(worldBlock, worldMeta));
+            msgPlayer(player, "Error: Invalid block!");
             return false;
         }
 
         if (newBlock == worldBlock && newMeta == worldMeta) {
-            msgPlayer(player, getBlockName(newBlock, newMeta) + " is the same block as selected block");
             return false;
         }
 
@@ -106,7 +106,7 @@ public class ExchangerHandler {
     public static List<BlockPos> getBlocksToExchange(ItemStack stack, BlockPos pos, World world, EnumFacing side) {
 
         int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
-        int range = me.jacky1356400.exchangers.item.ItemExchangerBase.modeSwitchRange[modeSwitch];
+        int range = ItemExchangerBase.modeSwitchRange[modeSwitch];
         IBlockState state = world.getBlockState(pos);
 
         List<BlockPos> exchangeList = new ArrayList<BlockPos>();
@@ -177,7 +177,7 @@ public class ExchangerHandler {
                 try {
                     slot = findItemInInventory(player.inventory, Item.getItemFromBlock(newBlock), newMeta);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    msgPlayer(player, "Out of " + getBlockName(newBlock, newMeta) + " in inventory");
+                    msgPlayer(player, "Error: Out of blocks!");
                     return false;
                 }
 
@@ -186,11 +186,11 @@ public class ExchangerHandler {
                     int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
 
                     if (!placeBlockInInventory(player, oldBlock, oldMeta)) {
-                        msgPlayer(player, "Out of space in inventory");
+                        msgPlayer(player, "Error: Out of space in inventory!");
                         return false;
                     } else {
                         if (!placeBlockInWorld(world, exchangePos, newState)) {
-                            msgPlayer(player, "Out of " + getBlockName(newBlock, newMeta) + " in inventory");
+                            msgPlayer(player, "Error: Out of blocks!");
                             return false;
                         } else {
                             if (!consumeBlockInInventory(player, newBlock, newState)) {

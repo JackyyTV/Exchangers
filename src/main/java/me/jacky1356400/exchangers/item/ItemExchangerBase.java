@@ -79,6 +79,7 @@ public class ItemExchangerBase extends Item {
                 ExchangerHandler.setSelectedBlock(stack, block, state);
                 return EnumActionResult.SUCCESS;
             } else {
+                msgPlayer(player, "Error: Invalid block!");
                 return EnumActionResult.FAIL;
             }
         } else {

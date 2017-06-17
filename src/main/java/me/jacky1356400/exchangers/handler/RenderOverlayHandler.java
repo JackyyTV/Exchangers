@@ -34,9 +34,8 @@ public class RenderOverlayHandler {
 
         RayTraceResult mouseOver = mc.objectMouseOver;
 
-        if (stack != null && stack.getItem() instanceof ItemExchangerBase  && stack.getTagCompound() != null
-                && mouseOver != null && mouseOver.getBlockPos() != null && mouseOver.sideHit != null) {
-            List<BlockPos> blocks = ExchangerHandler.getBlocksToExchange(stack, mouseOver.getBlockPos(), world, mc.objectMouseOver.sideHit);
+        if (stack != null && stack.getItem() instanceof ItemExchangerBase && stack.getTagCompound() != null && mouseOver != null && mouseOver.getBlockPos() != null && mouseOver.sideHit != null) {
+            List<BlockPos> blocks = ItemExchangerBase.getBlocksToExchange(stack, mouseOver.getBlockPos(), world, mc.objectMouseOver.sideHit);
 
             Tessellator tessellator = Tessellator.getInstance();
             VertexBuffer buffer = tessellator.getBuffer();

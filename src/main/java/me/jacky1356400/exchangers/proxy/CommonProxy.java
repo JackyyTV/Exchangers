@@ -5,12 +5,12 @@ import me.jacky1356400.exchangers.Recipes;
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.ExchangersItems;
 import me.jacky1356400.exchangers.client.Keys;
-import me.jacky1356400.exchangers.handler.ExchangerHandler;
 import me.jacky1356400.exchangers.handler.KeyBindingsHandler;
 import me.jacky1356400.exchangers.handler.RenderOverlayHandler;
 import me.jacky1356400.exchangers.handler.WorldEventHandler;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
 import me.jacky1356400.exchangers.helper.DirectionHelper;
+import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -41,7 +41,7 @@ public class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent e) {
-        ExchangerHandler.initSpecialBlockLists();
+        ItemExchangerBase.initSpecialBlockLists();
         DirectionHelper.initFacings();
     }
 

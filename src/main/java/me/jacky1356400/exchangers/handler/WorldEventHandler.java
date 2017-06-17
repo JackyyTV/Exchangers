@@ -37,7 +37,7 @@ public class WorldEventHandler {
 
         if (queue == null || queue.size() == 0) return;
 
-        world.theProfiler.startSection("BBE-Exchanging");
+        world.theProfiler.startSection("Exchangers-Exchanging");
         List<Exchange> queueList = new ArrayList<Exchange>(queue);
         Exchange exchange = queueList.get(0);
 

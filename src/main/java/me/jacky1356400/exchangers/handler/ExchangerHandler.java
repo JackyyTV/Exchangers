@@ -164,7 +164,7 @@ public class ExchangerHandler {
         int newMeta = stack.getTagCompound().getInteger("BlockData");
 
         if (newBlock == null) return false;
-        world.theProfiler.startSection("Exchanger-Building/Queueing");
+        world.theProfiler.startSection("Exchangers-Building/Queueing");
 
         IBlockState newState = newBlock.getStateFromMeta(newMeta);
         List<BlockPos> toExchange = getBlocksToExchange(stack, pos, world, facing);

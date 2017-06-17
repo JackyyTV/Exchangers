@@ -22,12 +22,22 @@ import static me.jacky1356400.exchangers.helper.ChatHelper.msgPlayer;
 
 public class ItemExchangerBase extends Item {
 
-    public boolean showDurabilityBar(ItemStack stack){
-        return stack.isItemDamaged();
-    }
+    public static final int MODE_INITIAL = 0;
+    public static final int MODE_1X1 = 0;
+    public static final int MODE_3X3 = 1;
+    public static final int MODE_5X5 = 2;
+    public static final int MODE_7X7 = 3;
+    public static final int MODE_9X9 = 4;
+    public static final int MODE_11X11 = 5;
+    public static final int MODE_13X13 = 6;
+    public static final int MODE_15X15 = 7;
 
     public static final String[] modeSwitchList = new String[] {"1x1", "3x3", "5x5", "7x7", "9x9", "11x11", "13x13", "15x15"};
     public static final Integer[] modeSwitchRange = new Integer[] {0, 1, 2, 3, 4, 5, 6, 7};
+
+    public boolean showDurabilityBar(ItemStack stack){
+        return stack.isItemDamaged();
+    }
 
     public static void setDefaultTagCompound(ItemStack stack) {
         stack.setTagCompound(new NBTTagCompound());
@@ -99,16 +109,6 @@ public class ItemExchangerBase extends Item {
 
         return EnumActionResult.SUCCESS;
     }
-
-    public static final int MODE_INITIAL = 0;
-    public static final int MODE_1X1 = 0;
-    public static final int MODE_3X3 = 1;
-    public static final int MODE_5X5 = 2;
-    public static final int MODE_7X7 = 3;
-    public static final int MODE_9X9 = 4;
-    public static final int MODE_11X11 = 5;
-    public static final int MODE_13X13 = 6;
-    public static final int MODE_15X15 = 7;
 
     public void switchMode(EntityPlayer player, ItemStack stack, EnumHand hand, MessageContext context) {
         if (stackTagCompoundNull(stack)) setDefaultTagCompound(stack);

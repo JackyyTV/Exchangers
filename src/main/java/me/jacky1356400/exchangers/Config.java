@@ -115,13 +115,13 @@ public class Config {
         leadstoneExchangerMaxRF = cfg.getInt("Leadstone Exchanger Capacity", CATEGORY_TWEAKS_TE, 80000, 1000, 100000000, "Set the RF capacity for Leadstone Exchanger");
         leadstoneExchangerPerBlockRF = cfg.getInt("Leadstone Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 10, 1, 250, "Set the RF consumption per block for Leadstone Exchanger");
         hardenedExchangerMaxRF = cfg.getInt("Hardened Exchanger Capacity", CATEGORY_TWEAKS_TE, 500000, 1000, 100000000, "Set the RF capacity for Hardened Exchanger");
-        hardenedExchangerPerBlockRF = cfg.getInt("Hardened Exchanger Capacity", CATEGORY_TWEAKS_TE, 50, 1, 500, "Set the RF consumption per block for Hardened Exchanger");
+        hardenedExchangerPerBlockRF = cfg.getInt("Hardened Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 50, 1, 500, "Set the RF consumption per block for Hardened Exchanger");
         reinforcedExchangerMaxRF = cfg.getInt("Reinforced Exchanger Capacity", CATEGORY_TWEAKS_TE, 1000000, 1000, 100000000, "Set the RF capacity for Reinforced Exchanger");
-        reinforcedExchangerPerBlockRF = cfg.getInt("Reinforced Exchanger Capacity", CATEGORY_TWEAKS_TE, 100, 1, 1000, "Set the RF consumption per block for Reinforced Exchanger");
+        reinforcedExchangerPerBlockRF = cfg.getInt("Reinforced Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 100, 1, 1000, "Set the RF consumption per block for Reinforced Exchanger");
         signalumExchangerMaxRF = cfg.getInt("Signalum Exchanger Capacity", CATEGORY_TWEAKS_TE, 10000000, 1000, 100000000, "Set the RF capacity for Signalum Exchanger");
-        signalumExchangerPerBlockRF = cfg.getInt("Signalum Exchanger Capacity", CATEGORY_TWEAKS_TE, 500, 1, 5000, "Set the RF consumption per block for Signalum Exchanger");
+        signalumExchangerPerBlockRF = cfg.getInt("Signalum Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 500, 1, 5000, "Set the RF consumption per block for Signalum Exchanger");
         resonantExchangerMaxRF = cfg.getInt("Resonant Exchanger Capacity", CATEGORY_TWEAKS_TE, 20000000, 1000, 100000000, "Set the RF capacity for Resonant Exchanger");
-        resonantExchangerPerBlockRF = cfg.getInt("Resonant Exchanger Capacity", CATEGORY_TWEAKS_TE, 1000, 1, 10000, "Set the RF consumption per block for Resonant Exchanger");
+        resonantExchangerPerBlockRF = cfg.getInt("Resonant Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 1000, 1, 10000, "Set the RF consumption per block for Resonant Exchanger");
 
         //Mekanism Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_MEKANISM, "Mekanism Exchanger Tweaks");

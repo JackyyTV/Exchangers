@@ -10,7 +10,7 @@ death.attack.exchangerpotato=%1$s tried to operate a potato exchanger
 death.attack.exchangerpotato.player=%1$s tried to operate a potato exchanger
 death.attack.exchangerpotato.item=%1$s tried to operate a potato exchanger
 
-#Materials
+#Crafting Components
 item.exchangers.exchanger_core_tier1.name=§aExchanger Core (Tier 1)
 item.exchangers.exchanger_core_tier2.name=§bExchanger Core (Tier 2)
 item.exchangers.exchanger_core_tier3.name=§dExchanger Core (Tier 3)

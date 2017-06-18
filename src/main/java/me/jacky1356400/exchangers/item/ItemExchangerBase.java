@@ -1,7 +1,31 @@
 package me.jacky1356400.exchangers.item;
 
+import static me.jacky1356400.exchangers.handler.WorldEventHandler.queueExchanges;
+import static me.jacky1356400.exchangers.helper.ChatHelper.msgPlayer;
+import static me.jacky1356400.exchangers.helper.DirectionHelper.getFacings;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.mojang.realmsclient.gui.ChatFormatting;
-import net.minecraft.block.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockHugeMushroom;
+import net.minecraft.block.BlockLadder;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockPistonBase;
+import net.minecraft.block.BlockRedstoneLight;
+import net.minecraft.block.BlockTorch;
+import net.minecraft.block.BlockTrapDoor;
+import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,16 +38,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-
-import java.util.*;
-
-import static me.jacky1356400.exchangers.handler.WorldEventHandler.queueExchanges;
-import static me.jacky1356400.exchangers.helper.ChatHelper.msgPlayer;
-import static me.jacky1356400.exchangers.helper.DirectionHelper.getFacings;
 
 public class ItemExchangerBase extends Item {
 
@@ -265,7 +281,7 @@ public class ItemExchangerBase extends Item {
         EnumFacing[] facesAround = getFacings(side);
 
         for (EnumFacing dir : facesAround){
-            BlockPos newPos = pos.offset(side);
+            BlockPos newPos = pos.offset(dir);
 
             if (checkedList.contains(newPos) || !blockInRange(origin, newPos, range)){
                 continue;

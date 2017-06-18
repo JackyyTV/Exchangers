@@ -254,6 +254,7 @@ public class ItemExchangerBase extends Item {
 	softBlocks.add(Blocks.SNOW);
 	softBlocks.add(Blocks.VINE);
 	softBlocks.add(Blocks.FIRE);
+	softBlocks.add(Blocks.AIR);
 
     }
 

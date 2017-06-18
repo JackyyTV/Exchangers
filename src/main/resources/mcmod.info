@@ -7,9 +7,9 @@
   "mcversion": "1.12",
   "url": "https://github.com/Jacky1356400/Exchangers",
   "updateUrl": "",
-  "authorList": ["Jacky1356400"],
-  "credits": "",
-  "logoFile": "",
+  "authorList": ["Jacky1356400", "Turkey2349"],
+  "credits": "ThatGamerBlue, ColossalPercy, JCOnline_ and many other people that helped the development of this mod!",
+  "logoFile": "assets/exchangers/logo.png",
   "screenshots": [],
   "dependencies": []
 }

@@ -102,7 +102,6 @@ public class ItemExchangerBase extends Item {
 
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        int meta = block.getMetaFromState(state);
 
         if (player.isSneaking()) {
 

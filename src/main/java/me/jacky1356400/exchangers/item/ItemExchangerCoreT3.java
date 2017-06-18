@@ -7,12 +7,12 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemExchangerCore extends Item {
+public class ItemExchangerCoreT3 extends Item {
 
-    public ItemExchangerCore(){
-        setRegistryName(Exchangers.MODID + ":exchanger_core");
-        setUnlocalizedName(Exchangers.MODID + ".exchanger_core");
-        setMaxStackSize(1);
+    public ItemExchangerCoreT3(){
+        setRegistryName(Exchangers.MODID + ":exchanger_core_tier3");
+        setUnlocalizedName(Exchangers.MODID + ".exchanger_core_tier3");
+        setMaxStackSize(16);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

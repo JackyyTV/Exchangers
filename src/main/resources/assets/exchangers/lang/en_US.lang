@@ -1,14 +1,26 @@
 #Creative Tab
 itemGroup.exchangers=Exchangers
 
-#Materials
-item.exchangers.exchanger_core.name=§dExchanger Core
+#Key Bindings
+key.categories.exchangers=Exchangers
+key.exchangermode=Exchanger Mode Switch
+
+#Death
+death.attack.exchangerpotato=%1$s tried to operate a potato exchanger
+death.attack.exchangerpotato.player=%1$s tried to operate a potato exchanger
+death.attack.exchangerpotato.item=%1$s tried to operate a potato exchanger
+
+#Crafting Components
+item.exchangers.exchanger_core_tier1.name=§aExchanger Core (Tier 1)
+item.exchangers.exchanger_core_tier2.name=§bExchanger Core (Tier 2)
+item.exchangers.exchanger_core_tier3.name=§dExchanger Core (Tier 3)
 
 #Exchangers
-item.exchangers.wooden_exchanger.name=§bWooden Exchanger
-item.exchangers.stone_exchanger.name=§bStone Exchanger
+item.exchangers.tuberous_exchanger.name=§eTuberous Exchanger
+item.exchangers.wooden_exchanger.name=§aWooden Exchanger
+item.exchangers.stone_exchanger.name=§aStone Exchanger
 item.exchangers.golden_exchanger.name=§bGolden Exchanger
 item.exchangers.iron_exchanger.name=§bIron Exchanger
-item.exchangers.diamond_exchanger.name=§bDiamond Exchanger
-item.exchangers.emerald_exchanger.name=§bEmerald Exchanger
-item.exchangers.obsidian_exchanger.name=§bObsidian Exchanger
+item.exchangers.diamond_exchanger.name=§dDiamond Exchanger
+item.exchangers.emerald_exchanger.name=§dEmerald Exchanger
+item.exchangers.obsidian_exchanger.name=§dObsidian Exchanger

@@ -36,6 +36,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -194,6 +197,11 @@ public class ItemExchangerBase extends Item {
 	buildExchangeList(world, pos, pos, state, side, range, exchangeList, checkedList);
 
 	if (!exchangeList.isEmpty()) {
+	    world.playSound(null, (double) ((float) pos.getX() + 0.5F), (double) ((float) pos.getY() + 0.5F),
+		    (double) ((float) pos.getZ() + 0.5F),
+		    SoundEvent.REGISTRY.getObject(new ResourceLocation("entity.endermen.teleport")),
+		    SoundCategory.BLOCKS, 1F, 1F);
+
 	    Collections.sort(exchangeList, new Comparator<BlockPos>() {
 		@Override
 		public int compare(BlockPos o1, BlockPos o2) {
@@ -308,12 +316,11 @@ public class ItemExchangerBase extends Item {
 	    checkedList.add(newPos);
 	    IBlockState state = world.getBlockState(newPos);
 
-	    //TODO: This is just gross
+	    // TODO: This is just gross
 	    boolean validExchange = !world.isAirBlock(newPos)
 		    && (world.isAirBlock(newPos.offset(side))
 			    || (world.getBlockState(newPos.offset(side)) == Blocks.WATER))
-		    && state == origState && !world.isAirBlock(newPos.offset(side))
-		    && state.getBlock().isReplaceable(world, newPos.offset(side));
+		    && state == origState && state.getBlock().isReplaceable(world, newPos.offset(side));
 
 	    if (validExchange) {
 		exchangeList.add(newPos);

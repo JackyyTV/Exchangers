@@ -43,7 +43,6 @@ import net.minecraftforge.fluids.BlockFluidBase;
 
 public class ItemExchangerBase extends Item {
 
-    public static final int MODE_INITIAL = 0;
     public static final int MODE_1X1 = 0;
     public static final int MODE_3X3 = 1;
     public static final int MODE_5X5 = 2;
@@ -53,146 +52,157 @@ public class ItemExchangerBase extends Item {
     public static final int MODE_13X13 = 6;
     public static final int MODE_15X15 = 7;
 
-    public static final String[] modeSwitchList = new String[] {"1x1", "3x3", "5x5", "7x7", "9x9", "11x11", "13x13", "15x15"};
-    public static final Integer[] modeSwitchRange = new Integer[] {0, 1, 2, 3, 4, 5, 6, 7};
+    public static final String[] modeSwitchList = new String[] { "1x1", "3x3", "5x5", "7x7", "9x9", "11x11", "13x13",
+	    "15x15" };
 
-    public boolean showDurabilityBar(ItemStack stack){
-        return stack.isItemDamaged();
+    public boolean showDurabilityBar(ItemStack stack) {
+	return stack.isItemDamaged();
     }
 
     public static void setDefaultTagCompound(ItemStack stack) {
-        stack.setTagCompound(new NBTTagCompound());
-        stack.getTagCompound().setString("BlockName", "");
-        stack.getTagCompound().setInteger("BlockData", 0);
-        stack.getTagCompound().setInteger("ExchangeMode", 0);
+	stack.setTagCompound(new NBTTagCompound());
+	stack.getTagCompound().setString("BlockName", "");
+	stack.getTagCompound().setInteger("BlockData", 0);
+	stack.getTagCompound().setInteger("ExchangeMode", 0);
     }
 
     public static boolean stackTagCompoundNull(ItemStack stack) {
-        return stack.getTagCompound() == null;
+	return stack.getTagCompound() == null;
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
-        super.addInformation(stack, player, tooltip, bool);
+	super.addInformation(stack, player, tooltip, bool);
 
-        if (stackTagCompoundNull(stack)) setDefaultTagCompound(stack);
-        NBTTagCompound compound = stack.getTagCompound();
+	if (stackTagCompoundNull(stack))
+	    setDefaultTagCompound(stack);
+	NBTTagCompound compound = stack.getTagCompound();
 
-        if (compound == null || Block.getBlockFromName(compound.getString("BlockName")) == null) {
-            tooltip.add(ChatFormatting.RED + "No Selected Block");
-        } else {
-            String name = compound.getString("BlockName");
-            Block block = Block.getBlockFromName(name);
+	if (compound == null || Block.getBlockFromName(compound.getString("BlockName")) == null) {
+	    tooltip.add(ChatFormatting.RED + "No Selected Block");
+	} else {
+	    String name = compound.getString("BlockName");
+	    Block block = Block.getBlockFromName(name);
 
-            int meta = compound.getByte("BlockData");
+	    int meta = compound.getByte("BlockData");
 
-            tooltip.add(ChatFormatting.GREEN + "Selected Block: " + getBlockName(block, meta));
-            tooltip.add(ChatFormatting.GREEN + "Selected Mode: " + modeSwitchList[compound.getInteger("ExchangeMode")]);
-        }
+	    tooltip.add(ChatFormatting.GREEN + "Selected Block: " + getBlockName(block, meta));
+	    tooltip.add(ChatFormatting.GREEN + "Selected Mode: " + modeSwitchList[compound.getInteger("ExchangeMode")]);
+	}
 
-        tooltip.add("Sneak right click on block to select.");
-        tooltip.add("Right click on a block to exchange.");
-        tooltip.add("Use the mode key (default 'COMMA') to switch modes.");
+	tooltip.add("Sneak right click on block to select.");
+	tooltip.add("Right click on a block to exchange.");
+	tooltip.add("Use the mode key (default 'COMMA') to switch modes.");
     }
 
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (world.isRemote) {
-            return EnumActionResult.PASS;
-        }
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand,
+	    EnumFacing facing, float hitX, float hitY, float hitZ) {
+	if (world.isRemote) {
+	    return EnumActionResult.PASS;
+	}
 
-        IBlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
+	IBlockState state = world.getBlockState(pos);
+	Block block = state.getBlock();
 
-        if (player.isSneaking()) {
+	if (player.isSneaking()) {
 
-            if (blockSuitableForSelection(player, world, pos)) {
-                setSelectedBlock(stack, block, state);
-                return EnumActionResult.SUCCESS;
-            } else {
-                msgPlayer(player, "Error: Invalid block!");
-                return EnumActionResult.FAIL;
-            }
-        } else {
-            if (blockSuitableForExchange(stack, player, world, pos)) {
+	    if (blockSuitableForSelection(player, world, pos)) {
+		setSelectedBlock(stack, block, state);
+		return EnumActionResult.SUCCESS;
+	    } else {
+		msgPlayer(player, "Error: Invalid block!");
+		return EnumActionResult.FAIL;
+	    }
+	} else {
+	    if (blockSuitableForExchange(stack, player, world, pos)) {
 
-                boolean success = exchangeBlocks(stack, player, world, pos, facing);
+		boolean success = exchangeBlocks(stack, player, world, pos, facing);
 
-                if (success) {
-                    return EnumActionResult.SUCCESS;
+		if (success) {
+		    return EnumActionResult.SUCCESS;
 
-                }
+		}
 
-            } else {
-                return EnumActionResult.FAIL;
-            }
-        }
+	    } else {
+		return EnumActionResult.FAIL;
+	    }
+	}
 
-        return EnumActionResult.SUCCESS;
+	return EnumActionResult.SUCCESS;
     }
 
     public void switchMode(EntityPlayer player, ItemStack stack) {
-        if (stackTagCompoundNull(stack)) setDefaultTagCompound(stack);
+	if (stackTagCompoundNull(stack))
+	    setDefaultTagCompound(stack);
 
-        int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
-        modeSwitch++;
+	int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
+	modeSwitch++;
 
-        ItemStack heldItem = player.getHeldItemMainhand();
+	ItemStack heldItem = player.getHeldItemMainhand();
 
-        if (heldItem != null) {
-            if (heldItem.getItem() instanceof ItemObsidianExchanger) {
-                if (modeSwitch > MODE_15X15) modeSwitch = MODE_INITIAL;
-            }
-            if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
-                if (modeSwitch > MODE_13X13) modeSwitch = MODE_INITIAL;
-            }
-            if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
-                if (modeSwitch > MODE_11X11) modeSwitch = MODE_INITIAL;
-            }
-            if (heldItem.getItem() instanceof ItemDiamondExchanger) {
-                if (modeSwitch > MODE_9X9) modeSwitch = MODE_INITIAL;
-            }
-            if (heldItem.getItem() instanceof ItemIronExchanger) {
-                if (modeSwitch > MODE_7X7) modeSwitch = MODE_INITIAL;
-            }
-            if (heldItem.getItem() instanceof ItemGoldenExchanger) {
-                if (modeSwitch > MODE_5X5) modeSwitch = MODE_INITIAL;
-            }
-            if (heldItem.getItem() instanceof ItemStoneExchanger) {
-                if (modeSwitch > MODE_3X3) modeSwitch = MODE_INITIAL;
-            }
-            if (heldItem.getItem() instanceof ItemWoodenExchanger) {
-                if (modeSwitch > MODE_1X1) modeSwitch = MODE_INITIAL;
-            }
-        }
+	if (heldItem != null) {
+	    if (heldItem.getItem() instanceof ItemObsidianExchanger) {
+		if (modeSwitch > MODE_15X15)
+		    modeSwitch = MODE_1X1;
+	    }
+	    if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
+		if (modeSwitch > MODE_13X13)
+		    modeSwitch = MODE_1X1;
+	    }
+	    if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
+		if (modeSwitch > MODE_11X11)
+		    modeSwitch = MODE_1X1;
+	    }
+	    if (heldItem.getItem() instanceof ItemDiamondExchanger) {
+		if (modeSwitch > MODE_9X9)
+		    modeSwitch = MODE_1X1;
+	    }
+	    if (heldItem.getItem() instanceof ItemIronExchanger) {
+		if (modeSwitch > MODE_7X7)
+		    modeSwitch = MODE_1X1;
+	    }
+	    if (heldItem.getItem() instanceof ItemGoldenExchanger) {
+		if (modeSwitch > MODE_5X5)
+		    modeSwitch = MODE_1X1;
+	    }
+	    if (heldItem.getItem() instanceof ItemStoneExchanger) {
+		if (modeSwitch > MODE_3X3)
+		    modeSwitch = MODE_1X1;
+	    }
+	    if (heldItem.getItem() instanceof ItemWoodenExchanger) {
+		if (modeSwitch > MODE_1X1)
+		    modeSwitch = MODE_1X1;
+	    }
+	}
 
-        stack.getTagCompound().setInteger("ExchangeMode", modeSwitch);
-        msgPlayer(player, "Exchanger mode set to " + modeSwitchList[modeSwitch]);
+	stack.getTagCompound().setInteger("ExchangeMode", modeSwitch);
+	msgPlayer(player, "Exchanger mode set to " + modeSwitchList[modeSwitch]);
     }
 
     public static List<BlockPos> getBlocksToExchange(ItemStack stack, BlockPos pos, World world, EnumFacing side) {
 
-        int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
-        int range = modeSwitchRange[modeSwitch];
-        IBlockState state = world.getBlockState(pos);
+	int modeSwitch = stack.getTagCompound().getInteger("ExchangeMode");
+	int range = modeSwitch;
+	IBlockState state = world.getBlockState(pos);
 
-        List<BlockPos> exchangeList = new ArrayList<BlockPos>();
-        List<BlockPos> checkedList = new ArrayList<BlockPos>();
+	List<BlockPos> exchangeList = new ArrayList<BlockPos>();
+	List<BlockPos> checkedList = new ArrayList<BlockPos>();
 
-        exchangeList.add(pos);
-        checkedList.add(pos);
+	exchangeList.add(pos);
+	checkedList.add(pos);
 
-        buildExchangeList(world, pos, pos, state, side, range, exchangeList, checkedList);
+	buildExchangeList(world, pos, pos, state, side, range, exchangeList, checkedList);
 
-        if (!exchangeList.isEmpty()) {
-            Collections.sort(exchangeList, new Comparator<BlockPos>() {
-                @Override
-                public int compare(BlockPos o1, BlockPos o2) {
-                    return o1.compareTo(o2);
-                }
-            });
-        }
+	if (!exchangeList.isEmpty()) {
+	    Collections.sort(exchangeList, new Comparator<BlockPos>() {
+		@Override
+		public int compare(BlockPos o1, BlockPos o2) {
+		    return o1.compareTo(o2);
+		}
+	    });
+	}
 
-        return exchangeList;
+	return exchangeList;
     }
 
     private static final Set<Block> softBlocks = new HashSet<Block>();
@@ -201,210 +211,224 @@ public class ItemExchangerBase extends Item {
     private static final Set<Block> creativeBlocks = new HashSet<Block>();
 
     public static void initSpecialBlockLists() {
-        for (Object o : Block.REGISTRY) {
-            Block block = (Block) o;
-            if (block instanceof BlockFence || block instanceof BlockFenceGate || block instanceof BlockTrapDoor || block instanceof BlockDoor || block instanceof BlockPistonBase
-                    || block instanceof BlockLadder) {
-                specialBlocks.add(block);
-            }
-        }
+	for (Object o : Block.REGISTRY) {
+	    Block block = (Block) o;
+	    if (block instanceof BlockFence || block instanceof BlockFenceGate || block instanceof BlockTrapDoor
+		    || block instanceof BlockDoor || block instanceof BlockPistonBase || block instanceof BlockLadder) {
+		specialBlocks.add(block);
+	    }
+	}
 
-        for (Object o : Block.REGISTRY) {
-            Block block = (Block) o;
-            if (block instanceof BlockRedstoneLight || block instanceof BlockWorkbench) {
-                blacklistedBlocks.add(block);
-            }
-        }
+	for (Object o : Block.REGISTRY) {
+	    Block block = (Block) o;
+	    if (block instanceof BlockRedstoneLight || block instanceof BlockWorkbench) {
+		blacklistedBlocks.add(block);
+	    }
+	}
 
-        for (Object o : Block.REGISTRY) {
-            Block block = (Block) o;
-            if (block == Blocks.BEDROCK || block == Blocks.END_PORTAL_FRAME) {
-                creativeBlocks.add(block);
-            }
-        }
+	for (Object o : Block.REGISTRY) {
+	    Block block = (Block) o;
+	    if (block == Blocks.BEDROCK || block == Blocks.END_PORTAL_FRAME) {
+		creativeBlocks.add(block);
+	    }
+	}
 
-        for (Object o : Block.REGISTRY) {
-            Block block = (Block) o;
-            if (block instanceof BlockFluidBase || block instanceof BlockLiquid || block instanceof IPlantable || block instanceof BlockTorch || block instanceof BlockLeaves
-                    || block instanceof BlockHugeMushroom) {
-                softBlocks.add(block);
-            }
-        }
+	for (Object o : Block.REGISTRY) {
+	    Block block = (Block) o;
+	    if (block instanceof BlockFluidBase || block instanceof BlockLiquid || block instanceof IPlantable
+		    || block instanceof BlockTorch || block instanceof BlockLeaves
+		    || block instanceof BlockHugeMushroom) {
+		softBlocks.add(block);
+	    }
+	}
 
-        softBlocks.add(Blocks.SNOW);
-        softBlocks.add(Blocks.VINE);
-        softBlocks.add(Blocks.FIRE);
+	softBlocks.add(Blocks.SNOW);
+	softBlocks.add(Blocks.VINE);
+	softBlocks.add(Blocks.FIRE);
 
     }
 
     public static boolean blockSuitableForSelection(EntityPlayer player, World world, BlockPos pos) {
-        if (world.getTileEntity(pos) != null) return false;
-        if (world.isAirBlock(pos)) return false;
-        if (blacklistedBlocks.contains(world.getBlockState(pos).getBlock())) return false;
-        if (softBlocks.contains(world.getBlockState(pos).getBlock())) return false;
-        if (specialBlocks.contains((world.getBlockState(pos).getBlock()))) return false;
-        if (creativeBlocks.contains(world.getBlockState(pos).getBlock()) && !player.capabilities.isCreativeMode) return false;
+	if (world.getTileEntity(pos) != null)
+	    return false;
+	if (world.isAirBlock(pos))
+	    return false;
+	if (blacklistedBlocks.contains(world.getBlockState(pos).getBlock()))
+	    return false;
+	if (softBlocks.contains(world.getBlockState(pos).getBlock()))
+	    return false;
+	if (specialBlocks.contains((world.getBlockState(pos).getBlock())))
+	    return false;
+	if (creativeBlocks.contains(world.getBlockState(pos).getBlock()) && !player.capabilities.isCreativeMode)
+	    return false;
 
-        return true;
+	return true;
     }
 
     public static void setSelectedBlock(ItemStack stack, Block block, IBlockState state) {
-        String blockName = Block.REGISTRY.getNameForObject(block).toString();
-        if (stackTagCompoundNull(stack)) setDefaultTagCompound(stack);
+	String blockName = Block.REGISTRY.getNameForObject(block).toString();
+	if (stackTagCompoundNull(stack))
+	    setDefaultTagCompound(stack);
 
-        stack.getTagCompound().setString("BlockName", blockName);
-        stack.getTagCompound().setInteger("BlockData", (byte) block.getMetaFromState(state));
+	stack.getTagCompound().setString("BlockName", blockName);
+	stack.getTagCompound().setInteger("BlockData", (byte) block.getMetaFromState(state));
     }
 
     public static boolean blockSuitableForExchange(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {
-        Block newBlock = Block.getBlockFromName(stack.getTagCompound().getString("BlockName"));
-        int newMeta = stack.getTagCompound().getInteger("BlockData");
+	Block newBlock = Block.getBlockFromName(stack.getTagCompound().getString("BlockName"));
+	int newMeta = stack.getTagCompound().getInteger("BlockData");
 
-        Block worldBlock = world.getBlockState(pos).getBlock();
-        int worldMeta = worldBlock.getMetaFromState(world.getBlockState(pos));
+	Block worldBlock = world.getBlockState(pos).getBlock();
+	int worldMeta = worldBlock.getMetaFromState(world.getBlockState(pos));
 
-        if (!blockSuitableForSelection(player, world, pos)) {
-            msgPlayer(player, "Error: Invalid block!");
-            return false;
-        }
+	if (!blockSuitableForSelection(player, world, pos)) {
+	    msgPlayer(player, "Error: Invalid block!");
+	    return false;
+	}
 
-        if (newBlock == worldBlock && newMeta == worldMeta) {
-            return false;
-        }
+	if (newBlock == worldBlock && newMeta == worldMeta) {
+	    return false;
+	}
 
-        return true;
+	return true;
     }
 
-    private static void buildExchangeList(World world, BlockPos pos, BlockPos origin, IBlockState origState, EnumFacing side, int range, List<BlockPos> exchangeList, List<BlockPos> checkedList) {
+    private static void buildExchangeList(World world, BlockPos pos, BlockPos origin, IBlockState origState,
+	    EnumFacing side, int range, List<BlockPos> exchangeList, List<BlockPos> checkedList) {
 
-        EnumFacing[] facesAround = getFacings(side);
+	EnumFacing[] facesAround = getFacings(side);
 
-        for (EnumFacing dir : facesAround){
-            BlockPos newPos = pos.offset(dir);
+	for (EnumFacing dir : facesAround) {
+	    BlockPos newPos = pos.offset(dir);
 
-            if (checkedList.contains(newPos) || !blockInRange(origin, newPos, range)){
-                continue;
-            }
+	    if (checkedList.contains(newPos) || !blockInRange(origin, newPos, range)) {
+		continue;
+	    }
 
-            checkedList.add(newPos);
-            IBlockState state = world.getBlockState(newPos);
+	    checkedList.add(newPos);
+	    IBlockState state = world.getBlockState(newPos);
 
-            boolean validExchange = !world.isAirBlock(newPos) && (world.isAirBlock(newPos.offset(side)) || (world.getBlockState(newPos.offset(side)) == Blocks.WATER))
-                    && state == origState && state.getBlock().isReplaceable(world, newPos.offset(side));
+	    //TODO: This is just gross
+	    boolean validExchange = !world.isAirBlock(newPos)
+		    && (world.isAirBlock(newPos.offset(side))
+			    || (world.getBlockState(newPos.offset(side)) == Blocks.WATER))
+		    && state == origState && !world.isAirBlock(newPos.offset(side))
+		    && state.getBlock().isReplaceable(world, newPos.offset(side));
 
-            if (validExchange) {
-                exchangeList.add(newPos);
-                buildExchangeList(world, newPos, origin, origState, side, range, exchangeList, checkedList);
-            }
-        }
+	    if (validExchange) {
+		exchangeList.add(newPos);
+		buildExchangeList(world, newPos, origin, origState, side, range, exchangeList, checkedList);
+	    }
+	}
 
     }
 
     private static boolean blockInRange(BlockPos origin, BlockPos pos, int range) {
-        BlockPos diff = pos.subtract(origin);
-        return Math.abs(diff.getX()) <= range && Math.abs(diff.getY()) <= range && Math.abs(diff.getZ()) <= range;
+	BlockPos diff = pos.subtract(origin);
+	return Math.abs(diff.getX()) <= range && Math.abs(diff.getY()) <= range && Math.abs(diff.getZ()) <= range;
     }
 
-    public static boolean exchangeBlocks(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing facing) {
-        Block newBlock = Block.getBlockFromName(stack.getTagCompound().getString("BlockName"));
-        int newMeta = stack.getTagCompound().getInteger("BlockData");
+    public static boolean exchangeBlocks(ItemStack stack, EntityPlayer player, World world, BlockPos pos,
+	    EnumFacing facing) {
+	Block newBlock = Block.getBlockFromName(stack.getTagCompound().getString("BlockName"));
+	int newMeta = stack.getTagCompound().getInteger("BlockData");
 
-        if (newBlock == null) return false;
-        world.theProfiler.startSection("Exchangers-Building/Queueing");
+	if (newBlock == null)
+	    return false;
+	world.theProfiler.startSection("Exchangers-Building/Queueing");
 
-        IBlockState newState = newBlock.getStateFromMeta(newMeta);
-        List<BlockPos> toExchange = getBlocksToExchange(stack, pos, world, facing);
+	IBlockState newState = newBlock.getStateFromMeta(newMeta);
+	List<BlockPos> toExchange = getBlocksToExchange(stack, pos, world, facing);
 
-        for (BlockPos exchangePos : toExchange) {
-            int slot = -1;
-            if (player.capabilities.isCreativeMode) {
-                placeBlockInWorld(world, exchangePos, newState);
-            } else {
-                try {
-                    slot = findItemInInventory(player.inventory, Item.getItemFromBlock(newBlock), newMeta);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    msgPlayer(player, "Error: Out of blocks!");
-                    return false;
-                }
+	for (BlockPos exchangePos : toExchange) {
+	    int slot = -1;
+	    if (player.capabilities.isCreativeMode) {
+		placeBlockInWorld(world, exchangePos, newState);
+	    } else {
+		try {
+		    slot = findItemInInventory(player.inventory, Item.getItemFromBlock(newBlock), newMeta);
+		} catch (ArrayIndexOutOfBoundsException e) {
+		    msgPlayer(player, "Error: Out of blocks!");
+		    return false;
+		}
 
-                if (slot >= 0 && player.inventory.mainInventory[slot].stackSize > 0) {
-                    Block oldBlock = world.getBlockState(exchangePos).getBlock();
-                    int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
+		if (slot >= 0 && player.inventory.mainInventory[slot].stackSize > 0) {
+		    Block oldBlock = world.getBlockState(exchangePos).getBlock();
+		    int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
 
-                    if (!placeBlockInInventory(player, oldBlock, oldMeta)) {
-                        msgPlayer(player, "Error: Out of space in inventory!");
-                        return false;
-                    } else {
-                        if (!placeBlockInWorld(world, exchangePos, newState)) {
-                            msgPlayer(player, "Error: Out of blocks!");
-                            return false;
-                        } else {
-                            if (!consumeBlockInInventory(player, newBlock, newState)) {
-                                return false;
-                            } else {
-                                stack.damageItem(1, player);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        world.theProfiler.endSection();
+		    if (!placeBlockInInventory(player, oldBlock, oldMeta)) {
+			msgPlayer(player, "Error: Out of space in inventory!");
+			return false;
+		    } else {
+			if (!placeBlockInWorld(world, exchangePos, newState)) {
+			    msgPlayer(player, "Error: Out of blocks!");
+			    return false;
+			} else {
+			    if (!consumeBlockInInventory(player, newBlock, newState)) {
+				return false;
+			    } else {
+				stack.damageItem(1, player);
+			    }
+			}
+		    }
+		}
+	    }
+	}
+	world.theProfiler.endSection();
 
-        return true;
+	return true;
     }
 
     private static boolean placeBlockInInventory(EntityPlayer player, Block block, int meta) {
-        ItemStack oldStack = new ItemStack(block, 1, meta);
-        boolean successPlaceInInventory = player.inventory.addItemStackToInventory(oldStack);
-        IBlockState state = block.getStateFromMeta(meta);
-        if (!successPlaceInInventory) {
-            return false;
-        }
-
-        return true;
+	ItemStack oldStack = new ItemStack(block, 1, meta);
+	boolean successPlaceInInventory = player.inventory.addItemStackToInventory(oldStack);
+	if (!successPlaceInInventory) {
+	    return false;
+	}
+	return true;
     }
 
     private static boolean consumeBlockInInventory(EntityPlayer player, Block block, IBlockState state) {
-        if (!player.capabilities.isCreativeMode) {
-            InventoryPlayer inv = player.inventory;
-            Item item = Item.getItemFromBlock(block);
-            int meta = block.getMetaFromState(state);
+	if (!player.capabilities.isCreativeMode) {
+	    InventoryPlayer inv = player.inventory;
+	    Item item = Item.getItemFromBlock(block);
+	    int meta = block.getMetaFromState(state);
 
-            int slot = findItemInInventory(inv, item, meta);
+	    int slot = findItemInInventory(inv, item, meta);
 
-            if (slot < 0) {
-                return false;
-            } else {
-                if (--inv.mainInventory[slot].stackSize <= 0){
-                    inv.mainInventory[slot] = null;
-                }
+	    if (slot < 0) {
+		return false;
+	    } else {
+		if (--inv.mainInventory[slot].stackSize <= 0) {
+		    inv.mainInventory[slot] = null;
+		}
 
-            }
-        }
+	    }
+	}
 
-        return true;
+	return true;
     }
 
     private static int findItemInInventory(InventoryPlayer inv, Item item, int meta) {
-        for (int i = 0; i < inv.mainInventory.length; i++) {
-            if (inv.mainInventory[i] != null && inv.mainInventory[i].getItem() == item && inv.mainInventory[i].getItemDamage() == meta) {
-                return i;
-            }
-        }
-        return -1;
+	for (int i = 0; i < inv.mainInventory.length; i++) {
+	    if (inv.mainInventory[i] != null && inv.mainInventory[i].getItem() == item
+		    && inv.mainInventory[i].getItemDamage() == meta) {
+		return i;
+	    }
+	}
+	return -1;
     }
 
     private static boolean placeBlockInWorld(World world, BlockPos exchangePos, IBlockState state) {
 
-        queueExchanges(exchangePos, state, world);
+	queueExchanges(exchangePos, state, world);
 
-        return true;
+	return true;
     }
 
     public static String getBlockName(Block block, int meta) {
-        ItemStack s = new ItemStack(block, 1, meta);
-        return s.getDisplayName();
+	ItemStack s = new ItemStack(block, 1, meta);
+	return s.getDisplayName();
     }
 
 }

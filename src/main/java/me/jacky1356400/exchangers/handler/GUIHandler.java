@@ -51,9 +51,9 @@ public class GUIHandler extends Gui {
 
             InventoryPlayer inv = player.inventory;
 
-            for (int slot = 0; slot < inv.mainInventory.length; slot++) {
+            for (int slot = 0; slot < inv.mainInventory.size(); slot++) {
                 ItemStack is = inv.getStackInSlot(slot);
-                if (is != null && is.isItemEqual(source)) quantity += is.stackSize;
+                if (is != null && is.isItemEqual(source)) quantity += is.getCount();
             }
 
             this.lastExchangeSourceCount = quantity;

@@ -98,12 +98,13 @@ public class ItemExchangerBase extends Item {
 	tooltip.add("Use the mode key (default 'COMMA') to switch modes.");
     }
 
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand,
-	    EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+     {
 	if (world.isRemote) {
 	    return EnumActionResult.PASS;
 	}
 
+	ItemStack stack = player.getHeldItem(hand);
 	IBlockState state = world.getBlockState(pos);
 	Block block = state.getBlock();
 
@@ -359,7 +360,7 @@ public class ItemExchangerBase extends Item {
 		    return false;
 		}
 
-		if (slot >= 0 && player.inventory.mainInventory[slot].stackSize > 0) {
+		if (slot >= 0 && player.inventory.mainInventory.get(slot).getCount() > 0) {
 		    Block oldBlock = world.getBlockState(exchangePos).getBlock();
 		    int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
 
@@ -406,8 +407,10 @@ public class ItemExchangerBase extends Item {
 	    if (slot < 0) {
 		return false;
 	    } else {
-		if (--inv.mainInventory[slot].stackSize <= 0) {
-		    inv.mainInventory[slot] = null;
+		ItemStack stack = inv.mainInventory.get(slot);
+		stack.shrink(1);
+		if (stack.getCount() <= 0) {
+		    inv.mainInventory.set(slot, ItemStack.EMPTY);
 		}
 
 	    }
@@ -417,9 +420,9 @@ public class ItemExchangerBase extends Item {
     }
 
     private static int findItemInInventory(InventoryPlayer inv, Item item, int meta) {
-	for (int i = 0; i < inv.mainInventory.length; i++) {
-	    if (inv.mainInventory != null && inv.mainInventory[i].getItem() == item
-		    && inv.mainInventory[i].getItemDamage() == meta) {
+	for (int i = 0; i < inv.mainInventory.size(); i++) {
+	    if (inv.mainInventory != null && inv.mainInventory.get(i).getItem() == item
+		    && inv.mainInventory.get(i).getItemDamage() == meta) {
 		return i;
 	    }
 	}

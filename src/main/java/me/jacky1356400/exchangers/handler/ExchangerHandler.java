@@ -1,10 +1,14 @@
 package me.jacky1356400.exchangers.handler;
 
-import cofh.api.energy.IEnergyContainerItem;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.item.*;
 import me.jacky1356400.exchangers.item.ItemExchangerBaseRF;
+import me.jacky1356400.exchangers.item.enderio.*;
+import me.jacky1356400.exchangers.item.mekanism.*;
+import me.jacky1356400.exchangers.item.thermalexpansion.*;
+import me.jacky1356400.exchangers.item.thermalexpansion.ItemReinforcedExchanger;
+import me.jacky1356400.exchangers.item.vanilla.*;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -85,40 +89,100 @@ public class ExchangerHandler extends Item {
         ItemStack heldItem = player.getHeldItemMainhand();
 
         if (heldItem != null) {
-            if (heldItem.getItem() instanceof ItemObsidianExchanger) {
-                if (modeSwitch > MODE_15X15)
-                    modeSwitch = MODE_1X1;
-            }
-            if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
-                if (modeSwitch > MODE_13X13)
-                    modeSwitch = MODE_1X1;
-            }
-            if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
-                if (modeSwitch > MODE_11X11)
-                    modeSwitch = MODE_1X1;
-            }
-            if (heldItem.getItem() instanceof ItemDiamondExchanger) {
-                if (modeSwitch > MODE_9X9)
-                    modeSwitch = MODE_1X1;
-            }
-            if (heldItem.getItem() instanceof ItemIronExchanger) {
-                if (modeSwitch > MODE_7X7)
-                    modeSwitch = MODE_1X1;
-            }
-            if (heldItem.getItem() instanceof ItemGoldenExchanger) {
-                if (modeSwitch > MODE_5X5)
+            //Vanilla Exchangers
+            if (heldItem.getItem() instanceof ItemWoodenExchanger) {
+                if (modeSwitch > MODE_1X1)
                     modeSwitch = MODE_1X1;
             }
             if (heldItem.getItem() instanceof ItemStoneExchanger) {
                 if (modeSwitch > MODE_3X3)
                     modeSwitch = MODE_1X1;
             }
-            if (heldItem.getItem() instanceof ItemWoodenExchanger) {
-                if (modeSwitch > MODE_1X1)
+            if (heldItem.getItem() instanceof ItemGoldenExchanger) {
+                if (modeSwitch > MODE_5X5)
                     modeSwitch = MODE_1X1;
             }
+            if (heldItem.getItem() instanceof ItemIronExchanger) {
+                if (modeSwitch > MODE_7X7)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemDiamondExchanger) {
+                if (modeSwitch > MODE_9X9)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
+                if (modeSwitch > MODE_11X11)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
+                if (modeSwitch > MODE_13X13)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemObsidianExchanger) {
+                if (modeSwitch > MODE_15X15)
+                    modeSwitch = MODE_1X1;
+            }
+            //Ender IO Exchangers
             if (heldItem.getItem() instanceof ItemConductiveIronExchanger) {
                 if (modeSwitch > MODE_3X3)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemPulsatingIronExchanger) {
+                if (modeSwitch > MODE_5X5)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemElectricalSteelExchanger) {
+                if (modeSwitch > MODE_9X9)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemEnergeticExchanger) {
+                if (modeSwitch > MODE_11X11)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemDarkSteelExchanger) {
+                if (modeSwitch > MODE_13X13)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemVibrantExchanger) {
+                if (modeSwitch > MODE_15X15)
+                    modeSwitch = MODE_1X1;
+            }
+            //Thermal Expansion Exchangers
+            if (heldItem.getItem() instanceof ItemLeadstoneExchanger) {
+                if (modeSwitch > MODE_3X3)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemLeadstoneExchanger) {
+                if (modeSwitch > MODE_7X7)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemReinforcedExchanger) {
+                if (modeSwitch > MODE_11X11)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemSignalumExchanger) {
+                if (modeSwitch > MODE_13X13)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemResonantExchanger) {
+                if (modeSwitch > MODE_15X15)
+                    modeSwitch = MODE_1X1;
+            }
+            //Mekanism Exchangers
+            if (heldItem.getItem() instanceof ItemBasicExchanger) {
+                if (modeSwitch > MODE_7X7)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemAdvancedExchanger) {
+                if (modeSwitch > MODE_11X11)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemEliteExchanger) {
+                if (modeSwitch > MODE_13X13)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemUltimateExchanger) {
+                if (modeSwitch > MODE_15X15)
                     modeSwitch = MODE_1X1;
             }
         }
@@ -412,11 +476,57 @@ public class ExchangerHandler extends Item {
                                 if (!consumeBlockInInventory(player, newBlock, newState)) {
                                     return false;
                                 } else {
+                                    //Vanilla Exchangers
                                     if (stack.getItem() instanceof ItemExchangerBase) {
                                         stack.damageItem(1, player);
                                     }
+                                    //Ender IO Exchangers
                                     if (stack.getItem() instanceof ItemConductiveIronExchanger && stack.getTagCompound().getInteger("Energy") >= Config.conductiveIronExchangerPerBlockRF) {
                                         stack.getTagCompound().setInteger("Energy", energy - Config.conductiveIronExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemPulsatingIronExchanger && stack.getTagCompound().getInteger("Energy") >= Config.pulsatingIronExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.pulsatingIronExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemElectricalSteelExchanger && stack.getTagCompound().getInteger("Energy") >= Config.electricalSteelExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.electricalSteelExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemEnergeticExchanger && stack.getTagCompound().getInteger("Energy") >= Config.energeticExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.energeticExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemDarkSteelExchanger && stack.getTagCompound().getInteger("Energy") >= Config.darkSteelExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.darkSteelExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemVibrantExchanger && stack.getTagCompound().getInteger("Energy") >= Config.vibrantExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.vibrantExchangerPerBlockRF);
+                                    }
+                                    //Thermal Expansion Exchangers
+                                    if (stack.getItem() instanceof ItemLeadstoneExchanger && stack.getTagCompound().getInteger("Energy") >= Config.leadstoneExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.leadstoneExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemHardenedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.hardenedExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.hardenedExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemReinforcedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.reinforcedExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.reinforcedExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemSignalumExchanger && stack.getTagCompound().getInteger("Energy") >= Config.signalumExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.signalumExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemResonantExchanger && stack.getTagCompound().getInteger("Energy") >= Config.resonantExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.resonantExchangerPerBlockRF);
+                                    }
+                                    //Mekanism Exchangers
+                                    if (stack.getItem() instanceof ItemBasicExchanger && stack.getTagCompound().getInteger("Energy") >= Config.basicExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.basicExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemAdvancedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.advancedExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.advancedExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemEliteExchanger && stack.getTagCompound().getInteger("Energy") >= Config.eliteExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.eliteExchangerPerBlockRF);
+                                    }
+                                    if (stack.getItem() instanceof ItemUltimateExchanger && stack.getTagCompound().getInteger("Energy") >= Config.ultimateExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.ultimateExchangerPerBlockRF);
                                     }
                                 }
                             }

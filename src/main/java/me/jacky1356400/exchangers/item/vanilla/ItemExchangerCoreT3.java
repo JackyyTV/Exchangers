@@ -1,19 +1,18 @@
-package me.jacky1356400.exchangers.item;
+package me.jacky1356400.exchangers.item.vanilla;
 
 import me.jacky1356400.exchangers.Exchangers;
-import me.jacky1356400.exchangers.Config;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemEmeraldExchanger extends ItemExchangerBase {
+public class ItemExchangerCoreT3 extends Item {
 
-    public ItemEmeraldExchanger(){
-        setRegistryName(Exchangers.MODID + ":emerald_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".emerald_exchanger");
-        setMaxStackSize(1);
-        setMaxDamage(Config.emeraldExchangerMaxDamage);
+    public ItemExchangerCoreT3(){
+        setRegistryName(Exchangers.MODID + ":exchanger_core_tier3");
+        setUnlocalizedName(Exchangers.MODID + ".exchanger_core_tier3");
+        setMaxStackSize(16);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

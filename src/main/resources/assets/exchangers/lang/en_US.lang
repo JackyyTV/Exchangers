@@ -26,4 +26,22 @@ item.exchangers.emerald_exchanger.name=§dEmerald Exchanger
 item.exchangers.obsidian_exchanger.name=§dObsidian Exchanger
 
 #Ender IO Exchangers
-item.exchangers.conductive_iron_exchanger.name=§bConductive Iron Exchanger
+item.exchangers.conductive_iron_exchanger.name=§aConductive Iron Exchanger
+item.exchangers.pulsating_iron_exchanger.name=§aPulsating Iron Exchanger
+item.exchangers.electrical_steel_exchanger.name=§bElectrical Steel Exchanger
+item.exchangers.energetic_exchanger.name=§bEnergetic Exchanger
+item.exchangers.dark_steel_exchanger.name=§dDark Steel Exchanger
+item.exchangers.vibrant_exchanger.name=§dVibrant Exchanger
+
+#Thermal Expansion Exchangers
+item.exchangers.leadstone_exchanger.name=§aLeadstone Exchanger
+item.exchangers.hardened_exchanger.name=§aHardened Exchanger
+item.exchangers.reinforced_exchanger.name=§bReinforced Exchanger
+item.exchangers.signalum_exchanger.name=§dSignalum Exchanger
+item.exchangers.resonant_exchanger.name=§dResonant Exchanger
+
+#Mekanism Exchangers
+item.exchangers.basic_exchanger.name=§aBasic Exchanger
+item.exchangers.advanced_exchanger.name=§bAdvanced Exchanger
+item.exchangers.elite_exchanger.name=§dElite Exchanger
+item.exchangers.ultimate_exchanger.name=§dUltimate Exchanger

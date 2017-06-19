@@ -1,4 +1,4 @@
-package me.jacky1356400.exchangers.item;
+package me.jacky1356400.exchangers.item.vanilla;
 
 import me.jacky1356400.exchangers.Exchangers;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

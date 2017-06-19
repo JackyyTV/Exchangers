@@ -1,7 +1,8 @@
-package me.jacky1356400.exchangers.item;
+package me.jacky1356400.exchangers.item.vanilla;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.jacky1356400.exchangers.Exchangers;
+import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

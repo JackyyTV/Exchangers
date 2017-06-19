@@ -1,19 +1,20 @@
-package me.jacky1356400.exchangers.item;
+package me.jacky1356400.exchangers.item.vanilla;
 
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.Config;
+import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemDiamondExchanger extends ItemExchangerBase {
+public class ItemObsidianExchanger extends ItemExchangerBase {
 
-    public ItemDiamondExchanger(){
-        setRegistryName(Exchangers.MODID + ":diamond_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".diamond_exchanger");
+    public ItemObsidianExchanger(){
+        setRegistryName(Exchangers.MODID + ":obsidian_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".obsidian_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.diamondExchangerMaxDamage);
+        setMaxDamage(Config.obsidianExchangerMaxDamage);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

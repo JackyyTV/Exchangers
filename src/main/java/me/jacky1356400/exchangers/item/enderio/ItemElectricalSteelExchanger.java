@@ -1,8 +1,9 @@
-package me.jacky1356400.exchangers.item;
+package me.jacky1356400.exchangers.item.enderio;
 
 import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
+import me.jacky1356400.exchangers.item.ItemExchangerBaseRF;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -14,11 +15,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
+public class ItemElectricalSteelExchanger extends ItemExchangerBaseRF {
 
-    public ItemConductiveIronExchanger(){
-        setRegistryName(Exchangers.MODID + ":conductive_iron_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".conductive_iron_exchanger");
+    public ItemElectricalSteelExchanger(){
+        setRegistryName(Exchangers.MODID + ":electrical_steel_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".electrical_steel_exchanger");
         setMaxStackSize(1);
         setCreativeTab(Exchangers.exchangersCreativeTab);
         setNoRepair();
@@ -31,7 +32,7 @@ public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.conductiveIronExchangerMaxRF;
+        return Config.electricalSteelExchangerMaxRF;
     }
 
     @Override
@@ -40,7 +41,7 @@ public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.conductiveIronExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.electricalSteelExchangerMaxRF);
         list.add(full);
     }
 

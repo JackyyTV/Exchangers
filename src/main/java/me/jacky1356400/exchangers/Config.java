@@ -81,9 +81,9 @@ public class Config {
 
         //Modules
         vanillaModule = cfg.getBoolean("Vanilla Module", CATEGORY_MODULES, true, "If true, enables recipes for vanilla-based exchangers.");
-        enderIOModule = cfg.getBoolean("Ender IO Module", CATEGORY_MODULES, false, "[Not yet implemented] If true, enables recipes for Ender IO-based exchangers (Requires Ender IO to be installed).");
-        thermalExpansionModule = cfg.getBoolean("Thermal Expansion Module", CATEGORY_MODULES, false, "[Not yet implemented] If true, enables recipes for Thermal Expansion-based exchangers (Requires Thermal Expansion to be installed).");
-        mekanismModule = cfg.getBoolean("Mekanism Module", CATEGORY_MODULES, false, "[Not yet implemented] If true, enables recipes for Mekanism-based exchangers (Requires Mekanism to be installed).");
+        enderIOModule = cfg.getBoolean("Ender IO Module", CATEGORY_MODULES, false, "If true, enables recipes for Ender IO-based exchangers (Requires Ender IO to be installed).");
+        thermalExpansionModule = cfg.getBoolean("Thermal Expansion Module", CATEGORY_MODULES, false, "If true, enables recipes for Thermal Expansion-based exchangers (Requires Thermal Expansion to be installed).");
+        mekanismModule = cfg.getBoolean("Mekanism Module", CATEGORY_MODULES, false, "If true, enables recipes for Mekanism-based exchangers (Requires Mekanism to be installed).");
 
         //Vanilla Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_VANILLA, "Vanilla Exchanger Tweaks");

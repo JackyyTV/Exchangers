@@ -1,5 +1,7 @@
 package me.jacky1356400.exchangers.proxy;
 
+import me.jacky1356400.exchangers.client.Keys;
+import me.jacky1356400.exchangers.handler.KeyBindingsHandler;
 import net.minecraft.client.Minecraft;
 import me.jacky1356400.exchangers.ExchangersItems;
 import me.jacky1356400.exchangers.handler.GUIHandler;
@@ -19,6 +21,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent e){
         super.init(e);
+        MinecraftForge.EVENT_BUS.register(new KeyBindingsHandler());
+        Keys.init();
     }
 
     @Override

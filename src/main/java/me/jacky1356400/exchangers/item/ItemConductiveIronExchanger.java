@@ -4,6 +4,7 @@ import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Exchangers;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,13 +30,23 @@ public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
         return Config.conductiveIronExchangerMaxRF;
     }
 
-    public boolean showDurabilityBar(ItemStack stack) {
-        return super.showDurabilityBar(stack);
+    @Override
+    public ItemExchangerBaseRF setMaxTransfer(int maxTransfer) {
+        setMaxReceive(5000);
+        setMaxExtract(5000);
+        return this;
     }
 
-    public double getDurabilityForDisplay(ItemStack stack) {
-        int max = getMaxEnergyStored(stack);
-        return (max - getEnergyStored(stack)) / max;
+    @Override
+    public ItemExchangerBaseRF setMaxReceive(int maxReceive) {
+        this.maxReceive = 5000;
+        return this;
+    }
+
+    @Override
+    public ItemExchangerBaseRF setMaxExtract(int maxExtract) {
+        this.maxExtract = 5000;
+        return this;
     }
 
 }

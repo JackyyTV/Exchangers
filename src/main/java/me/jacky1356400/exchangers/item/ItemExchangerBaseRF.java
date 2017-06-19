@@ -1,6 +1,7 @@
 package me.jacky1356400.exchangers.item;
 
 import cofh.api.energy.IEnergyContainerItem;
+import cofh.api.energy.ItemEnergyContainer;
 import me.jacky1356400.exchangers.handler.ExchangerHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,12 +11,31 @@ import java.util.List;
 
 public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyContainerItem {
 
-	private int capacity = 0;
-	private int maxReceive = 5000;
-	private int maxExtract = 5000;
+	protected int capacity;
+	protected int maxReceive;
+	protected int maxExtract;
 
 	public ItemExchangerBaseRF() {
+		super();
+	}
 
+	public ItemExchangerBaseRF setMaxTransfer(int maxTransfer) {
+
+		setMaxReceive(maxTransfer);
+		setMaxExtract(maxTransfer);
+		return this;
+	}
+
+	public ItemExchangerBaseRF setMaxReceive(int maxReceive) {
+
+		this.maxReceive = maxReceive;
+		return this;
+	}
+
+	public ItemExchangerBaseRF setMaxExtract(int maxExtract) {
+
+		this.maxExtract = maxExtract;
+		return this;
 	}
 
 	/* IEnergyContainerItem */
@@ -63,6 +83,16 @@ public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyCont
 	@Override
 	public int getMaxEnergyStored(ItemStack container) {
 		return capacity;
+	}
+
+	@Override
+	public boolean showDurabilityBar(ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public double getDurabilityForDisplay(ItemStack stack) {
+		return 1D-(getEnergyStored(stack)/getMaxEnergyStored(stack));
 	}
 
 	@Override

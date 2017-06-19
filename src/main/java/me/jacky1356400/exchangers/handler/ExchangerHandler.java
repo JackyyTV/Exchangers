@@ -1,7 +1,10 @@
 package me.jacky1356400.exchangers.handler;
 
+import cofh.api.energy.IEnergyContainerItem;
 import com.mojang.realmsclient.gui.ChatFormatting;
+import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.item.*;
+import me.jacky1356400.exchangers.item.ItemExchangerBaseRF;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -392,19 +395,30 @@ public class ExchangerHandler extends Item {
                 if (slot >= 0 && player.inventory.mainInventory[slot].stackSize > 0) {
                     Block oldBlock = world.getBlockState(exchangePos).getBlock();
                     int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
+                    int energy = stack.getTagCompound().getInteger("Energy");
 
-                    if (!placeBlockInInventory(player, oldBlock, oldMeta)) {
-                        msgPlayer(player, "Error: Out of space in inventory!");
+                    if (stack.getItem() instanceof ItemExchangerBaseRF && energy <= 0) {
+                        msgPlayer(player, "Error: Out of power!");
                         return false;
                     } else {
-                        if (!placeBlockInWorld(world, exchangePos, newState)) {
-                            msgPlayer(player, "Error: Out of blocks!");
+                        if (!placeBlockInInventory(player, oldBlock, oldMeta)) {
+                            msgPlayer(player, "Error: Out of space in inventory!");
                             return false;
                         } else {
-                            if (!consumeBlockInInventory(player, newBlock, newState)) {
+                            if (!placeBlockInWorld(world, exchangePos, newState)) {
+                                msgPlayer(player, "Error: Out of blocks!");
                                 return false;
                             } else {
-                                stack.damageItem(1, player);
+                                if (!consumeBlockInInventory(player, newBlock, newState)) {
+                                    return false;
+                                } else {
+                                    if (stack.getItem() instanceof ItemExchangerBase) {
+                                        stack.damageItem(1, player);
+                                    }
+                                    if (stack.getItem() instanceof ItemConductiveIronExchanger && stack.getTagCompound().getInteger("Energy") >= Config.conductiveIronExchangerPerBlockRF) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.conductiveIronExchangerPerBlockRF);
+                                    }
+                                }
                             }
                         }
                     }

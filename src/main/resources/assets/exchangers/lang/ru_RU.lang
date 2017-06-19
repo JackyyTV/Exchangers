@@ -16,7 +16,7 @@ item.exchangers.exchanger_core_tier2.name=§bОбменное ядро (ур. 2)
 item.exchangers.exchanger_core_tier3.name=§dОбменное ядро (ур. 3)
 
 #Exchangers
-item.exchangers.tuberous_exchanger.name=§eКлубневой обменник
+item.exchangers.tuberous_exchanger.name=§eКлубневый обменник
 item.exchangers.wooden_exchanger.name=§aДеревянный обменник
 item.exchangers.stone_exchanger.name=§aКаменный обменник
 item.exchangers.golden_exchanger.name=§bЗолотой обменник

@@ -2,12 +2,17 @@ package me.jacky1356400.exchangers.item;
 
 import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Exchangers;
+import me.jacky1356400.exchangers.helper.EnergyHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
 
@@ -15,7 +20,6 @@ public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
         setRegistryName(Exchangers.MODID + ":conductive_iron_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".conductive_iron_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(0);
         setCreativeTab(Exchangers.exchangersCreativeTab);
         setNoRepair();
     }
@@ -31,22 +35,13 @@ public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
     }
 
     @Override
-    public ItemExchangerBaseRF setMaxTransfer(int maxTransfer) {
-        setMaxReceive(5000);
-        setMaxExtract(5000);
-        return this;
-    }
-
-    @Override
-    public ItemExchangerBaseRF setMaxReceive(int maxReceive) {
-        this.maxReceive = 5000;
-        return this;
-    }
-
-    @Override
-    public ItemExchangerBaseRF setMaxExtract(int maxExtract) {
-        this.maxExtract = 5000;
-        return this;
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
+        ItemStack empty = new ItemStack(this);
+        list.add(empty);
+        ItemStack full = new ItemStack(this);
+        EnergyHelper.setDefaultEnergyTag(full, Config.conductiveIronExchangerMaxRF);
+        list.add(full);
     }
 
 }

@@ -1,88 +1,34 @@
 package me.jacky1356400.exchangers.item;
 
 import cofh.api.energy.IEnergyContainerItem;
-import cofh.api.energy.ItemEnergyContainer;
 import me.jacky1356400.exchangers.handler.ExchangerHandler;
+import me.jacky1356400.exchangers.helper.EnergyHelper;
+import me.jacky1356400.exchangers.helper.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.List;
 
 public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyContainerItem {
 
-	protected int capacity;
-	protected int maxReceive;
-	protected int maxExtract;
-
-	public ItemExchangerBaseRF() {
-		super();
-	}
-
-	public ItemExchangerBaseRF setMaxTransfer(int maxTransfer) {
-
-		setMaxReceive(maxTransfer);
-		setMaxExtract(maxTransfer);
-		return this;
-	}
-
-	public ItemExchangerBaseRF setMaxReceive(int maxReceive) {
-
-		this.maxReceive = maxReceive;
-		return this;
-	}
-
-	public ItemExchangerBaseRF setMaxExtract(int maxExtract) {
-
-		this.maxExtract = maxExtract;
-		return this;
-	}
-
-	/* IEnergyContainerItem */
 	@Override
-	public int receiveEnergy(ItemStack container, int maxReceive, boolean simulate) {
-
-		if (!container.hasTagCompound()) {
-			container.setTagCompound(new NBTTagCompound());
-		}
-		int energy = container.getTagCompound().getInteger("Energy");
-		int energyReceived = Math.min(capacity - energy, Math.min(this.maxReceive, maxReceive));
-
-		if (!simulate) {
-			energy += energyReceived;
-			container.getTagCompound().setInteger("Energy", energy);
-		}
-		return energyReceived;
+	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
+		return NBTHelper.receiveEnergy(container, energy, getMaxEnergyStored(container), simulate);
 	}
 
 	@Override
-	public int extractEnergy(ItemStack container, int maxExtract, boolean simulate) {
-
-		if (container.getTagCompound() == null || !container.getTagCompound().hasKey("Energy")) {
-			return 0;
-		}
-		int energy = container.getTagCompound().getInteger("Energy");
-		int energyExtracted = Math.min(energy, Math.min(this.maxExtract, maxExtract));
-
-		if (!simulate) {
-			energy -= energyExtracted;
-			container.getTagCompound().setInteger("Energy", energy);
-		}
-		return energyExtracted;
+	public int extractEnergy(ItemStack container, int energy, boolean simulate) {
+		return NBTHelper.extractEnergy(container, energy, simulate);
 	}
 
 	@Override
 	public int getEnergyStored(ItemStack container) {
-
-		if (container.getTagCompound() == null || !container.getTagCompound().hasKey("Energy")) {
-			return 0;
-		}
-		return container.getTagCompound().getInteger("Energy");
+		return NBTHelper.getEnergyStored(container);
 	}
 
 	@Override
 	public int getMaxEnergyStored(ItemStack container) {
-		return capacity;
+		return 0;
 	}
 
 	@Override
@@ -92,13 +38,21 @@ public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyCont
 
 	@Override
 	public double getDurabilityForDisplay(ItemStack stack) {
-		return 1D-(getEnergyStored(stack)/getMaxEnergyStored(stack));
+		if (stack.getTagCompound() == null) {
+			EnergyHelper.setDefaultEnergyTag(stack, 0);
+		}
+		return 1D - ((double) stack.getTagCompound().getInteger("Energy") / (double) getMaxEnergyStored(stack));
 	}
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
 		super.addInformation(stack, player, tooltip, bool);
 		tooltip.add(getEnergyStored(stack) + " / " + getMaxEnergyStored(stack) + " RF");
+	}
+
+	@Override
+	public boolean isDamaged(ItemStack stack) {
+		return true;
 	}
 
 }

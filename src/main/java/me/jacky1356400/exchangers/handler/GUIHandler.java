@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
-import me.jacky1356400.exchangers.item.ItemExchangerBase;
 
 public class GUIHandler extends Gui {
 
@@ -33,7 +32,7 @@ public class GUIHandler extends Gui {
         EntityPlayer player = (EntityPlayer) mc.getRenderViewEntity();
 
         if (player == null || !mc.inGameHasFocus || !Minecraft.isGuiEnabled()) return;
-        if (player.getHeldItemMainhand() == null || !(player.getHeldItemMainhand().getItem() instanceof ItemExchangerBase))  return;
+        if (player.getHeldItemMainhand() == null || !(player.getHeldItemMainhand().getItem() instanceof ExchangerHandler))  return;
 
         ItemStack exchangerStack = player.getHeldItemMainhand();
         ItemStack source = null;

@@ -2,6 +2,7 @@ package me.jacky1356400.exchangers;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -31,6 +32,15 @@ public class Recipes {
             GameRegistry.addRecipe(emeraldExchangerRecipe);
             ShapedOreRecipe obsidianExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.obsidianExchanger), "OEO", "OCO", "OEO", 'O', "obsidian", 'E', Items.ENDER_EYE, 'C', ExchangersItems.exchangerCoreT3);
             GameRegistry.addRecipe(obsidianExchangerRecipe);
+        }
+        if ((Config.enderIOModule = true) && (Loader.isModLoaded("EnderIO"))) {
+            //TODO
+        }
+        if ((Config.thermalExpansionModule = true) && (Loader.isModLoaded("thermalexpansion"))) {
+            //TODO
+        }
+        if ((Config.mekanismModule = true) && (Loader.isModLoaded("Mekanism"))) {
+            //TODO
         }
     }
 

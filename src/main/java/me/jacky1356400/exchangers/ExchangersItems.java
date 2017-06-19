@@ -16,6 +16,8 @@ public class ExchangersItems {
     public static ItemExchangerCoreT2 exchangerCoreT2;
     public static ItemExchangerCoreT3 exchangerCoreT3;
 
+    public static ItemConductiveIronExchanger conductiveIronExchanger;
+
     public static void init(){
         woodenExchanger = GameRegistry.register(new ItemWoodenExchanger());
         stoneExchanger = GameRegistry.register(new ItemStoneExchanger());
@@ -28,6 +30,8 @@ public class ExchangersItems {
         exchangerCoreT1 = GameRegistry.register(new ItemExchangerCoreT1());
         exchangerCoreT2 = GameRegistry.register(new ItemExchangerCoreT2());
         exchangerCoreT3 = GameRegistry.register(new ItemExchangerCoreT3());
+
+        conductiveIronExchanger = GameRegistry.register(new ItemConductiveIronExchanger());
     }
 
     public static void initModels(){
@@ -42,6 +46,8 @@ public class ExchangersItems {
         exchangerCoreT1.initModel();
         exchangerCoreT2.initModel();
         exchangerCoreT3.initModel();
+
+        conductiveIronExchanger.initModel();
     }
 
 }

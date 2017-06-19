@@ -15,7 +15,7 @@ item.exchangers.exchanger_core_tier1.name=§aExchanger Core (Tier 1)
 item.exchangers.exchanger_core_tier2.name=§bExchanger Core (Tier 2)
 item.exchangers.exchanger_core_tier3.name=§dExchanger Core (Tier 3)
 
-#Exchangers
+#Vanilla Exchangers
 item.exchangers.tuberous_exchanger.name=§eTuberous Exchanger
 item.exchangers.wooden_exchanger.name=§aWooden Exchanger
 item.exchangers.stone_exchanger.name=§aStone Exchanger
@@ -24,3 +24,6 @@ item.exchangers.iron_exchanger.name=§bIron Exchanger
 item.exchangers.diamond_exchanger.name=§dDiamond Exchanger
 item.exchangers.emerald_exchanger.name=§dEmerald Exchanger
 item.exchangers.obsidian_exchanger.name=§dObsidian Exchanger
+
+#Ender IO Exchangers
+item.exchangers.conductive_iron_exchanger.name=§bConductive Iron Exchanger

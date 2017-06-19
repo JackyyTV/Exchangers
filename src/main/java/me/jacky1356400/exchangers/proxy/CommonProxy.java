@@ -4,8 +4,6 @@ import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Recipes;
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.ExchangersItems;
-import me.jacky1356400.exchangers.client.Keys;
-import me.jacky1356400.exchangers.handler.KeyBindingsHandler;
 import me.jacky1356400.exchangers.handler.RenderOverlayHandler;
 import me.jacky1356400.exchangers.handler.WorldEventHandler;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
@@ -34,8 +32,6 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent e){
         Exchangers.logger.info("proxy");
-        MinecraftForge.EVENT_BUS.register(new KeyBindingsHandler());
-        Keys.init();
         MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
         MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
     }

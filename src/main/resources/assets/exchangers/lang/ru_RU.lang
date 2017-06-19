@@ -1,0 +1,26 @@
+#Creative Tab
+itemGroup.exchangers=Exchangers
+
+#Key Bindings
+key.categories.exchangers=Exchangers
+key.exchangermode=Переключение режима обменника
+
+#Death
+death.attack.exchangerpotato=%1$s решил использовать картофельный обменник
+death.attack.exchangerpotato.player=%1$s решил использовать картофельный обменник
+death.attack.exchangerpotato.item=%1$s решил использовать картофельный обменник
+
+#Crafting Components
+item.exchangers.exchanger_core_tier1.name=§aОбменное ядро (ур. 1)
+item.exchangers.exchanger_core_tier2.name=§bОбменное ядро (ур. 2)
+item.exchangers.exchanger_core_tier3.name=§dОбменное ядро (ур. 3)
+
+#Exchangers
+item.exchangers.tuberous_exchanger.name=§eКлубневой обменник
+item.exchangers.wooden_exchanger.name=§aДеревянный обменник
+item.exchangers.stone_exchanger.name=§aКаменный обменник
+item.exchangers.golden_exchanger.name=§bЗолотой обменник
+item.exchangers.iron_exchanger.name=§bЖелезный обменник
+item.exchangers.diamond_exchanger.name=§dАлмазный обменник
+item.exchangers.emerald_exchanger.name=§dИзумрудный обменник
+item.exchangers.obsidian_exchanger.name=§dОбсидиановый обменник

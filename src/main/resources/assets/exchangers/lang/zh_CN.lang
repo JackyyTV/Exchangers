@@ -1,0 +1,26 @@
+#Creative Tab
+itemGroup.exchangers=替换器
+
+#Key Bindings
+key.categories.exchangers=替换器
+key.exchangermode=替换器模式切换
+
+#Death
+death.attack.exchangerpotato=%1$s 试图操作一个土豆替换器
+death.attack.exchangerpotato.player=%1$s 试图操作一个土豆替换器
+death.attack.exchangerpotato.item=%1$s 试图操作一个土豆替换器
+
+#Crafting Components
+item.exchangers.exchanger_core_tier1.name=§a替换器核心（一级）
+item.exchangers.exchanger_core_tier2.name=§b替换器核心（二级）
+item.exchangers.exchanger_core_tier3.name=§d替换器核心（三级）
+
+#Exchangers
+item.exchangers.tuberous_exchanger.name=§e土豆替换器
+item.exchangers.wooden_exchanger.name=§a木制替换器
+item.exchangers.stone_exchanger.name=§a石制替换器
+item.exchangers.golden_exchanger.name=§b金制替换器
+item.exchangers.iron_exchanger.name=§b铁制替换器
+item.exchangers.diamond_exchanger.name=§d钻石替换器
+item.exchangers.emerald_exchanger.name=§d绿宝石替换器
+item.exchangers.obsidian_exchanger.name=§d黑曜石替换器

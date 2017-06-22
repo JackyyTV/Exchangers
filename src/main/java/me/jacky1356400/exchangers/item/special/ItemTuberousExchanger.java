@@ -1,4 +1,4 @@
-package me.jacky1356400.exchangers.item.vanilla;
+package me.jacky1356400.exchangers.item.special;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.jacky1356400.exchangers.Exchangers;

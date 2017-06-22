@@ -11,12 +11,28 @@ death.attack.exchangerpotato.player=%1$s tried to operate a potato exchanger
 death.attack.exchangerpotato.item=%1$s tried to operate a potato exchanger
 
 #Crafting Components
+#Vanilla
 item.exchangers.exchanger_core_tier1.name=§aExchanger Core (Tier 1)
 item.exchangers.exchanger_core_tier2.name=§bExchanger Core (Tier 2)
 item.exchangers.exchanger_core_tier3.name=§dExchanger Core (Tier 3)
+#Ender IO
+item.exchangers.eio_exchanger_core_tier1.name=§aEnder IO Exchanger Core (Tier 1)
+item.exchangers.eio_exchanger_core_tier2.name=§bEnder IO Exchanger Core (Tier 2)
+item.exchangers.eio_exchanger_core_tier3.name=§dEnder IO Exchanger Core (Tier 3)
+#Thermal Expansion
+item.exchangers.te_exchanger_core_tier1.name=§aThermal Expansion Exchanger Core (Tier 1)
+item.exchangers.te_exchanger_core_tier2.name=§bThermal Expansion Exchanger Core (Tier 2)
+item.exchangers.te_exchanger_core_tier3.name=§dThermal Expansion Exchanger Core (Tier 3)
+#Mekanism
+item.exchangers.mekanism_exchanger_core_tier1.name=§aMekanism Exchanger Core (Tier 1)
+item.exchangers.mekanism_exchanger_core_tier2.name=§bMekanism Exchanger Core (Tier 2)
+item.exchangers.mekanism_exchanger_core_tier3.name=§dMekanism Exchanger Core (Tier 3)
+
+#Special Exchangers
+item.exchangers.tuberous_exchanger.name=§eTuberous Exchanger
+item.exchangers.creative_exchanger.name=§dCreative Exchanger
 
 #Vanilla Exchangers
-item.exchangers.tuberous_exchanger.name=§eTuberous Exchanger
 item.exchangers.wooden_exchanger.name=§aWooden Exchanger
 item.exchangers.stone_exchanger.name=§aStone Exchanger
 item.exchangers.golden_exchanger.name=§bGolden Exchanger

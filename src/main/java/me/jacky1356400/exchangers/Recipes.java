@@ -16,8 +16,6 @@ public class Recipes {
             GameRegistry.addRecipe(exchangerCoreT2Recipe);
             ShapedOreRecipe exchangerCoreT3Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.exchangerCoreT3), "DCE", "CNC", "ECD", 'D', "gemDiamond", 'E', "gemEmerald", 'C', ExchangersItems.exchangerCoreT2, 'N', Items.NETHER_STAR);
             GameRegistry.addRecipe(exchangerCoreT3Recipe);
-            ShapedOreRecipe tuberousExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.tuberousExchanger), "PGP", "PEP", "PGP", 'P', Items.POTATO, 'G', "nuggetGold", 'E', "enderpearl");
-            GameRegistry.addRecipe(tuberousExchangerRecipe);
             ShapedOreRecipe woodenExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.woodenExchanger), "WEW", "WCW", "WEW", 'W', "logWood", 'E', Items.ENDER_EYE, 'C', ExchangersItems.exchangerCoreT1);
             GameRegistry.addRecipe(woodenExchangerRecipe);
             ShapedOreRecipe stoneExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.stoneExchanger), "SES", "SCS", "SES", 'S', "stone", 'E', Items.ENDER_EYE, 'C', ExchangersItems.exchangerCoreT1);
@@ -32,6 +30,10 @@ public class Recipes {
             GameRegistry.addRecipe(emeraldExchangerRecipe);
             ShapedOreRecipe obsidianExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.obsidianExchanger), "OEO", "OCO", "OEO", 'O', "obsidian", 'E', Items.ENDER_EYE, 'C', ExchangersItems.exchangerCoreT3);
             GameRegistry.addRecipe(obsidianExchangerRecipe);
+        }
+        if (Config.specialModule = true) {
+            ShapedOreRecipe tuberousExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.tuberousExchanger), "PGP", "PEP", "PGP", 'P', Items.POTATO, 'G', "nuggetGold", 'E', "enderpearl");
+            GameRegistry.addRecipe(tuberousExchangerRecipe);
         }
         if ((Config.enderIOModule = true) && (Loader.isModLoaded("EnderIO"))) {
             //TODO

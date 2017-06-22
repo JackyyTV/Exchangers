@@ -17,6 +17,7 @@ public class Config {
     public static boolean enderIOModule;
     public static boolean thermalExpansionModule;
     public static boolean mekanismModule;
+    public static boolean specialModule;
 
     //Vanilla
     public static int woodenExchangerMaxDamage;
@@ -84,6 +85,7 @@ public class Config {
         enderIOModule = cfg.getBoolean("Ender IO Module", CATEGORY_MODULES, false, "If true, enables recipes for Ender IO-based exchangers (Requires Ender IO to be installed).");
         thermalExpansionModule = cfg.getBoolean("Thermal Expansion Module", CATEGORY_MODULES, false, "If true, enables recipes for Thermal Expansion-based exchangers (Requires Thermal Expansion to be installed).");
         mekanismModule = cfg.getBoolean("Mekanism Module", CATEGORY_MODULES, false, "If true, enables recipes for Mekanism-based exchangers (Requires Mekanism to be installed).");
+        specialModule = cfg.getBoolean("Special Module", CATEGORY_MODULES, true, "If true, enables recipes for special exchangers (e.g. Tuberous Exchanger).");
 
         //Vanilla Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_VANILLA, "Vanilla Exchanger Tweaks");

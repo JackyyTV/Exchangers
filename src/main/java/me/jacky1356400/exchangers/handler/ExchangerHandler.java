@@ -6,6 +6,8 @@ import me.jacky1356400.exchangers.item.*;
 import me.jacky1356400.exchangers.item.ItemExchangerBaseRF;
 import me.jacky1356400.exchangers.item.enderio.*;
 import me.jacky1356400.exchangers.item.mekanism.*;
+import me.jacky1356400.exchangers.item.special.ItemCreativeExchanger;
+import me.jacky1356400.exchangers.item.special.ItemTuberousExchanger;
 import me.jacky1356400.exchangers.item.thermalexpansion.*;
 import me.jacky1356400.exchangers.item.thermalexpansion.ItemReinforcedExchanger;
 import me.jacky1356400.exchangers.item.vanilla.*;
@@ -39,9 +41,14 @@ public class ExchangerHandler extends Item {
     public static final int MODE_11X11 = 5;
     public static final int MODE_13X13 = 6;
     public static final int MODE_15X15 = 7;
+    public static final int MODE_17X17 = 8;
+    public static final int MODE_19X19 = 9;
+    public static final int MODE_21X21 = 10;
+    public static final int MODE_23X23 = 11;
+    public static final int MODE_25X25 = 12;
 
     public static final String[] modeSwitchList = new String[] { "1x1", "3x3", "5x5", "7x7", "9x9", "11x11", "13x13",
-            "15x15" };
+            "15x15", "17x17", "19x19", "21x21", "23x23", "25x25" };
 
     public static void setDefaultTagCompound(ItemStack stack) {
         stack.setTagCompound(new NBTTagCompound());
@@ -89,6 +96,15 @@ public class ExchangerHandler extends Item {
         ItemStack heldItem = player.getHeldItemMainhand();
 
         if (heldItem != null) {
+            //Special Exchangers
+            if (heldItem.getItem() instanceof ItemTuberousExchanger) {
+                if (modeSwitch > MODE_1X1)
+                    modeSwitch = MODE_1X1;
+            }
+            if (heldItem.getItem() instanceof ItemCreativeExchanger) {
+                if (modeSwitch > MODE_25X25)
+                    modeSwitch = MODE_1X1;
+            }
             //Vanilla Exchangers
             if (heldItem.getItem() instanceof ItemWoodenExchanger) {
                 if (modeSwitch > MODE_1X1)
@@ -188,7 +204,6 @@ public class ExchangerHandler extends Item {
         }
 
         stack.getTagCompound().setInteger("ExchangeMode", modeSwitch);
-        msgPlayer(player, "Exchanger mode set to " + modeSwitchList[modeSwitch]);
     }
 
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand,
@@ -298,6 +313,7 @@ public class ExchangerHandler extends Item {
         softBlocks.add(Blocks.SNOW);
         softBlocks.add(Blocks.VINE);
         softBlocks.add(Blocks.FIRE);
+        softBlocks.add(Blocks.AIR);
 
     }
 
@@ -390,7 +406,8 @@ public class ExchangerHandler extends Item {
     }
 
     public static boolean consumeBlockInInventory(EntityPlayer player, Block block, IBlockState state) {
-        if (!player.capabilities.isCreativeMode) {
+        ItemStack heldItem = player.getHeldItemMainhand();
+        if (!player.capabilities.isCreativeMode || !(heldItem.getItem() instanceof ItemCreativeExchanger)) {
             InventoryPlayer inv = player.inventory;
             Item item = Item.getItemFromBlock(block);
             int meta = block.getMetaFromState(state);
@@ -446,38 +463,34 @@ public class ExchangerHandler extends Item {
 
         for (BlockPos exchangePos : toExchange) {
             int slot = -1;
-            if (player.capabilities.isCreativeMode) {
+            ItemStack heldItem = player.getHeldItemMainhand();
+            if (player.capabilities.isCreativeMode || heldItem.getItem() instanceof ItemCreativeExchanger) {
                 placeBlockInWorld(world, exchangePos, newState);
             } else {
                 try {
                     slot = findItemInInventory(player.inventory, Item.getItemFromBlock(newBlock), newMeta);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    msgPlayer(player, "Error: Out of blocks!");
                     return false;
                 }
-
                 if (slot >= 0 && player.inventory.mainInventory[slot].stackSize > 0) {
                     Block oldBlock = world.getBlockState(exchangePos).getBlock();
                     int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
                     int energy = stack.getTagCompound().getInteger("Energy");
-
                     if (stack.getItem() instanceof ItemExchangerBaseRF && energy <= 0) {
                         msgPlayer(player, "Error: Out of power!");
                         return false;
                     } else {
                         if (!placeBlockInInventory(player, oldBlock, oldMeta)) {
-                            msgPlayer(player, "Error: Out of space in inventory!");
                             return false;
                         } else {
                             if (!placeBlockInWorld(world, exchangePos, newState)) {
-                                msgPlayer(player, "Error: Out of blocks!");
                                 return false;
                             } else {
                                 if (!consumeBlockInInventory(player, newBlock, newState)) {
                                     return false;
                                 } else {
                                     //Vanilla Exchangers
-                                    if (stack.getItem() instanceof ItemExchangerBase) {
+                                    if (stack.getItem() instanceof ItemExchangerBase && !(stack.getItem() instanceof ItemCreativeExchanger)) {
                                         stack.damageItem(1, player);
                                     }
                                     //Ender IO Exchangers

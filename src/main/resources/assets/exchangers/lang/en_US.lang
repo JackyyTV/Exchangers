@@ -10,6 +10,22 @@ death.attack.exchangerpotato=%1$s tried to operate a potato exchanger
 death.attack.exchangerpotato.player=%1$s tried to operate a potato exchanger
 death.attack.exchangerpotato.item=%1$s tried to operate a potato exchanger
 
+#Tooltips
+exchangers.tooltip.tier=Tier %d
+exchangers.tooltip.holdShift=Hold %s for Details
+exchangers.tooltip.holdShift.shift=Shift
+exchangers.tooltip.shift1=Sneak right click on block to select.
+exchangers.tooltip.shift2=Right click on a block to exchange.
+exchangers.tooltip.shift3=Use the mode key to switch modes.
+exchangers.tooltip.tuberousExchanger.warning=Clever! But not exchangeable.
+exchangers.tooltip.selectedblock=Selected Block:
+exchangers.tooltip.selectedmode=Selected Mode:
+exchangers.tooltip.noselectedblock=No Selected Block
+
+#Error Messages
+exchangers.error.invalidblock=Error: Invalid block!
+exchangers.error.nopower=Error: Out of power!
+
 #Crafting Components
 #Vanilla
 item.exchangers.exchanger_core_tier1.name=§aExchanger Core (Tier 1)

@@ -1,15 +1,18 @@
 package me.jacky1356400.exchangers.handler;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import me.jacky1356400.exchangers.Config;
-import me.jacky1356400.exchangers.item.*;
+import me.jacky1356400.exchangers.client.Keys;
+import me.jacky1356400.exchangers.helper.StringHelper;
+import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import me.jacky1356400.exchangers.item.ItemExchangerBaseRF;
 import me.jacky1356400.exchangers.item.enderio.*;
-import me.jacky1356400.exchangers.item.mekanism.*;
+import me.jacky1356400.exchangers.item.mekanism.ItemAdvancedExchanger;
+import me.jacky1356400.exchangers.item.mekanism.ItemBasicExchanger;
+import me.jacky1356400.exchangers.item.mekanism.ItemEliteExchanger;
+import me.jacky1356400.exchangers.item.mekanism.ItemUltimateExchanger;
 import me.jacky1356400.exchangers.item.special.ItemCreativeExchanger;
 import me.jacky1356400.exchangers.item.special.ItemTuberousExchanger;
 import me.jacky1356400.exchangers.item.thermalexpansion.*;
-import me.jacky1356400.exchangers.item.thermalexpansion.ItemReinforcedExchanger;
 import me.jacky1356400.exchangers.item.vanilla.*;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -64,26 +67,34 @@ public class ExchangerHandler extends Item {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
+        if (StringHelper.displayShiftForDetail && !StringHelper.isShiftKeyDown()) {
+            tooltip.add(StringHelper.getShiftText());
+        }
+        if (!StringHelper.isShiftKeyDown()) {
+            return;
+        }
 
         if (stackTagCompoundNull(stack))
             setDefaultTagCompound(stack);
         NBTTagCompound compound = stack.getTagCompound();
 
         if (compound == null || Block.getBlockFromName(compound.getString("BlockName")) == null) {
-            tooltip.add(ChatFormatting.RED + "No Selected Block");
+            tooltip.add(StringHelper.RED + StringHelper.localize("tooltip.noselectedblock"));
         } else {
             String name = compound.getString("BlockName");
             Block block = Block.getBlockFromName(name);
 
             int meta = compound.getByte("BlockData");
 
-            tooltip.add(ChatFormatting.GREEN + "Selected Block: " + getBlockName(block, meta));
-            tooltip.add(ChatFormatting.GREEN + "Selected Mode: " + modeSwitchList[compound.getInteger("ExchangeMode")]);
+            tooltip.add(StringHelper.GREEN + StringHelper.localize("tooltip.selectedblock") + " " + getBlockName(block, meta));
+            tooltip.add(StringHelper.GREEN + StringHelper.localize("tooltip.selectedmode") + " " + modeSwitchList[compound.getInteger("ExchangeMode")]);
         }
-
-        tooltip.add("Sneak right click on block to select.");
-        tooltip.add("Right click on a block to exchange.");
-        tooltip.add("Use the mode key (default 'COMMA') to switch modes.");
+        if (StringHelper.isShiftKeyDown()) {
+            tooltip.remove(StringHelper.getShiftText());
+            tooltip.add(StringHelper.localize("tooltip.shift1"));
+            tooltip.add(StringHelper.localize("tooltip.shift2"));
+            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + Keys.modeKey.getDisplayName() + ")");
+        }
     }
 
     public void switchMode(EntityPlayer player, ItemStack stack) {
@@ -221,7 +232,7 @@ public class ExchangerHandler extends Item {
                 setSelectedBlock(stack, block, state);
                 return EnumActionResult.SUCCESS;
             } else {
-                msgPlayer(player, "Error: Invalid block!");
+                msgPlayer(player, StringHelper.LIGHT_RED + StringHelper.localize("error.invalidblock"));
                 return EnumActionResult.FAIL;
             }
         } else {
@@ -351,7 +362,7 @@ public class ExchangerHandler extends Item {
         int worldMeta = worldBlock.getMetaFromState(world.getBlockState(pos));
 
         if (!blockSuitableForSelection(player, world, pos)) {
-            msgPlayer(player, "Error: Invalid block!");
+            msgPlayer(player, StringHelper.LIGHT_RED + StringHelper.localize("error.invalidblock"));
             return false;
         }
 
@@ -477,7 +488,7 @@ public class ExchangerHandler extends Item {
                     int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
                     int energy = stack.getTagCompound().getInteger("Energy");
                     if (stack.getItem() instanceof ItemExchangerBaseRF && energy <= 0) {
-                        msgPlayer(player, "Error: Out of power!");
+                        msgPlayer(player, StringHelper.LIGHT_RED + StringHelper.localize("error.nopower"));
                         return false;
                     } else {
                         if (!placeBlockInInventory(player, oldBlock, oldMeta)) {

@@ -4,9 +4,11 @@ import cofh.api.energy.IEnergyContainerItem;
 import me.jacky1356400.exchangers.handler.ExchangerHandler;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
 import me.jacky1356400.exchangers.helper.NBTHelper;
+import me.jacky1356400.exchangers.helper.StringHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyContainerItem {
@@ -47,7 +49,7 @@ public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyCont
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
 		super.addInformation(stack, player, tooltip, bool);
-		tooltip.add(getEnergyStored(stack) + " / " + getMaxEnergyStored(stack) + " RF");
+		tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
 	}
 
 	@Override

@@ -11,6 +11,7 @@ public class Config {
     private static final String CATEGORY_TWEAKS_EIO = "ender io tweaks";
     private static final String CATEGORY_TWEAKS_TE = "thermal expansion tweaks";
     private static final String CATEGORY_TWEAKS_MEKANISM = "mekanism tweaks";
+    private static final String CATEGORY_RECIPES = "recipe tweaks";
 
     //Modules
     public static boolean vanillaModule;
@@ -18,6 +19,12 @@ public class Config {
     public static boolean thermalExpansionModule;
     public static boolean mekanismModule;
     public static boolean specialModule;
+
+    //Recipes
+    public static boolean vanillaProgressiveRecipes;
+    public static boolean enderIOProgressiveRecipes;
+    public static boolean thermalExpansionProgressiveRecipes;
+    public static boolean mekanismProgressiveRecipes;
 
     //Vanilla
     public static int woodenExchangerMaxDamage;
@@ -82,10 +89,17 @@ public class Config {
 
         //Modules
         vanillaModule = cfg.getBoolean("Vanilla Module", CATEGORY_MODULES, true, "If true, enables recipes for vanilla-based exchangers.");
-        enderIOModule = cfg.getBoolean("Ender IO Module", CATEGORY_MODULES, false, "If true, enables recipes for Ender IO-based exchangers (Requires Ender IO to be installed).");
-        thermalExpansionModule = cfg.getBoolean("Thermal Expansion Module", CATEGORY_MODULES, false, "If true, enables recipes for Thermal Expansion-based exchangers (Requires Thermal Expansion to be installed).");
-        mekanismModule = cfg.getBoolean("Mekanism Module", CATEGORY_MODULES, false, "If true, enables recipes for Mekanism-based exchangers (Requires Mekanism to be installed).");
+        enderIOModule = cfg.getBoolean("Ender IO Module", CATEGORY_MODULES, true, "If true, enables recipes for Ender IO-based exchangers (Requires Ender IO to be installed).");
+        thermalExpansionModule = cfg.getBoolean("Thermal Expansion Module", CATEGORY_MODULES, true, "If true, enables recipes for Thermal Expansion-based exchangers (Requires Thermal Expansion to be installed).");
+        mekanismModule = cfg.getBoolean("Mekanism Module", CATEGORY_MODULES, true, "If true, enables recipes for Mekanism-based exchangers (Requires Mekanism to be installed).");
         specialModule = cfg.getBoolean("Special Module", CATEGORY_MODULES, true, "If true, enables recipes for special exchangers (e.g. Tuberous Exchanger).");
+
+        //Recipes
+        cfg.addCustomCategoryComment(CATEGORY_RECIPES, "Progressive recipes - requires the previous tier to craft the next tier exchanger, which means more expensive.");
+        vanillaProgressiveRecipes = cfg.getBoolean("Vanilla Progressive Recipes", CATEGORY_RECIPES, true, "If true, enables progressive recipes for vanilla-based exchangers.");
+        enderIOProgressiveRecipes = cfg.getBoolean("Ender IO Progressive Recipes", CATEGORY_RECIPES, true, "If true, enables progressive recipes for Ender IO-based exchangers.");
+        thermalExpansionProgressiveRecipes = cfg.getBoolean("Thermal Expansion Progressive Recipes", CATEGORY_RECIPES, true, "If true, enables progressive recipes for Thermal Expansion-based exchangers.");
+        mekanismProgressiveRecipes = cfg.getBoolean("Mekanism Progressive Recipes", CATEGORY_RECIPES, true, "If true, enables progressive recipes for Mekanism-based exchangers.");
 
         //Vanilla Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_VANILLA, "Vanilla Exchanger Tweaks");

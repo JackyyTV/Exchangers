@@ -1,7 +1,7 @@
 package me.jacky1356400.exchangers.item.special;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
 import me.jacky1356400.exchangers.Exchangers;
+import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,10 +31,14 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
-
-        tooltip.add(ChatFormatting.RED + "Clever! But not exchangeable.");
+        tooltip.add(StringHelper.getTierText(0));
+        if (StringHelper.isShiftKeyDown()) {
+            tooltip.add(StringHelper.LIGHT_RED + StringHelper.ITALIC + StringHelper.localize("tooltip.tuberousExchanger.warning"));
+        }
     }
 
     @Override

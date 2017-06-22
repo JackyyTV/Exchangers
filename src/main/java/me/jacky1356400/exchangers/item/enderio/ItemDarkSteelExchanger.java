@@ -3,9 +3,11 @@ package me.jacky1356400.exchangers.item.enderio;
 import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
+import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBaseRF;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
@@ -43,6 +45,14 @@ public class ItemDarkSteelExchanger extends ItemExchangerBaseRF {
         ItemStack full = new ItemStack(this);
         EnergyHelper.setDefaultEnergyTag(full, Config.darkSteelExchangerMaxRF);
         list.add(full);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings("unchecked")
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
+        super.addInformation(stack, player, tooltip, bool);
+        tooltip.add(StringHelper.getTierText(3));
     }
 
 }

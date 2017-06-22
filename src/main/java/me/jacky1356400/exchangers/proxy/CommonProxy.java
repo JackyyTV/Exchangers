@@ -8,9 +8,13 @@ import me.jacky1356400.exchangers.handler.RenderOverlayHandler;
 import me.jacky1356400.exchangers.handler.WorldEventHandler;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
 import me.jacky1356400.exchangers.helper.DirectionHelper;
+import me.jacky1356400.exchangers.integration.EnderIOIntegration;
+import me.jacky1356400.exchangers.integration.MekanismIntegration;
+import me.jacky1356400.exchangers.integration.ThermalExpansionIntegration;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -26,6 +30,15 @@ public class CommonProxy {
         config = new Configuration(new File(configDir.getPath(), "exchangers.cfg"));
         Config.readConfig();
         ExchangersItems.init();
+        if ((Config.enderIOModule = true) && (Loader.isModLoaded("EnderIO"))) {
+            EnderIOIntegration.init();
+        }
+        if ((Config.thermalExpansionModule = true) && (Loader.isModLoaded("thermalexpansion"))) {
+            ThermalExpansionIntegration.init();
+        }
+        if ((Config.mekanismModule = true) && (Loader.isModLoaded("Mekanism"))) {
+            MekanismIntegration.init();
+        }
         Recipes.init();
         PacketHandler.registerMessages(Exchangers.MODID);
     }

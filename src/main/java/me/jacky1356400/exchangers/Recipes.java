@@ -129,7 +129,7 @@ public class Recipes {
             GameRegistry.addRecipe(teExchangerCoreT3Recipe);
         }
 
-        if ((Config.mekanismModule = true) && (Loader.isModLoaded("Mekanism"))) {
+        if ((Config.mekanismModule = true) && (Loader.isModLoaded("mekanism"))) {
             if (Config.mekanismProgressiveRecipes = true) {
                 ShapedOreRecipe basicExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.basicExchanger), "BTB", "BCB", "BTB", 'B', MekanismIntegration.circuitBasic, 'T', MekanismIntegration.energyTablet, 'C', ExchangersItems.mekanismExchangerCoreT1);
                 GameRegistry.addRecipe(basicExchangerRecipe);

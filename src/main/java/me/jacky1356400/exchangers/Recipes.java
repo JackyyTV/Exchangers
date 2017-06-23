@@ -5,8 +5,6 @@ import me.jacky1356400.exchangers.integration.MekanismIntegration;
 import me.jacky1356400.exchangers.integration.ThermalExpansionIntegration;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;

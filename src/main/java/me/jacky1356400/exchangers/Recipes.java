@@ -92,13 +92,13 @@ public class Recipes {
             GameRegistry.addRecipe(eioExchangerCoreT1Recipe);
             ShapedOreRecipe eioExchangerCoreT2Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.eioExchangerCoreT2), "PSP", "CDC", "PSP", 'P', "itemPulsatingPowder", 'S', "ingotElectricalSteel", 'C', ExchangersItems.eioExchangerCoreT1, 'D', EnderIOIntegration.bucketDewOfTheVoid);
             GameRegistry.addRecipe(eioExchangerCoreT2Recipe);
-            ShapedOreRecipe eioExchangerCoreT3Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.eioExchangerCoreT3), "CDC", "DVD", "CDC", 'C', ExchangersItems.eioExchangerCoreT2, 'D', "ingotDarkSteel", 'V', EnderIOIntegration.bucketVaporOfLevity);
+            ShapedOreRecipe eioExchangerCoreT3Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.eioExchangerCoreT3), "DCD", "CVC", "DCD", 'C', ExchangersItems.eioExchangerCoreT2, 'D', "ingotDarkSteel", 'V', EnderIOIntegration.bucketVaporOfLevity);
             GameRegistry.addRecipe(eioExchangerCoreT3Recipe);
         }
 
         if ((Config.thermalExpansionModule = true) && (Loader.isModLoaded("thermalexpansion"))) {
             if (Config.thermalExpansionProgressiveRecipes = true) {
-                ShapedOreRecipe leadstoneExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.leadstoneExchanger), "LRL", "LCL", "LFL", 'L', "ingotLead", 'R', ThermalExpansionIntegration.redstoneReceptionCoil, 'F', ThermalExpansionIntegration.fluxCapacitorBasic, 'C', ExchangersItems.teExchangerCoreT1);
+                ShapedOreRecipe leadstoneExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.leadstoneExchanger), "LSL", "LCL", "LFL", 'L', "ingotLead", 'S', ThermalExpansionIntegration.redstoneServo, 'F', ThermalExpansionIntegration.fluxCapacitorBasic, 'C', ExchangersItems.teExchangerCoreT1);
                 GameRegistry.addRecipe(leadstoneExchangerRecipe);
                 ShapedOreRecipe hardenedExchangerRecipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.hardenedExchanger), "IRI", "CXC", "IFI", 'I', "ingotInvar", 'R', ThermalExpansionIntegration.redstoneReceptionCoil, 'F', ThermalExpansionIntegration.fluxCapacitorHardened, 'C', ExchangersItems.teExchangerCoreT1, 'X', ExchangersItems.leadstoneExchanger);
                 GameRegistry.addRecipe(hardenedExchangerRecipe);
@@ -125,7 +125,7 @@ public class Recipes {
             GameRegistry.addRecipe(teExchangerCoreT1Recipe);
             ShapedOreRecipe teExchangerCoreT2Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.teExchangerCoreT2), "BIB", "CGC", "BIB", 'B', "gearBronze", 'I', "gearInvar",'C', ExchangersItems.teExchangerCoreT1, 'G', ThermalExpansionIntegration.bucketEnergizedGlowstone);
             GameRegistry.addRecipe(teExchangerCoreT2Recipe);
-            ShapedOreRecipe teExchangerCoreT3Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.teExchangerCoreT3), "CLC", "LGL", "CLC", 'C', ExchangersItems.teExchangerCoreT2, 'L', "gearLumium", 'G', ThermalExpansionIntegration.bucketGelidCryotheum);
+            ShapedOreRecipe teExchangerCoreT3Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.teExchangerCoreT3), "LCL", "CGC", "LCL", 'C', ExchangersItems.teExchangerCoreT2, 'L', "gearLumium", 'G', ThermalExpansionIntegration.bucketGelidCryotheum);
             GameRegistry.addRecipe(teExchangerCoreT3Recipe);
         }
 
@@ -154,7 +154,7 @@ public class Recipes {
             GameRegistry.addRecipe(mekanismExchangerCoreT1Recipe);
             ShapedOreRecipe mekanismExchangerCoreT2Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.mekanismExchangerCoreT2), "DGD", "CAC", "DGD", 'D', "dustDiamond", 'G', "ingotRefinedGlowstone", 'C', ExchangersItems.mekanismExchangerCoreT1, 'A', "alloyElite");
             GameRegistry.addRecipe(mekanismExchangerCoreT2Recipe);
-            ShapedOreRecipe mekanismExchangerCoreT3Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.mekanismExchangerCoreT3), "COC", "OAO", "COC", 'C', ExchangersItems.mekanismExchangerCoreT2, 'O', "dustRefinedObsidian", 'A', "alloyUltimate");
+            ShapedOreRecipe mekanismExchangerCoreT3Recipe = new ShapedOreRecipe(new ItemStack(ExchangersItems.mekanismExchangerCoreT3), "OCO", "CAC", "OCO", 'C', ExchangersItems.mekanismExchangerCoreT2, 'O', "dustRefinedObsidian", 'A', "alloyUltimate");
             GameRegistry.addRecipe(mekanismExchangerCoreT3Recipe);
         }
 

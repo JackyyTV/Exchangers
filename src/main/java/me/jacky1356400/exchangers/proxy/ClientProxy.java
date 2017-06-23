@@ -1,10 +1,10 @@
 package me.jacky1356400.exchangers.proxy;
 
+import me.jacky1356400.exchangers.ExchangersItems;
 import me.jacky1356400.exchangers.client.Keys;
+import me.jacky1356400.exchangers.handler.GUIHandler;
 import me.jacky1356400.exchangers.handler.KeyBindingsHandler;
 import net.minecraft.client.Minecraft;
-import me.jacky1356400.exchangers.ExchangersItems;
-import me.jacky1356400.exchangers.handler.GUIHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

@@ -9,12 +9,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Exchangers.MODID, version = Exchangers.VERSION, name = Exchangers.MODNAME, useMetadata = true)
+@Mod(modid = Exchangers.MODID, version = Exchangers.VERSION, name = Exchangers.MODNAME, dependencies = Exchangers.DEPENDS, useMetadata = true)
 public class Exchangers {
 
-    public static final String VERSION = "1.12-1.0.2";
+    public static final String VERSION = "1.12-1.1";
     public static final String MODID = "exchangers";
     public static final String MODNAME = "Exchangers";
+    public static final String PREFIX = MODID + ".";
+    public static final String DEPENDS = "required-after:forge@14.21.0.2338;after:enderio;after:thermalfoundation;after:thermalexpansion;after:mekanism;";
     public static final ExchangersTab exchangersCreativeTab = new ExchangersTab();
 
     public static Logger logger = LogManager.getLogger("Exchangers");

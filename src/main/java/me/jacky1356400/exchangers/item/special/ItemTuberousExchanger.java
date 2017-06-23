@@ -37,7 +37,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
         super.addInformation(stack, player, tooltip, bool);
         tooltip.add(StringHelper.getTierText(0));
         if (StringHelper.isShiftKeyDown()) {
-            tooltip.add(StringHelper.LIGHT_RED + StringHelper.ITALIC + StringHelper.localize("tooltip.tuberousExchanger.warning"));
+            tooltip.add(StringHelper.localize("tooltip.tuberousExchanger.warning"));
         }
     }
 

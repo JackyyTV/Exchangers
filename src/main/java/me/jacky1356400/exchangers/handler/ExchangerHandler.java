@@ -79,15 +79,15 @@ public class ExchangerHandler extends Item {
         NBTTagCompound compound = stack.getTagCompound();
 
         if (compound == null || Block.getBlockFromName(compound.getString("BlockName")) == null) {
-            tooltip.add(StringHelper.RED + StringHelper.localize("tooltip.noselectedblock"));
+            tooltip.add(StringHelper.localize("tooltip.noselectedblock"));
         } else {
             String name = compound.getString("BlockName");
             Block block = Block.getBlockFromName(name);
 
             int meta = compound.getByte("BlockData");
 
-            tooltip.add(StringHelper.GREEN + StringHelper.localize("tooltip.selectedblock") + " " + getBlockName(block, meta));
-            tooltip.add(StringHelper.GREEN + StringHelper.localize("tooltip.selectedmode") + " " + modeSwitchList[compound.getInteger("ExchangeMode")]);
+            tooltip.add(StringHelper.localize("tooltip.selectedblock") + " " + getBlockName(block, meta));
+            tooltip.add(StringHelper.localize("tooltip.selectedmode") + " " + modeSwitchList[compound.getInteger("ExchangeMode")]);
         }
         if (StringHelper.isShiftKeyDown()) {
             tooltip.remove(StringHelper.getShiftText());
@@ -232,7 +232,7 @@ public class ExchangerHandler extends Item {
                 setSelectedBlock(stack, block, state);
                 return EnumActionResult.SUCCESS;
             } else {
-                msgPlayer(player, StringHelper.LIGHT_RED + StringHelper.localize("error.invalidblock"));
+                msgPlayer(player, StringHelper.localize("error.invalidblock"));
                 return EnumActionResult.FAIL;
             }
         } else {
@@ -362,7 +362,7 @@ public class ExchangerHandler extends Item {
         int worldMeta = worldBlock.getMetaFromState(world.getBlockState(pos));
 
         if (!blockSuitableForSelection(player, world, pos)) {
-            msgPlayer(player, StringHelper.LIGHT_RED + StringHelper.localize("error.invalidblock"));
+            msgPlayer(player, StringHelper.localize("error.invalidblock"));
             return false;
         }
 
@@ -488,7 +488,7 @@ public class ExchangerHandler extends Item {
                     int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
                     int energy = stack.getTagCompound().getInteger("Energy");
                     if (stack.getItem() instanceof ItemExchangerBaseRF && energy <= 0) {
-                        msgPlayer(player, StringHelper.LIGHT_RED + StringHelper.localize("error.nopower"));
+                        msgPlayer(player, StringHelper.localize("error.nopower"));
                         return false;
                     } else {
                         if (!placeBlockInInventory(player, oldBlock, oldMeta)) {

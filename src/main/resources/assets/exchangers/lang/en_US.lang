@@ -17,14 +17,14 @@ exchangers.tooltip.holdShift.shift=Shift
 exchangers.tooltip.shift1=Sneak right click on block to select.
 exchangers.tooltip.shift2=Right click on a block to exchange.
 exchangers.tooltip.shift3=Use the mode key to switch modes.
-exchangers.tooltip.tuberousExchanger.warning=Clever! But not exchangeable.
-exchangers.tooltip.selectedblock=Selected Block:
-exchangers.tooltip.selectedmode=Selected Mode:
-exchangers.tooltip.noselectedblock=No Selected Block
+exchangers.tooltip.tuberousExchanger.warning=§c§oClever! But not exchangeable.
+exchangers.tooltip.selectedblock=§2Selected Block:
+exchangers.tooltip.selectedmode=§2Selected Mode:
+exchangers.tooltip.noselectedblock=§4No Selected Block
 
 #Error Messages
-exchangers.error.invalidblock=Error: Invalid block!
-exchangers.error.nopower=Error: Out of power!
+exchangers.error.invalidblock=§cError: Invalid block!
+exchangers.error.nopower=§cError: Out of power!
 
 #Crafting Components
 #Vanilla

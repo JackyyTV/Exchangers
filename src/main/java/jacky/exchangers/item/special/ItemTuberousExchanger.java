@@ -5,7 +5,6 @@ import java.util.List;
 import jacky.exchangers.helper.StringHelper;
 import jacky.exchangers.item.ItemExchanger;
 import jacky.exchangers.util.Tier;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,7 +15,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,16 +24,10 @@ public class ItemTuberousExchanger extends ItemExchanger {
 		super("potato", Tier.ZERO, 0);
 	}
 
-	@SideOnly(Side.CLIENT)
-	public void initModel() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
 		super.addInformation(stack, world, tooltip, bool);
-		tooltip.add(getTier().getFormattedText());
 		if (StringHelper.isShiftKeyDown()) {
 			tooltip.add(StringHelper.localize("tooltip.tuberousExchanger.warning"));
 		}

@@ -28,9 +28,9 @@ exchangers.error.nopower=§cError: Out of power!
 
 #Crafting Components
 #Vanilla
-item.exchangers.exchanger_core_tier1.name=§aExchanger Core (Tier 1)
-item.exchangers.exchanger_core_tier2.name=§bExchanger Core (Tier 2)
-item.exchangers.exchanger_core_tier3.name=§dExchanger Core (Tier 3)
+item.exchangers.core_t1.name=§aExchanger Core (Tier 1)
+item.exchangers.core_t2.name=§bExchanger Core (Tier 2)
+item.exchangers.core_t3.name=§dExchanger Core (Tier 3)
 #Ender IO
 item.exchangers.eio_exchanger_core_tier1.name=§aEnder IO Exchanger Core (Tier 1)
 item.exchangers.eio_exchanger_core_tier2.name=§bEnder IO Exchanger Core (Tier 2)
@@ -45,17 +45,17 @@ item.exchangers.mekanism_exchanger_core_tier2.name=§bMekanism Exchanger Core (T
 item.exchangers.mekanism_exchanger_core_tier3.name=§dMekanism Exchanger Core (Tier 3)
 
 #Special Exchangers
-item.exchangers.tuberous_exchanger.name=§eTuberous Exchanger
-item.exchangers.creative_exchanger.name=§dCreative Exchanger
+item.exchangers.potato.name=§eTuberous Exchanger
+item.exchangers.creative.name=§dCreative Exchanger
 
 #Vanilla Exchangers
-item.exchangers.wooden_exchanger.name=§aWooden Exchanger
-item.exchangers.stone_exchanger.name=§aStone Exchanger
-item.exchangers.golden_exchanger.name=§bGolden Exchanger
-item.exchangers.iron_exchanger.name=§bIron Exchanger
-item.exchangers.diamond_exchanger.name=§dDiamond Exchanger
-item.exchangers.emerald_exchanger.name=§dEmerald Exchanger
-item.exchangers.obsidian_exchanger.name=§dObsidian Exchanger
+item.exchangers.wooden.name=§aWooden Exchanger
+item.exchangers.stone.name=§aStone Exchanger
+item.exchangers.golden.name=§bGolden Exchanger
+item.exchangers.iron.name=§bIron Exchanger
+item.exchangers.diamond.name=§dDiamond Exchanger
+item.exchangers.emerald.name=§dEmerald Exchanger
+item.exchangers.obsidian.name=§dObsidian Exchanger
 
 #Ender IO Exchangers
 item.exchangers.conductive_iron_exchanger.name=§aConductive Iron Exchanger

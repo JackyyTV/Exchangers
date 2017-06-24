@@ -12,14 +12,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class Recipes {
 
 	public static void init() {
-
-		if (Config.specialModule = true) {
-			ShapedOreRecipe tuberousExchangerRecipe = new ShapedOreRecipe(
-					new ItemStack(ExchangersItems.tuberousExchanger), "PGP", "PEP", "PGP", 'P', Items.POTATO, 'G',
-					"nuggetGold", 'E', "enderpearl");
-			GameRegistry.addRecipe(tuberousExchangerRecipe);
-		}
-
 		if ((Config.enderIOModule = true) && (Loader.isModLoaded("EnderIO"))) {
 			if (Config.enderIOProgressiveRecipes = true) {
 				ShapedOreRecipe conductiveIronExchangerRecipe = new ShapedOreRecipe(

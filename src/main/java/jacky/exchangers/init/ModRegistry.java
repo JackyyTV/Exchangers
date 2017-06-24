@@ -3,6 +3,7 @@ package jacky.exchangers.init;
 import jacky.exchangers.Config;
 import jacky.exchangers.item.ItemBasic;
 import jacky.exchangers.item.ItemExchanger;
+import jacky.exchangers.item.special.ItemTuberousExchanger;
 import jacky.exchangers.util.Data;
 import jacky.exchangers.util.RecipeHelper;
 import jacky.exchangers.util.Tier;
@@ -23,6 +24,7 @@ public class ModRegistry {
 	public static final Item EMERALD = new ItemExchanger("emerald", Tier.FOUR, Config.emeMaxDmg);
 	public static final Item OBSIDIAN = new ItemExchanger("obsidian", Tier.FOUR, Config.obsMaxDmg);
 	public static final Item CREATIVE = new ItemExchanger("creative", Tier.CREATIVE, 0);
+	public static final Item POTATO = new ItemTuberousExchanger();
 	public static final Item CORE_1 = new ItemBasic("core_t1");
 	public static final Item CORE_2 = new ItemBasic("core_t2");
 	public static final Item CORE_3 = new ItemBasic("core_t3");
@@ -37,6 +39,10 @@ public class ModRegistry {
 			String E = "gemEmerald";
 
 			RecipeHelper.addShaped(WOODEN, 3, 3, L, Items.ENDER_EYE, L, L, CORE_1, L, L, Items.ENDER_EYE, L);
+
+			if (Config.specialModule = true)
+				RecipeHelper.addOldShaped(POTATO, "PGP", "PEP", "PGP", 'P', Items.POTATO, 'G', "nuggetGold", 'E',
+						"enderpearl");
 
 			if (Config.vanillaProgressiveRecipes = true) {
 				RecipeHelper.addOldShaped(STONE, "SES", "CXC", "SES", 'S', "stone", 'E', Items.ENDER_EYE, 'C', CORE_1,

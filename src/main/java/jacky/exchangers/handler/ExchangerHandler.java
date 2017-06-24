@@ -98,7 +98,7 @@ public abstract class ExchangerHandler extends Item {
 			int stateID = compound.getInteger("state");
 
 			tooltip.add(StringHelper.localize("tooltip.selectedblock") + " "
-					+ Block.getStateById(stateID).getBlock().getLocalizedName());
+					+ new ItemStack(Block.getStateById(stateID).getBlock(), 1, stateID >> 12 & 15).getDisplayName());
 			tooltip.add(StringHelper.localize("tooltip.selectedmode") + " "
 					+ modeSwitchList[compound.getInteger("ExchangeMode")]);
 		}

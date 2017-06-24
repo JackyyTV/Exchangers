@@ -24,7 +24,9 @@ public enum Tier {
 
 	@SideOnly(Side.CLIENT)
 	public String getFormattedText() {
-		return I18n.format(Data.MODID + ".tooltip.tier", this.ordinal());
+		int k = this.ordinal();
+		if(this == Tier.CREATIVE) k = 9001;
+		return I18n.format(Data.MODID + ".tooltip.tier", k);
 	}
 
 	public int getMaxSize() {

@@ -40,9 +40,9 @@ public class GUIHandler extends Gui {
 		ItemStack exchangerStack = player.getHeldItemMainhand();
 		ItemStack source = ItemStack.EMPTY;
 
-		if (exchangerStack.hasTagCompound() && exchangerStack.getTagCompound().hasKey("BlockName")) {
-			source = new ItemStack(Block.getBlockFromName(exchangerStack.getTagCompound().getString("BlockName")), 1,
-					exchangerStack.getTagCompound().getInteger("BlockData"));
+		if (exchangerStack.hasTagCompound()){
+			int stateID = exchangerStack.getTagCompound().getInteger("state");
+			source = new ItemStack(Block.getStateById(stateID).getBlock(), 1, stateID >> 12 & 15);
 		}
 
 		if (source.isEmpty())

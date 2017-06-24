@@ -1,7 +1,6 @@
 package jacky.exchangers.handler;
 
 import static jacky.exchangers.handler.WorldEventHandler.queueExchanges;
-import static jacky.exchangers.helper.ChatHelper.msgPlayer;
 import static jacky.exchangers.helper.DirectionHelper.getFacings;
 
 import java.util.ArrayList;
@@ -11,35 +10,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import jacky.exchangers.Config;
 import jacky.exchangers.client.Keys;
 import jacky.exchangers.helper.StringHelper;
-import jacky.exchangers.item.ItemExchangerBase;
-import jacky.exchangers.item.ItemExchangerBaseRF;
-import jacky.exchangers.item.enderio.ItemConductiveIronExchanger;
-import jacky.exchangers.item.enderio.ItemDarkSteelExchanger;
-import jacky.exchangers.item.enderio.ItemElectricalSteelExchanger;
-import jacky.exchangers.item.enderio.ItemEnergeticExchanger;
-import jacky.exchangers.item.enderio.ItemPulsatingIronExchanger;
-import jacky.exchangers.item.enderio.ItemVibrantExchanger;
-import jacky.exchangers.item.mekanism.ItemAdvancedExchanger;
-import jacky.exchangers.item.mekanism.ItemBasicExchanger;
-import jacky.exchangers.item.mekanism.ItemEliteExchanger;
-import jacky.exchangers.item.mekanism.ItemUltimateExchanger;
-import jacky.exchangers.item.special.ItemCreativeExchanger;
-import jacky.exchangers.item.special.ItemTuberousExchanger;
-import jacky.exchangers.item.thermalexpansion.ItemHardenedExchanger;
-import jacky.exchangers.item.thermalexpansion.ItemLeadstoneExchanger;
-import jacky.exchangers.item.thermalexpansion.ItemReinforcedExchanger;
-import jacky.exchangers.item.thermalexpansion.ItemResonantExchanger;
-import jacky.exchangers.item.thermalexpansion.ItemSignalumExchanger;
-import jacky.exchangers.item.vanilla.ItemDiamondExchanger;
-import jacky.exchangers.item.vanilla.ItemEmeraldExchanger;
-import jacky.exchangers.item.vanilla.ItemGoldenExchanger;
-import jacky.exchangers.item.vanilla.ItemIronExchanger;
-import jacky.exchangers.item.vanilla.ItemObsidianExchanger;
-import jacky.exchangers.item.vanilla.ItemStoneExchanger;
-import jacky.exchangers.item.vanilla.ItemWoodenExchanger;
+import jacky.exchangers.item.ItemExchanger;
+import jacky.exchangers.item.ItemPoweredExchanger;
+import jacky.exchangers.util.Data;
+import jacky.exchangers.util.Tier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockFence;
@@ -68,11 +44,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.BlockFluidBase;
 
-public class ExchangerHandler extends Item {
+public abstract class ExchangerHandler extends Item {
 
 	public static final int MODE_1X1 = 0;
 	public static final int MODE_3X3 = 1;
@@ -93,8 +70,7 @@ public class ExchangerHandler extends Item {
 
 	public static void setDefaultTagCompound(ItemStack stack) {
 		stack.setTagCompound(new NBTTagCompound());
-		stack.getTagCompound().setString("BlockName", "");
-		stack.getTagCompound().setInteger("BlockData", 0);
+		stack.getTagCompound().setInteger("state", 0);
 		stack.getTagCompound().setInteger("ExchangeMode", 0);
 	}
 
@@ -115,15 +91,14 @@ public class ExchangerHandler extends Item {
 			setDefaultTagCompound(stack);
 		NBTTagCompound compound = stack.getTagCompound();
 
-		if (compound == null || Block.getBlockFromName(compound.getString("BlockName")) == null) {
+		if (compound == null || compound.getInteger("state") == 0) {
 			tooltip.add(StringHelper.localize("tooltip.noselectedblock"));
 		} else {
-			String name = compound.getString("BlockName");
-			Block block = Block.getBlockFromName(name);
 
-			int meta = compound.getByte("BlockData");
+			int stateID = compound.getInteger("state");
 
-			tooltip.add(StringHelper.localize("tooltip.selectedblock") + " " + getBlockName(block, meta));
+			tooltip.add(StringHelper.localize("tooltip.selectedblock") + " "
+					+ Block.getStateById(stateID).getBlock().getLocalizedName());
 			tooltip.add(StringHelper.localize("tooltip.selectedmode") + " "
 					+ modeSwitchList[compound.getInteger("ExchangeMode")]);
 		}
@@ -144,122 +119,21 @@ public class ExchangerHandler extends Item {
 
 		ItemStack heldItem = player.getHeldItemMainhand();
 
-		if (heldItem != null) {
-			//Special Exchangers
-			if (heldItem.getItem() instanceof ItemTuberousExchanger) {
-				if (modeSwitch > MODE_1X1)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemCreativeExchanger) {
-				if (modeSwitch > MODE_25X25)
-					modeSwitch = MODE_1X1;
-			}
-			//Vanilla Exchangers
-			if (heldItem.getItem() instanceof ItemWoodenExchanger) {
-				if (modeSwitch > MODE_1X1)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemStoneExchanger) {
-				if (modeSwitch > MODE_3X3)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemGoldenExchanger) {
-				if (modeSwitch > MODE_5X5)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemIronExchanger) {
-				if (modeSwitch > MODE_7X7)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemDiamondExchanger) {
-				if (modeSwitch > MODE_9X9)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
-				if (modeSwitch > MODE_11X11)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemEmeraldExchanger) {
-				if (modeSwitch > MODE_13X13)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemObsidianExchanger) {
-				if (modeSwitch > MODE_15X15)
-					modeSwitch = MODE_1X1;
-			}
-			//Ender IO Exchangers
-			if (heldItem.getItem() instanceof ItemConductiveIronExchanger) {
-				if (modeSwitch > MODE_3X3)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemPulsatingIronExchanger) {
-				if (modeSwitch > MODE_5X5)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemElectricalSteelExchanger) {
-				if (modeSwitch > MODE_9X9)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemEnergeticExchanger) {
-				if (modeSwitch > MODE_11X11)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemDarkSteelExchanger) {
-				if (modeSwitch > MODE_13X13)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemVibrantExchanger) {
-				if (modeSwitch > MODE_15X15)
-					modeSwitch = MODE_1X1;
-			}
-			//Thermal Expansion Exchangers
-			if (heldItem.getItem() instanceof ItemLeadstoneExchanger) {
-				if (modeSwitch > MODE_3X3)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemLeadstoneExchanger) {
-				if (modeSwitch > MODE_7X7)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemReinforcedExchanger) {
-				if (modeSwitch > MODE_11X11)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemSignalumExchanger) {
-				if (modeSwitch > MODE_13X13)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemResonantExchanger) {
-				if (modeSwitch > MODE_15X15)
-					modeSwitch = MODE_1X1;
-			}
-			//Mekanism Exchangers
-			if (heldItem.getItem() instanceof ItemBasicExchanger) {
-				if (modeSwitch > MODE_7X7)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemAdvancedExchanger) {
-				if (modeSwitch > MODE_11X11)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemEliteExchanger) {
-				if (modeSwitch > MODE_13X13)
-					modeSwitch = MODE_1X1;
-			}
-			if (heldItem.getItem() instanceof ItemUltimateExchanger) {
-				if (modeSwitch > MODE_15X15)
-					modeSwitch = MODE_1X1;
-			}
+		if (!heldItem.isEmpty() && stack.getItem() instanceof ItemExchanger) {
+			ItemExchanger k = (ItemExchanger) stack.getItem();
+			if (modeSwitch > k.getTier().getMaxSize())
+				modeSwitch = MODE_1X1;
 		}
 
 		stack.getTagCompound().setInteger("ExchangeMode", modeSwitch);
 	}
 
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (world.isRemote) {
-			return EnumActionResult.PASS;
-		}
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ) {
+		if (world.isRemote)
+			return EnumActionResult.SUCCESS;
+		ItemStack stack = player.getHeldItem(hand);
 
 		IBlockState state = world.getBlockState(pos);
 		Block block = state.getBlock();
@@ -270,25 +144,15 @@ public class ExchangerHandler extends Item {
 				setSelectedBlock(stack, block, state);
 				return EnumActionResult.SUCCESS;
 			} else {
-				msgPlayer(player, StringHelper.localize("error.invalidblock"));
+				player.sendMessage(new TextComponentTranslation(Data.MODID + ".error.invalidblock"));
 				return EnumActionResult.FAIL;
 			}
 		} else {
-			if (blockSuitableForExchange(stack, player, world, pos)) {
-
-				boolean success = exchangeBlocks(stack, player, world, pos, facing);
-
-				if (success) {
-					return EnumActionResult.SUCCESS;
-
-				}
-
-			} else {
-				return EnumActionResult.FAIL;
-			}
+			if (blockSuitableForExchange(stack, player, world, pos)
+					&& exchangeBlocks(stack, player, world, pos, facing))
+				return EnumActionResult.SUCCESS;
+			return EnumActionResult.FAIL;
 		}
-
-		return EnumActionResult.SUCCESS;
 	}
 
 	public static List<BlockPos> getBlocksToExchange(ItemStack stack, BlockPos pos, World world, EnumFacing side) {
@@ -367,48 +231,30 @@ public class ExchangerHandler extends Item {
 	}
 
 	public static boolean blockSuitableForSelection(EntityPlayer player, World world, BlockPos pos) {
-		if (world.getTileEntity(pos) != null)
-			return false;
-		if (world.isAirBlock(pos))
-			return false;
-		if (blacklistedBlocks.contains(world.getBlockState(pos).getBlock()))
-			return false;
-		if (softBlocks.contains(world.getBlockState(pos).getBlock()))
-			return false;
-		if (specialBlocks.contains((world.getBlockState(pos).getBlock())))
-			return false;
-		if (creativeBlocks.contains(world.getBlockState(pos).getBlock()) && !player.capabilities.isCreativeMode)
-			return false;
+		Block block = world.getBlockState(pos).getBlock();
 
-		return true;
+		return (world.getTileEntity(pos) == null && !world.isAirBlock(pos) && !blacklistedBlocks.contains(block)
+				&& !softBlocks.contains(block) && !specialBlocks.contains(block)
+				&& !(creativeBlocks.contains(block) && !player.capabilities.isCreativeMode));
 	}
 
 	public static void setSelectedBlock(ItemStack stack, Block block, IBlockState state) {
-		String blockName = Block.REGISTRY.getNameForObject(block).toString();
 		if (stackTagCompoundNull(stack))
 			setDefaultTagCompound(stack);
-
-		stack.getTagCompound().setString("BlockName", blockName);
-		stack.getTagCompound().setInteger("BlockData", (byte) block.getMetaFromState(state));
+		stack.getTagCompound().setInteger("state", Block.getStateId(state));
 	}
 
 	public static boolean blockSuitableForExchange(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {
-		Block newBlock = Block.getBlockFromName(stack.getTagCompound().getString("BlockName"));
-		int newMeta = stack.getTagCompound().getInteger("BlockData");
+		int newMeta = stack.getTagCompound().getInteger("state");
 
-		Block worldBlock = world.getBlockState(pos).getBlock();
-		int worldMeta = worldBlock.getMetaFromState(world.getBlockState(pos));
+		int worldMeta = Block.getStateId(world.getBlockState(pos));
 
 		if (!blockSuitableForSelection(player, world, pos)) {
-			msgPlayer(player, StringHelper.localize("error.invalidblock"));
+			player.sendMessage(new TextComponentTranslation(Data.MODID + ".error.invalidblock"));
 			return false;
 		}
 
-		if (newBlock == worldBlock && newMeta == worldMeta) {
-			return false;
-		}
-
-		return true;
+		return newMeta != worldMeta;
 	}
 
 	public static void buildExchangeList(World world, BlockPos pos, BlockPos origin, IBlockState origState,
@@ -456,7 +302,10 @@ public class ExchangerHandler extends Item {
 
 	public static boolean consumeBlockInInventory(EntityPlayer player, Block block, IBlockState state) {
 		ItemStack heldItem = player.getHeldItemMainhand();
-		if (!player.capabilities.isCreativeMode || !(heldItem.getItem() instanceof ItemCreativeExchanger)) {
+		if (!(heldItem.getItem() instanceof ItemExchanger))
+			return false;
+		ItemExchanger exchanger = (ItemExchanger) heldItem.getItem();
+		if (!player.capabilities.isCreativeMode || exchanger.getTier() != Tier.CREATIVE) {
 			InventoryPlayer inv = player.inventory;
 			Item item = Item.getItemFromBlock(block);
 			int meta = block.getMetaFromState(state);
@@ -465,8 +314,9 @@ public class ExchangerHandler extends Item {
 
 			if (stack.isEmpty())
 				return false;
-			else stack.shrink(1);
-			}
+			else
+				stack.shrink(1);
+		}
 
 		return true;
 	}
@@ -495,24 +345,27 @@ public class ExchangerHandler extends Item {
 
 	public static boolean exchangeBlocks(ItemStack stack, EntityPlayer player, World world, BlockPos pos,
 			EnumFacing facing) {
-		Block newBlock = Block.getBlockFromName(stack.getTagCompound().getString("BlockName"));
-		int newMeta = stack.getTagCompound().getInteger("BlockData");
+		int stateID = stack.getTagCompound().getInteger("state");
 
-		if (newBlock == null)
+		if (stateID == 0)
 			return false;
 		world.profiler.startSection("Exchangers-Building/Queueing");
 
-		IBlockState newState = newBlock.getStateFromMeta(newMeta);
+		IBlockState newState = Block.getStateById(stateID);
 		List<BlockPos> toExchange = getBlocksToExchange(stack, pos, world, facing);
 
 		for (BlockPos exchangePos : toExchange) {
 			ItemStack slot = ItemStack.EMPTY;
 			ItemStack heldItem = player.getHeldItemMainhand();
-			if (player.capabilities.isCreativeMode || heldItem.getItem() instanceof ItemCreativeExchanger) {
+			if (!(heldItem.getItem() instanceof ItemExchanger))
+				return false;
+			ItemExchanger exchanger = (ItemExchanger) heldItem.getItem();
+			if (player.capabilities.isCreativeMode || exchanger.getTier() == Tier.CREATIVE) {
 				placeBlockInWorld(world, exchangePos, newState);
 			} else {
 				try {
-					slot = findItemInInventory(player.inventory, Item.getItemFromBlock(newBlock), newMeta);
+					slot = findItemInInventory(player.inventory, Item.getItemFromBlock(newState.getBlock()),
+							stateID >> 12 & 15);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					return false;
 				}
@@ -520,107 +373,22 @@ public class ExchangerHandler extends Item {
 					Block oldBlock = world.getBlockState(exchangePos).getBlock();
 					int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
 					int energy = stack.getTagCompound().getInteger("Energy");
-					if (stack.getItem() instanceof ItemExchangerBaseRF && energy <= 0) {
-						msgPlayer(player, StringHelper.localize("error.nopower"));
+					if (exchanger.isPowered() && energy < ((ItemPoweredExchanger) exchanger).getPerBlockCost()) {
+						player.sendMessage(new TextComponentTranslation(Data.MODID + ".error.nopower"));
 						return false;
-					} else {
-						if (!placeBlockInInventory(player, oldBlock, oldMeta)) {
-							return false;
-						} else {
-							if (!placeBlockInWorld(world, exchangePos, newState)) {
-								return false;
-							} else {
-								if (!consumeBlockInInventory(player, newBlock, newState)) {
-									return false;
-								} else {
-									//Vanilla Exchangers
-									if (stack.getItem() instanceof ItemExchangerBase
-											&& !(stack.getItem() instanceof ItemCreativeExchanger)) {
-										stack.damageItem(1, player);
-									}
-									//Ender IO Exchangers
-									if (stack.getItem() instanceof ItemConductiveIronExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.conductiveIronExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.conductiveIronExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemPulsatingIronExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.pulsatingIronExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.pulsatingIronExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemElectricalSteelExchanger
-											&& stack.getTagCompound().getInteger(
-													"Energy") >= Config.electricalSteelExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.electricalSteelExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemEnergeticExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.energeticExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.energeticExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemDarkSteelExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.darkSteelExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.darkSteelExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemVibrantExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.vibrantExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.vibrantExchangerPerBlockRF);
-									}
-									//Thermal Expansion Exchangers
-									if (stack.getItem() instanceof ItemLeadstoneExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.leadstoneExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.leadstoneExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemHardenedExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.hardenedExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.hardenedExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemReinforcedExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.reinforcedExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.reinforcedExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemSignalumExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.signalumExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.signalumExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemResonantExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.resonantExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.resonantExchangerPerBlockRF);
-									}
-									//Mekanism Exchangers
-									if (stack.getItem() instanceof ItemBasicExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.basicExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.basicExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemAdvancedExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.advancedExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.advancedExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemEliteExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.eliteExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.eliteExchangerPerBlockRF);
-									}
-									if (stack.getItem() instanceof ItemUltimateExchanger && stack.getTagCompound()
-											.getInteger("Energy") >= Config.ultimateExchangerPerBlockRF) {
-										stack.getTagCompound().setInteger("Energy",
-												energy - Config.ultimateExchangerPerBlockRF);
-									}
-								}
-							}
-						}
 					}
+					if (placeBlockInInventory(player, oldBlock, oldMeta)
+							&& placeBlockInWorld(world, exchangePos, newState)
+							&& consumeBlockInInventory(player, newState.getBlock(), newState)) {
+						if (!exchanger.isPowered() && exchanger.getTier() != Tier.CREATIVE)
+							stack.damageItem(1, player);
+						else if (exchanger.isPowered()) {
+							ItemPoweredExchanger powered = (ItemPoweredExchanger) exchanger;
+							if (energy >= powered.getPerBlockCost())
+								stack.getTagCompound().setInteger("Energy", energy - powered.getPerBlockCost());
+						}
+					} else
+						return false;
 				}
 			}
 		}

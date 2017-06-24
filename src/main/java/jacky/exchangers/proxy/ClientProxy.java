@@ -1,10 +1,12 @@
 package jacky.exchangers.proxy;
 
-import jacky.exchangers.ExchangersItems;
 import jacky.exchangers.client.Keys;
 import jacky.exchangers.handler.GUIHandler;
 import jacky.exchangers.handler.KeyBindingsHandler;
+import jacky.exchangers.util.Data;
+import jacky.exchangers.util.IHasModel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -19,10 +21,12 @@ public class ClientProxy extends CommonProxy {
 		super.preInit(e);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
-	
+
 	@SubscribeEvent
-	public void onModelRegistry(ModelRegistryEvent e){
-		ExchangersItems.initModels();
+	public void onModelRegistry(ModelRegistryEvent e) {
+		for (Item item : Data.ITEMS)
+			if (item instanceof IHasModel)
+				((IHasModel) item).initModel(e);
 	}
 
 	@Override

@@ -18,8 +18,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class GUIHandler extends Gui {
 
 	private Minecraft mc;
-	private ItemStack lastExchangeSource = null;
+	private ItemStack lastExchangeSource = ItemStack.EMPTY;
 	private int lastExchangeSourceCount = 0;
+	private static int timesChanged = 0;
 
 	public GUIHandler(Minecraft mc) {
 		super();
@@ -52,7 +53,7 @@ public class GUIHandler extends Gui {
 		if (source.isEmpty())
 			return;
 
-		if (player.inventory.inventoryChanged || this.lastExchangeSource.isEmpty()
+		if (player.inventory.getTimesChanged() > timesChanged || this.lastExchangeSource.isEmpty()
 				|| !source.isItemEqual(this.lastExchangeSource)) {
 			int quantity = 0;
 
@@ -66,7 +67,7 @@ public class GUIHandler extends Gui {
 
 			this.lastExchangeSourceCount = quantity;
 			this.lastExchangeSource = source;
-			player.inventory.inventoryChanged = false;
+			timesChanged = player.inventory.getTimesChanged();
 		}
 
 		ScaledResolution scaledresolution = new ScaledResolution(this.mc);

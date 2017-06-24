@@ -1,4 +1,4 @@
-package jacky.exchangers;
+/*package jacky.exchangers;
 
 import jacky.exchangers.item.enderio.ItemConductiveIronExchanger;
 import jacky.exchangers.item.enderio.ItemDarkSteelExchanger;
@@ -39,6 +39,7 @@ import jacky.exchangers.item.vanilla.ItemWoodenExchanger;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+@Deprecated
 public class ExchangersItems {
 
 	public static ItemTuberousExchanger tuberousExchanger;
@@ -190,4 +191,4 @@ public class ExchangersItems {
 		}
 	}
 
-}
+}*/

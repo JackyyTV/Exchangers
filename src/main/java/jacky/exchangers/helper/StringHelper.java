@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 
 import org.lwjgl.input.Keyboard;
 
-import jacky.exchangers.Exchangers;
+import jacky.exchangers.util.Data;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,10 +18,7 @@ public final class StringHelper {
 
 	}
 
-	public static String getTierText(int tier) {
-		return localize("tooltip.tier", tier);
-	}
-
+	@SideOnly(Side.CLIENT)
 	public static String getShiftText() {
 		return TextFormatting.GRAY
 				+ localize("tooltip.holdShift", TextFormatting.YELLOW.toString() + TextFormatting.ITALIC
@@ -36,13 +33,14 @@ public final class StringHelper {
 		return NumberFormat.getInstance().format(number);
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static String localize(String unlocalized, Object... args) {
 		return localize(unlocalized, true, args);
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static String localize(String unlocalized, boolean prefix, Object... args) {
-		String toLocalize = (prefix ? Exchangers.PREFIX : "") + unlocalized;
+		String toLocalize = (prefix ? Data.MODID + "." : "") + unlocalized;
 		if (args != null && args.length > 0) {
 			return I18n.format(toLocalize, args);
 		} else {

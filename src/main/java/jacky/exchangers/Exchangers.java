@@ -3,8 +3,8 @@ package jacky.exchangers;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import jacky.exchangers.init.Data;
 import jacky.exchangers.proxy.CommonProxy;
+import jacky.exchangers.util.Data;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -13,9 +13,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Data.MODID, version = Data.VERSION, name = Data.MODNAME, dependencies = Exchangers.DEPENDS, useMetadata = true)
 public class Exchangers {
-	
+
 	public static final String DEPENDS = "after:enderio;after:thermalfoundation;after:thermalexpansion;after:mekanism;";
-	public static final ExchangersTab exchangersCreativeTab = new ExchangersTab();
 
 	public static Logger logger = LogManager.getLogger("Exchangers");
 

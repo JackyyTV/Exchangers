@@ -2,10 +2,9 @@ package jacky.exchangers.item.special;
 
 import java.util.List;
 
-import jacky.exchangers.Exchangers;
 import jacky.exchangers.helper.StringHelper;
-import jacky.exchangers.init.Data;
-import jacky.exchangers.item.ItemExchangerBase;
+import jacky.exchangers.item.ItemExchanger;
+import jacky.exchangers.util.Tier;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,14 +20,10 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemTuberousExchanger extends ItemExchangerBase {
+public class ItemTuberousExchanger extends ItemExchanger {
 
 	public ItemTuberousExchanger() {
-		setRegistryName(Data.MODID + ":tuberous_exchanger");
-		setUnlocalizedName(Data.MODID + ".tuberous_exchanger");
-		setMaxStackSize(1);
-		setMaxDamage(1);
-		setCreativeTab(Exchangers.exchangersCreativeTab);
+		super("potato", Tier.ZERO, 0);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -40,15 +35,16 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
 		super.addInformation(stack, world, tooltip, bool);
-		tooltip.add(StringHelper.getTierText(0));
+		tooltip.add(getTier().getFormattedText());
 		if (StringHelper.isShiftKeyDown()) {
 			tooltip.add(StringHelper.localize("tooltip.tuberousExchanger.warning"));
 		}
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing,
+			float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
 		return killPlayer(player, stack) ? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
 	}
 
@@ -60,10 +56,10 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 	}
 
 	private static boolean killPlayer(EntityPlayer player, ItemStack stack) {
-			stack = ItemStack.EMPTY;
-			player.attackEntityFrom(new EntityDamageSource("exchangerpotato", player), 100000.0F);
-			player.world.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
-			return true;
+		stack = ItemStack.EMPTY;
+		player.attackEntityFrom(new EntityDamageSource("exchangerpotato", player), 100000.0F);
+		player.world.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
+		return true;
 
 	}
 

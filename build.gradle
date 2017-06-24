@@ -43,8 +43,8 @@ repositories {
 
 dependencies {
     compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.12:4.6.0.66:api"
-    runtime "mezz.jei:jei_1.12:4.6.0.66"
+	deobfCompile "mezz.jei:jei_1.12:4.7.0.67:api"
+    runtime "mezz.jei:jei_1.12:4.7.0.67"
 	deobfCompile "mcp.mobius.waila:Hwyla:1.8.18-B32_1.12:api"
 	runtime "mcp.mobius.waila:Hwyla:1.8.18-B32_1.12"
 }
@@ -60,4 +60,12 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+sourceSets {
+    main {
+		java {
+            exclude '**/jacky/exchangers/item/powered/*'
+		}
+	}
 }

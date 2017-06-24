@@ -27,13 +27,13 @@ public class Config {
 	public static boolean mekanismProgressiveRecipes;
 
 	//Vanilla
-	public static int woodenExchangerMaxDamage;
-	public static int stoneExchangerMaxDamage;
-	public static int goldenExchangerMaxDamage;
-	public static int ironExchangerMaxDamage;
-	public static int diamondExchangerMaxDamage;
-	public static int emeraldExchangerMaxDamage;
-	public static int obsidianExchangerMaxDamage;
+	public static int woodMaxDmg;
+	public static int stoneMaxDmg;
+	public static int goldMaxDmg;
+	public static int ironMaxDmg;
+	public static int diaMaxDmg;
+	public static int emeMaxDmg;
+	public static int obsMaxDmg;
 
 	//Ender IO
 	public static int conductiveIronExchangerMaxRF;
@@ -113,20 +113,20 @@ public class Config {
 
 		//Vanilla Tweaks
 		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_VANILLA, "Vanilla Exchanger Tweaks");
-		woodenExchangerMaxDamage = cfg.getInt("Wooden Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 256, 1,
-				2147483647, "Set the durability for Wooden Exchanger");
-		stoneExchangerMaxDamage = cfg.getInt("Stone Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 384, 1,
-				2147483647, "Set the durability for Stone Exchanger");
-		goldenExchangerMaxDamage = cfg.getInt("Golden Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 512, 1,
-				2147483647, "Set the durability for Golden Exchanger");
-		ironExchangerMaxDamage = cfg.getInt("Iron Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 1024, 1,
-				2147483647, "Set the durability for Iron Exchanger");
-		diamondExchangerMaxDamage = cfg.getInt("Diamond Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 4096, 1,
-				2147483647, "Set the durability for Diamond Exchanger");
-		emeraldExchangerMaxDamage = cfg.getInt("Emerald Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 8192, 1,
-				2147483647, "Set the durability for Emerald Exchanger");
-		obsidianExchangerMaxDamage = cfg.getInt("Obsidian Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 16384, 1,
-				2147483647, "Set the durability for Obsidian Exchanger");
+		woodMaxDmg = cfg.getInt("Wooden Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 256, 1, 2147483647,
+				"Set the durability for Wooden Exchanger");
+		stoneMaxDmg = cfg.getInt("Stone Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 384, 1, 2147483647,
+				"Set the durability for Stone Exchanger");
+		goldMaxDmg = cfg.getInt("Golden Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 512, 1, 2147483647,
+				"Set the durability for Golden Exchanger");
+		ironMaxDmg = cfg.getInt("Iron Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 1024, 1, 2147483647,
+				"Set the durability for Iron Exchanger");
+		diaMaxDmg = cfg.getInt("Diamond Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 4096, 1, 2147483647,
+				"Set the durability for Diamond Exchanger");
+		emeMaxDmg = cfg.getInt("Emerald Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 8192, 1, 2147483647,
+				"Set the durability for Emerald Exchanger");
+		obsMaxDmg = cfg.getInt("Obsidian Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 16384, 1, 2147483647,
+				"Set the durability for Obsidian Exchanger");
 
 		//Ender IO Tweaks
 		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_EIO, "Ender IO Exchanger Tweaks");

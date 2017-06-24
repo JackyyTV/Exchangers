@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "${mc_version}-${mod_version}"
-group= "me.jacky1356400.exchangers"
+group= "jacky.exchangers"
 archivesBaseName = "Exchangers"
 
 sourceCompatibility = targetCompatibility = "1.8"

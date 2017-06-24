@@ -9,16 +9,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMekanismExchangerCoreT2 extends Item {
 
-    public ItemMekanismExchangerCoreT2(){
-        setRegistryName(Exchangers.MODID + ":mekanism_exchanger_core_tier2");
-        setUnlocalizedName(Exchangers.MODID + ".mekanism_exchanger_core_tier2");
-        setMaxStackSize(16);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
-    }
+	public ItemMekanismExchangerCoreT2() {
+		setRegistryName(Exchangers.MODID + ":mekanism_exchanger_core_tier2");
+		setUnlocalizedName(Exchangers.MODID + ".mekanism_exchanger_core_tier2");
+		setMaxStackSize(16);
+		setCreativeTab(Exchangers.exchangersCreativeTab);
+	}
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-    }
+	@SideOnly(Side.CLIENT)
+	public void initModel() {
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+	}
 
 }

@@ -1,5 +1,7 @@
 package me.jacky1356400.exchangers.item.special;
 
+import java.util.List;
+
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
@@ -10,28 +12,26 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
-
 public class ItemCreativeExchanger extends ItemExchangerBase {
 
-    public ItemCreativeExchanger(){
-        setRegistryName(Exchangers.MODID + ":creative_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".creative_exchanger");
-        setMaxStackSize(1);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
-    }
+	public ItemCreativeExchanger() {
+		setRegistryName(Exchangers.MODID + ":creative_exchanger");
+		setUnlocalizedName(Exchangers.MODID + ".creative_exchanger");
+		setMaxStackSize(1);
+		setCreativeTab(Exchangers.exchangersCreativeTab);
+	}
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-    }
+	@SideOnly(Side.CLIENT)
+	public void initModel() {
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    @SuppressWarnings("unchecked")
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
-        super.addInformation(stack, player, tooltip, bool);
-        tooltip.add(StringHelper.getTierText(9001));
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("unchecked")
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
+		super.addInformation(stack, player, tooltip, bool);
+		tooltip.add(StringHelper.getTierText(9001));
+	}
 
 }

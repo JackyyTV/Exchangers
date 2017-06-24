@@ -16,41 +16,42 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class WorldEventHandler {
 
-    public static Map<Integer, Set<Exchange>> exchanges = new HashMap<>();
+	public static Map<Integer, Set<Exchange>> exchanges = new HashMap<>();
 
-    @SubscribeEvent
-    public void onWorldTick(TickEvent.WorldTickEvent event) {
-        exchangeTick(event.world);
-    }
+	@SubscribeEvent
+	public void onWorldTick(TickEvent.WorldTickEvent event) {
+		exchangeTick(event.world);
+	}
 
-    public static void queueExchanges(BlockPos pos, IBlockState state, World world) {
-        int dimId = world.provider.getDimension();
-        Set<Exchange> queue = (LinkedHashSet<Exchange>) exchanges.get(dimId);
+	public static void queueExchanges(BlockPos pos, IBlockState state, World world) {
+		int dimId = world.provider.getDimension();
+		Set<Exchange> queue = (LinkedHashSet<Exchange>) exchanges.get(dimId);
 
-        if (queue == null) {
-            exchanges.put(dimId, new LinkedHashSet<Exchange>());
-            queue = exchanges.get(dimId);
-        }
+		if (queue == null) {
+			exchanges.put(dimId, new LinkedHashSet<Exchange>());
+			queue = exchanges.get(dimId);
+		}
 
-        queue.add(new Exchange(pos, state));
-        exchanges.put(dimId, queue);
-    }
+		queue.add(new Exchange(pos, state));
+		exchanges.put(dimId, queue);
+	}
 
-    private void exchangeTick(World world) {
-        int dimId = world.provider.getDimension();
-        Set<Exchange> queue = exchanges.get(dimId);
+	private void exchangeTick(World world) {
+		int dimId = world.provider.getDimension();
+		Set<Exchange> queue = exchanges.get(dimId);
 
-        if (queue == null || queue.size() == 0) return;
+		if (queue == null || queue.size() == 0)
+			return;
 
-        world.theProfiler.startSection("Exchangers-Exchanging");
-        List<Exchange> queueList = new ArrayList<Exchange>(queue);
-        Exchange exchange = queueList.get(0);
+		world.theProfiler.startSection("Exchangers-Exchanging");
+		List<Exchange> queueList = new ArrayList<Exchange>(queue);
+		Exchange exchange = queueList.get(0);
 
-        world.destroyBlock(exchange.pos, false);
-        world.setBlockState(exchange.pos, exchange.state, 3);
+		world.destroyBlock(exchange.pos, false);
+		world.setBlockState(exchange.pos, exchange.state, 3);
 
-        queue.remove(exchange);
-        world.theProfiler.endSection();
-    }
+		queue.remove(exchange);
+		world.theProfiler.endSection();
+	}
 
 }

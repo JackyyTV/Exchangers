@@ -1,37 +1,14 @@
 package me.jacky1356400.exchangers.item;
 
-import cofh.api.energy.IEnergyContainerItem;
+import java.util.List;
+
 import me.jacky1356400.exchangers.handler.ExchangerHandler;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
-import me.jacky1356400.exchangers.helper.NBTHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import java.text.NumberFormat;
-import java.util.List;
-
-public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyContainerItem {
-
-	@Override
-	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
-		return NBTHelper.receiveEnergy(container, energy, getMaxEnergyStored(container), simulate);
-	}
-
-	@Override
-	public int extractEnergy(ItemStack container, int energy, boolean simulate) {
-		return NBTHelper.extractEnergy(container, energy, simulate);
-	}
-
-	@Override
-	public int getEnergyStored(ItemStack container) {
-		return NBTHelper.getEnergyStored(container);
-	}
-
-	@Override
-	public int getMaxEnergyStored(ItemStack container) {
-		return 0;
-	}
+public class ItemExchangerBaseRF extends ExchangerHandler {//TODO implement Forge Energy capabilities
 
 	@Override
 	public boolean showDurabilityBar(ItemStack stack) {
@@ -49,7 +26,8 @@ public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyCont
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
 		super.addInformation(stack, player, tooltip, bool);
-		tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
+		tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / "
+				+ StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
 	}
 
 	@Override

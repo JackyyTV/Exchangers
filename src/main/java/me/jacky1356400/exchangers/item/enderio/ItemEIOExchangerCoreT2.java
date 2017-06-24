@@ -9,16 +9,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemEIOExchangerCoreT2 extends Item {
 
-    public ItemEIOExchangerCoreT2(){
-        setRegistryName(Exchangers.MODID + ":eio_exchanger_core_tier2");
-        setUnlocalizedName(Exchangers.MODID + ".eio_exchanger_core_tier2");
-        setMaxStackSize(16);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
-    }
+	public ItemEIOExchangerCoreT2() {
+		setRegistryName(Exchangers.MODID + ":eio_exchanger_core_tier2");
+		setUnlocalizedName(Exchangers.MODID + ".eio_exchanger_core_tier2");
+		setMaxStackSize(16);
+		setCreativeTab(Exchangers.exchangersCreativeTab);
+	}
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-    }
+	@SideOnly(Side.CLIENT)
+	public void initModel() {
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+	}
 
 }

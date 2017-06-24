@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "${mc_version}-${mod_version}"
-group= "jacky.exchangers"
+group= "me.jacky1356400.exchangers"
 archivesBaseName = "Exchangers"
 
 sourceCompatibility = targetCompatibility = "1.8"
@@ -65,7 +65,7 @@ processResources
 sourceSets {
     main {
 		java {
-            exclude '**/jacky/exchangers/item/powered/*'
+            exclude '**/me/jacky1356400/exchangers/item/powered/*'
 		}
 	}
 }

@@ -10,6 +10,7 @@ import me.jacky1356400.exchangers.handler.RenderOverlayHandler;
 import me.jacky1356400.exchangers.handler.WorldEventHandler;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
 import me.jacky1356400.exchangers.helper.DirectionHelper;
+import me.jacky1356400.exchangers.init.Registry;
 import me.jacky1356400.exchangers.integration.EnderIOIntegration;
 import me.jacky1356400.exchangers.integration.MekanismIntegration;
 import me.jacky1356400.exchangers.integration.ThermalExpansionIntegration;
@@ -29,6 +30,9 @@ public class CommonProxy {
 		File configDir = e.getModConfigurationDirectory();
 		config = new Configuration(new File(configDir.getPath(), "exchangers.cfg"));
 		Config.readConfig();
+		MinecraftForge.EVENT_BUS.register(new Registry());
+		
+		
 		ExchangersItems.init();
 		if ((Config.enderIOModule = true) && (Loader.isModLoaded("EnderIO"))) {
 			EnderIOIntegration.init();

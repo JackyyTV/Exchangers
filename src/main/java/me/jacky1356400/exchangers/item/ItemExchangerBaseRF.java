@@ -5,8 +5,10 @@ import java.util.List;
 import me.jacky1356400.exchangers.handler.ExchangerHandler;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class ItemExchangerBaseRF extends ExchangerHandler {//TODO implement Forge Energy capabilities
 
@@ -24,8 +26,8 @@ public class ItemExchangerBaseRF extends ExchangerHandler {//TODO implement Forg
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
-		super.addInformation(stack, player, tooltip, bool);
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
+		super.addInformation(stack, world, tooltip, bool);
 		tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / "
 				+ StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
 	}

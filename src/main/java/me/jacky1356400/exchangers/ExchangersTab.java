@@ -1,7 +1,7 @@
 package me.jacky1356400.exchangers;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class ExchangersTab extends CreativeTabs {
 
@@ -10,8 +10,8 @@ public class ExchangersTab extends CreativeTabs {
 	}
 
 	@Override
-	public Item getTabIconItem() {
-		return ExchangersItems.obsidianExchanger;
+	public ItemStack getTabIconItem() {
+		return new ItemStack(ExchangersItems.obsidianExchanger);
 	}
 
 }

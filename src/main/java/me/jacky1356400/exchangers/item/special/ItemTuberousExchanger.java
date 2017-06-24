@@ -6,6 +6,7 @@ import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -36,9 +37,8 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings("unchecked")
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
-		super.addInformation(stack, player, tooltip, bool);
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
+		super.addInformation(stack, world, tooltip, bool);
 		tooltip.add(StringHelper.getTierText(0));
 		if (StringHelper.isShiftKeyDown()) {
 			tooltip.add(StringHelper.localize("tooltip.tuberousExchanger.warning"));
@@ -52,22 +52,17 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
 		boolean result = killPlayer(player, stack);
 		return ActionResult.newResult(result ? EnumActionResult.SUCCESS : EnumActionResult.FAIL, stack);
 	}
 
 	private static boolean killPlayer(EntityPlayer player, ItemStack stack) {
-
-		if (player instanceof EntityPlayer) {
-			stack.stackSize = 0;
+			stack = ItemStack.EMPTY;
 			player.attackEntityFrom(new EntityDamageSource("exchangerpotato", player), 100000.0F);
-			player.worldObj.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
-
+			player.world.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
 			return true;
-		}
-
-		return false;
 
 	}
 

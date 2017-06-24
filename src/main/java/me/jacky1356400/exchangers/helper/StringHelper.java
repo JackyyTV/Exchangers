@@ -1,14 +1,14 @@
 package me.jacky1356400.exchangers.helper;
 
-import static net.minecraft.util.text.translation.I18n.translateToLocal;
-import static net.minecraft.util.text.translation.I18n.translateToLocalFormatted;
-
 import java.text.NumberFormat;
 
 import org.lwjgl.input.Keyboard;
 
 import me.jacky1356400.exchangers.Exchangers;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class StringHelper {
 
@@ -40,12 +40,13 @@ public final class StringHelper {
 		return localize(unlocalized, true, args);
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static String localize(String unlocalized, boolean prefix, Object... args) {
 		String toLocalize = (prefix ? Exchangers.PREFIX : "") + unlocalized;
 		if (args != null && args.length > 0) {
-			return translateToLocalFormatted(toLocalize, args);
+			return I18n.format(toLocalize, args);
 		} else {
-			return translateToLocal(toLocalize);
+			return I18n.format(toLocalize);
 		}
 	}
 

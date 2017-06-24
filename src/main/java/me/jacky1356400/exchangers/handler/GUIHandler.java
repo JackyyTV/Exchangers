@@ -37,31 +37,31 @@ public class GUIHandler extends Gui {
 
 		if (player == null || !mc.inGameHasFocus || !Minecraft.isGuiEnabled())
 			return;
-		if (player.getHeldItemMainhand() == null
+		if (player.getHeldItemMainhand().isEmpty()
 				|| !(player.getHeldItemMainhand().getItem() instanceof ExchangerHandler))
 			return;
 
 		ItemStack exchangerStack = player.getHeldItemMainhand();
-		ItemStack source = null;
+		ItemStack source = ItemStack.EMPTY;
 
 		if (exchangerStack.hasTagCompound() && exchangerStack.getTagCompound().hasKey("BlockName")) {
 			source = new ItemStack(Block.getBlockFromName(exchangerStack.getTagCompound().getString("BlockName")), 1,
 					exchangerStack.getTagCompound().getInteger("BlockData"));
 		}
 
-		if (source == null)
+		if (source.isEmpty())
 			return;
 
-		if (player.inventory.inventoryChanged || this.lastExchangeSource == null
+		if (player.inventory.inventoryChanged || this.lastExchangeSource.isEmpty()
 				|| !source.isItemEqual(this.lastExchangeSource)) {
 			int quantity = 0;
 
 			InventoryPlayer inv = player.inventory;
 
-			for (int slot = 0; slot < inv.mainInventory.length; slot++) {
+			for (int slot = 0; slot < inv.mainInventory.size(); slot++) {
 				ItemStack is = inv.getStackInSlot(slot);
 				if (is != null && is.isItemEqual(source))
-					quantity += is.stackSize;
+					quantity += is.getCount();
 			}
 
 			this.lastExchangeSourceCount = quantity;
@@ -90,12 +90,12 @@ public class GUIHandler extends Gui {
 
 		String am = Integer.toString(this.lastExchangeSourceCount);
 		if (!player.capabilities.isCreativeMode)
-			drawItemQuantity(mc.fontRendererObj, xOffset + 4, yOffset + 2, am);
+			drawItemQuantity(mc.fontRenderer, xOffset + 4, yOffset + 2, am);
 		else
-			drawItemQuantity(mc.fontRendererObj, xOffset + 2, yOffset + 1, "Inf");
+			drawItemQuantity(mc.fontRenderer, xOffset + 2, yOffset + 1, "Inf");
 		String exchangeMode;
 		exchangeMode = new String(modeSwitchList[exchangerStack.getTagCompound().getInteger("ExchangeMode")]);
-		drawExchangeMode(mc.fontRendererObj, xOffset + 1, yOffset + 2, exchangeMode);
+		drawExchangeMode(mc.fontRenderer, xOffset + 1, yOffset + 2, exchangeMode);
 
 		net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();
 	}

@@ -54,6 +54,7 @@ import net.minecraft.block.BlockTorch;
 import net.minecraft.block.BlockTrapDoor;
 import net.minecraft.block.BlockWorkbench;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -102,8 +103,7 @@ public class ExchangerHandler extends Item {
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
-		super.addInformation(stack, player, tooltip, bool);
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
 		if (StringHelper.displayShiftForDetail && !StringHelper.isShiftKeyDown()) {
 			tooltip.add(StringHelper.getShiftText());
 		}
@@ -461,29 +461,24 @@ public class ExchangerHandler extends Item {
 			Item item = Item.getItemFromBlock(block);
 			int meta = block.getMetaFromState(state);
 
-			int slot = findItemInInventory(inv, item, meta);
+			ItemStack stack = findItemInInventory(inv, item, meta);
 
-			if (slot < 0) {
+			if (stack.isEmpty())
 				return false;
-			} else {
-				if (--inv.mainInventory[slot].stackSize <= 0) {
-					inv.mainInventory[slot] = null;
-				}
-
+			else stack.shrink(1);
 			}
-		}
 
 		return true;
 	}
 
-	public static int findItemInInventory(InventoryPlayer inv, Item item, int meta) {
-		for (int i = 0; i < inv.mainInventory.length; i++) {
-			if (inv.mainInventory[i] != null && inv.mainInventory[i].getItem() == item
-					&& inv.mainInventory[i].getItemDamage() == meta) {
-				return i;
+	public static ItemStack findItemInInventory(InventoryPlayer inv, Item item, int meta) {
+		for (int i = 0; i < inv.mainInventory.size(); i++) {
+			ItemStack stack = inv.mainInventory.get(i);
+			if (!stack.isEmpty() && stack.getItem() == item && stack.getItemDamage() == meta) {
+				return stack;
 			}
 		}
-		return -1;
+		return ItemStack.EMPTY;
 	}
 
 	public static boolean placeBlockInWorld(World world, BlockPos exchangePos, IBlockState state) {
@@ -505,13 +500,13 @@ public class ExchangerHandler extends Item {
 
 		if (newBlock == null)
 			return false;
-		world.theProfiler.startSection("Exchangers-Building/Queueing");
+		world.profiler.startSection("Exchangers-Building/Queueing");
 
 		IBlockState newState = newBlock.getStateFromMeta(newMeta);
 		List<BlockPos> toExchange = getBlocksToExchange(stack, pos, world, facing);
 
 		for (BlockPos exchangePos : toExchange) {
-			int slot = -1;
+			ItemStack slot = ItemStack.EMPTY;
 			ItemStack heldItem = player.getHeldItemMainhand();
 			if (player.capabilities.isCreativeMode || heldItem.getItem() instanceof ItemCreativeExchanger) {
 				placeBlockInWorld(world, exchangePos, newState);
@@ -521,7 +516,7 @@ public class ExchangerHandler extends Item {
 				} catch (ArrayIndexOutOfBoundsException e) {
 					return false;
 				}
-				if (slot >= 0 && player.inventory.mainInventory[slot].stackSize > 0) {
+				if (!slot.isEmpty()) {
 					Block oldBlock = world.getBlockState(exchangePos).getBlock();
 					int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
 					int energy = stack.getTagCompound().getInteger("Energy");
@@ -629,7 +624,7 @@ public class ExchangerHandler extends Item {
 				}
 			}
 		}
-		world.theProfiler.endSection();
+		world.profiler.endSection();
 
 		return true;
 	}

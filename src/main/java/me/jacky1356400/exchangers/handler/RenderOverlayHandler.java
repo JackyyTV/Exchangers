@@ -5,10 +5,10 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -25,7 +25,7 @@ public class RenderOverlayHandler {
 	@SubscribeEvent
 	public void RenderWorldLastEvent(RenderWorldLastEvent event) {
 
-		EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		World world = player.getEntityWorld();
 		ItemStack stack = player.getHeldItemMainhand();
 		Minecraft mc = Minecraft.getMinecraft();
@@ -39,7 +39,7 @@ public class RenderOverlayHandler {
 					mc.objectMouseOver.sideHit);
 
 			Tessellator tessellator = Tessellator.getInstance();
-			VertexBuffer buffer = tessellator.getBuffer();
+			BufferBuilder buffer = tessellator.getBuffer();
 
 			double offsetX = player.prevPosX + (player.posX - player.prevPosX) * (double) partialTicks;
 			double offsetY = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTicks;

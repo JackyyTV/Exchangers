@@ -48,11 +48,10 @@ public class ItemTuberousExchanger extends ItemExchanger {
 	}
 
 	private static boolean killPlayer(EntityPlayer player, ItemStack stack) {
-		stack = ItemStack.EMPTY;
+		stack.setCount(0);
 		player.attackEntityFrom(new EntityDamageSource("exchangerpotato", player), 100000.0F);
 		player.world.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
 		return true;
-
 	}
 
 }

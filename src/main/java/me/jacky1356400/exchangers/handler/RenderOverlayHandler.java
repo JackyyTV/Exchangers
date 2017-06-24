@@ -65,11 +65,16 @@ public class RenderOverlayHandler {
 				float colourB = 1F;
 				float colourA = 1F;
 
-				if (Block.getBlockFromName(stack.getTagCompound().getString("BlockName")) == null) {
-					colourR = 1F;
-					colourG = 0.1F;
-					colourB = 0.1F;
-					colourA = 1F;
+				ItemStack exchangerStack = player.getHeldItemMainhand();
+
+				if (exchangerStack.hasTagCompound()){
+					int stateID = exchangerStack.getTagCompound().getInteger("state");
+					if (stateID == 0) {
+						colourR = 1F;
+						colourG = 0.1F;
+						colourB = 0.1F;
+						colourA = 1F;
+					}
 				}
 
 				if (player.isSneaking()) {

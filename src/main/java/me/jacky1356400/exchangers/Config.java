@@ -90,12 +90,12 @@ public class Config {
 		//Modules
 		vanillaModule = cfg.getBoolean("Vanilla Module", CATEGORY_MODULES, true,
 				"If true, enables recipes for vanilla-based exchangers.");
-		enderIOModule = cfg.getBoolean("Ender IO Module", CATEGORY_MODULES, true,
-				"If true, enables recipes for Ender IO-based exchangers (Requires Ender IO to be installed).");
-		thermalExpansionModule = cfg.getBoolean("Thermal Expansion Module", CATEGORY_MODULES, true,
-				"If true, enables recipes for Thermal Expansion-based exchangers (Requires Thermal Expansion to be installed).");
-		mekanismModule = cfg.getBoolean("Mekanism Module", CATEGORY_MODULES, true,
-				"If true, enables recipes for Mekanism-based exchangers (Requires Mekanism to be installed).");
+		enderIOModule = cfg.getBoolean("Ender IO Module", CATEGORY_MODULES, false,
+				"[Not implemented!] If true, enables recipes for Ender IO-based exchangers (Requires Ender IO to be installed).");
+		thermalExpansionModule = cfg.getBoolean("Thermal Expansion Module", CATEGORY_MODULES, false,
+				"[Not implemented!] If true, enables recipes for Thermal Expansion-based exchangers (Requires Thermal Expansion to be installed).");
+		mekanismModule = cfg.getBoolean("Mekanism Module", CATEGORY_MODULES, false,
+				"[Not implemented!] If true, enables recipes for Mekanism-based exchangers (Requires Mekanism to be installed).");
 		specialModule = cfg.getBoolean("Special Module", CATEGORY_MODULES, true,
 				"If true, enables recipes for special exchangers (e.g. Tuberous Exchanger).");
 
@@ -103,11 +103,11 @@ public class Config {
 		cfg.addCustomCategoryComment(CATEGORY_RECIPES,
 				"Progressive recipes - requires the previous tier to craft the next tier exchanger, which means more expensive.");
 		vanillaProgressiveRecipes = cfg.getBoolean("Vanilla Progressive Recipes", CATEGORY_RECIPES, true,
-				"If true, enables progressive recipes for vanilla-based exchangers.");
+				"[Not implemented!] If true, enables progressive recipes for vanilla-based exchangers.");
 		enderIOProgressiveRecipes = cfg.getBoolean("Ender IO Progressive Recipes", CATEGORY_RECIPES, true,
-				"If true, enables progressive recipes for Ender IO-based exchangers.");
+				"[Not implemented!] If true, enables progressive recipes for Ender IO-based exchangers.");
 		thermalExpansionProgressiveRecipes = cfg.getBoolean("Thermal Expansion Progressive Recipes", CATEGORY_RECIPES,
-				true, "If true, enables progressive recipes for Thermal Expansion-based exchangers.");
+				true, "[Not implemented!] If true, enables progressive recipes for Thermal Expansion-based exchangers.");
 		mekanismProgressiveRecipes = cfg.getBoolean("Mekanism Progressive Recipes", CATEGORY_RECIPES, true,
 				"If true, enables progressive recipes for Mekanism-based exchangers.");
 
@@ -129,7 +129,7 @@ public class Config {
 				"Set the durability for Obsidian Exchanger");
 
 		//Ender IO Tweaks
-		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_EIO, "Ender IO Exchanger Tweaks");
+		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_EIO, "[Not implemented!] Ender IO Exchanger Tweaks");
 		conductiveIronExchangerMaxRF = cfg.getInt("Conductive Iron Exchanger Capacity", CATEGORY_TWEAKS_EIO, 80000,
 				1000, 100000000, "Set the RF capacity for Conductive Iron Exchanger");
 		conductiveIronExchangerPerBlockRF = cfg.getInt("Conductive Iron Exchanger Power Consumption",
@@ -156,7 +156,7 @@ public class Config {
 				10000, "Set the RF consumption per block for Vibrant Exchanger");
 
 		//Thermal Expansion Tweaks
-		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_TE, "Thermal Expansion Exchanger Tweaks");
+		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_TE, "[Not implemented!] Thermal Expansion Exchanger Tweaks");
 		leadstoneExchangerMaxRF = cfg.getInt("Leadstone Exchanger Capacity", CATEGORY_TWEAKS_TE, 80000, 1000, 100000000,
 				"Set the RF capacity for Leadstone Exchanger");
 		leadstoneExchangerPerBlockRF = cfg.getInt("Leadstone Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 10, 1,
@@ -179,7 +179,7 @@ public class Config {
 				10000, "Set the RF consumption per block for Resonant Exchanger");
 
 		//Mekanism Tweaks
-		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_MEKANISM, "Mekanism Exchanger Tweaks");
+		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_MEKANISM, "[Not implemented!] Mekanism Exchanger Tweaks");
 		basicExchangerMaxRF = cfg.getInt("Basic Exchanger Capacity", CATEGORY_TWEAKS_MEKANISM, 100000, 1000, 100000000,
 				"Set the RF capacity for Basic Exchanger");
 		basicExchangerPerBlockRF = cfg.getInt("Basic Exchanger Power Consumption", CATEGORY_TWEAKS_MEKANISM, 50, 1, 500,

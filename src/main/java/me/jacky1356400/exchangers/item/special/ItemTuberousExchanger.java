@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemTuberousExchanger extends ItemExchanger {
 
 	public ItemTuberousExchanger() {
-		super("potato", Tier.ZERO, 0);
+		super("expotato", Tier.ZERO, 1);
 	}
 
 	@Override

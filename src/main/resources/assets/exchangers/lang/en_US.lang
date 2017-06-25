@@ -11,6 +11,7 @@ death.attack.exchangerpotato.player=%1$s tried to operate a potato exchanger
 death.attack.exchangerpotato.item=%1$s tried to operate a potato exchanger
 
 #Tooltips
+exchangers.tooltip.durability=Durability
 exchangers.tooltip.tier=Tier %d
 exchangers.tooltip.holdShift=Hold %s for Details
 exchangers.tooltip.holdShift.shift=Shift
@@ -28,52 +29,52 @@ exchangers.error.nopower=§cError: Out of power!
 
 #Crafting Components
 #Vanilla
-item.exchangers.core_t1.name=§aExchanger Core (Tier 1)
-item.exchangers.core_t2.name=§bExchanger Core (Tier 2)
-item.exchangers.core_t3.name=§dExchanger Core (Tier 3)
+item.exchangers.excore_t1.name=§aExchanger Core (Tier 1)
+item.exchangers.excore_t2.name=§bExchanger Core (Tier 2)
+item.exchangers.excore_t3.name=§dExchanger Core (Tier 3)
 #Ender IO
-item.exchangers.eio_exchanger_core_tier1.name=§aEnder IO Exchanger Core (Tier 1)
-item.exchangers.eio_exchanger_core_tier2.name=§bEnder IO Exchanger Core (Tier 2)
-item.exchangers.eio_exchanger_core_tier3.name=§dEnder IO Exchanger Core (Tier 3)
+item.exchangers.eioexcore_t1.name=§aEnder IO Exchanger Core (Tier 1)
+item.exchangers.eioexcore_t2.name=§bEnder IO Exchanger Core (Tier 2)
+item.exchangers.eioexcore_t3.name=§dEnder IO Exchanger Core (Tier 3)
 #Thermal Expansion
-item.exchangers.te_exchanger_core_tier1.name=§aThermal Expansion Exchanger Core (Tier 1)
-item.exchangers.te_exchanger_core_tier2.name=§bThermal Expansion Exchanger Core (Tier 2)
-item.exchangers.te_exchanger_core_tier3.name=§dThermal Expansion Exchanger Core (Tier 3)
+item.exchangers.teexcore_t1.name=§aThermal Expansion Exchanger Core (Tier 1)
+item.exchangers.teexcore_t2.name=§bThermal Expansion Exchanger Core (Tier 2)
+item.exchangers.teexcore_t3.name=§dThermal Expansion Exchanger Core (Tier 3)
 #Mekanism
-item.exchangers.mekanism_exchanger_core_tier1.name=§aMekanism Exchanger Core (Tier 1)
-item.exchangers.mekanism_exchanger_core_tier2.name=§bMekanism Exchanger Core (Tier 2)
-item.exchangers.mekanism_exchanger_core_tier3.name=§dMekanism Exchanger Core (Tier 3)
+item.exchangers.mekexcore_t1.name=§aMekanism Exchanger Core (Tier 1)
+item.exchangers.mekexcore_t2.name=§bMekanism Exchanger Core (Tier 2)
+item.exchangers.mekexcore_t3.name=§dMekanism Exchanger Core (Tier 3)
 
 #Special Exchangers
-item.exchangers.potato.name=§eTuberous Exchanger
-item.exchangers.creative.name=§dCreative Exchanger
+item.exchangers.expotato.name=§eTuberous Exchanger
+item.exchangers.excreative.name=§dCreative Exchanger
 
 #Vanilla Exchangers
-item.exchangers.wooden.name=§aWooden Exchanger
-item.exchangers.stone.name=§aStone Exchanger
-item.exchangers.golden.name=§bGolden Exchanger
-item.exchangers.iron.name=§bIron Exchanger
-item.exchangers.diamond.name=§dDiamond Exchanger
-item.exchangers.emerald.name=§dEmerald Exchanger
-item.exchangers.obsidian.name=§dObsidian Exchanger
+item.exchangers.exwooden.name=§aWooden Exchanger
+item.exchangers.exstone.name=§aStone Exchanger
+item.exchangers.exgolden.name=§bGolden Exchanger
+item.exchangers.exiron.name=§bIron Exchanger
+item.exchangers.exdiamond.name=§dDiamond Exchanger
+item.exchangers.exemerald.name=§dEmerald Exchanger
+item.exchangers.exobsidian.name=§dObsidian Exchanger
 
 #Ender IO Exchangers
-item.exchangers.conductive_iron_exchanger.name=§aConductive Iron Exchanger
-item.exchangers.pulsating_iron_exchanger.name=§aPulsating Iron Exchanger
-item.exchangers.electrical_steel_exchanger.name=§bElectrical Steel Exchanger
-item.exchangers.energetic_exchanger.name=§bEnergetic Exchanger
-item.exchangers.dark_steel_exchanger.name=§dDark Steel Exchanger
-item.exchangers.vibrant_exchanger.name=§dVibrant Exchanger
+item.exchangers.exconductive.name=§aConductive Iron Exchanger
+item.exchangers.expulsating.name=§aPulsating Iron Exchanger
+item.exchangers.exelectricalsteel.name=§bElectrical Steel Exchanger
+item.exchangers.exenergetic.name=§bEnergetic Exchanger
+item.exchangers.exdarksteel.name=§dDark Steel Exchanger
+item.exchangers.exvibrant.name=§dVibrant Exchanger
 
 #Thermal Expansion Exchangers
-item.exchangers.leadstone_exchanger.name=§aLeadstone Exchanger
-item.exchangers.hardened_exchanger.name=§aHardened Exchanger
-item.exchangers.reinforced_exchanger.name=§bReinforced Exchanger
-item.exchangers.signalum_exchanger.name=§dSignalum Exchanger
-item.exchangers.resonant_exchanger.name=§dResonant Exchanger
+item.exchangers.exleadstone.name=§aLeadstone Exchanger
+item.exchangers.exhardened.name=§aHardened Exchanger
+item.exchangers.exreinforced.name=§bReinforced Exchanger
+item.exchangers.exsignalum.name=§dSignalum Exchanger
+item.exchangers.exresonant.name=§dResonant Exchanger
 
 #Mekanism Exchangers
-item.exchangers.basic_exchanger.name=§aBasic Exchanger
-item.exchangers.advanced_exchanger.name=§bAdvanced Exchanger
-item.exchangers.elite_exchanger.name=§dElite Exchanger
-item.exchangers.ultimate_exchanger.name=§dUltimate Exchanger
+item.exchangers.exbasic.name=§aBasic Exchanger
+item.exchangers.exadvanced.name=§bAdvanced Exchanger
+item.exchangers.exelite.name=§dElite Exchanger
+item.exchangers.exultimate.name=§dUltimate Exchanger

@@ -16,18 +16,18 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ModRegistry {
 
-	public static final Item WOODEN = new ItemExchanger("wooden", Tier.ONE, Config.woodMaxDmg);
-	public static final Item STONE = new ItemExchanger("stone", Tier.TWO, Config.stoneMaxDmg);
-	public static final Item GOLD = new ItemExchanger("golden", Tier.THREE, Config.goldMaxDmg);
-	public static final Item IRON = new ItemExchanger("iron", Tier.FOUR, Config.ironMaxDmg);
-	public static final Item DIAMOND = new ItemExchanger("diamond", Tier.FIVE, Config.diaMaxDmg);
-	public static final Item EMERALD = new ItemExchanger("emerald", Tier.SIX, Config.emeMaxDmg);
-	public static final Item OBSIDIAN = new ItemExchanger("obsidian", Tier.SEVEN, Config.obsMaxDmg);
-	public static final Item CREATIVE = new ItemExchanger("creative", Tier.CREATIVE, 0);
+	public static final Item WOODEN = new ItemExchanger("exwooden", Tier.ONE, Config.woodMaxDmg);
+	public static final Item STONE = new ItemExchanger("exstone", Tier.TWO, Config.stoneMaxDmg);
+	public static final Item GOLD = new ItemExchanger("exgolden", Tier.THREE, Config.goldMaxDmg);
+	public static final Item IRON = new ItemExchanger("exiron", Tier.FOUR, Config.ironMaxDmg);
+	public static final Item DIAMOND = new ItemExchanger("exdiamond", Tier.FIVE, Config.diaMaxDmg);
+	public static final Item EMERALD = new ItemExchanger("exemerald", Tier.SIX, Config.emeMaxDmg);
+	public static final Item OBSIDIAN = new ItemExchanger("exobsidian", Tier.SEVEN, Config.obsMaxDmg);
+	public static final Item CREATIVE = new ItemExchanger("excreative", Tier.CREATIVE, 9001);
 	public static final Item POTATO = new ItemTuberousExchanger();
-	public static final Item CORE_1 = new ItemBasic("core_t1");
-	public static final Item CORE_2 = new ItemBasic("core_t2");
-	public static final Item CORE_3 = new ItemBasic("core_t3");
+	public static final Item CORE_1 = new ItemBasic("excore_t1");
+	public static final Item CORE_2 = new ItemBasic("excore_t2");
+	public static final Item CORE_3 = new ItemBasic("excore_t3");
 
 	@SuppressWarnings("deprecation")
 	private static void initRecipes() {

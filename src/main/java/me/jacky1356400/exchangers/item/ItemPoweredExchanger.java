@@ -41,7 +41,6 @@ public class ItemPoweredExchanger extends ItemExchanger {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
 		ItemStack empty = new ItemStack(this);
 		list.add(empty);

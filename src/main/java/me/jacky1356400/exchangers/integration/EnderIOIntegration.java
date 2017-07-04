@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.UniversalBucket;
 
 public class EnderIOIntegration {
-
+	/*
 	public static ItemStack capacitorBankBasic;
 	public static ItemStack capacitorBank;
 	public static ItemStack capacitorBankVibrant;
@@ -57,5 +57,5 @@ public class EnderIOIntegration {
 		bucketVaporOfLevity = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket,
 				vaporOfLevity);
 	}
-
+	*/
 }

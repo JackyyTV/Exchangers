@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class MekanismIntegration {
-
+	/*
 	public static ItemStack circuitBasic;
 	public static ItemStack circuitAdvanced;
 	public static ItemStack circuitElite;
@@ -41,4 +41,5 @@ public class MekanismIntegration {
 			portableTeleporter = new ItemStack(portableTeleporterItem, 1, 0);
 		}
 	}
+	*/
 }

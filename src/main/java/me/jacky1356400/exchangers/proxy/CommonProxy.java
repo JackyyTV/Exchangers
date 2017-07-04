@@ -30,6 +30,7 @@ public class CommonProxy {
 		config = new Configuration(new File(configDir.getPath(), "exchangers.cfg"));
 		Config.readConfig();
 		MinecraftForge.EVENT_BUS.register(new ModRegistry());
+		/*
 		if ((Config.enderIOModule = true) && (Loader.isModLoaded(Data.EIO))) {
 			EnderIOIntegration.init();
 		}
@@ -39,6 +40,7 @@ public class CommonProxy {
 		if ((Config.mekanismModule = true) && (Loader.isModLoaded(Data.MEK))) {
 			MekanismIntegration.init();
 		}
+		*/
 		PacketHandler.registerMessages(Data.MODID);
 	}
 

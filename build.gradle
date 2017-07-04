@@ -43,8 +43,8 @@ repositories {
 
 dependencies {
     compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.12:4.7.0.67:api"
-    runtime "mezz.jei:jei_1.12:4.7.0.67"
+	deobfCompile "mezz.jei:jei_1.12:4.7.0.68:api"
+    runtime "mezz.jei:jei_1.12:4.7.0.68"
 	deobfCompile "mcp.mobius.waila:Hwyla:1.8.18-B32_1.12:api"
 	runtime "mcp.mobius.waila:Hwyla:1.8.18-B32_1.12"
 }

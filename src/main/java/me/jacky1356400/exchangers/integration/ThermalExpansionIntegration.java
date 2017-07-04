@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.UniversalBucket;
 
 public class ThermalExpansionIntegration {
-
+	/*
 	public static ItemStack fluxCapacitorBasic;
 	public static ItemStack fluxCapacitorHardened;
 	public static ItemStack fluxCapacitorReinforced;
@@ -53,4 +53,5 @@ public class ThermalExpansionIntegration {
 		bucketGelidCryotheum = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket,
 				cryotheum);
 	}
+	*/
 }

@@ -1,15 +1,5 @@
 package me.jacky1356400.exchangers.integration;
 
-import me.jacky1356400.exchangers.Exchangers;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.UniversalBucket;
-
 public class EnderIOIntegration {
 	/*
 	public static ItemStack capacitorBankBasic;

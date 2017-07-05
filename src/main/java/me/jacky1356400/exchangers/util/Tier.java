@@ -14,6 +14,11 @@ public enum Tier {
 	FIVE(ExchangerHandler.MODE_9X9),
 	SIX(ExchangerHandler.MODE_11X11),
 	SEVEN(ExchangerHandler.MODE_15X15),
+	TE_ONE(ExchangerHandler.MODE_3X3),
+	TE_TWO(ExchangerHandler.MODE_7X7),
+	TE_THREE(ExchangerHandler.MODE_11X11),
+	TE_FOUR(ExchangerHandler.MODE_13X13),
+	TE_FIVE(ExchangerHandler.MODE_15X15),
 	CREATIVE(ExchangerHandler.MODE_25X25);
 
 	final int size;
@@ -25,6 +30,11 @@ public enum Tier {
 	@SideOnly(Side.CLIENT)
 	public String getFormattedText() {
 		int k = this.ordinal();
+		if(this == Tier.TE_ONE) k = 1;
+		if(this == Tier.TE_TWO) k = 2;
+		if(this == Tier.TE_THREE) k = 3;
+		if(this == Tier.TE_FOUR) k = 4;
+		if(this == Tier.TE_FIVE) k = 5;
 		if(this == Tier.CREATIVE) k = 9001;
 		return I18n.format(Data.MODID + ".tooltip.tier", k);
 	}

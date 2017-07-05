@@ -1,10 +1,5 @@
 package me.jacky1356400.exchangers.integration;
 
-import me.jacky1356400.exchangers.Exchangers;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-
 public class MekanismIntegration {
 	/*
 	public static ItemStack circuitBasic;

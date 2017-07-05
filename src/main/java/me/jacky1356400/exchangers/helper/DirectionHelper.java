@@ -1,9 +1,9 @@
 package me.jacky1356400.exchangers.helper;
 
+import net.minecraft.util.EnumFacing;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.util.EnumFacing;
 
 public class DirectionHelper {
 

@@ -1,34 +1,13 @@
 package me.jacky1356400.exchangers.handler;
 
-import static me.jacky1356400.exchangers.handler.WorldEventHandler.queueExchanges;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import me.jacky1356400.exchangers.client.Keys;
+import me.jacky1356400.exchangers.helper.DirectionHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchanger;
 import me.jacky1356400.exchangers.item.ItemPoweredExchanger;
 import me.jacky1356400.exchangers.util.Data;
 import me.jacky1356400.exchangers.util.Tier;
-import me.jacky1356400.exchangers.helper.DirectionHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockHugeMushroom;
-import net.minecraft.block.BlockLadder;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockPistonBase;
-import net.minecraft.block.BlockRedstoneLight;
-import net.minecraft.block.BlockTorch;
-import net.minecraft.block.BlockTrapDoor;
-import net.minecraft.block.BlockWorkbench;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,17 +16,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.BlockFluidBase;
+
+import java.util.*;
+
+import static me.jacky1356400.exchangers.handler.WorldEventHandler.queueExchanges;
 
 public abstract class ExchangerHandler extends Item {
 

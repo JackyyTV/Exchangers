@@ -10,7 +10,6 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-
 version = "${mc_version}-${mod_version}"
 group= "me.jacky1356400.exchangers"
 archivesBaseName = "Exchangers"
@@ -23,7 +22,7 @@ compileJava {
 minecraft {
     version = "${mc_version}-${forge_version}"
     runDir = "run"
-    mappings = "snapshot_20170624"
+    mappings = "snapshot_20170705"
 }
 
 repositories {
@@ -39,14 +38,22 @@ repositories {
 	maven {
 		url  "http://tehnut.info/maven"
 	}
+	maven {
+        name = "CoFH Maven"
+        url = "http://maven.covers1624.net"
+    }
+	maven {
+        url = "http://chickenbones.net/maven"
+    }
 }
 
 dependencies {
     compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.12:4.7.0.68:api"
-    runtime "mezz.jei:jei_1.12:4.7.0.68"
-	deobfCompile "mcp.mobius.waila:Hwyla:1.8.18-B32_1.12:api"
-	runtime "mcp.mobius.waila:Hwyla:1.8.18-B32_1.12"
+	deobfCompile "mezz.jei:jei_1.12:4.7.1.69:api"
+    runtime "mezz.jei:jei_1.12:4.7.1.69"
+	deobfCompile "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12:api"
+	runtime "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12"
+    compile "cofh:RedstoneFlux:1.12-2.0.0.+:deobf"
 }
 
 processResources

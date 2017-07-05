@@ -1,14 +1,14 @@
 package me.jacky1356400.exchangers.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.jacky1356400.exchangers.init.ModRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Data {
 
@@ -18,7 +18,7 @@ public class Data {
 	public static final String EIO = "enderio";
 	public static final String MEK = "mekanism";
 	public static final String THERMAL = "thermalexpansion";
-	public static final String VERSION = "1.12-2.0.1";
+	public static final String VERSION = "1.12-2.1";
 	public static final String MODID = "exchangers";
 	public static final String MODNAME = "Exchangers";
 	public static final CreativeTabs TAB = new CreativeTabs(MODID) {

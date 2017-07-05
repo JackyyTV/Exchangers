@@ -1,17 +1,19 @@
 package me.jacky1356400.exchangers.item;
 
-import java.util.List;
-
+import cofh.redstoneflux.api.IEnergyContainerItem;
+import me.jacky1356400.exchangers.helper.EnergyHelper;
+import me.jacky1356400.exchangers.helper.NBTHelper;
+import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.util.Tier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemPoweredExchanger extends ItemExchanger {
+import java.util.List;
+
+public class ItemPoweredExchanger extends ItemExchanger implements IEnergyContainerItem {
 
 	private final int maxEnergy;
 	private final int perBlockUse;
@@ -22,45 +24,23 @@ public class ItemPoweredExchanger extends ItemExchanger {
 		perBlockUse = perBlock;
 	}
 
-	//TODO implement Forge Energy
-
 	@Override
-	public boolean showDurabilityBar(ItemStack stack) {
-		return false; //TODO implement Forge Energy
+	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
+		return NBTHelper.receiveEnergy(container, energy, getMaxEnergyStored(container), simulate);
 	}
 
 	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
-		/*
-		if (!stack.hasTagCompound()) {
-		EnergyHelper.setDefaultEnergyTag(stack, 0);
-		}
-		return 1D - ((double) stack.getTagCompound().getInteger("Energy") / (double) getMaxEnergyStored(stack));
-		*/
-		return 0; //TODO implement Forge Energy
+	public int extractEnergy(ItemStack container, int energy, boolean simulate) {
+		return NBTHelper.extractEnergy(container, energy, simulate);
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-		ItemStack empty = new ItemStack(this);
-		list.add(empty);
-		ItemStack full = new ItemStack(this);
-		//EnergyHelper.setDefaultEnergyTag(full, Config.darkSteelExchangerMaxRF);
-		list.add(full);
+	public int getEnergyStored(ItemStack container) {
+		return NBTHelper.getEnergyStored(container);
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
-		super.addInformation(stack, world, tooltip, bool);
-		//tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
-	}
-
-	@Override
-	public boolean isDamaged(ItemStack stack) {
-		return true;
-	}
-
-	public int getMaxEnergy() {
+	public int getMaxEnergyStored(ItemStack container) {
 		return maxEnergy;
 	}
 
@@ -69,8 +49,44 @@ public class ItemPoweredExchanger extends ItemExchanger {
 	}
 
 	@Override
+	public boolean showDurabilityBar(ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public double getDurabilityForDisplay(ItemStack stack) {
+		if (stack.getTagCompound() == null) {
+			EnergyHelper.setDefaultEnergyTag(stack, 0);
+		}
+		return 1D - ((double) stack.getTagCompound().getInteger("Energy") / (double) getMaxEnergyStored(stack));
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
+		tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
+		tooltip.add(getTier().getFormattedText());
+	}
+
+	@Override
+	public boolean isDamaged(ItemStack stack) {
+		return true;
+	}
+
+	@Override
 	public boolean isPowered() {
 		return true;
+	}
+
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
+		if (this.isInCreativeTab(tab)) {
+			ItemStack empty = new ItemStack(this);
+			list.add(empty);
+			ItemStack full = new ItemStack(this);
+			EnergyHelper.setDefaultEnergyTag(full, maxEnergy);
+			list.add(full);
+		}
 	}
 
 }

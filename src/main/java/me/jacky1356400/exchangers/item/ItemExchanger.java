@@ -1,7 +1,5 @@
 package me.jacky1356400.exchangers.item;
 
-import java.util.List;
-
 import me.jacky1356400.exchangers.handler.ExchangerHandler;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.util.Data;
@@ -10,6 +8,8 @@ import me.jacky1356400.exchangers.util.Tier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 import static me.jacky1356400.exchangers.helper.StringHelper.localize;
 
@@ -41,8 +41,10 @@ public class ItemExchanger extends ExchangerHandler implements IHasModel {
 	@Override
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
 		super.addInformation(stack, world, tooltip, bool);
-		tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + localize("tooltip.durability"));
-		tooltip.add(getTier().getFormattedText());
+		if (!isPowered()){
+			tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + localize("tooltip.durability"));
+			tooltip.add(getTier().getFormattedText());
+		}
 	}
 
 	public Tier getTier() {

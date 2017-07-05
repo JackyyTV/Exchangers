@@ -1,14 +1,13 @@
 package me.jacky1356400.exchangers.helper;
 
-import java.text.NumberFormat;
-
-import org.lwjgl.input.Keyboard;
-
 import me.jacky1356400.exchangers.util.Data;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
+
+import java.text.NumberFormat;
 
 public final class StringHelper {
 

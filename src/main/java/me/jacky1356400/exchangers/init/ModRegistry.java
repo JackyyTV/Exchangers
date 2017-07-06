@@ -154,6 +154,19 @@ public class ModRegistry {
 
 	@SubscribeEvent
 	public void onRecipeRegistry(RegistryEvent.Register<IRecipe> e) {
+		/*
+		if ((Config.enderIOModule = true) && (Loader.isModLoaded(Data.EIO))) {
+			EnderIOIntegration.init();
+		}
+		*/
+		if ((Config.thermalExpansionModule = true) && (Loader.isModLoaded(Data.THERMAL))) {
+			ThermalExpansionIntegration.init();
+		}
+		/*
+		if ((Config.mekanismModule = true) && (Loader.isModLoaded(Data.MEK))) {
+			MekanismIntegration.init();
+		}
+		*/
 		initRecipes();
 		e.getRegistry().registerAll(Data.RECIPES.toArray(new IRecipe[0]));
 	}

@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Data.MODID, version = Data.VERSION, name = Data.MODNAME, dependencies = Exchangers.DEPENDS, useMetadata = true)
 public class Exchangers {
 
-	public static final String DEPENDS = "after:redstoneflux;after:enderio;after:thermalfoundation;after:thermalexpansion;after:mekanism;";
+	public static final String DEPENDS = "required-after:redstoneflux;after:enderio;after:thermalfoundation;after:thermalexpansion;after:mekanism;";
 
 	public static Logger logger = LogManager.getLogger("Exchangers");
 

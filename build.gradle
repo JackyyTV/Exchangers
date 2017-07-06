@@ -42,9 +42,6 @@ repositories {
         name = "CoFH Maven"
         url = "http://maven.covers1624.net"
     }
-	maven {
-        url = "http://chickenbones.net/maven"
-    }
 }
 
 dependencies {
@@ -69,10 +66,3 @@ processResources
     }
 }
 
-sourceSets {
-    main {
-		java {
-            exclude '**/me/jacky1356400/exchangers/item/powered/*'
-		}
-	}
-}

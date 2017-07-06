@@ -27,19 +27,6 @@ public class CommonProxy {
 		File configDir = e.getModConfigurationDirectory();
 		config = new Configuration(new File(configDir.getPath(), "exchangers.cfg"));
 		Config.readConfig();
-		/*
-		if ((Config.enderIOModule = true) && (Loader.isModLoaded(Data.EIO))) {
-			EnderIOIntegration.init();
-		}
-		*/
-		if ((Config.thermalExpansionModule = true) && (Loader.isModLoaded(Data.THERMAL))) {
-			ThermalExpansionIntegration.init();
-		}
-		/*
-		if ((Config.mekanismModule = true) && (Loader.isModLoaded(Data.MEK))) {
-			MekanismIntegration.init();
-		}
-		*/
 		MinecraftForge.EVENT_BUS.register(new ModRegistry());
 		PacketHandler.registerMessages(Data.MODID);
 	}

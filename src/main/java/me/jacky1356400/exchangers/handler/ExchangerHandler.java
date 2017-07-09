@@ -201,7 +201,9 @@ public abstract class ExchangerHandler extends Item {
 			}
 		}
 
-		softBlocks.add(Blocks.SNOW);
+		softBlocks.add(Blocks.SNOW_LAYER);
+		softBlocks.add(Blocks.REDSTONE_WIRE);
+		softBlocks.add(Blocks.TRIPWIRE);
 		softBlocks.add(Blocks.VINE);
 		softBlocks.add(Blocks.FIRE);
 		softBlocks.add(Blocks.AIR);

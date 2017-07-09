@@ -35,7 +35,7 @@ public class ItemVibrantExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.vibrantExchangerMaxRF;
+        return Config.vibrantMaxEnergy;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ItemVibrantExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.vibrantExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.vibrantMaxEnergy);
         list.add(full);
     }
 

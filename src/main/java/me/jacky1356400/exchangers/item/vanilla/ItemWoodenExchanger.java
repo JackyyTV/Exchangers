@@ -19,7 +19,7 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":wooden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".wooden_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.woodenExchangerMaxDamage);
+        setMaxDamage(Config.woodMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

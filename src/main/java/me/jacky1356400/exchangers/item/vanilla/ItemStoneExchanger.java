@@ -19,7 +19,7 @@ public class ItemStoneExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":stone_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".stone_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.stoneExchangerMaxDamage);
+        setMaxDamage(Config.stoneMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

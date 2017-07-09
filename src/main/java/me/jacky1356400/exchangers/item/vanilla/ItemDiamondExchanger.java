@@ -19,7 +19,7 @@ public class ItemDiamondExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":diamond_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".diamond_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.diamondExchangerMaxDamage);
+        setMaxDamage(Config.diaMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

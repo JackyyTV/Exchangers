@@ -35,7 +35,7 @@ public class ItemUltimateExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.ultimateExchangerMaxRF;
+        return Config.ultimateMaxEnergy;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ItemUltimateExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.ultimateExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.ultimateMaxEnergy);
         list.add(full);
     }
 

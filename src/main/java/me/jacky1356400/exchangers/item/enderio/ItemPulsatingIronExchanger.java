@@ -35,7 +35,7 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.pulsatingIronExchangerMaxRF;
+        return Config.pulsatingMaxEnergy;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.pulsatingIronExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.pulsatingMaxEnergy);
         list.add(full);
     }
 

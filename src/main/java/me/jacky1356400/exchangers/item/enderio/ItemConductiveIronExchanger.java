@@ -35,7 +35,7 @@ public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.conductiveIronExchangerMaxRF;
+        return Config.conductiveMaxEnergy;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ItemConductiveIronExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.conductiveIronExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.conductiveMaxEnergy);
         list.add(full);
     }
 

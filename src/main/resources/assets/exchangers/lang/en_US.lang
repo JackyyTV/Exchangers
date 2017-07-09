@@ -11,6 +11,7 @@ death.attack.exchangerpotato.player=%1$s tried to operate a potato exchanger
 death.attack.exchangerpotato.item=%1$s tried to operate a potato exchanger
 
 #Tooltips
+exchangers.tooltip.durability=Durability
 exchangers.tooltip.tier=Tier %d
 exchangers.tooltip.holdShift=Hold %s for Details
 exchangers.tooltip.holdShift.shift=Shift

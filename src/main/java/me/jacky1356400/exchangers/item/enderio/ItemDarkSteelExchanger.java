@@ -35,7 +35,7 @@ public class ItemDarkSteelExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.darkSteelExchangerMaxRF;
+        return Config.darkSteelMaxEnergy;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ItemDarkSteelExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.darkSteelExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.darkSteelMaxEnergy);
         list.add(full);
     }
 

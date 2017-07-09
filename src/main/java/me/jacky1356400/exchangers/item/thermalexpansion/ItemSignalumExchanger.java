@@ -35,7 +35,7 @@ public class ItemSignalumExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.signalumExchangerMaxRF;
+        return Config.signalumMaxEnergy;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ItemSignalumExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.signalumExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.signalumMaxEnergy);
         list.add(full);
     }
 

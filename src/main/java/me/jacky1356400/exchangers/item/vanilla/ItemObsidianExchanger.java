@@ -19,7 +19,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":obsidian_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".obsidian_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.obsidianExchangerMaxDamage);
+        setMaxDamage(Config.obsMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

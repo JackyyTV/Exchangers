@@ -82,11 +82,11 @@ public class GUIHandler extends Gui {
         GL11.glDisable(GL11.GL_LIGHTING);
 
         String am = Integer.toString(this.lastExchangeSourceCount);
-        if (!player.capabilities.isCreativeMode) drawItemQuantity(mc.fontRendererObj, xOffset+4, yOffset+2 , am);
-        else drawItemQuantity(mc.fontRendererObj, xOffset+2, yOffset+1 , "Inf");
+        if (!player.capabilities.isCreativeMode) drawItemQuantity(mc.fontRenderer, xOffset+4, yOffset+2 , am);
+        else drawItemQuantity(mc.fontRenderer, xOffset+2, yOffset+1 , "Inf");
         String exchangeMode;
         exchangeMode = new String(modeSwitchList[exchangerStack.getTagCompound().getInteger("ExchangeMode")]);
-        drawExchangeMode(mc.fontRendererObj, xOffset+1, yOffset+2 , exchangeMode);
+        drawExchangeMode(mc.fontRenderer, xOffset+1, yOffset+2 , exchangeMode);
 
         net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();
     }

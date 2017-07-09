@@ -19,7 +19,7 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":emerald_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".emerald_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.emeraldExchangerMaxDamage);
+        setMaxDamage(Config.emeMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

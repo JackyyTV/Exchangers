@@ -19,7 +19,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":iron_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".iron_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.ironExchangerMaxDamage);
+        setMaxDamage(Config.ironMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

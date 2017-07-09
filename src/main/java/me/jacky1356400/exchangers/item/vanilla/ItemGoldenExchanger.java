@@ -19,7 +19,7 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":golden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".golden_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.goldenExchangerMaxDamage);
+        setMaxDamage(Config.goldMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

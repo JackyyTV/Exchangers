@@ -35,7 +35,7 @@ public class ItemResonantExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.resonantExchangerMaxRF;
+        return Config.resonantMaxEnergy;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ItemResonantExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.resonantExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.resonantMaxEnergy);
         list.add(full);
     }
 

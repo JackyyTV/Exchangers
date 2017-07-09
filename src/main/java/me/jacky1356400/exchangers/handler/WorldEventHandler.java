@@ -42,7 +42,7 @@ public class WorldEventHandler {
 
         if (queue == null || queue.size() == 0) return;
 
-        world.theProfiler.startSection("Exchangers-Exchanging");
+        world.profiler.startSection("Exchangers-Exchanging");
         List<Exchange> queueList = new ArrayList<Exchange>(queue);
         Exchange exchange = queueList.get(0);
 
@@ -50,7 +50,7 @@ public class WorldEventHandler {
         world.setBlockState(exchange.pos, exchange.state, 3);
 
         queue.remove(exchange);
-        world.theProfiler.endSection();
+        world.profiler.endSection();
     }
 
 }

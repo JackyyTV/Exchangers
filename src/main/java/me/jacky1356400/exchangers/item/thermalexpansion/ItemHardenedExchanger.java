@@ -53,7 +53,7 @@ public class ItemHardenedExchanger extends ItemExchangerBaseRF {
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
-        tooltip.add(StringHelper.getTierText(1));
+        tooltip.add(StringHelper.getTierText(2));
     }
 
 }

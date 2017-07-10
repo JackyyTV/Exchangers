@@ -33,7 +33,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
-        tooltip.add(StringHelper.getTierText(2));
+        tooltip.add(StringHelper.getTierText(4));
     }
 
 }

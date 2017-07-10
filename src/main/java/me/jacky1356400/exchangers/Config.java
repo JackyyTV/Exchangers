@@ -103,11 +103,11 @@ public class Config {
         cfg.addCustomCategoryComment(CATEGORY_RECIPES,
                 "Progressive recipes - requires the previous tier to craft the next tier exchanger, which means more expensive.");
         vanillaProgressiveRecipes = cfg.getBoolean("Vanilla Progressive Recipes", CATEGORY_RECIPES, true,
-                "[Not implemented!] If true, enables progressive recipes for vanilla-based exchangers.");
+                "If true, enables progressive recipes for vanilla-based exchangers.");
         enderIOProgressiveRecipes = cfg.getBoolean("Ender IO Progressive Recipes", CATEGORY_RECIPES, true,
-                "[Not implemented!] If true, enables progressive recipes for Ender IO-based exchangers.");
+                "If true, enables progressive recipes for Ender IO-based exchangers.");
         thermalExpansionProgressiveRecipes = cfg.getBoolean("Thermal Expansion Progressive Recipes", CATEGORY_RECIPES,
-                true, "[Not implemented!] If true, enables progressive recipes for Thermal Expansion-based exchangers.");
+                true, "If true, enables progressive recipes for Thermal Expansion-based exchangers.");
         mekanismProgressiveRecipes = cfg.getBoolean("Mekanism Progressive Recipes", CATEGORY_RECIPES, true,
                 "If true, enables progressive recipes for Mekanism-based exchangers.");
 
@@ -129,7 +129,7 @@ public class Config {
                 "Set the durability for Obsidian Exchanger");
 
         //Ender IO Tweaks
-        cfg.addCustomCategoryComment(CATEGORY_TWEAKS_EIO, "[Not implemented!] Ender IO Exchanger Tweaks");
+        cfg.addCustomCategoryComment(CATEGORY_TWEAKS_EIO, "Ender IO Exchanger Tweaks");
         conductiveMaxEnergy = cfg.getInt("Conductive Iron Exchanger Capacity", CATEGORY_TWEAKS_EIO, 80000,
                 1000, 100000000, "Set the RF capacity for Conductive Iron Exchanger");
         conductivePerBlockUse = cfg.getInt("Conductive Iron Exchanger Power Consumption",

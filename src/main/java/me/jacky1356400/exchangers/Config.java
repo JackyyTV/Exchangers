@@ -103,13 +103,13 @@ public class Config {
 		cfg.addCustomCategoryComment(CATEGORY_RECIPES,
 				"Progressive recipes - requires the previous tier to craft the next tier exchanger, which means more expensive.");
 		vanillaProgressiveRecipes = cfg.getBoolean("Vanilla Progressive Recipes", CATEGORY_RECIPES, true,
-				"[Not implemented!] If true, enables progressive recipes for vanilla-based exchangers.");
+				"If true, enables progressive recipes for vanilla-based exchangers.");
 		enderIOProgressiveRecipes = cfg.getBoolean("Ender IO Progressive Recipes", CATEGORY_RECIPES, true,
 				"[Not implemented!] If true, enables progressive recipes for Ender IO-based exchangers.");
 		thermalExpansionProgressiveRecipes = cfg.getBoolean("Thermal Expansion Progressive Recipes", CATEGORY_RECIPES,
-				true, "[Not implemented!] If true, enables progressive recipes for Thermal Expansion-based exchangers.");
+				true, "If true, enables progressive recipes for Thermal Expansion-based exchangers.");
 		mekanismProgressiveRecipes = cfg.getBoolean("Mekanism Progressive Recipes", CATEGORY_RECIPES, true,
-				"If true, enables progressive recipes for Mekanism-based exchangers.");
+				"[Not implemented!] If true, enables progressive recipes for Mekanism-based exchangers.");
 
 		//Vanilla Tweaks
 		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_VANILLA, "Vanilla Exchanger Tweaks");
@@ -156,7 +156,7 @@ public class Config {
 				10000, "Set the RF consumption per block for Vibrant Exchanger");
 
 		//Thermal Expansion Tweaks
-		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_TE, "[Not implemented!] Thermal Expansion Exchanger Tweaks");
+		cfg.addCustomCategoryComment(CATEGORY_TWEAKS_TE, "Thermal Expansion Exchanger Tweaks");
 		leadstoneMaxEnergy = cfg.getInt("Leadstone Exchanger Capacity", CATEGORY_TWEAKS_TE, 80000, 1000, 100000000,
 				"Set the RF capacity for Leadstone Exchanger");
 		leadstonePerBlockUse = cfg.getInt("Leadstone Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 10, 1,

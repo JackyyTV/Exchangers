@@ -4,6 +4,10 @@ import me.jacky1356400.exchangers.Exchangers;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 
 public class ThermalExpansionIntegration {
 
@@ -16,6 +20,9 @@ public class ThermalExpansionIntegration {
 	public static ItemStack redstoneReceptionCoil;
 	public static ItemStack redstoneTransmissionCoil;
 	public static ItemStack redstoneConductanceCoil;
+	public static ItemStack bucketResonantEnder;
+	public static ItemStack bucketEnergizedGlowstone;
+	public static ItemStack bucketGelidCryotheum;
 
 	public static void init() {
 		Exchangers.logger.info("Fetching items for Thermal Expansion integration...");
@@ -36,6 +43,13 @@ public class ThermalExpansionIntegration {
 			redstoneTransmissionCoil = new ItemStack(teMaterialsItem, 1, 514);
 			redstoneConductanceCoil = new ItemStack(teMaterialsItem, 1, 515);
 		}
+
+		Fluid ender = FluidRegistry.getFluid("ender");
+		bucketResonantEnder = FluidUtil.getFilledBucket(new FluidStack(ender, 1000));
+		Fluid glowstone = FluidRegistry.getFluid("glowstone");
+		bucketEnergizedGlowstone = FluidUtil.getFilledBucket(new FluidStack(glowstone, 1000));
+		Fluid cryotheum = FluidRegistry.getFluid("cryotheum");
+		bucketGelidCryotheum = FluidUtil.getFilledBucket(new FluidStack(cryotheum, 1000));
 
 	}
 

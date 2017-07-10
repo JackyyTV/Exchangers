@@ -12,15 +12,12 @@ import me.jacky1356400.exchangers.util.Tier;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import static me.jacky1356400.exchangers.integration.ThermalExpansionIntegration.*;
 
 public class ModRegistry {
 
@@ -44,10 +41,6 @@ public class ModRegistry {
     public static final Item TECORE_1 = new ItemBasic("teexcore_t1");
     public static final Item TECORE_2 = new ItemBasic("teexcore_t2");
     public static final Item TECORE_3 = new ItemBasic("teexcore_t3");
-
-    public static ItemStack bucketResonantEnder;
-    public static ItemStack bucketEnergizedGlowstone;
-    public static ItemStack bucketGelidCryotheum;
 
 	@SuppressWarnings("deprecation")
 	private static void initRecipes() {
@@ -125,13 +118,6 @@ public class ModRegistry {
                         'R', ThermalExpansionIntegration.redstoneConductanceCoil, 'F', ThermalExpansionIntegration.fluxCapacitorResonant,
                         'C', TECORE_3);
             }
-
-            Fluid ender = FluidRegistry.getFluid("ender");
-            bucketResonantEnder = FluidUtil.getFilledBucket(new FluidStack(ender, 1000));
-            Fluid glowstone = FluidRegistry.getFluid("glowstone");
-            bucketEnergizedGlowstone = FluidUtil.getFilledBucket(new FluidStack(glowstone, 1000));
-            Fluid cryotheum = FluidRegistry.getFluid("cryotheum");
-            bucketGelidCryotheum = FluidUtil.getFilledBucket(new FluidStack(cryotheum, 1000));
 
             RecipeHelper.addOldShaped(TECORE_1, "CLC", "LRL", "CLC", 'C', "gearCopper", 'L', "ingotLead",
                     'R', bucketResonantEnder);

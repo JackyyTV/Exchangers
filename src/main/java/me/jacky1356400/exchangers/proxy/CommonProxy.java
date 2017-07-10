@@ -30,7 +30,6 @@ public class CommonProxy {
 	}
 
 	public void init(FMLInitializationEvent e) {
-		Exchangers.logger.info("proxy");
 		MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 	}

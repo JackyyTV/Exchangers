@@ -1,7 +1,7 @@
 package me.jacky1356400.exchangers.item.vanilla;
 
-import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.Config;
+import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -19,7 +19,7 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":wooden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".wooden_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.woodenExchangerMaxDamage);
+        setMaxDamage(Config.woodMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

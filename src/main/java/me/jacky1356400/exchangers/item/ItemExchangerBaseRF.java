@@ -1,17 +1,15 @@
 package me.jacky1356400.exchangers.item;
 
 import cofh.api.energy.IEnergyContainerItem;
-import me.jacky1356400.exchangers.handler.ExchangerHandler;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
 import me.jacky1356400.exchangers.helper.NBTHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import java.text.NumberFormat;
 import java.util.List;
 
-public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyContainerItem {
+public class ItemExchangerBaseRF extends ItemExchangerBase implements IEnergyContainerItem {
 
 	@Override
 	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
@@ -54,6 +52,11 @@ public class ItemExchangerBaseRF extends ExchangerHandler implements IEnergyCont
 
 	@Override
 	public boolean isDamaged(ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public boolean isPowered() {
 		return true;
 	}
 

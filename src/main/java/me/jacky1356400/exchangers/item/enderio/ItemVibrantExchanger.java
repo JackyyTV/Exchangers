@@ -34,7 +34,7 @@ public class ItemVibrantExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.vibrantExchangerMaxRF;
+        return Config.vibrantMaxEnergy;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ItemVibrantExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.vibrantExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.vibrantMaxEnergy);
         list.add(full);
     }
 
@@ -52,7 +52,7 @@ public class ItemVibrantExchanger extends ItemExchangerBaseRF {
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
-        tooltip.add(StringHelper.getTierText(3));
+        tooltip.add(StringHelper.getTierText(6));
     }
 
 }

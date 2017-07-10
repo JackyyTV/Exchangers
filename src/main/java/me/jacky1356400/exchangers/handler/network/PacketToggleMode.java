@@ -2,7 +2,6 @@ package me.jacky1356400.exchangers.handler.network;
 
 import io.netty.buffer.ByteBuf;
 import me.jacky1356400.exchangers.handler.ExchangerHandler;
-import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

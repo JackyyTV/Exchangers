@@ -18,6 +18,7 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":creative_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".creative_exchanger");
         setMaxStackSize(1);
+        setMaxDamage(9001);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 

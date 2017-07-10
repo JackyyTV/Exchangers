@@ -37,6 +37,7 @@ public final class StringHelper {
         return localize(unlocalized, true, args);
     }
 
+    @SuppressWarnings("deprecation")
     public static String localize(String unlocalized, boolean prefix, Object... args) {
         String toLocalize = (prefix ? Exchangers.PREFIX : "") + unlocalized;
         if(args != null && args.length > 0) {

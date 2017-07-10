@@ -34,7 +34,7 @@ public class ItemLeadstoneExchanger extends ItemExchangerBaseRF {
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-        return Config.leadstoneExchangerMaxRF;
+        return Config.leadstoneMaxEnergy;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ItemLeadstoneExchanger extends ItemExchangerBaseRF {
         ItemStack empty = new ItemStack(this);
         list.add(empty);
         ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.leadstoneExchangerMaxRF);
+        EnergyHelper.setDefaultEnergyTag(full, Config.leadstoneMaxEnergy);
         list.add(full);
     }
 

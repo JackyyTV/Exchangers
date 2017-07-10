@@ -321,7 +321,9 @@ public class ExchangerHandler extends Item {
             }
         }
 
-        softBlocks.add(Blocks.SNOW);
+        softBlocks.add(Blocks.SNOW_LAYER);
+        softBlocks.add(Blocks.REDSTONE_WIRE);
+        softBlocks.add(Blocks.TRIPWIRE);
         softBlocks.add(Blocks.VINE);
         softBlocks.add(Blocks.FIRE);
         softBlocks.add(Blocks.AIR);
@@ -460,6 +462,7 @@ public class ExchangerHandler extends Item {
         return s.getDisplayName();
     }
 
+    @SuppressWarnings("deprecation")
     public static boolean exchangeBlocks(ItemStack stack, EntityPlayer player, World world, BlockPos pos,
                                          EnumFacing facing) {
         Block newBlock = Block.getBlockFromName(stack.getTagCompound().getString("BlockName"));
@@ -505,52 +508,52 @@ public class ExchangerHandler extends Item {
                                         stack.damageItem(1, player);
                                     }
                                     //Ender IO Exchangers
-                                    if (stack.getItem() instanceof ItemConductiveIronExchanger && stack.getTagCompound().getInteger("Energy") >= Config.conductiveIronExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.conductiveIronExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemConductiveIronExchanger && stack.getTagCompound().getInteger("Energy") >= Config.conductivePerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.conductivePerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemPulsatingIronExchanger && stack.getTagCompound().getInteger("Energy") >= Config.pulsatingIronExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.pulsatingIronExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemPulsatingIronExchanger && stack.getTagCompound().getInteger("Energy") >= Config.pulsatingPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.pulsatingPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemElectricalSteelExchanger && stack.getTagCompound().getInteger("Energy") >= Config.electricalSteelExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.electricalSteelExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemElectricalSteelExchanger && stack.getTagCompound().getInteger("Energy") >= Config.electricalSteelPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.electricalSteelPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemEnergeticExchanger && stack.getTagCompound().getInteger("Energy") >= Config.energeticExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.energeticExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemEnergeticExchanger && stack.getTagCompound().getInteger("Energy") >= Config.energeticPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.energeticPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemDarkSteelExchanger && stack.getTagCompound().getInteger("Energy") >= Config.darkSteelExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.darkSteelExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemDarkSteelExchanger && stack.getTagCompound().getInteger("Energy") >= Config.darkSteelPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.darkSteelPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemVibrantExchanger && stack.getTagCompound().getInteger("Energy") >= Config.vibrantExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.vibrantExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemVibrantExchanger && stack.getTagCompound().getInteger("Energy") >= Config.vibrantPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.vibrantPerBlockUse);
                                     }
                                     //Thermal Expansion Exchangers
-                                    if (stack.getItem() instanceof ItemLeadstoneExchanger && stack.getTagCompound().getInteger("Energy") >= Config.leadstoneExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.leadstoneExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemLeadstoneExchanger && stack.getTagCompound().getInteger("Energy") >= Config.leadstonePerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.leadstonePerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemHardenedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.hardenedExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.hardenedExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemHardenedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.hardenedPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.hardenedPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemReinforcedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.reinforcedExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.reinforcedExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemReinforcedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.reinforcedPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.reinforcedPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemSignalumExchanger && stack.getTagCompound().getInteger("Energy") >= Config.signalumExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.signalumExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemSignalumExchanger && stack.getTagCompound().getInteger("Energy") >= Config.signalumPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.signalumPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemResonantExchanger && stack.getTagCompound().getInteger("Energy") >= Config.resonantExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.resonantExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemResonantExchanger && stack.getTagCompound().getInteger("Energy") >= Config.resonantPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.resonantPerBlockUse);
                                     }
                                     //Mekanism Exchangers
-                                    if (stack.getItem() instanceof ItemBasicExchanger && stack.getTagCompound().getInteger("Energy") >= Config.basicExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.basicExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemBasicExchanger && stack.getTagCompound().getInteger("Energy") >= Config.basicPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.basicPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemAdvancedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.advancedExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.advancedExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemAdvancedExchanger && stack.getTagCompound().getInteger("Energy") >= Config.advancedPerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.advancedPerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemEliteExchanger && stack.getTagCompound().getInteger("Energy") >= Config.eliteExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.eliteExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemEliteExchanger && stack.getTagCompound().getInteger("Energy") >= Config.elitePerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.elitePerBlockUse);
                                     }
-                                    if (stack.getItem() instanceof ItemUltimateExchanger && stack.getTagCompound().getInteger("Energy") >= Config.ultimateExchangerPerBlockRF) {
-                                        stack.getTagCompound().setInteger("Energy", energy - Config.ultimateExchangerPerBlockRF);
+                                    if (stack.getItem() instanceof ItemUltimateExchanger && stack.getTagCompound().getInteger("Energy") >= Config.ultimatePerBlockUse) {
+                                        stack.getTagCompound().setInteger("Energy", energy - Config.ultimatePerBlockUse);
                                     }
                                 }
                             }

@@ -1,7 +1,7 @@
 package me.jacky1356400.exchangers.item.vanilla;
 
-import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.Config;
+import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -19,7 +19,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":obsidian_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".obsidian_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.obsidianExchangerMaxDamage);
+        setMaxDamage(Config.obsMaxDmg);
         setCreativeTab(Exchangers.exchangersCreativeTab);
     }
 
@@ -33,7 +33,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
     @SuppressWarnings("unchecked")
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
-        tooltip.add(StringHelper.getTierText(3));
+        tooltip.add(StringHelper.getTierText(7));
     }
 
 }

@@ -30,14 +30,20 @@ public class CommonProxy {
         config = new Configuration(new File(configDir.getPath(), "exchangers.cfg"));
         Config.readConfig();
         ExchangersItems.init();
-        if ((Config.enderIOModule = true) && (Loader.isModLoaded("EnderIO"))) {
-            EnderIOIntegration.init();
+        if (Config.enderIOModule = true) {
+            if (Loader.isModLoaded("EnderIO")) {
+                EnderIOIntegration.init();
+            }
         }
-        if ((Config.thermalExpansionModule = true) && (Loader.isModLoaded("thermalexpansion"))) {
-            ThermalExpansionIntegration.init();
+        if (Config.thermalExpansionModule = true) {
+            if (Loader.isModLoaded("thermalexpansion")) {
+                ThermalExpansionIntegration.init();
+            }
         }
-        if ((Config.mekanismModule = true) && (Loader.isModLoaded("Mekanism"))) {
-            MekanismIntegration.init();
+        if (Config.mekanismModule = true) {
+            if (Loader.isModLoaded("Mekanism")) {
+                MekanismIntegration.init();
+            }
         }
         Recipes.init();
         PacketHandler.registerMessages(Exchangers.MODID);

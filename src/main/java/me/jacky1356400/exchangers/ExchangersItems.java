@@ -72,37 +72,43 @@ public class ExchangersItems {
             exchangerCoreT3 = GameRegistry.register(new ItemExchangerCoreT3());
         }
         //Ender IO Exchangers
-        if ((Config.enderIOModule = true) && (Loader.isModLoaded("EnderIO"))) {
-            conductiveIronExchanger = GameRegistry.register(new ItemConductiveIronExchanger());
-            pulsatingIronExchanger = GameRegistry.register(new ItemPulsatingIronExchanger());
-            electricalSteelExchanger = GameRegistry.register(new ItemElectricalSteelExchanger());
-            energeticExchanger = GameRegistry.register(new ItemEnergeticExchanger());
-            darkSteelExchanger = GameRegistry.register(new ItemDarkSteelExchanger());
-            vibrantExchanger = GameRegistry.register(new ItemVibrantExchanger());
-            eioExchangerCoreT1 = GameRegistry.register(new ItemEIOExchangerCoreT1());
-            eioExchangerCoreT2 = GameRegistry.register(new ItemEIOExchangerCoreT2());
-            eioExchangerCoreT3 = GameRegistry.register(new ItemEIOExchangerCoreT3());
+        if (Config.enderIOModule = true) {
+            if (Loader.isModLoaded("EnderIO")) {
+                conductiveIronExchanger = GameRegistry.register(new ItemConductiveIronExchanger());
+                pulsatingIronExchanger = GameRegistry.register(new ItemPulsatingIronExchanger());
+                electricalSteelExchanger = GameRegistry.register(new ItemElectricalSteelExchanger());
+                energeticExchanger = GameRegistry.register(new ItemEnergeticExchanger());
+                darkSteelExchanger = GameRegistry.register(new ItemDarkSteelExchanger());
+                vibrantExchanger = GameRegistry.register(new ItemVibrantExchanger());
+                eioExchangerCoreT1 = GameRegistry.register(new ItemEIOExchangerCoreT1());
+                eioExchangerCoreT2 = GameRegistry.register(new ItemEIOExchangerCoreT2());
+                eioExchangerCoreT3 = GameRegistry.register(new ItemEIOExchangerCoreT3());
+            }
         }
         //Thermal Expansion Exchangers
-        if ((Config.thermalExpansionModule = true) && (Loader.isModLoaded("thermalexpansion"))) {
-            leadstoneExchanger = GameRegistry.register(new ItemLeadstoneExchanger());
-            hardenedExchanger = GameRegistry.register(new ItemHardenedExchanger());
-            reinforcedExchanger = GameRegistry.register(new ItemReinforcedExchanger());
-            signalumExchanger = GameRegistry.register(new ItemSignalumExchanger());
-            resonantExchanger = GameRegistry.register(new ItemResonantExchanger());
-            teExchangerCoreT1 = GameRegistry.register(new ItemTEExchangerCoreT1());
-            teExchangerCoreT2 = GameRegistry.register(new ItemTEExchangerCoreT2());
-            teExchangerCoreT3 = GameRegistry.register(new ItemTEExchangerCoreT3());
+        if (Config.thermalExpansionModule = true) {
+            if (Loader.isModLoaded("thermalexpansion")) {
+                leadstoneExchanger = GameRegistry.register(new ItemLeadstoneExchanger());
+                hardenedExchanger = GameRegistry.register(new ItemHardenedExchanger());
+                reinforcedExchanger = GameRegistry.register(new ItemReinforcedExchanger());
+                signalumExchanger = GameRegistry.register(new ItemSignalumExchanger());
+                resonantExchanger = GameRegistry.register(new ItemResonantExchanger());
+                teExchangerCoreT1 = GameRegistry.register(new ItemTEExchangerCoreT1());
+                teExchangerCoreT2 = GameRegistry.register(new ItemTEExchangerCoreT2());
+                teExchangerCoreT3 = GameRegistry.register(new ItemTEExchangerCoreT3());
+            }
         }
         //Mekanism Exchangers
-        if ((Config.mekanismModule = true) && (Loader.isModLoaded("Mekanism"))) {
-            basicExchanger = GameRegistry.register(new ItemBasicExchanger());
-            advancedExchanger = GameRegistry.register(new ItemAdvancedExchanger());
-            eliteExchanger = GameRegistry.register(new ItemEliteExchanger());
-            ultimateExchanger = GameRegistry.register(new ItemUltimateExchanger());
-            mekanismExchangerCoreT1 = GameRegistry.register(new ItemMekanismExchangerCoreT1());
-            mekanismExchangerCoreT2 = GameRegistry.register(new ItemMekanismExchangerCoreT2());
-            mekanismExchangerCoreT3 = GameRegistry.register(new ItemMekanismExchangerCoreT3());
+        if (Config.mekanismModule = true) {
+            if (Loader.isModLoaded("Mekanism")) {
+                basicExchanger = GameRegistry.register(new ItemBasicExchanger());
+                advancedExchanger = GameRegistry.register(new ItemAdvancedExchanger());
+                eliteExchanger = GameRegistry.register(new ItemEliteExchanger());
+                ultimateExchanger = GameRegistry.register(new ItemUltimateExchanger());
+                mekanismExchangerCoreT1 = GameRegistry.register(new ItemMekanismExchangerCoreT1());
+                mekanismExchangerCoreT2 = GameRegistry.register(new ItemMekanismExchangerCoreT2());
+                mekanismExchangerCoreT3 = GameRegistry.register(new ItemMekanismExchangerCoreT3());
+            }
         }
     }
 
@@ -126,37 +132,43 @@ public class ExchangersItems {
             exchangerCoreT3.initModel();
         }
         //Ender IO Exchangers
-        if ((Config.enderIOModule = true) && (Loader.isModLoaded("EnderIO"))) {
-            conductiveIronExchanger.initModel();
-            pulsatingIronExchanger.initModel();
-            electricalSteelExchanger.initModel();
-            energeticExchanger.initModel();
-            darkSteelExchanger.initModel();
-            vibrantExchanger.initModel();
-            eioExchangerCoreT1.initModel();
-            eioExchangerCoreT2.initModel();
-            eioExchangerCoreT3.initModel();
+        if (Config.enderIOModule = true) {
+            if (Loader.isModLoaded("EnderIO")) {
+                conductiveIronExchanger.initModel();
+                pulsatingIronExchanger.initModel();
+                electricalSteelExchanger.initModel();
+                energeticExchanger.initModel();
+                darkSteelExchanger.initModel();
+                vibrantExchanger.initModel();
+                eioExchangerCoreT1.initModel();
+                eioExchangerCoreT2.initModel();
+                eioExchangerCoreT3.initModel();
+            }
         }
         //Thermal Expansion Exchangers
-        if ((Config.thermalExpansionModule = true) && (Loader.isModLoaded("thermalexpansion"))) {
-            leadstoneExchanger.initModel();
-            hardenedExchanger.initModel();
-            reinforcedExchanger.initModel();
-            signalumExchanger.initModel();
-            resonantExchanger.initModel();
-            teExchangerCoreT1.initModel();
-            teExchangerCoreT2.initModel();
-            teExchangerCoreT3.initModel();
+        if (Config.thermalExpansionModule = true) {
+            if (Loader.isModLoaded("thermalexpansion")) {
+                leadstoneExchanger.initModel();
+                hardenedExchanger.initModel();
+                reinforcedExchanger.initModel();
+                signalumExchanger.initModel();
+                resonantExchanger.initModel();
+                teExchangerCoreT1.initModel();
+                teExchangerCoreT2.initModel();
+                teExchangerCoreT3.initModel();
+            }
         }
         //Mekanism Exchangers
-        if ((Config.mekanismModule = true) && (Loader.isModLoaded("Mekanism"))) {
-            basicExchanger.initModel();
-            advancedExchanger.initModel();
-            eliteExchanger.initModel();
-            ultimateExchanger.initModel();
-            mekanismExchangerCoreT1.initModel();
-            mekanismExchangerCoreT2.initModel();
-            mekanismExchangerCoreT3.initModel();
+        if (Config.mekanismModule = true) {
+            if (Loader.isModLoaded("Mekanism")) {
+                basicExchanger.initModel();
+                advancedExchanger.initModel();
+                eliteExchanger.initModel();
+                ultimateExchanger.initModel();
+                mekanismExchangerCoreT1.initModel();
+                mekanismExchangerCoreT2.initModel();
+                mekanismExchangerCoreT3.initModel();
+            }
         }
     }
 

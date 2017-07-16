@@ -179,7 +179,7 @@ public class ExchangerHandler extends Item {
                 if (modeSwitch > MODE_3X3)
                     modeSwitch = MODE_1X1;
             }
-            if (heldItem.getItem() instanceof ItemLeadstoneExchanger) {
+            if (heldItem.getItem() instanceof ItemHardenedExchanger) {
                 if (modeSwitch > MODE_7X7)
                     modeSwitch = MODE_1X1;
             }

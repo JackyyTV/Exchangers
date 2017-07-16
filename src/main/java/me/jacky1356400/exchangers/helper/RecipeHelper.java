@@ -1,5 +1,6 @@
-package me.jacky1356400.exchangers.util;
+package me.jacky1356400.exchangers.helper;
 
+import me.jacky1356400.exchangers.util.Data;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

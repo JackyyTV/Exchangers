@@ -1,7 +1,17 @@
 package me.jacky1356400.exchangers.integration;
 
+import me.jacky1356400.exchangers.Exchangers;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+
 public class EnderIOIntegration {
-	/*
+
 	public static ItemStack capacitorBankBasic;
 	public static ItemStack capacitorBank;
 	public static ItemStack capacitorBankVibrant;
@@ -38,14 +48,11 @@ public class EnderIOIntegration {
 		}
 
 		Fluid nutrientDistillation = FluidRegistry.getFluid("nutrient_distillation");
-		bucketNutrientDistillation = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket,
-				nutrientDistillation);
+		bucketNutrientDistillation = FluidUtil.getFilledBucket(new FluidStack(nutrientDistillation, 1000));
 		Fluid dewOfTheVoid = FluidRegistry.getFluid("ender_distillation");
-		bucketDewOfTheVoid = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket,
-				dewOfTheVoid);
+		bucketDewOfTheVoid = FluidUtil.getFilledBucket(new FluidStack(dewOfTheVoid, 1000));
 		Fluid vaporOfLevity = FluidRegistry.getFluid("vapor_of_levity");
-		bucketVaporOfLevity = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket,
-				vaporOfLevity);
+		bucketVaporOfLevity = FluidUtil.getFilledBucket(new FluidStack(vaporOfLevity, 1000));
 	}
-	*/
+
 }

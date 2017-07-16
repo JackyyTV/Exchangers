@@ -1,7 +1,12 @@
 package me.jacky1356400.exchangers.integration;
 
+import me.jacky1356400.exchangers.Exchangers;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
 public class MekanismIntegration {
-	/*
+
 	public static ItemStack circuitBasic;
 	public static ItemStack circuitAdvanced;
 	public static ItemStack circuitElite;
@@ -36,5 +41,5 @@ public class MekanismIntegration {
 			portableTeleporter = new ItemStack(portableTeleporterItem, 1, 0);
 		}
 	}
-	*/
+
 }

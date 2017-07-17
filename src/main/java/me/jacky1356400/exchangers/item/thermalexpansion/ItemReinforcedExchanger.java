@@ -4,7 +4,7 @@ import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
-import me.jacky1356400.exchangers.item.ItemExchangerBaseRF;
+import me.jacky1356400.exchangers.item.ItemExchangerBasePowered;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemReinforcedExchanger extends ItemExchangerBaseRF {
+public class ItemReinforcedExchanger extends ItemExchangerBasePowered {
 
     public ItemReinforcedExchanger(){
         setRegistryName(Exchangers.MODID + ":reinforced_exchanger");

@@ -4,7 +4,7 @@ import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.client.Keys;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
-import me.jacky1356400.exchangers.item.ItemExchangerBaseRF;
+import me.jacky1356400.exchangers.item.ItemExchangerBasePowered;
 import me.jacky1356400.exchangers.item.enderio.*;
 import me.jacky1356400.exchangers.item.mekanism.ItemAdvancedExchanger;
 import me.jacky1356400.exchangers.item.mekanism.ItemBasicExchanger;
@@ -292,8 +292,12 @@ public class ExchangerHandler extends Item {
     public static void initSpecialBlockLists() {
         for (Object o : Block.REGISTRY) {
             Block block = (Block) o;
-            if (block instanceof BlockFence || block instanceof BlockFenceGate || block instanceof BlockTrapDoor
-                    || block instanceof BlockDoor || block instanceof BlockPistonBase || block instanceof BlockLadder) {
+            if (block instanceof BlockFence
+                    || block instanceof BlockFenceGate
+                    || block instanceof BlockTrapDoor
+                    || block instanceof BlockDoor
+                    || block instanceof BlockPistonBase
+                    || block instanceof BlockLadder) {
                 specialBlocks.add(block);
             }
         }
@@ -314,8 +318,11 @@ public class ExchangerHandler extends Item {
 
         for (Object o : Block.REGISTRY) {
             Block block = (Block) o;
-            if (block instanceof BlockFluidBase || block instanceof BlockLiquid || block instanceof IPlantable
-                    || block instanceof BlockTorch || block instanceof BlockLeaves
+            if (block instanceof BlockFluidBase
+                    || block instanceof BlockLiquid
+                    || block instanceof IPlantable
+                    || block instanceof BlockTorch
+                    || block instanceof BlockLeaves
                     || block instanceof BlockHugeMushroom) {
                 softBlocks.add(block);
             }
@@ -492,7 +499,7 @@ public class ExchangerHandler extends Item {
                     Block oldBlock = world.getBlockState(exchangePos).getBlock();
                     int oldMeta = oldBlock.getMetaFromState(world.getBlockState(exchangePos));
                     int energy = stack.getTagCompound().getInteger("Energy");
-                    if (stack.getItem() instanceof ItemExchangerBaseRF && energy <= 0) {
+                    if (stack.getItem() instanceof ItemExchangerBasePowered && energy <= 0) {
                         msgPlayer(player, StringHelper.localize("error.nopower"));
                         return false;
                     } else {

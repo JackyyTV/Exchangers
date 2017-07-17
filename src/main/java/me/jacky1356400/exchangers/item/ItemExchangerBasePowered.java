@@ -4,12 +4,15 @@ import cofh.api.energy.IEnergyContainerItem;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
 import me.jacky1356400.exchangers.helper.NBTHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
+import me.jacky1356400.exchangers.util.EnergyContainerItemWrapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 import java.util.List;
 
-public class ItemExchangerBaseRF extends ItemExchangerBase implements IEnergyContainerItem {
+public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem {
 
 	@Override
 	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
@@ -26,12 +29,12 @@ public class ItemExchangerBaseRF extends ItemExchangerBase implements IEnergyCon
 		return NBTHelper.getEnergyStored(container);
 	}
 
-	@Override
-	public int getMaxEnergyStored(ItemStack container) {
-		return 0;
-	}
+    @Override
+    public int getMaxEnergyStored(ItemStack container) {
+        return 0;
+    }
 
-	@Override
+    @Override
 	public boolean showDurabilityBar(ItemStack stack) {
 		return true;
 	}
@@ -59,5 +62,11 @@ public class ItemExchangerBaseRF extends ItemExchangerBase implements IEnergyCon
 	public boolean isPowered() {
 		return true;
 	}
+
+    /* CAPABILITIES */
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
+        return new EnergyContainerItemWrapper(stack, this);
+    }
 
 }

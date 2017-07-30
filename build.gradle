@@ -48,8 +48,7 @@ dependencies {
 	runtime "mcp.mobius.waila:Hwyla:1.8.17-B31_1.10.2"
 }
 
-processResources
-{
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
     from(sourceSets.main.resources.srcDirs) {

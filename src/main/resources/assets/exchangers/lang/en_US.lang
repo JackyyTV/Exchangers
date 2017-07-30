@@ -23,8 +23,9 @@ exchangers.tooltip.selectedblock=§2Selected Block:
 exchangers.tooltip.selectedmode=§2Selected Mode:
 exchangers.tooltip.noselectedblock=§4No Selected Block
 
-#Error Messages
+#Messages
 exchangers.error.invalidblock=§cError: Invalid block!
+exchangers.error.outofblock=§cError: Out of block!
 exchangers.error.nopower=§cError: Out of power!
 
 #Crafting Components

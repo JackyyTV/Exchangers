@@ -15,9 +15,10 @@ public class ItemExchangerBase extends ExchangerHandler {
 		return stack.isItemDamaged();
 	}
 
-	public boolean isPowered() {
-		return false;
-	}
+	@Override
+    public boolean isPowered() {
+        return false;
+    }
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {

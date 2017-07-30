@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -38,13 +39,22 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
+    public int getPerBlockUse() {
+        return Config.basicPerBlockUse;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
-        ItemStack empty = new ItemStack(this);
-        list.add(empty);
-        ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.basicMaxEnergy);
-        list.add(full);
+        if (Config.mekanismModule) {
+            if (Loader.isModLoaded("Mekanism")) {
+                ItemStack empty = new ItemStack(this);
+                list.add(empty);
+                ItemStack full = new ItemStack(this);
+                EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+                list.add(full);
+            }
+        }
     }
 
     @Override
@@ -53,6 +63,11 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
         tooltip.add(StringHelper.getTierText(1));
+    }
+
+    @Override
+    public int getMaxRange() {
+        return MODE_7X7;
     }
 
 }

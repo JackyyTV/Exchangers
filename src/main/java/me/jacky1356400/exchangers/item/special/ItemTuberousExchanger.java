@@ -1,10 +1,13 @@
 package me.jacky1356400.exchangers.item.special;
 
+import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +16,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ItemTuberousExchanger extends ItemExchangerBase {
@@ -64,6 +68,19 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
         return false;
 
+    }
+
+    @Override
+    public int getMaxRange() {
+        return MODE_1X1;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
+        if (Config.specialModule) {
+            list.add(new ItemStack(this));
+        }
     }
 
 }

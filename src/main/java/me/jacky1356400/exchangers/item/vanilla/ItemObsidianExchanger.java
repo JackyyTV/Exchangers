@@ -5,12 +5,15 @@ import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ItemObsidianExchanger extends ItemExchangerBase {
@@ -34,6 +37,19 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
         tooltip.add(StringHelper.getTierText(7));
+    }
+
+    @Override
+    public int getMaxRange() {
+        return MODE_15X15;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
+        if (Config.vanillaModule) {
+            list.add(new ItemStack(this));
+        }
     }
 
 }

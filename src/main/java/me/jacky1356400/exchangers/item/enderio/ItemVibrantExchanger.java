@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -39,13 +40,22 @@ public class ItemVibrantExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
+    public int getPerBlockUse() {
+        return Config.vibrantPerBlockUse;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-        ItemStack empty = new ItemStack(this);
-        list.add(empty);
-        ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.vibrantMaxEnergy);
-        list.add(full);
+        if (Config.enderIOModule) {
+            if (Loader.isModLoaded("enderio")) {
+                ItemStack empty = new ItemStack(this);
+                list.add(empty);
+                ItemStack full = new ItemStack(this);
+                EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+                list.add(full);
+            }
+        }
     }
 
     @Override
@@ -54,6 +64,11 @@ public class ItemVibrantExchanger extends ItemExchangerBasePowered {
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
         tooltip.add(StringHelper.getTierText(6));
+    }
+
+    @Override
+    public int getMaxRange() {
+        return MODE_15X15;
     }
 
 }

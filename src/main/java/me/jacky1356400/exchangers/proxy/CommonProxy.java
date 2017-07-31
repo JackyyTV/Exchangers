@@ -1,17 +1,14 @@
 package me.jacky1356400.exchangers.proxy;
 
 import me.jacky1356400.exchangers.Config;
-import me.jacky1356400.exchangers.Recipes;
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.ExchangersItems;
+import me.jacky1356400.exchangers.Recipes;
 import me.jacky1356400.exchangers.handler.RenderOverlayHandler;
-import me.jacky1356400.exchangers.handler.WorldEventHandler;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
-import me.jacky1356400.exchangers.helper.DirectionHelper;
 import me.jacky1356400.exchangers.integration.EnderIOIntegration;
 import me.jacky1356400.exchangers.integration.MekanismIntegration;
 import me.jacky1356400.exchangers.integration.ThermalExpansionIntegration;
-import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
@@ -30,17 +27,17 @@ public class CommonProxy {
         config = new Configuration(new File(configDir.getPath(), "exchangers.cfg"));
         Config.readConfig();
         ExchangersItems.init();
-        if (Config.enderIOModule = true) {
+        if (Config.enderIOModule) {
             if (Loader.isModLoaded("enderio")) {
                 EnderIOIntegration.init();
             }
         }
-        if (Config.thermalExpansionModule = true) {
+        if (Config.thermalExpansionModule) {
             if (Loader.isModLoaded("thermalexpansion")) {
                 ThermalExpansionIntegration.init();
             }
         }
-        if (Config.mekanismModule = true) {
+        if (Config.mekanismModule) {
             if (Loader.isModLoaded("mekanism")) {
                 MekanismIntegration.init();
             }
@@ -51,12 +48,9 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent e){
         MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
-        MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
     }
 
     public void postInit(FMLPostInitializationEvent e) {
-        ItemExchangerBase.initSpecialBlockLists();
-        DirectionHelper.initFacings();
     }
 
 }

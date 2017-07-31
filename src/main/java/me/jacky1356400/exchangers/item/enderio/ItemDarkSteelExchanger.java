@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -39,13 +40,22 @@ public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
+    public int getPerBlockUse() {
+        return Config.darkSteelPerBlockUse;
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-        ItemStack empty = new ItemStack(this);
-        list.add(empty);
-        ItemStack full = new ItemStack(this);
-        EnergyHelper.setDefaultEnergyTag(full, Config.darkSteelMaxEnergy);
-        list.add(full);
+        if (Config.enderIOModule) {
+            if (Loader.isModLoaded("enderio")) {
+                ItemStack empty = new ItemStack(this);
+                list.add(empty);
+                ItemStack full = new ItemStack(this);
+                EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+                list.add(full);
+            }
+        }
     }
 
     @Override
@@ -54,6 +64,11 @@ public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
         tooltip.add(StringHelper.getTierText(5));
+    }
+
+    @Override
+    public int getMaxRange() {
+        return MODE_13X13;
     }
 
 }

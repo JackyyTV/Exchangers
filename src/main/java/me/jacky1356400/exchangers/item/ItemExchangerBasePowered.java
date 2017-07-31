@@ -29,12 +29,12 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 		return NBTHelper.getEnergyStored(container);
 	}
 
-	@Override
-	public int getMaxEnergyStored(ItemStack container) {
-		return 0;
-	}
+    @Override
+    public int getMaxEnergyStored(ItemStack container) {
+        return 0;
+    }
 
-	@Override
+    @Override
 	public boolean showDurabilityBar(ItemStack stack) {
 		return true;
 	}

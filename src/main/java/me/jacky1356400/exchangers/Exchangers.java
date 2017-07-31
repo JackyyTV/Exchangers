@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Exchangers.MODID, version = Exchangers.VERSION, name = Exchangers.MODNAME, dependencies = Exchangers.DEPENDS, useMetadata = true)
 public class Exchangers {
 
-    public static final String VERSION = "1.10.2-1.4";
+    public static final String VERSION = "1.10.2-1.4.1";
     public static final String MODID = "exchangers";
     public static final String MODNAME = "Exchangers";
     public static final String PREFIX = MODID + ".";

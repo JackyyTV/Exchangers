@@ -80,7 +80,8 @@ public class ExchangerHandler extends Item {
             int meta = compound.getInteger("meta");
 
             tooltip.add(StringHelper.localize("tooltip.selectedblock") + " " + getBlockName(block, meta));
-            tooltip.add(StringHelper.localize("tooltip.selectedmode") + " " + modeSwitchList[compound.getInteger("mode")]);
+            tooltip.add(StringHelper.localize("tooltip.currentrange") + " " + modeSwitchList[compound.getInteger("mode")]);
+            tooltip.add(StringHelper.localize("tooltip.maxrange") + " " + modeSwitchList[getMaxRange()]);
         }
         if (StringHelper.isShiftKeyDown()) {
             tooltip.remove(StringHelper.getShiftText());
@@ -158,6 +159,12 @@ public class ExchangerHandler extends Item {
         if (blockHardness < -0.1F) {
             if (!isCreative()) {
                 msgPlayer(player, StringHelper.localize("error.invalidblock"));
+                return;
+            }
+        }
+        if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockUse()) {
+            if (!isCreative()) {
+                msgPlayer(player, StringHelper.localize("error.nopower"));
                 return;
             }
         }

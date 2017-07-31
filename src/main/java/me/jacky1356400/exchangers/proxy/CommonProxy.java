@@ -1,7 +1,6 @@
 package me.jacky1356400.exchangers.proxy;
 
 import me.jacky1356400.exchangers.Config;
-import me.jacky1356400.exchangers.handler.RenderOverlayHandler;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
 import me.jacky1356400.exchangers.init.ModRegistry;
 import me.jacky1356400.exchangers.util.Data;
@@ -26,7 +25,6 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
-        MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
     }
 
     public void postInit(FMLPostInitializationEvent e) {

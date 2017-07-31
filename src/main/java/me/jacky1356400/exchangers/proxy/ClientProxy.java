@@ -3,6 +3,7 @@ package me.jacky1356400.exchangers.proxy;
 import me.jacky1356400.exchangers.client.Keys;
 import me.jacky1356400.exchangers.handler.GUIHandler;
 import me.jacky1356400.exchangers.handler.KeyBindingsHandler;
+import me.jacky1356400.exchangers.handler.RenderOverlayHandler;
 import me.jacky1356400.exchangers.util.Data;
 import me.jacky1356400.exchangers.util.IHasModel;
 import net.minecraft.client.Minecraft;
@@ -34,6 +35,7 @@ public class ClientProxy extends CommonProxy {
         super.init(e);
         MinecraftForge.EVENT_BUS.register(new KeyBindingsHandler());
         Keys.init();
+        MinecraftForge.EVENT_BUS.register(new RenderOverlayHandler());
     }
 
     @Override

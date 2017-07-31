@@ -20,11 +20,13 @@ exchangers.tooltip.shift2=Right click on a block to exchange.
 exchangers.tooltip.shift3=Use the mode key to switch modes.
 exchangers.tooltip.tuberousExchanger.warning=§c§oClever! But not exchangeable.
 exchangers.tooltip.selectedblock=§2Selected Block:
-exchangers.tooltip.selectedmode=§2Selected Mode:
+exchangers.tooltip.currentrange=§2Current Range:
+exchangers.tooltip.maxrange=§2Maximum Range:
 exchangers.tooltip.noselectedblock=§4No Selected Block
 
 #Error Messages
 exchangers.error.invalidblock=§cError: Invalid block!
+exchangers.error.outofblock=§cError: Out of block!
 exchangers.error.nopower=§cError: Out of power!
 
 #Crafting Components

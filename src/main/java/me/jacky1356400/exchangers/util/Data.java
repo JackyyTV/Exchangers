@@ -12,20 +12,20 @@ import java.util.List;
 
 public class Data {
 
-	public static final List<Item> ITEMS = new ArrayList<Item>();
-	public static final List<Block> BLOCKS = new ArrayList<Block>();
-	public static final List<IRecipe> RECIPES = new ArrayList<IRecipe>();
-	public static final String EIO = "enderio";
-	public static final String MEK = "mekanism";
-	public static final String THERMAL = "thermalexpansion";
-	public static final String VERSION = "1.12-2.2";
-	public static final String MODID = "exchangers";
-	public static final String MODNAME = "Exchangers";
-	public static final CreativeTabs TAB = new CreativeTabs(MODID) {
-		@Override
-		public ItemStack getTabIconItem() {
-			return new ItemStack(ModRegistry.OBSIDIAN);
-		}
-	};
+    public static final List<Item> ITEMS = new ArrayList<Item>();
+    public static final List<Block> BLOCKS = new ArrayList<Block>();
+    public static final List<IRecipe> RECIPES = new ArrayList<IRecipe>();
+    public static final String EIO = "enderio";
+    public static final String MEK = "mekanism";
+    public static final String THERMAL = "thermalexpansion";
+    public static final String VERSION = "1.12-2.3";
+    public static final String MODID = "exchangers";
+    public static final String MODNAME = "Exchangers";
+    public static final CreativeTabs TAB = new CreativeTabs(MODID) {
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(ModRegistry.OBSIDIAN);
+        }
+    };
 
 }

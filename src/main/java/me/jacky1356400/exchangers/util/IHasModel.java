@@ -9,15 +9,15 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public interface IHasModel {
 
-	default public void initModel(ModelRegistryEvent e) {
-		if (this instanceof Item)
-			ModelLoader.setCustomModelResourceLocation((Item) this, 0,
-					new ModelResourceLocation(((IForgeRegistryEntry<?>) this).getRegistryName(), "inventory"));
-		else if (this instanceof Block)
-			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock((Block) this), 0,
-					new ModelResourceLocation(((IForgeRegistryEntry<?>) this).getRegistryName(), "inventory"));
-		else
-			throw new IllegalArgumentException("wat are u doin");
-	}
+    default public void initModel(ModelRegistryEvent e) {
+        if (this instanceof Item)
+            ModelLoader.setCustomModelResourceLocation((Item) this, 0,
+                    new ModelResourceLocation(((IForgeRegistryEntry<?>) this).getRegistryName(), "inventory"));
+        else if (this instanceof Block)
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock((Block) this), 0,
+                    new ModelResourceLocation(((IForgeRegistryEntry<?>) this).getRegistryName(), "inventory"));
+        else
+            throw new IllegalArgumentException("wat are u doin");
+    }
 
 }

@@ -1,130 +1,135 @@
 package me.jacky1356400.exchangers.handler;
 
+import me.jacky1356400.exchangers.item.ItemExchanger;
+import me.jacky1356400.exchangers.util.StackUtil;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
-import java.util.List;
+import java.util.Set;
 
 public class RenderOverlayHandler {
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void RenderWorldLastEvent(RenderWorldLastEvent event) {
+    private static void renderOutlines(RenderWorldLastEvent evt, EntityPlayerSP p, Set<BlockPos> coordinates, int r, int g, int b) {
+        double doubleX = p.lastTickPosX + (p.posX - p.lastTickPosX) * evt.getPartialTicks();
+        double doubleY = p.lastTickPosY + (p.posY - p.lastTickPosY) * evt.getPartialTicks();
+        double doubleZ = p.lastTickPosZ + (p.posZ - p.lastTickPosZ) * evt.getPartialTicks();
 
-		EntityPlayerSP player = Minecraft.getMinecraft().player;
-		World world = player.getEntityWorld();
-		ItemStack stack = player.getHeldItemMainhand();
-		Minecraft mc = Minecraft.getMinecraft();
-		float partialTicks = event.getPartialTicks();
+        RenderHelper.disableStandardItemLighting();
+        Minecraft.getMinecraft().entityRenderer.disableLightmap();
+        GlStateManager.disableDepth();
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableLighting();
+        GlStateManager.disableAlpha();
+        GlStateManager.depthMask(false);
 
-		RayTraceResult mouseOver = mc.objectMouseOver;
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(-doubleX, -doubleY, -doubleZ);
 
-		if (stack != null && stack.getItem() instanceof ExchangerHandler && stack.getTagCompound() != null && mouseOver != null && mouseOver.getBlockPos() != null && mouseOver.sideHit != null) {
-			List<BlockPos> blocks = ExchangerHandler.getBlocksToExchange(stack, mouseOver.getBlockPos(), world, mc.objectMouseOver.sideHit);
+        renderOutlines(coordinates, r, g, b, 4);
 
-			Tessellator tessellator = Tessellator.getInstance();
-			BufferBuilder buffer = tessellator.getBuffer();
+        GlStateManager.popMatrix();
 
-			double offsetX = player.prevPosX + (player.posX - player.prevPosX) * (double) partialTicks;
-			double offsetY = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTicks;
-			double offsetZ = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) partialTicks;
+        Minecraft.getMinecraft().entityRenderer.enableLightmap();
+        GlStateManager.enableTexture2D();
+    }
 
-			GlStateManager.enableBlend();
-			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-			GlStateManager.color(1F, 1F, 1F, 1F);
-			GlStateManager.glLineWidth(3.0F);
-			GlStateManager.disableTexture2D();
+    private static void renderOutlines(Set<BlockPos> coordinates, int r, int g, int b, int thickness) {
+        Tessellator tessellator = Tessellator.getInstance();
 
-			for (BlockPos block : blocks) {
-				if (world.isAirBlock(block)) {
-					continue;
-				}
+        BufferBuilder buffer = tessellator.getBuffer();
+        buffer.begin(1, DefaultVertexFormats.POSITION_COLOR);
 
-				double renderX = block.getX() - offsetX;
-				double renderY = block.getY() - offsetY;
-				double renderZ = block.getZ() - offsetZ;
+        GL11.glLineWidth(thickness);
+        for (BlockPos coordinate : coordinates) {
+            float x = coordinate.getX();
+            float y = coordinate.getY();
+            float z = coordinate.getZ();
 
-				AxisAlignedBB boundingBox = new AxisAlignedBB(renderX, renderY, renderZ, renderX + 1, renderY + 1, renderZ + 1).expand(0.001, 0.001, 0.001);
+            renderHighLightedBlocksOutline(buffer, x, y, z, r / 255.0F, g / 255.0F, b / 255.0F, 1.0F);
+        }
+        tessellator.draw();
+    }
 
-				float colourR = 1F;
-				float colourG = 1F;
-				float colourB = 1F;
-				float colourA = 1F;
+    private static void renderHighLightedBlocksOutline(BufferBuilder buffer, float mx, float my, float mz, float r, float g, float b, float a) {
+        buffer.pos(mx, my, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my + 1.0F, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my + 1.0F, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my + 1.0F, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my + 1.0F, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my + 1.0F, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my + 1.0F, mz).color(r, g, b, a).endVertex();
 
-				ItemStack exchangerStack = player.getHeldItemMainhand();
+        buffer.pos(mx, my + 1.0F, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my + 1.0F, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my + 1.0F, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my + 1.0F, mz).color(r, g, b, a).endVertex();
 
-				if (exchangerStack.hasTagCompound()){
-					int stateID = exchangerStack.getTagCompound().getInteger("state");
-					if (stateID == 0) {
-						colourR = 1F;
-						colourG = 0.1F;
-						colourB = 0.1F;
-						colourA = 1F;
-					}
-				}
+        buffer.pos(mx + 1.0F, my, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my, mz).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my + 1.0F, mz).color(r, g, b, a).endVertex();
 
-				if (player.isSneaking()) {
-					colourR = 0.1F;
-					colourG = 1F;
-					colourB = 0.1F;
-					colourA = 1F;
-				}
+        buffer.pos(mx, my, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx + 1.0F, my, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my, mz + 1.0F).color(r, g, b, a).endVertex();
+        buffer.pos(mx, my + 1.0F, mz + 1.0F).color(r, g, b, a).endVertex();
+    }
 
-				if (!world.getBlockState(block.offset(mc.objectMouseOver.sideHit)).getBlock().isReplaceable(world, block.offset(mc.objectMouseOver.sideHit))) {
-					GlStateManager.disableDepth();
-					colourR = 0.2F;
-					colourG = 0.2F;
-					colourB = 0.2F;
-					colourA = 0.2F;
-				}
+    @SubscribeEvent
+    public void renderWorldLastEvent(RenderWorldLastEvent event) {
+        Minecraft mc = Minecraft.getMinecraft();
+        EntityPlayerSP player = mc.player;
+        ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
+        if (StackUtil.isEmpty(stack)) {
+            return;
+        }
+        if ((stack.getItem() instanceof ItemExchanger)) {
+            renderOverlay(event, player, stack);
+        }
+    }
 
-				buffer.begin(3, DefaultVertexFormats.POSITION_COLOR);
-				buffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.maxZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.maxZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				tessellator.draw();
-				buffer.begin(3, DefaultVertexFormats.POSITION_COLOR);
-				buffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.maxZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				tessellator.draw();
-				buffer.begin(1, DefaultVertexFormats.POSITION_COLOR);
-				buffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.minZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.maxX, boundingBox.minY, boundingBox.maxZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.minX, boundingBox.minY, boundingBox.maxZ).color(colourR, colourG, colourB, colourA).endVertex();
-				buffer.pos(boundingBox.minX, boundingBox.maxY, boundingBox.maxZ).color(colourR, colourG, colourB, colourA).endVertex();
-				tessellator.draw();
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings("deprecation")
+    public void renderOverlay(RenderWorldLastEvent evt, EntityPlayerSP player, ItemStack stack) {
+        RayTraceResult mouseOver = Minecraft.getMinecraft().objectMouseOver;
+        if ((mouseOver != null) && (mouseOver.getBlockPos() != null) && (mouseOver.sideHit != null)) {
+            IBlockState state = player.getEntityWorld().getBlockState(mouseOver.getBlockPos());
+            Block block = state.getBlock();
+            if ((block != null) && (block.getMaterial(state) != Material.AIR)) {
+                int meta = block.getMetaFromState(state);
 
-				if (!world.getBlockState(block.offset(mc.objectMouseOver.sideHit)).getBlock().isReplaceable(world, block.offset(mc.objectMouseOver.sideHit))) {
-					GlStateManager.enableDepth();
-				}
-			}
-
-			GlStateManager.enableTexture2D();
-			GlStateManager.disableBlend();
-		}
-
-	}
+                int exId = ExchangerHandler.getTagCompound(stack).getInteger("block");
+                Block exblock = Block.REGISTRY.getObjectById(exId);
+                int wandMeta = ExchangerHandler.getTagCompound(stack).getInteger("meta");
+                if ((exblock == block) && (wandMeta == meta)) {
+                    return;
+                }
+                Set<BlockPos> coordinates = ExchangerHandler.findSuitableBlocks(stack, player.getEntityWorld(), mouseOver.sideHit, mouseOver.getBlockPos(), block, meta);
+                renderOutlines(evt, player, coordinates, 200, 230, 180);
+            }
+        }
+    }
 
 }

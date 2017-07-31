@@ -15,44 +15,50 @@ import static me.jacky1356400.exchangers.helper.StringHelper.localize;
 
 public class ItemExchanger extends ExchangerHandler implements IHasModel {
 
-	private final Tier t;
+    private final Tier t;
 
-	public ItemExchanger(String name, boolean noRepair, Tier tier, int maxDmg) {
-		setRegistryName(Data.MODID, name);
-		setUnlocalizedName(Data.MODID + "." + name);
-		setCreativeTab(Data.TAB);
-		if (noRepair)
-			setNoRepair();
-		setMaxStackSize(1);
-		t = tier;
-		if (maxDmg > 0)
-			setMaxDamage(maxDmg);
-		Data.ITEMS.add(this);
-	}
+    public ItemExchanger(String name, boolean noRepair, Tier tier, int maxDmg) {
+        setRegistryName(Data.MODID, name);
+        setUnlocalizedName(Data.MODID + "." + name);
+        setCreativeTab(Data.TAB);
+        if (noRepair)
+            setNoRepair();
+        setMaxStackSize(1);
+        t = tier;
+        if (maxDmg > 0)
+            setMaxDamage(maxDmg);
+        Data.ITEMS.add(this);
+    }
 
-	public ItemExchanger(String name, Tier tier, int maxDmg) {
-		this(name, false, tier, maxDmg);
-	}
+    public ItemExchanger(String name, Tier tier, int maxDmg) {
+        this(name, false, tier, maxDmg);
+    }
 
-	public boolean showDurabilityBar(ItemStack stack) {
-		return stack.isItemDamaged();
-	}
+    public boolean showDurabilityBar(ItemStack stack) {
+        return stack.isItemDamaged();
+    }
 
-	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
-		super.addInformation(stack, world, tooltip, bool);
-		if (!isPowered()){
-			tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + localize("tooltip.durability"));
-			tooltip.add(getTier().getFormattedText());
-		}
-	}
+    @Override
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
+        super.addInformation(stack, world, tooltip, bool);
+        if (!isPowered()) {
+            tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + localize("tooltip.durability"));
+            tooltip.add(getTier().getFormattedText());
+        }
+    }
 
-	public Tier getTier() {
-		return t;
-	}
+    public Tier getTier() {
+        return t;
+    }
 
-	public boolean isPowered() {
-		return false;
-	}
+    @Override
+    public boolean isPowered() {
+        return false;
+    }
+
+    @Override
+    public boolean isCreative() {
+        return this.getTier() == Tier.CREATIVE;
+    }
 
 }

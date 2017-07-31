@@ -46,11 +46,11 @@ repositories {
 
 dependencies {
     compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.12:4.7.1.69:api"
-    runtime "mezz.jei:jei_1.12:4.7.1.69"
+	deobfCompile "mezz.jei:jei_1.12:4.7.1.+:api"
+    runtime "mezz.jei:jei_1.12:4.7.1.+"
 	deobfCompile "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12:api"
 	runtime "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12"
-    compile "cofh:RedstoneFlux:1.12-2.0.0.+:deobf"
+    compile "cofh:RedstoneFlux:1.12-2.+:deobf"
 }
 
 processResources

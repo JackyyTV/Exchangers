@@ -1,13 +1,14 @@
 package me.jacky1356400.exchangers.init;
 
 import me.jacky1356400.exchangers.Config;
+import me.jacky1356400.exchangers.helper.RecipeHelper;
+import me.jacky1356400.exchangers.integration.MekanismIntegration;
 import me.jacky1356400.exchangers.integration.ThermalExpansionIntegration;
 import me.jacky1356400.exchangers.item.ItemBasic;
 import me.jacky1356400.exchangers.item.ItemExchanger;
 import me.jacky1356400.exchangers.item.ItemPoweredExchanger;
 import me.jacky1356400.exchangers.item.special.ItemTuberousExchanger;
 import me.jacky1356400.exchangers.util.Data;
-import me.jacky1356400.exchangers.helper.RecipeHelper;
 import me.jacky1356400.exchangers.util.Tier;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -28,15 +29,23 @@ public class ModRegistry {
     public static final Item EMERALD = new ItemExchanger("exemerald", Tier.SIX, Config.emeMaxDmg);
     public static final Item OBSIDIAN = new ItemExchanger("exobsidian", Tier.SEVEN, Config.obsMaxDmg);
     public static final Item LEADSTONE = new ItemPoweredExchanger("exleadstone", Tier.TE_ONE, Config.leadstoneMaxEnergy,
-	    Config.leadstonePerBlockUse);
+            Config.leadstonePerBlockUse);
     public static final Item HARDENED = new ItemPoweredExchanger("exhardened", Tier.TE_TWO, Config.hardenedMaxEnergy,
-	    Config.hardenedPerBlockUse);
+            Config.hardenedPerBlockUse);
     public static final Item REINFORCED = new ItemPoweredExchanger("exreinforced", Tier.TE_THREE,
-	    Config.reinforcedMaxEnergy, Config.reinforcedPerBlockUse);
+            Config.reinforcedMaxEnergy, Config.reinforcedPerBlockUse);
     public static final Item SIGNALUM = new ItemPoweredExchanger("exsignalum", Tier.TE_FOUR, Config.signalumMaxEnergy,
-	    Config.signalumPerBlockUse);
+            Config.signalumPerBlockUse);
     public static final Item RESONANT = new ItemPoweredExchanger("exresonant", Tier.TE_FIVE, Config.resonantMaxEnergy,
-	    Config.resonantPerBlockUse);
+            Config.resonantPerBlockUse);
+    public static final Item BASIC = new ItemPoweredExchanger("exbasic", Tier.MEK_ONE, Config.basicMaxEnergy,
+            Config.basicPerBlockUse);
+    public static final Item ADVANCED = new ItemPoweredExchanger("exadvanced", Tier.MEK_TWO, Config.advancedMaxEnergy,
+            Config.advancedPerBlockUse);
+    public static final Item ELITE = new ItemPoweredExchanger("exelite", Tier.MEK_THREE, Config.eliteMaxEnergy,
+            Config.elitePerBlockUse);
+    public static final Item ULTIMATE = new ItemPoweredExchanger("exultimate", Tier.MEK_FOUR, Config.ultimateMaxEnergy,
+            Config.ultimatePerBlockUse);
     public static final Item CREATIVE = new ItemExchanger("excreative", Tier.CREATIVE, 9001);
     public static final Item POTATO = new ItemTuberousExchanger();
     public static final Item CORE_1 = new ItemBasic("excore_t1");
@@ -45,126 +54,163 @@ public class ModRegistry {
     public static final Item TECORE_1 = new ItemBasic("teexcore_t1");
     public static final Item TECORE_2 = new ItemBasic("teexcore_t2");
     public static final Item TECORE_3 = new ItemBasic("teexcore_t3");
+    public static final Item MEKCORE_1 = new ItemBasic("mekexcore_t1");
+    public static final Item MEKCORE_2 = new ItemBasic("mekexcore_t2");
+    public static final Item MEKCORE_3 = new ItemBasic("mekexcore_t3");
 
     private static void initRecipes() {
-	if (Config.vanillaModule) {
-	    String W = "logWood";
-	    String R = "dyeRed";
-	    String S = "stone";
-	    String G = "ingotGold";
-	    String I = "ingotIron";
-	    String D = "gemDiamond";
-	    String Db = "blockDiamond";
-	    String E = "gemEmerald";
-	    String L = "gemLapis";
-	    String O = "obsidian";
-	    String Pe = "enderpearl";
-	    Item EYE = Items.ENDER_EYE;
+        if (Config.vanillaModule) {
+            String W = "logWood";
+            String R = "dyeRed";
+            String S = "stone";
+            String G = "ingotGold";
+            String I = "ingotIron";
+            String D = "gemDiamond";
+            String Db = "blockDiamond";
+            String E = "gemEmerald";
+            String L = "gemLapis";
+            String O = "obsidian";
+            String Pe = "enderpearl";
+            Item EYE = Items.ENDER_EYE;
 
-	    RecipeHelper.addShaped(WOODEN, 3, 3, W, EYE, W, W, CORE_1, W, W, EYE, W);
+            RecipeHelper.addShaped(WOODEN, 3, 3, W, EYE, W, W, CORE_1, W, W, EYE, W);
 
-	    if (Config.vanillaProgressiveRecipes) {
-		RecipeHelper.addShaped(STONE, 3, 3, S, EYE, S, CORE_1, WOODEN, CORE_1, S, EYE, S);
-		RecipeHelper.addShaped(GOLD, 3, 3, G, EYE, G, CORE_2, STONE, CORE_2, G, EYE, G);
-		RecipeHelper.addShaped(IRON, 3, 3, I, EYE, I, CORE_2, GOLD, CORE_2, I, EYE, I);
-		RecipeHelper.addShaped(DIAMOND, 3, 3, D, EYE, D, CORE_3, IRON, CORE_3, D, EYE, D);
-		RecipeHelper.addShaped(EMERALD, 3, 3, E, EYE, E, CORE_3, DIAMOND, CORE_3, E, EYE, E);
-		RecipeHelper.addShaped(OBSIDIAN, 3, 3, O, EYE, O, CORE_3, EMERALD, CORE_3, O, EYE, O);
-	    } else {
-		RecipeHelper.addShaped(STONE, 3, 3, S, EYE, S, S, CORE_1, S, S, EYE, S);
-		RecipeHelper.addShaped(GOLD, 3, 3, G, EYE, G, G, CORE_2, G, G, EYE, G);
-		RecipeHelper.addShaped(IRON, 3, 3, I, EYE, I, I, CORE_2, I, I, EYE, I);
-		RecipeHelper.addShaped(DIAMOND, 3, 3, D, EYE, D, D, CORE_3, D, D, EYE, D);
-		RecipeHelper.addShaped(EMERALD, 3, 3, E, EYE, E, E, CORE_3, E, E, EYE, E);
-		RecipeHelper.addShaped(OBSIDIAN, 3, 3, O, EYE, O, O, CORE_3, O, O, EYE, O);
-	    }
+            if (Config.vanillaProgressiveRecipes) {
+                RecipeHelper.addShaped(STONE, 3, 3, S, EYE, S, CORE_1, WOODEN, CORE_1, S, EYE, S);
+                RecipeHelper.addShaped(GOLD, 3, 3, G, EYE, G, CORE_2, STONE, CORE_2, G, EYE, G);
+                RecipeHelper.addShaped(IRON, 3, 3, I, EYE, I, CORE_2, GOLD, CORE_2, I, EYE, I);
+                RecipeHelper.addShaped(DIAMOND, 3, 3, D, EYE, D, CORE_3, IRON, CORE_3, D, EYE, D);
+                RecipeHelper.addShaped(EMERALD, 3, 3, E, EYE, E, CORE_3, DIAMOND, CORE_3, E, EYE, E);
+                RecipeHelper.addShaped(OBSIDIAN, 3, 3, O, EYE, O, CORE_3, EMERALD, CORE_3, O, EYE, O);
+            } else {
+                RecipeHelper.addShaped(STONE, 3, 3, S, EYE, S, S, CORE_1, S, S, EYE, S);
+                RecipeHelper.addShaped(GOLD, 3, 3, G, EYE, G, G, CORE_2, G, G, EYE, G);
+                RecipeHelper.addShaped(IRON, 3, 3, I, EYE, I, I, CORE_2, I, I, EYE, I);
+                RecipeHelper.addShaped(DIAMOND, 3, 3, D, EYE, D, D, CORE_3, D, D, EYE, D);
+                RecipeHelper.addShaped(EMERALD, 3, 3, E, EYE, E, E, CORE_3, E, E, EYE, E);
+                RecipeHelper.addShaped(OBSIDIAN, 3, 3, O, EYE, O, O, CORE_3, O, O, EYE, O);
+            }
 
-	    RecipeHelper.addShaped(CORE_1, 3, 3, W, R, W, R, Pe, R, W, R, W);
-	    RecipeHelper.addShaped(CORE_2, 3, 3, I, L, I, CORE_1, EYE, CORE_1, I, L, I);
-	    RecipeHelper.addShaped(CORE_3, 3, 3, D, CORE_2, E, CORE_2, Db, CORE_2, E, CORE_2, D);
-	}
-	if (Config.specialModule) {
-	    String Pe = "enderpearl";
-	    String nG = "nuggetGold";
-	    Item Po = Items.POTATO;
+            RecipeHelper.addShaped(CORE_1, 3, 3, W, R, W, R, Pe, R, W, R, W);
+            RecipeHelper.addShaped(CORE_2, 3, 3, I, L, I, CORE_1, EYE, CORE_1, I, L, I);
+            RecipeHelper.addShaped(CORE_3, 3, 3, D, CORE_2, E, CORE_2, Db, CORE_2, E, CORE_2, D);
+        }
+        if (Config.specialModule) {
+            String Pe = "enderpearl";
+            String nG = "nuggetGold";
+            Item Po = Items.POTATO;
 
-	    RecipeHelper.addShaped(POTATO, 3, 3, Po, nG, Po, Po, Pe, Po, Po, nG, Po);
-	}
-	if (Config.thermalExpansionModule) {
-	    if (Loader.isModLoaded(Data.THERMAL)) {
-		String iLe = "ingotLead";
-		String iI = "ingotInvar";
-		String iEle = "ingotElectrum";
-		String iS = "ingotSignalum";
-		String iEn = "ingotEnderium";
-		String gC = "gearCopper";
-		String gB = "gearBronze";
-		String gI = "gearInvar";
-		String gLu = "gearLumium";
-		ItemStack S = ThermalExpansionIntegration.redstoneServo;
-		ItemStack C1 = ThermalExpansionIntegration.redstoneReceptionCoil;
-		ItemStack C2 = ThermalExpansionIntegration.redstoneTransmissionCoil;
-		ItemStack C3 = ThermalExpansionIntegration.redstoneConductanceCoil;
-		ItemStack F1 = ThermalExpansionIntegration.fluxCapacitorBasic;
-		ItemStack F2 = ThermalExpansionIntegration.fluxCapacitorHardened;
-		ItemStack F3 = ThermalExpansionIntegration.fluxCapacitorReinforced;
-		ItemStack F4 = ThermalExpansionIntegration.fluxCapacitorSignalum;
-		ItemStack F5 = ThermalExpansionIntegration.fluxCapacitorResonant;
-		ItemStack B1 = ThermalExpansionIntegration.bucketResonantEnder;
-		ItemStack B2 = ThermalExpansionIntegration.bucketEnergizedGlowstone;
-		ItemStack B3 = ThermalExpansionIntegration.bucketGelidCryotheum;
+            RecipeHelper.addShaped(POTATO, 3, 3, Po, nG, Po, Po, Pe, Po, Po, nG, Po);
+        }
+        if (Config.thermalExpansionModule) {
+            if (Loader.isModLoaded(Data.THERMAL)) {
+                String iLe = "ingotLead";
+                String iI = "ingotInvar";
+                String iEle = "ingotElectrum";
+                String iS = "ingotSignalum";
+                String iEn = "ingotEnderium";
+                String gC = "gearCopper";
+                String gB = "gearBronze";
+                String gI = "gearInvar";
+                String gLu = "gearLumium";
+                ItemStack S = ThermalExpansionIntegration.redstoneServo;
+                ItemStack C1 = ThermalExpansionIntegration.redstoneReceptionCoil;
+                ItemStack C2 = ThermalExpansionIntegration.redstoneTransmissionCoil;
+                ItemStack C3 = ThermalExpansionIntegration.redstoneConductanceCoil;
+                ItemStack F1 = ThermalExpansionIntegration.fluxCapacitorBasic;
+                ItemStack F2 = ThermalExpansionIntegration.fluxCapacitorHardened;
+                ItemStack F3 = ThermalExpansionIntegration.fluxCapacitorReinforced;
+                ItemStack F4 = ThermalExpansionIntegration.fluxCapacitorSignalum;
+                ItemStack F5 = ThermalExpansionIntegration.fluxCapacitorResonant;
+                ItemStack B1 = ThermalExpansionIntegration.bucketResonantEnder;
+                ItemStack B2 = ThermalExpansionIntegration.bucketEnergizedGlowstone;
+                ItemStack B3 = ThermalExpansionIntegration.bucketGelidCryotheum;
 
-		RecipeHelper.addShaped(LEADSTONE, 3, 3, iLe, S, iLe, iLe, TECORE_1, iLe, iLe, F1, iLe);
+                RecipeHelper.addShaped(LEADSTONE, 3, 3, iLe, S, iLe, iLe, TECORE_1, iLe, iLe, F1, iLe);
 
-		if (Config.thermalExpansionProgressiveRecipes) {
-		    RecipeHelper.addShaped(HARDENED, 3, 3, iI, C1, iI, TECORE_1, LEADSTONE, TECORE_1, iI, F2, iI);
-		    RecipeHelper.addShaped(REINFORCED, 3, 3, iEle, C2, iEle, TECORE_2, HARDENED, TECORE_2, iEle, F3,
-			    iEle);
-		    RecipeHelper.addShaped(SIGNALUM, 3, 3, iS, C3, iS, TECORE_3, REINFORCED, TECORE_3, iS, F4, iS);
-		    RecipeHelper.addShaped(RESONANT, 3, 3, iEn, C3, iEn, TECORE_3, SIGNALUM, TECORE_3, iEn, F5, iEn);
-		} else {
-		    RecipeHelper.addShaped(HARDENED, 3, 3, iI, C1, iI, iI, TECORE_1, iI, iI, F2, iI);
-		    RecipeHelper.addShaped(REINFORCED, 3, 3, iEle, C2, iEle, iEle, TECORE_2, iEle, iEle, F3, iEle);
-		    RecipeHelper.addShaped(SIGNALUM, 3, 3, iS, C3, iS, iS, TECORE_3, iS, iS, F4, iS);
-		    RecipeHelper.addShaped(RESONANT, 3, 3, iEn, C3, iEn, iEn, TECORE_3, iEn, iEn, F5, iEn);
-		}
+                if (Config.thermalExpansionProgressiveRecipes) {
+                    RecipeHelper.addShaped(HARDENED, 3, 3, iI, C1, iI, TECORE_1, LEADSTONE, TECORE_1, iI, F2, iI);
+                    RecipeHelper.addShaped(REINFORCED, 3, 3, iEle, C2, iEle, TECORE_2, HARDENED, TECORE_2, iEle, F3, iEle);
+                    RecipeHelper.addShaped(SIGNALUM, 3, 3, iS, C3, iS, TECORE_3, REINFORCED, TECORE_3, iS, F4, iS);
+                    RecipeHelper.addShaped(RESONANT, 3, 3, iEn, C3, iEn, TECORE_3, SIGNALUM, TECORE_3, iEn, F5, iEn);
+                } else {
+                    RecipeHelper.addShaped(HARDENED, 3, 3, iI, C1, iI, iI, TECORE_1, iI, iI, F2, iI);
+                    RecipeHelper.addShaped(REINFORCED, 3, 3, iEle, C2, iEle, iEle, TECORE_2, iEle, iEle, F3, iEle);
+                    RecipeHelper.addShaped(SIGNALUM, 3, 3, iS, C3, iS, iS, TECORE_3, iS, iS, F4, iS);
+                    RecipeHelper.addShaped(RESONANT, 3, 3, iEn, C3, iEn, iEn, TECORE_3, iEn, iEn, F5, iEn);
+                }
 
-		RecipeHelper.addShaped(TECORE_1, 3, 3, gC, iLe, gC, iLe, B1, iLe, gC, iLe, gC);
-		RecipeHelper.addShaped(TECORE_2, 3, 3, gB, gI, gB, TECORE_1, B2, TECORE_1, gB, gI, gB);
-		RecipeHelper.addShaped(TECORE_3, 3, 3, gLu, TECORE_2, gLu, TECORE_2, B3, TECORE_2, gLu, TECORE_2, gLu);
-	    }
-	}
+                RecipeHelper.addShaped(TECORE_1, 3, 3, gC, iLe, gC, iLe, B1, iLe, gC, iLe, gC);
+                RecipeHelper.addShaped(TECORE_2, 3, 3, gB, gI, gB, TECORE_1, B2, TECORE_1, gB, gI, gB);
+                RecipeHelper.addShaped(TECORE_3, 3, 3, gLu, TECORE_2, gLu, TECORE_2, B3, TECORE_2, gLu, TECORE_2, gLu);
+            }
+        }
+        if (Config.mekanismModule) {
+            if (Loader.isModLoaded(Data.MEK)) {
+                String iO = "ingotOsmium";
+                String iS = "ingotSteel";
+                String iRG = "ingotRefinedGlowstone";
+                String dD = "dustDiamond";
+                String dRO = "dustRefinedObsidian";
+                String A1 = "alloyAdvanced";
+                String A2 = "alloyElite";
+                String A3 = "alloyUltimate";
+                ItemStack C1 = MekanismIntegration.circuitBasic;
+                ItemStack C2 = MekanismIntegration.circuitAdvanced;
+                ItemStack C3 = MekanismIntegration.circuitElite;
+                ItemStack C4 = MekanismIntegration.circuitUltimate;
+                ItemStack T = MekanismIntegration.energyTablet;
+                ItemStack Tel = MekanismIntegration.portableTeleporter;
+                ItemStack TelC = MekanismIntegration.teleportationCore;
+
+                RecipeHelper.addShaped(BASIC, 3, 3, C1, T, C1, C1, MEKCORE_1, C1, C1, T, C1);
+
+                if (Config.mekanismProgressiveRecipes) {
+                    RecipeHelper.addShaped(ADVANCED, 3, 3, C2, T, C2, MEKCORE_2, BASIC, MEKCORE_2, C2, T, C2);
+                    RecipeHelper.addShaped(ELITE, 3, 3, C3, TelC, C3, MEKCORE_3, ADVANCED, MEKCORE_3, C3, T, C3);
+                    RecipeHelper.addShaped(ULTIMATE, 3, 3, C4, Tel, C4, MEKCORE_3, ELITE, MEKCORE_3, C4, Tel, C4);
+                } else {
+                    RecipeHelper.addShaped(ADVANCED, 3, 3, C2, T, C2, C2, MEKCORE_2, C2, C2, T, C2);
+                    RecipeHelper.addShaped(ELITE, 3, 3, C3, TelC, C3, C3, MEKCORE_3, C3, C3, T, C3);
+                    RecipeHelper.addShaped(ULTIMATE, 3, 3, C4, Tel, C4, C4, MEKCORE_3, C4, C4, Tel, C4);
+                }
+
+                RecipeHelper.addShaped(MEKCORE_1, 3, 3, iO, iS, iO, iS, A1, iS, iO, iS, iO);
+                RecipeHelper.addShaped(MEKCORE_2, 3, 3, dD, iRG, dD, MEKCORE_1, A2, MEKCORE_1, dD, iRG, dD);
+                RecipeHelper.addShaped(MEKCORE_3, 3, 3, dRO, MEKCORE_2, dRO, MEKCORE_2, A3, MEKCORE_2, dRO, MEKCORE_2, dRO);
+            }
+        }
     }
 
     @SubscribeEvent
     public void onBlockRegistry(RegistryEvent.Register<Block> e) {
-	e.getRegistry().registerAll(Data.BLOCKS.toArray(new Block[0]));
+        e.getRegistry().registerAll(Data.BLOCKS.toArray(new Block[0]));
     }
 
     @SubscribeEvent
     public void onItemRegistry(RegistryEvent.Register<Item> e) {
-	e.getRegistry().registerAll(Data.ITEMS.toArray(new Item[0]));
+        e.getRegistry().registerAll(Data.ITEMS.toArray(new Item[0]));
     }
 
     @SubscribeEvent
     public void onRecipeRegistry(RegistryEvent.Register<IRecipe> e) {
-	if (Config.enderIOModule = true) {
-	    if (Loader.isModLoaded(Data.EIO)) {
-		// EnderIOIntegration.init();
-	    }
-	}
-	if (Config.thermalExpansionModule = true) {
-	    if (Loader.isModLoaded(Data.THERMAL)) {
-		ThermalExpansionIntegration.init();
-	    }
-	}
-	if (Config.mekanismModule = true) {
-	    if (Loader.isModLoaded(Data.MEK)) {
-		// MekanismIntegration.init();
-	    }
-	}
-	initRecipes();
-	e.getRegistry().registerAll(Data.RECIPES.toArray(new IRecipe[0]));
+        if (Config.enderIOModule) {
+            if (Loader.isModLoaded(Data.EIO)) {
+                // EnderIOIntegration.init();
+            }
+        }
+        if (Config.thermalExpansionModule) {
+            if (Loader.isModLoaded(Data.THERMAL)) {
+                ThermalExpansionIntegration.init();
+            }
+        }
+        if (Config.mekanismModule) {
+            if (Loader.isModLoaded(Data.MEK)) {
+                MekanismIntegration.init();
+            }
+        }
+        initRecipes();
+        e.getRegistry().registerAll(Data.RECIPES.toArray(new IRecipe[0]));
     }
 
 }

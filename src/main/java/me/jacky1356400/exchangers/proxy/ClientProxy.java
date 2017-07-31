@@ -16,30 +16,30 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ClientProxy extends CommonProxy {
 
-	@Override
-	public void preInit(FMLPreInitializationEvent e) {
-		super.preInit(e);
-		MinecraftForge.EVENT_BUS.register(this);
-	}
+    @Override
+    public void preInit(FMLPreInitializationEvent e) {
+        super.preInit(e);
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-	@SubscribeEvent
-	public void onModelRegistry(ModelRegistryEvent e) {
-		for (Item item : Data.ITEMS)
-			if (item instanceof IHasModel)
-				((IHasModel) item).initModel(e);
-	}
+    @SubscribeEvent
+    public void onModelRegistry(ModelRegistryEvent e) {
+        for (Item item : Data.ITEMS)
+            if (item instanceof IHasModel)
+                ((IHasModel) item).initModel(e);
+    }
 
-	@Override
-	public void init(FMLInitializationEvent e) {
-		super.init(e);
-		MinecraftForge.EVENT_BUS.register(new KeyBindingsHandler());
-		Keys.init();
-	}
+    @Override
+    public void init(FMLInitializationEvent e) {
+        super.init(e);
+        MinecraftForge.EVENT_BUS.register(new KeyBindingsHandler());
+        Keys.init();
+    }
 
-	@Override
-	public void postInit(FMLPostInitializationEvent e) {
-		super.postInit(e);
-		MinecraftForge.EVENT_BUS.register(new GUIHandler((Minecraft.getMinecraft())));
-	}
+    @Override
+    public void postInit(FMLPostInitializationEvent e) {
+        super.postInit(e);
+        MinecraftForge.EVENT_BUS.register(new GUIHandler((Minecraft.getMinecraft())));
+    }
 
 }

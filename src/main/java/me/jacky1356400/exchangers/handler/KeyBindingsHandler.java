@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 public class KeyBindingsHandler {
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (Keys.modeKey.isPressed()) {
+        if (Keys.MODE_KEY.isPressed()) {
             PacketHandler.INSTANCE.sendToServer(new PacketToggleMode());
         }
     }

@@ -1,7 +1,12 @@
 package me.jacky1356400.exchangers;
 
 import me.jacky1356400.exchangers.proxy.CommonProxy;
+import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.config.IConfigElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Config {
 
@@ -83,6 +88,20 @@ public class Config {
                 cfg.save();
             }
         }
+    }
+
+    public static List<IConfigElement> getConfigElements() {
+        List<IConfigElement> list = new ArrayList<IConfigElement>();
+        Configuration cfg = CommonProxy.config;
+
+        list.add(new ConfigElement(cfg.getCategory(CATEGORY_MODULES)));
+        list.add(new ConfigElement(cfg.getCategory(CATEGORY_TWEAKS_VANILLA)));
+        list.add(new ConfigElement(cfg.getCategory(CATEGORY_TWEAKS_EIO)));
+        list.add(new ConfigElement(cfg.getCategory(CATEGORY_TWEAKS_TE)));
+        list.add(new ConfigElement(cfg.getCategory(CATEGORY_TWEAKS_MEKANISM)));
+        list.add(new ConfigElement(cfg.getCategory(CATEGORY_RECIPES)));
+
+        return list;
     }
 
     private static void initConfig(Configuration cfg) {

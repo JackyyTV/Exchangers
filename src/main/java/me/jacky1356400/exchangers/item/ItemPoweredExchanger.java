@@ -101,7 +101,6 @@ public class ItemPoweredExchanger extends ItemExchanger implements IEnergyContai
     /* CAPABILITIES */
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-
         return new EnergyContainerItemWrapper(stack, this);
     }
 }

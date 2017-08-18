@@ -208,7 +208,7 @@ public class ExchangerHandler extends Item {
             tooltip.remove(StringHelper.getShiftText());
             tooltip.add(StringHelper.localize("tooltip.shift1"));
             tooltip.add(StringHelper.localize("tooltip.shift2"));
-            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + Keys.modeKey.getDisplayName() + ")");
+            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + Keys.MODE_KEY.getDisplayName() + ")");
         }
     }
 

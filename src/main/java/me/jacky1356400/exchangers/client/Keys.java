@@ -9,11 +9,10 @@ import org.lwjgl.input.Keyboard;
 @SideOnly(Side.CLIENT)
 public class Keys {
 
-    public static KeyBinding modeKey;
+    public static final KeyBinding MODE_KEY = new KeyBinding("key.exchangermode", Keyboard.KEY_COMMA, "key.categories.exchangers");
 
     public static void init() {
-        modeKey = new KeyBinding("key.exchangermode", Keyboard.KEY_COMMA, "key.categories.exchangers");
-        ClientRegistry.registerKeyBinding(modeKey);
+        ClientRegistry.registerKeyBinding(MODE_KEY);
     }
 
 }

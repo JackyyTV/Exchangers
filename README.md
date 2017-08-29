@@ -11,7 +11,11 @@ Block Exchangers for 1.10.2+
 
 ## About
 
-This is the GitHub repo for the Exchangers Minecraft mod, where the source code and issue tracker are in here. Submit any bug reports / suggestions via [issue tracker](https://github.com/Jacky1356400/Exchangers/issues). [Pull requests](https://github.com/Jacky1356400/Exchangers/pulls) are welcome if you would like to add features / help with bug fixes or translations.
+This is the GitHub repo for the Exchangers Minecraft mod, where the source code and issue tracker are in here.
+
+Submit any bug reports / suggestions via [issue tracker](https://github.com/Jacky1356400/Exchangers/issues).
+
+[Pull requests](https://github.com/Jacky1356400/Exchangers/pulls) are welcome if you would like to add features / help with bug fixes or translations.
 
 ---
 

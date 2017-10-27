@@ -18,7 +18,7 @@ public class MekanismIntegration {
     public static void init() {
         Exchangers.logger.info("Fetching items for Mekanism integration...");
 
-        Item circuitsItem = Item.REGISTRY.getObject(new ResourceLocation("mekanism", "ControlCircuit"));
+        Item circuitsItem = Item.REGISTRY.getObject(new ResourceLocation("mekanism", "controlcircuit"));
         if (circuitsItem != null) {
             circuitBasic = new ItemStack(circuitsItem, 1, 0);
             circuitAdvanced = new ItemStack(circuitsItem, 1, 1);
@@ -26,17 +26,17 @@ public class MekanismIntegration {
             circuitUltimate = new ItemStack(circuitsItem, 1, 3);
         }
 
-        Item energyTabletItem = Item.REGISTRY.getObject(new ResourceLocation("mekanism", "EnergyTablet"));
+        Item energyTabletItem = Item.REGISTRY.getObject(new ResourceLocation("mekanism", "energytablet"));
         if (energyTabletItem != null) {
             energyTablet = new ItemStack(energyTabletItem, 1, 0);
         }
 
-        Item teleportationCoreItem = Item.REGISTRY.getObject(new ResourceLocation("mekanism", "TeleportationCore"));
+        Item teleportationCoreItem = Item.REGISTRY.getObject(new ResourceLocation("mekanism", "teleportationcore"));
         if (teleportationCoreItem != null) {
             teleportationCore = new ItemStack(teleportationCoreItem, 1, 0);
         }
 
-        Item portableTeleporterItem = Item.REGISTRY.getObject(new ResourceLocation("mekanism", "PortableTeleporter"));
+        Item portableTeleporterItem = Item.REGISTRY.getObject(new ResourceLocation("mekanism", "portableteleporter"));
         if (portableTeleporterItem != null) {
             portableTeleporter = new ItemStack(portableTeleporterItem, 1, 0);
         }

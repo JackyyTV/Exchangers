@@ -2,7 +2,7 @@ package me.jacky1356400.exchangers.item.special;
 
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchanger;
-import me.jacky1356400.exchangers.util.Tier;
+import me.jacky1356400.exchangers.util.EnumTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ItemTuberousExchanger extends ItemExchanger {
 
     public ItemTuberousExchanger() {
-        super("expotato", Tier.ZERO, 1);
+        super("expotato", EnumTier.ZERO, 1);
     }
 
     private static boolean killPlayer(EntityPlayer player, ItemStack stack) {

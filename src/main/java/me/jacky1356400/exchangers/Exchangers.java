@@ -10,13 +10,10 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Data.MODID, version = Data.VERSION, name = Data.MODNAME, dependencies = Exchangers.DEPENDS, guiFactory = Exchangers.GUIFACTORY, useMetadata = true)
+@Mod(modid = Data.MODID, version = Data.VERSION, name = Data.MODNAME, dependencies = Data.DEPENDS, acceptedMinecraftVersions = Data.MCVERSION, guiFactory = Data.GUIFACTORY, useMetadata = true)
 public class Exchangers {
 
-    public static final String DEPENDS = "required-after:redstoneflux;after:enderio;after:thermalfoundation;after:thermalexpansion;after:mekanism;";
-    public static final String GUIFACTORY = "me.jacky1356400.exchangers.ConfigGuiFactory";
-
-    public static Logger logger = LogManager.getLogger("Exchangers");
+    public static Logger logger = LogManager.getLogger(Data.MODNAME);
 
     @SidedProxy(serverSide = "me.jacky1356400.exchangers.proxy.CommonProxy", clientSide = "me.jacky1356400.exchangers.proxy.ClientProxy")
     public static CommonProxy proxy;

@@ -3,8 +3,8 @@ package me.jacky1356400.exchangers.item;
 import me.jacky1356400.exchangers.handler.ExchangerHandler;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.util.Data;
+import me.jacky1356400.exchangers.util.EnumTier;
 import me.jacky1356400.exchangers.util.IHasModel;
-import me.jacky1356400.exchangers.util.Tier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -15,9 +15,9 @@ import static me.jacky1356400.exchangers.helper.StringHelper.localize;
 
 public class ItemExchanger extends ExchangerHandler implements IHasModel {
 
-    private final Tier t;
+    private final EnumTier t;
 
-    public ItemExchanger(String name, boolean noRepair, Tier tier, int maxDmg) {
+    public ItemExchanger(String name, boolean noRepair, EnumTier tier, int maxDmg) {
         setRegistryName(Data.MODID, name);
         setUnlocalizedName(Data.MODID + "." + name);
         setCreativeTab(Data.TAB);
@@ -30,7 +30,7 @@ public class ItemExchanger extends ExchangerHandler implements IHasModel {
         Data.ITEMS.add(this);
     }
 
-    public ItemExchanger(String name, Tier tier, int maxDmg) {
+    public ItemExchanger(String name, EnumTier tier, int maxDmg) {
         this(name, false, tier, maxDmg);
     }
 
@@ -47,7 +47,7 @@ public class ItemExchanger extends ExchangerHandler implements IHasModel {
         }
     }
 
-    public Tier getTier() {
+    public EnumTier getTier() {
         return t;
     }
 
@@ -58,7 +58,7 @@ public class ItemExchanger extends ExchangerHandler implements IHasModel {
 
     @Override
     public boolean isCreative() {
-        return this.getTier() == Tier.CREATIVE;
+        return this.getTier() == EnumTier.CREATIVE;
     }
 
 }

@@ -8,7 +8,7 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 version = "${mc_version}-${mod_version}"
 group = "me.jacky1356400.exchangers"
@@ -20,7 +20,7 @@ compileJava {
 }
 
 minecraft {
-    version = "${mc_version}-${forge_version}"
+    version = "${forge_version}"
     runDir = "run"
     mappings = "${mappings_version}"
 }
@@ -28,12 +28,6 @@ minecraft {
 repositories {
     maven {
         url "http://dvs1.progwml6.com/files/maven"
-    }
-    maven {
-        url "http://maven.epoxide.xyz"
-    }
-    maven {
-        url "http://maven.amadornes.com/"
     }
 	maven {
 		url  "http://tehnut.info/maven"
@@ -46,15 +40,14 @@ repositories {
 
 dependencies {
     compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.12:4.7.1.+:api"
-    runtime "mezz.jei:jei_1.12:4.7.1.+"
-	deobfCompile "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12:api"
-	runtime "mcp.mobius.waila:Hwyla:1.8.19-B33_1.12"
+	deobfCompile "mezz.jei:jei_1.12.2:+:api"
+    runtime "mezz.jei:jei_1.12.2:+"
+	deobfCompile "mcp.mobius.waila:Hwyla:+:api"
+	runtime "mcp.mobius.waila:Hwyla:+"
     compile "cofh:RedstoneFlux:1.12-2.+:deobf"
 }
 
-processResources
-{
+processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
     from(sourceSets.main.resources.srcDirs) {
@@ -66,3 +59,11 @@ processResources
     }
 }
 
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+artifacts {
+    archives deobfJar
+}

@@ -50,7 +50,5 @@ public class ThermalExpansionIntegration {
         bucketEnergizedGlowstone = FluidUtil.getFilledBucket(new FluidStack(glowstone, 1000));
         Fluid cryotheum = FluidRegistry.getFluid("cryotheum");
         bucketGelidCryotheum = FluidUtil.getFilledBucket(new FluidStack(cryotheum, 1000));
-
     }
-
 }

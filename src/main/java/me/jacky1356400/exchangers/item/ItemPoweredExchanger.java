@@ -5,7 +5,7 @@ import cofh.redstoneflux.util.EnergyContainerItemWrapper;
 import me.jacky1356400.exchangers.helper.EnergyHelper;
 import me.jacky1356400.exchangers.helper.NBTHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
-import me.jacky1356400.exchangers.util.Tier;
+import me.jacky1356400.exchangers.util.EnumTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ public class ItemPoweredExchanger extends ItemExchanger implements IEnergyContai
     private final int maxEnergy;
     private final int perBlockUse;
 
-    public ItemPoweredExchanger(String name, Tier tier, int maxStorage, int perBlock) {
+    public ItemPoweredExchanger(String name, EnumTier tier, int maxStorage, int perBlock) {
         super(name, true, tier, 0);
         maxEnergy = maxStorage;
         perBlockUse = perBlock;
@@ -89,7 +89,7 @@ public class ItemPoweredExchanger extends ItemExchanger implements IEnergyContai
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (this.isInCreativeTab(tab)) {
+        if (isInCreativeTab(tab)) {
             ItemStack empty = new ItemStack(this);
             list.add(empty);
             ItemStack full = new ItemStack(this);

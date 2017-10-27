@@ -28,19 +28,19 @@ public class EnderIOIntegration {
     public static void init() {
         Exchangers.logger.info("Fetching items for Ender IO integration...");
 
-        Block capBankBlock = Block.REGISTRY.getObject(new ResourceLocation("enderio", "blockCapBank"));
+        Block capBankBlock = Block.REGISTRY.getObject(new ResourceLocation("enderio", "blockcapbank"));
         capacitorBankBasic = new ItemStack(capBankBlock, 1, 1);
         capacitorBank = new ItemStack(capBankBlock, 1, 2);
         capacitorBankVibrant = new ItemStack(capBankBlock, 1, 3);
 
-        Item capacitorItem = Item.REGISTRY.getObject(new ResourceLocation("enderio", "itemBasicCapacitor"));
+        Item capacitorItem = Item.REGISTRY.getObject(new ResourceLocation("enderio", "itembasiccapacitor"));
         if (capacitorItem != null) {
             basicCapacitor = new ItemStack(capacitorItem, 1, 0);
             doubleLayerCapacitor = new ItemStack(capacitorItem, 1, 1);
             octadicCapacitor = new ItemStack(capacitorItem, 1, 2);
         }
 
-        Item eioMaterialsItem = Item.REGISTRY.getObject(new ResourceLocation("enderio", "itemMaterial"));
+        Item eioMaterialsItem = Item.REGISTRY.getObject(new ResourceLocation("enderio", "itemmaterial"));
         if (eioMaterialsItem != null) {
             pulsatingCrystal = new ItemStack(eioMaterialsItem, 1, 5);
             vibrantCrystal = new ItemStack(eioMaterialsItem, 1, 6);

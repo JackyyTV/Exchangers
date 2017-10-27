@@ -1,6 +1,7 @@
 package me.jacky1356400.exchangers.handler;
 
 import me.jacky1356400.exchangers.client.Keys;
+import me.jacky1356400.exchangers.helper.ChatHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.item.ItemExchanger;
 import me.jacky1356400.exchangers.item.ItemPoweredExchanger;
@@ -25,8 +26,6 @@ import net.minecraft.world.World;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static me.jacky1356400.exchangers.helper.ChatHelper.msgPlayer;
 
 public class ExchangerHandler extends Item {
 
@@ -238,6 +237,7 @@ public class ExchangerHandler extends Item {
         stack.getTagCompound().setInteger("mode", modeSwitch);
     }
 
+    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             if (player.isSneaking()) {
@@ -247,6 +247,10 @@ public class ExchangerHandler extends Item {
             }
         }
         return EnumActionResult.SUCCESS;
+    }
+
+    private boolean getWhitelist(World world, BlockPos pos) {
+        return world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("tconstruct");
     }
 
     @SuppressWarnings("deprecation")
@@ -263,16 +267,19 @@ public class ExchangerHandler extends Item {
 
         int oldmeta = oldblock.getMetaFromState(oldState);
         float blockHardness = oldblock.getBlockHardness(oldState, world, pos);
+        if (id == 0) {
+            return;
+        }
         if ((block == oldblock) && (meta == oldmeta)) {
             return;
         }
-        if (world.getTileEntity(pos) != null) {
-            msgPlayer(player, StringHelper.localize("error.invalidblock"));
+        if (world.getTileEntity(pos) != null && !this.getWhitelist(world, pos)) {
+            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
             return;
         }
         if (blockHardness < -0.1F) {
             if (!isCreative()) {
-                msgPlayer(player, StringHelper.localize("error.invalidblock"));
+                ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
                 return;
             }
         }
@@ -280,7 +287,7 @@ public class ExchangerHandler extends Item {
             ItemPoweredExchanger powered = (ItemPoweredExchanger) stack.getItem();
             if (isPowered() && stack.getTagCompound().getInteger("Energy") < powered.getPerBlockCost()) {
                 if (!isCreative()) {
-                    msgPlayer(player, StringHelper.localize("error.nopower"));
+                    ChatHelper.msgPlayer(player, StringHelper.localize("error.nopower"));
                     return;
                 }
             }
@@ -311,7 +318,7 @@ public class ExchangerHandler extends Item {
             }
         }
         if (notEnough) {
-            msgPlayer(player, StringHelper.localize("error.outofblock"));
+            ChatHelper.msgPlayer(player, StringHelper.localize("error.outofblock"));
         }
     }
 
@@ -326,12 +333,12 @@ public class ExchangerHandler extends Item {
         String name = getBlockName(block, meta);
         float blockHardness = block.getBlockHardness(state, world, pos);
         if (name == null) {
-            msgPlayer(player, StringHelper.localize("error.invalidblock"));
-        } else if (world.getTileEntity(pos) != null) {
-            msgPlayer(player, StringHelper.localize("error.invalidblock"));
+            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
+        } else if (world.getTileEntity(pos) != null && !this.getWhitelist(world, pos)) {
+            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
         } else if (blockHardness < -0.1F) {
             if (!isCreative()) {
-                msgPlayer(player, StringHelper.localize("error.invalidblock"));
+                ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
             }
         } else {
             int id = Block.REGISTRY.getIDForObject(block);

@@ -8,6 +8,7 @@ import me.jacky1356400.exchangers.item.ItemExchangerBasePowered;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -25,7 +26,7 @@ public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
         setRegistryName(Exchangers.MODID + ":energetic_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".energetic_exchanger");
         setMaxStackSize(1);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
+        setCreativeTab(Exchangers.TAB);
         setNoRepair();
     }
 
@@ -69,6 +70,11 @@ public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
     @Override
     public int getMaxRange() {
         return MODE_11X11;
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.RARE;
     }
 
 }

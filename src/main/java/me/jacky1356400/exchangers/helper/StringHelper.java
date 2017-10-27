@@ -39,7 +39,7 @@ public final class StringHelper {
 
     @SuppressWarnings("deprecation")
     public static String localize(String unlocalized, boolean prefix, Object... args) {
-        String toLocalize = (prefix ? Exchangers.PREFIX : "") + unlocalized;
+        String toLocalize = (prefix ? Exchangers.MODID + "." : "") + unlocalized;
         if(args != null && args.length > 0) {
             return translateToLocalFormatted(toLocalize, args);
         }

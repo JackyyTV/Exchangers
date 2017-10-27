@@ -29,17 +29,11 @@ public class StackUtil {
     }
 
     public static boolean isValid(@Nullable ItemStack stack) {
-        if (stack == ItemStack.EMPTY) {
-            return false;
-        }
-        return stack.getCount() > 0;
+        return stack != ItemStack.EMPTY && stack.getCount() > 0;
     }
 
     public static boolean isEmpty(@Nullable ItemStack stack) {
-        if (stack == stack.EMPTY) {
-            return true;
-        }
-        return stack.getCount() <= 0;
+        return stack == ItemStack.EMPTY || stack.getCount() <= 0;
     }
 
 }

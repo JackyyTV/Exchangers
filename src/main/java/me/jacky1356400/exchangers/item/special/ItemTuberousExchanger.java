@@ -7,6 +7,7 @@ import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
@@ -26,7 +27,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
         setUnlocalizedName(Exchangers.MODID + ".tuberous_exchanger");
         setMaxStackSize(1);
         setMaxDamage(1);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
+        setCreativeTab(Exchangers.TAB);
     }
 
     @SideOnly(Side.CLIENT)
@@ -46,8 +47,8 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        return killPlayer(player, player.getHeldItem(hand))? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        return killPlayer(player, stack)? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
     }
 
     @Override
@@ -81,6 +82,11 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
         if (Config.specialModule) {
             list.add(new ItemStack(this));
         }
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.UNCOMMON;
     }
 
 }

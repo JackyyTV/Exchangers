@@ -8,6 +8,7 @@ import me.jacky1356400.exchangers.item.ItemExchangerBasePowered;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -25,7 +26,7 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
         setRegistryName(Exchangers.MODID + ":basic_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".basic_exchanger");
         setMaxStackSize(1);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
+        setCreativeTab(Exchangers.TAB);
         setNoRepair();
     }
 
@@ -48,7 +49,7 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         if (Config.mekanismModule) {
-            if (Loader.isModLoaded("mekanism")) {
+            if (Loader.isModLoaded("Mekanism")) {
                 ItemStack empty = new ItemStack(this);
                 list.add(empty);
                 ItemStack full = new ItemStack(this);
@@ -69,6 +70,11 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
     @Override
     public int getMaxRange() {
         return MODE_7X7;
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return Exchangers.TIER_1;
     }
 
 }

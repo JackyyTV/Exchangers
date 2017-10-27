@@ -7,6 +7,7 @@ import me.jacky1356400.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -24,7 +25,7 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
         setUnlocalizedName(Exchangers.MODID + ".creative_exchanger");
         setMaxStackSize(1);
         setMaxDamage(9001);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
+        setCreativeTab(Exchangers.TAB);
     }
 
     @SideOnly(Side.CLIENT)
@@ -56,6 +57,11 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
         if (Config.specialModule) {
             list.add(new ItemStack(this));
         }
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.EPIC;
     }
 
 }

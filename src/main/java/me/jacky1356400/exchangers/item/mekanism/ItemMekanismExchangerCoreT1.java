@@ -4,6 +4,7 @@ import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Exchangers;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -20,7 +21,7 @@ public class ItemMekanismExchangerCoreT1 extends Item {
         setRegistryName(Exchangers.MODID + ":mekanism_exchanger_core_tier1");
         setUnlocalizedName(Exchangers.MODID + ".mekanism_exchanger_core_tier1");
         setMaxStackSize(16);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
+        setCreativeTab(Exchangers.TAB);
     }
 
     @SideOnly(Side.CLIENT)
@@ -32,10 +33,15 @@ public class ItemMekanismExchangerCoreT1 extends Item {
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         if (Config.mekanismModule) {
-            if (Loader.isModLoaded("mekanism")) {
+            if (Loader.isModLoaded("Mekanism")) {
                 list.add(new ItemStack(this));
             }
         }
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return Exchangers.TIER_1;
     }
 
 }

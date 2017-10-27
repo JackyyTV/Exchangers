@@ -31,52 +31,61 @@ exchangers.error.nopower=§cError: Out of power!
 
 #Crafting Components
 #Vanilla
-item.exchangers.exchanger_core_tier1.name=§aExchanger Core (Tier 1)
-item.exchangers.exchanger_core_tier2.name=§bExchanger Core (Tier 2)
-item.exchangers.exchanger_core_tier3.name=§dExchanger Core (Tier 3)
+item.exchangers.exchanger_core_tier1.name=Exchanger Core (Tier 1)
+item.exchangers.exchanger_core_tier2.name=Exchanger Core (Tier 2)
+item.exchangers.exchanger_core_tier3.name=Exchanger Core (Tier 3)
 #Ender IO
-item.exchangers.eio_exchanger_core_tier1.name=§aEnder IO Exchanger Core (Tier 1)
-item.exchangers.eio_exchanger_core_tier2.name=§bEnder IO Exchanger Core (Tier 2)
-item.exchangers.eio_exchanger_core_tier3.name=§dEnder IO Exchanger Core (Tier 3)
+item.exchangers.eio_exchanger_core_tier1.name=Ender IO Exchanger Core (Tier 1)
+item.exchangers.eio_exchanger_core_tier2.name=Ender IO Exchanger Core (Tier 2)
+item.exchangers.eio_exchanger_core_tier3.name=Ender IO Exchanger Core (Tier 3)
 #Thermal Expansion
-item.exchangers.te_exchanger_core_tier1.name=§aThermal Expansion Exchanger Core (Tier 1)
-item.exchangers.te_exchanger_core_tier2.name=§bThermal Expansion Exchanger Core (Tier 2)
-item.exchangers.te_exchanger_core_tier3.name=§dThermal Expansion Exchanger Core (Tier 3)
+item.exchangers.te_exchanger_core_tier1.name=Thermal Expansion Exchanger Core (Tier 1)
+item.exchangers.te_exchanger_core_tier2.name=Thermal Expansion Exchanger Core (Tier 2)
+item.exchangers.te_exchanger_core_tier3.name=Thermal Expansion Exchanger Core (Tier 3)
 #Mekanism
-item.exchangers.mekanism_exchanger_core_tier1.name=§aMekanism Exchanger Core (Tier 1)
-item.exchangers.mekanism_exchanger_core_tier2.name=§bMekanism Exchanger Core (Tier 2)
-item.exchangers.mekanism_exchanger_core_tier3.name=§dMekanism Exchanger Core (Tier 3)
+item.exchangers.mekanism_exchanger_core_tier1.name=Mekanism Exchanger Core (Tier 1)
+item.exchangers.mekanism_exchanger_core_tier2.name=Mekanism Exchanger Core (Tier 2)
+item.exchangers.mekanism_exchanger_core_tier3.name=Mekanism Exchanger Core (Tier 3)
+#Immersive Engineering
+item.exchangers.ie_exchanger_core_tier1.name=Immersive Engineering Exchanger Core (Tier 1)
+item.exchangers.ie_exchanger_core_tier2.name=Immersive Engineering Exchanger Core (Tier 2)
+item.exchangers.ie_exchanger_core_tier3.name=Immersive Engineering Exchanger Core (Tier 3)
 
 #Special Exchangers
-item.exchangers.tuberous_exchanger.name=§eTuberous Exchanger
-item.exchangers.creative_exchanger.name=§dCreative Exchanger
+item.exchangers.tuberous_exchanger.name=Tuberous Exchanger
+item.exchangers.creative_exchanger.name=Creative Exchanger
 
 #Vanilla Exchangers
-item.exchangers.wooden_exchanger.name=§aWooden Exchanger
-item.exchangers.stone_exchanger.name=§aStone Exchanger
-item.exchangers.golden_exchanger.name=§bGolden Exchanger
-item.exchangers.iron_exchanger.name=§bIron Exchanger
-item.exchangers.diamond_exchanger.name=§dDiamond Exchanger
-item.exchangers.emerald_exchanger.name=§dEmerald Exchanger
-item.exchangers.obsidian_exchanger.name=§dObsidian Exchanger
+item.exchangers.wooden_exchanger.name=Wooden Exchanger
+item.exchangers.stone_exchanger.name=Stone Exchanger
+item.exchangers.golden_exchanger.name=Golden Exchanger
+item.exchangers.iron_exchanger.name=Iron Exchanger
+item.exchangers.diamond_exchanger.name=Diamond Exchanger
+item.exchangers.emerald_exchanger.name=Emerald Exchanger
+item.exchangers.obsidian_exchanger.name=Obsidian Exchanger
 
 #Ender IO Exchangers
-item.exchangers.conductive_iron_exchanger.name=§aConductive Iron Exchanger
-item.exchangers.pulsating_iron_exchanger.name=§aPulsating Iron Exchanger
-item.exchangers.electrical_steel_exchanger.name=§bElectrical Steel Exchanger
-item.exchangers.energetic_exchanger.name=§bEnergetic Exchanger
-item.exchangers.dark_steel_exchanger.name=§dDark Steel Exchanger
-item.exchangers.vibrant_exchanger.name=§dVibrant Exchanger
+item.exchangers.conductive_iron_exchanger.name=Conductive Iron Exchanger
+item.exchangers.pulsating_iron_exchanger.name=Pulsating Iron Exchanger
+item.exchangers.electrical_steel_exchanger.name=Electrical Steel Exchanger
+item.exchangers.energetic_exchanger.name=Energetic Exchanger
+item.exchangers.dark_steel_exchanger.name=Dark Steel Exchanger
+item.exchangers.vibrant_exchanger.name=Vibrant Exchanger
 
 #Thermal Expansion Exchangers
-item.exchangers.leadstone_exchanger.name=§aLeadstone Exchanger
-item.exchangers.hardened_exchanger.name=§aHardened Exchanger
-item.exchangers.reinforced_exchanger.name=§bReinforced Exchanger
-item.exchangers.signalum_exchanger.name=§dSignalum Exchanger
-item.exchangers.resonant_exchanger.name=§dResonant Exchanger
+item.exchangers.leadstone_exchanger.name=Leadstone Exchanger
+item.exchangers.hardened_exchanger.name=Hardened Exchanger
+item.exchangers.reinforced_exchanger.name=Reinforced Exchanger
+item.exchangers.signalum_exchanger.name=Signalum Exchanger
+item.exchangers.resonant_exchanger.name=Resonant Exchanger
 
 #Mekanism Exchangers
-item.exchangers.basic_exchanger.name=§aBasic Exchanger
-item.exchangers.advanced_exchanger.name=§bAdvanced Exchanger
-item.exchangers.elite_exchanger.name=§dElite Exchanger
-item.exchangers.ultimate_exchanger.name=§dUltimate Exchanger
+item.exchangers.basic_exchanger.name=Basic Exchanger
+item.exchangers.advanced_exchanger.name=Advanced Exchanger
+item.exchangers.elite_exchanger.name=Elite Exchanger
+item.exchangers.ultimate_exchanger.name=Ultimate Exchanger
+
+#Immersive Engineering Exchangers
+item.exchangers.lv_exchanger.name=LV Exchanger
+item.exchangers.mv_exchanger.name=MV Exchanger
+item.exchangers.hv_exchanger.name=HV Exchanger

@@ -6,6 +6,7 @@ import me.jacky1356400.exchangers.ExchangersItems;
 import me.jacky1356400.exchangers.Recipes;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
 import me.jacky1356400.exchangers.integration.EnderIOIntegration;
+import me.jacky1356400.exchangers.integration.ImmersiveEngineeringIntegration;
 import me.jacky1356400.exchangers.integration.MekanismIntegration;
 import me.jacky1356400.exchangers.integration.ThermalExpansionIntegration;
 import net.minecraftforge.common.config.Configuration;
@@ -20,7 +21,7 @@ public class CommonProxy {
 
     public static Configuration config;
 
-    public void preInit(FMLPreInitializationEvent e){
+    public void preInit(FMLPreInitializationEvent e) {
         File configDir = e.getModConfigurationDirectory();
         config = new Configuration(new File(configDir.getPath(), "exchangers.cfg"));
         Config.readConfig();
@@ -38,6 +39,11 @@ public class CommonProxy {
         if (Config.mekanismModule) {
             if (Loader.isModLoaded("mekanism")) {
                 MekanismIntegration.init();
+            }
+        }
+        if (Config.immersiveEngineeringModule) {
+            if (Loader.isModLoaded("immersiveengineering")) {
+                ImmersiveEngineeringIntegration.init();
             }
         }
         Recipes.init();

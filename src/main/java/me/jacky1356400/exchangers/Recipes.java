@@ -77,7 +77,7 @@ public class Recipes {
                     );
                     GameRegistry.addRecipe(
                             new ShapedOreRecipe(new ItemStack(ExchangersItems.goldenExchanger),
-                                    "GCG", "EXE", "GCG",
+                                    "GCG", "EXE", "GGG",
                                     'G', "ingotGold", 'E', Items.ENDER_EYE, 'C', ExchangersItems.exchangerCoreT2, 'X', ExchangersItems.stoneExchanger)
                     );
                     GameRegistry.addRecipe(

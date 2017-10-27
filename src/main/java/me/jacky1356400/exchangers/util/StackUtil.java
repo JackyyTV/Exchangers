@@ -29,17 +29,11 @@ public class StackUtil {
     }
 
     public static boolean isValid(@Nullable ItemStack stack) {
-        if (stack == null) {
-            return false;
-        }
-        return stack.stackSize > 0;
+        return stack != null && stack.stackSize > 0;
     }
 
     public static boolean isEmpty(@Nullable ItemStack stack) {
-        if (stack == null) {
-            return true;
-        }
-        return stack.stackSize <= 0;
+        return stack == null || stack.stackSize <= 0;
     }
 
 }

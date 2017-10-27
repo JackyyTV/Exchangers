@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:item/generated",
+    "parent": "item/generated",
     "textures": {
         "layer0": "exchangers:items/enderio/eio_exchanger_core_tier3"
     }

@@ -28,4 +28,5 @@ public class PacketToggleMode implements IMessage, IMessageHandler<PacketToggleM
         }
         return null;
     }
+
 }

@@ -8,7 +8,7 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 version = "${mc_version}-${mod_version}"
 group = "me.jacky1356400.exchangers"
@@ -29,12 +29,6 @@ repositories {
     maven {
         url "http://dvs1.progwml6.com/files/maven"
     }
-    maven {
-        url "http://maven.epoxide.xyz"
-    }
-    maven {
-        url "http://maven.amadornes.com/"
-    }
 	maven {
 		url  "http://tehnut.info/maven"
 	}
@@ -42,8 +36,8 @@ repositories {
 
 dependencies {
     compile files('libs/')
-	deobfCompile "mezz.jei:jei_1.10.2:3.14.7.420:api"
-    runtime "mezz.jei:jei_1.10.2:3.14.7.420"
+	deobfCompile "mezz.jei:jei_1.10.2:+:api"
+    runtime "mezz.jei:jei_1.10.2:+"
 	deobfCompile "mcp.mobius.waila:Hwyla:1.8.17-B31_1.10.2:api"
 	runtime "mcp.mobius.waila:Hwyla:1.8.17-B31_1.10.2"
 }
@@ -60,3 +54,11 @@ processResources {
     }
 }
 
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+artifacts {
+    archives deobfJar
+}

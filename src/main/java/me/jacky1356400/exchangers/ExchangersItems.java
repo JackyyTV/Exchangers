@@ -1,6 +1,7 @@
 package me.jacky1356400.exchangers;
 
 import me.jacky1356400.exchangers.item.enderio.*;
+import me.jacky1356400.exchangers.item.immersiveengineering.*;
 import me.jacky1356400.exchangers.item.mekanism.*;
 import me.jacky1356400.exchangers.item.special.ItemCreativeExchanger;
 import me.jacky1356400.exchangers.item.special.ItemTuberousExchanger;
@@ -51,7 +52,14 @@ public class ExchangersItems {
     public static ItemMekanismExchangerCoreT2 mekanismExchangerCoreT2;
     public static ItemMekanismExchangerCoreT3 mekanismExchangerCoreT3;
 
-    public static void init(){
+    public static ItemLVExchanger lvExchanger;
+    public static ItemMVExchanger mvExchanger;
+    public static ItemHVExchanger hvExchanger;
+    public static ItemIEExchangerCoreT1 ieExchangerCoreT1;
+    public static ItemIEExchangerCoreT2 ieExchangerCoreT2;
+    public static ItemIEExchangerCoreT3 ieExchangerCoreT3;
+
+    public static void init() {
         //Special Exchangers
         tuberousExchanger = GameRegistry.register(new ItemTuberousExchanger());
         creativeExchanger = GameRegistry.register(new ItemCreativeExchanger());
@@ -93,9 +101,16 @@ public class ExchangersItems {
         mekanismExchangerCoreT1 = GameRegistry.register(new ItemMekanismExchangerCoreT1());
         mekanismExchangerCoreT2 = GameRegistry.register(new ItemMekanismExchangerCoreT2());
         mekanismExchangerCoreT3 = GameRegistry.register(new ItemMekanismExchangerCoreT3());
+        //Immersive Engineering Exchangers
+        lvExchanger = GameRegistry.register(new ItemLVExchanger());
+        mvExchanger = GameRegistry.register(new ItemMVExchanger());
+        hvExchanger = GameRegistry.register(new ItemHVExchanger());
+        ieExchangerCoreT1 = GameRegistry.register(new ItemIEExchangerCoreT1());
+        ieExchangerCoreT2 = GameRegistry.register(new ItemIEExchangerCoreT2());
+        ieExchangerCoreT3 = GameRegistry.register(new ItemIEExchangerCoreT3());
     }
 
-    public static void initModels(){
+    public static void initModels() {
         //Special Exchangers
         tuberousExchanger.initModel();
         creativeExchanger.initModel();
@@ -137,6 +152,13 @@ public class ExchangersItems {
         mekanismExchangerCoreT1.initModel();
         mekanismExchangerCoreT2.initModel();
         mekanismExchangerCoreT3.initModel();
+        //Immersive Engineering Exchangers
+        lvExchanger.initModel();
+        mvExchanger.initModel();
+        hvExchanger.initModel();
+        ieExchangerCoreT1.initModel();
+        ieExchangerCoreT2.initModel();
+        ieExchangerCoreT3.initModel();
     }
 
 }

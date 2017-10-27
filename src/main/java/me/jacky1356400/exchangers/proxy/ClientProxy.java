@@ -14,13 +14,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class ClientProxy extends CommonProxy {
 
     @Override
-    public void preInit(FMLPreInitializationEvent e){
+    public void preInit(FMLPreInitializationEvent e) {
         super.preInit(e);
         ExchangersItems.initModels();
     }
 
     @Override
-    public void init(FMLInitializationEvent e){
+    public void init(FMLInitializationEvent e) {
         super.init(e);
         MinecraftForge.EVENT_BUS.register(new KeyBindingsHandler());
         Keys.init();
@@ -28,9 +28,9 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void postInit(FMLPostInitializationEvent e){
+    public void postInit(FMLPostInitializationEvent e) {
         super.postInit(e);
-        MinecraftForge.EVENT_BUS.register(new GUIHandler((Minecraft.getMinecraft())));
+        MinecraftForge.EVENT_BUS.register(new GUIHandler(Minecraft.getMinecraft()));
     }
 
 }

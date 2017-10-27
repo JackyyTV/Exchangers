@@ -1,6 +1,7 @@
 package me.jacky1356400.exchangers.handler;
 
 import me.jacky1356400.exchangers.client.Keys;
+import me.jacky1356400.exchangers.helper.ChatHelper;
 import me.jacky1356400.exchangers.helper.StringHelper;
 import me.jacky1356400.exchangers.util.StackUtil;
 import net.minecraft.block.Block;
@@ -22,8 +23,6 @@ import net.minecraft.world.World;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static me.jacky1356400.exchangers.helper.ChatHelper.msgPlayer;
 
 public class ExchangerHandler extends Item {
 
@@ -135,6 +134,10 @@ public class ExchangerHandler extends Item {
         return EnumActionResult.SUCCESS;
     }
 
+    private boolean getWhitelist(World world, BlockPos pos) {
+        return world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("tconstruct");
+    }
+
     @SuppressWarnings("deprecation")
     private void placeBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side) {
         NBTTagCompound tagCompound = stack.getTagCompound();
@@ -149,22 +152,25 @@ public class ExchangerHandler extends Item {
 
         int oldmeta = oldblock.getMetaFromState(oldState);
         float blockHardness = oldblock.getBlockHardness(oldState, world, pos);
+        if (id == 0) {
+            return;
+        }
         if ((block == oldblock) && (meta == oldmeta)) {
             return;
         }
-        if (world.getTileEntity(pos) != null) {
-            msgPlayer(player, StringHelper.localize("error.invalidblock"));
+        if (world.getTileEntity(pos) != null && !this.getWhitelist(world, pos)) {
+            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
             return;
         }
         if (blockHardness < -0.1F) {
             if (!isCreative()) {
-                msgPlayer(player, StringHelper.localize("error.invalidblock"));
+                ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
                 return;
             }
         }
         if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockUse()) {
             if (!isCreative()) {
-                msgPlayer(player, StringHelper.localize("error.nopower"));
+                ChatHelper.msgPlayer(player, StringHelper.localize("error.nopower"));
                 return;
             }
         }
@@ -191,7 +197,7 @@ public class ExchangerHandler extends Item {
             }
         }
         if (notEnough) {
-            msgPlayer(player, StringHelper.localize("error.outofblock"));
+            ChatHelper.msgPlayer(player, StringHelper.localize("error.outofblock"));
         }
     }
 
@@ -206,14 +212,14 @@ public class ExchangerHandler extends Item {
         String name = getBlockName(block, meta);
         float blockHardness = block.getBlockHardness(state, world, pos);
         if (name == null) {
-            msgPlayer(player, StringHelper.localize("error.invalidblock"));
+            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
         }
-        else if (world.getTileEntity(pos) != null) {
-            msgPlayer(player, StringHelper.localize("error.invalidblock"));
+        else if (world.getTileEntity(pos) != null && !this.getWhitelist(world, pos)) {
+            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
         }
         else if (blockHardness < -0.1F) {
             if (!isCreative()) {
-                msgPlayer(player, StringHelper.localize("error.invalidblock"));
+                ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock"));
             }
         }
         else {
@@ -223,6 +229,7 @@ public class ExchangerHandler extends Item {
         }
     }
 
+    @SuppressWarnings("unchecked")
     protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
         Set<BlockPos> coordinates = new HashSet();
         int mode = stack.getTagCompound().getInteger("mode");

@@ -8,6 +8,7 @@ import me.jacky1356400.exchangers.item.ItemExchangerBasePowered;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
@@ -24,7 +25,7 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
         setRegistryName(Exchangers.MODID + ":conductive_iron_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".conductive_iron_exchanger");
         setMaxStackSize(1);
-        setCreativeTab(Exchangers.exchangersCreativeTab);
+        setCreativeTab(Exchangers.TAB);
         setNoRepair();
     }
 
@@ -68,6 +69,11 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
     @Override
     public int getMaxRange() {
         return MODE_3X3;
+    }
+
+    @Override
+    public EnumRarity getRarity(ItemStack stack) {
+        return Exchangers.TIER_1;
     }
 
 }

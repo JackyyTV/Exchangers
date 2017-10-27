@@ -16,6 +16,7 @@ public class Config {
     private static final String CATEGORY_TWEAKS_EIO = "ender io tweaks";
     private static final String CATEGORY_TWEAKS_TE = "thermal expansion tweaks";
     private static final String CATEGORY_TWEAKS_MEKANISM = "mekanism tweaks";
+    private static final String CATEGORY_TWEAKS_IE = "immersive engineering tweaks";
     private static final String CATEGORY_RECIPES = "recipe tweaks";
 
     //Modules
@@ -23,13 +24,15 @@ public class Config {
     public static boolean enderIOModule;
     public static boolean thermalExpansionModule;
     public static boolean mekanismModule;
+    public static boolean immersiveEngineeringModule;
     public static boolean specialModule;
 
     //Recipes
-    public static boolean vanillaProgressiveRecipes;
-    public static boolean enderIOProgressiveRecipes;
-    public static boolean thermalExpansionProgressiveRecipes;
-    public static boolean mekanismProgressiveRecipes;
+    public static String vanillaRecipesType;
+    public static String enderIORecipesType;
+    public static String thermalExpansionRecipesType;
+    public static String mekanismRecipesType;
+    public static String immersiveEngineeringRecipesType;
 
     //Vanilla
     public static int woodMaxDmg;
@@ -76,6 +79,14 @@ public class Config {
     public static int ultimateMaxEnergy;
     public static int ultimatePerBlockUse;
 
+    //Immersive Engineering
+    public static int lvMaxEnergy;
+    public static int lvPerBlockUse;
+    public static int mvMaxEnergy;
+    public static int mvPerBlockUse;
+    public static int hvMaxEnergy;
+    public static int hvPerBlockUse;
+
     public static void readConfig() {
         Configuration cfg = CommonProxy.config;
         try {
@@ -99,6 +110,7 @@ public class Config {
         list.add(new ConfigElement(cfg.getCategory(CATEGORY_TWEAKS_EIO)));
         list.add(new ConfigElement(cfg.getCategory(CATEGORY_TWEAKS_TE)));
         list.add(new ConfigElement(cfg.getCategory(CATEGORY_TWEAKS_MEKANISM)));
+        list.add(new ConfigElement(cfg.getCategory(CATEGORY_TWEAKS_IE)));
         list.add(new ConfigElement(cfg.getCategory(CATEGORY_RECIPES)));
 
         return list;
@@ -108,27 +120,55 @@ public class Config {
 
         //Modules
         vanillaModule = cfg.getBoolean("Vanilla Module", CATEGORY_MODULES, true,
-                "If true, enables recipes for vanilla-based exchangers.");
+                "If true, enables recipes for Vanilla-based exchangers.");
         enderIOModule = cfg.getBoolean("Ender IO Module", CATEGORY_MODULES, true,
                 "If true, enables recipes for Ender IO-based exchangers (Requires Ender IO to be installed).");
         thermalExpansionModule = cfg.getBoolean("Thermal Expansion Module", CATEGORY_MODULES, true,
                 "If true, enables recipes for Thermal Expansion-based exchangers (Requires Thermal Expansion to be installed).");
         mekanismModule = cfg.getBoolean("Mekanism Module", CATEGORY_MODULES, true,
                 "If true, enables recipes for Mekanism-based exchangers (Requires Mekanism to be installed).");
+        immersiveEngineeringModule = cfg.getBoolean("Immersive Engineering Module", CATEGORY_MODULES, true,
+                "If true, enables recipes for Immersive Engineering-based exchangers (Requires Immersive Engineering to be installed).");
         specialModule = cfg.getBoolean("Special Module", CATEGORY_MODULES, true,
                 "If true, enables recipes for special exchangers (e.g. Tuberous Exchanger).");
 
         //Recipes
-        cfg.addCustomCategoryComment(CATEGORY_RECIPES,
-                "Progressive recipes - requires the previous tier to craft the next tier exchanger, which means more expensive.");
-        vanillaProgressiveRecipes = cfg.getBoolean("Vanilla Progressive Recipes", CATEGORY_RECIPES, true,
-                "If true, enables progressive recipes for vanilla-based exchangers.");
-        enderIOProgressiveRecipes = cfg.getBoolean("Ender IO Progressive Recipes", CATEGORY_RECIPES, true,
-                "If true, enables progressive recipes for Ender IO-based exchangers.");
-        thermalExpansionProgressiveRecipes = cfg.getBoolean("Thermal Expansion Progressive Recipes", CATEGORY_RECIPES,
-                true, "If true, enables progressive recipes for Thermal Expansion-based exchangers.");
-        mekanismProgressiveRecipes = cfg.getBoolean("Mekanism Progressive Recipes", CATEGORY_RECIPES, true,
-                "If true, enables progressive recipes for Mekanism-based exchangers.");
+        cfg.addCustomCategoryComment(CATEGORY_RECIPES, "Tweak how difficult recipes are");
+        vanillaRecipesType = cfg.getString(
+                "Vanilla Recipes Type", CATEGORY_RECIPES, "normal",
+                "Set the recipes type for Vanilla-based exchangers:\n" +
+                "'easy'     Easy recipes, non-progressive, lowest recipe costs.\n" +
+                "'normal'   Normal recipes, progressive, moderate recipe costs.\n" +
+                "'hard'     Hard recipes, progressive, expensive recipe costs.\n"
+        );
+        enderIORecipesType = cfg.getString(
+                "Ender IO Recipes Type", CATEGORY_RECIPES, "normal",
+                "Set the recipes type for Ender IO-based exchangers:\n" +
+                        "'easy'     Easy recipes, non-progressive, lowest recipe costs.\n" +
+                        "'normal'   Normal recipes, progressive, moderate recipe costs.\n" +
+                        "'hard'     Hard recipes, progressive, expensive recipe costs.\n"
+        );
+        thermalExpansionRecipesType = cfg.getString(
+                "Thermal Expansion Recipes Type", CATEGORY_RECIPES, "normal",
+                "Set the recipes type for Thermal Expansion-based exchangers:\n" +
+                        "'easy'     Easy recipes, non-progressive, lowest recipe costs.\n" +
+                        "'normal'   Normal recipes, progressive, moderate recipe costs.\n" +
+                        "'hard'     Hard recipes, progressive, expensive recipe costs.\n"
+        );
+        mekanismRecipesType = cfg.getString(
+                "Mekanism Recipes Type", CATEGORY_RECIPES, "normal",
+                "Set the recipes type for Mekanism-based exchangers:\n" +
+                        "'easy'     Easy recipes, non-progressive, lowest recipe costs.\n" +
+                        "'normal'   Normal recipes, progressive, moderate recipe costs.\n" +
+                        "'hard'     Hard recipes, progressive, expensive recipe costs.\n"
+        );
+        immersiveEngineeringRecipesType = cfg.getString(
+                "Immersive Engineering Recipes Type", CATEGORY_RECIPES, "normal",
+                "Set the recipes type for Immersive Engineering-based exchangers:\n" +
+                        "'easy'     Easy recipes, non-progressive, lowest recipe costs.\n" +
+                        "'normal'   Normal recipes, progressive, moderate recipe costs.\n" +
+                        "'hard'     Hard recipes, progressive, expensive recipe costs.\n"
+        );
 
         //Vanilla Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_VANILLA, "Vanilla Exchanger Tweaks");
@@ -215,6 +255,21 @@ public class Config {
                 100000000, "Set the RF capacity for Ultimate Exchanger");
         ultimatePerBlockUse = cfg.getInt("Ultimate Exchanger Power Consumption", CATEGORY_TWEAKS_MEKANISM, 500,
                 1, 5000, "Set the RF consumption per block for Ultimate Exchanger");
+
+        //Immersive Engineering Tweaks
+        cfg.addCustomCategoryComment(CATEGORY_TWEAKS_IE, "Immersive Engineering Exchanger Tweaks");
+        lvMaxEnergy = cfg.getInt("LV Exchanger Capacity", CATEGORY_TWEAKS_IE, 100000, 1000, 100000000,
+                "Set the RF capacity for LV Exchanger");
+        lvPerBlockUse = cfg.getInt("LV Exchanger Power Consumption", CATEGORY_TWEAKS_IE, 100, 1, 1000,
+                "Set the RF consumption per block for LV Exchanger");
+        mvMaxEnergy = cfg.getInt("MV Exchanger Capacity", CATEGORY_TWEAKS_IE, 500000, 1000,
+                100000000, "Set the RF capacity for MV Exchanger");
+        mvPerBlockUse = cfg.getInt("MV Exchanger Power Consumption", CATEGORY_TWEAKS_IE, 250,
+                1, 2500, "Set the RF consumption per block for MV Exchanger");
+        hvMaxEnergy = cfg.getInt("HV Exchanger Capacity", CATEGORY_TWEAKS_IE, 2500000, 1000, 100000000,
+                "Set the RF capacity for HV Exchanger");
+        hvPerBlockUse = cfg.getInt("HV Exchanger Power Consumption", CATEGORY_TWEAKS_IE, 500, 1,
+                5000, "Set the RF consumption per block for HV Exchanger");
 
     }
 

@@ -107,7 +107,7 @@ public class Recipes {
                     );
                     GameRegistry.addRecipe(
                             new ShapedOreRecipe(new ItemStack(ExchangersItems.exchangerCoreT3),
-                                    "DBE", "BCB", "EBD",
+                                    "DED", "BCB", "DED",
                                     'D', "gemDiamond", 'E', "gemEmerald", 'C', ExchangersItems.exchangerCoreT2, 'B', "blockDiamond")
                     );
                     break;
@@ -331,7 +331,7 @@ public class Recipes {
                         GameRegistry.addRecipe(
                                 new ShapedOreRecipe(new ItemStack(ExchangersItems.teExchangerCoreT3),
                                         "LSL", "SGS", "LSL",
-                                        'C', ExchangersItems.teExchangerCoreT2, 'S', "ingotSignalum", 'L', "gearLumium", 'G', ThermalExpansionIntegration.bucketGelidCryotheum)
+                                        'C', ExchangersItems.teExchangerCoreT2, 'S', "gearSignalum", 'L', "gearLumium", 'G', ThermalExpansionIntegration.bucketGelidCryotheum)
                         );
                         break;
                     }
@@ -364,7 +364,7 @@ public class Recipes {
                         GameRegistry.addRecipe(
                                 new ShapedOreRecipe(new ItemStack(ExchangersItems.teExchangerCoreT3),
                                         "LSL", "GCG", "LSL",
-                                        'C', ExchangersItems.teExchangerCoreT2, 'L', "gearLumium", 'S', "ingotSignalum", 'G', ThermalExpansionIntegration.bucketGelidCryotheum)
+                                        'C', ExchangersItems.teExchangerCoreT2, 'L', "gearLumium", 'S', "gearSignalum", 'G', ThermalExpansionIntegration.bucketGelidCryotheum)
                         );
                         break;
                     }
@@ -518,7 +518,7 @@ public class Recipes {
                                 "CIC", "IBI", "CIC",
                                 'C', ImmersiveEngineeringIntegration.lvWireCoil, 'I', ImmersiveEngineeringIntegration.ironMechanicalComponent, 'B', ImmersiveEngineeringIntegration.bucketCreosote)
                 );
-                switch (Config.mekanismRecipesType) {
+                switch (Config.immersiveEngineeringRecipesType) {
                     case "easy": {
                         GameRegistry.addRecipe(
                                 new ShapedOreRecipe(new ItemStack(ExchangersItems.mvExchanger),

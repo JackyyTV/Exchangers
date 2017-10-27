@@ -33,7 +33,7 @@ public class ItemMekanismExchangerCoreT2 extends Item {
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         if (Config.mekanismModule) {
-            if (Loader.isModLoaded("Mekanism")) {
+            if (Loader.isModLoaded("mekanism")) {
                 list.add(new ItemStack(this));
             }
         }

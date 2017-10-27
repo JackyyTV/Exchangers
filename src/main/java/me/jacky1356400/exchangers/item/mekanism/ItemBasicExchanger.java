@@ -49,7 +49,7 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
     @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         if (Config.mekanismModule) {
-            if (Loader.isModLoaded("Mekanism")) {
+            if (Loader.isModLoaded("mekanism")) {
                 ItemStack empty = new ItemStack(this);
                 list.add(empty);
                 ItemStack full = new ItemStack(this);

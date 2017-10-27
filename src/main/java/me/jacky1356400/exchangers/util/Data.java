@@ -22,7 +22,7 @@ public class Data {
     public static final String MCVERSION = "[1.12,)";
     public static final String MODID = "exchangers";
     public static final String MODNAME = "Exchangers";
-    public static final EnumRarity TIER_1 = EnumHelper.addRarity("TIER_1", TextFormatting.GREEN, "EnumTier 1");
+    public static final EnumRarity TIER_1 = EnumHelper.addRarity("TIER_1", TextFormatting.GREEN, "Tier 1");
     public static final String DEPENDS
             = "required-after:redstoneflux;"
             + "after:enderio;"

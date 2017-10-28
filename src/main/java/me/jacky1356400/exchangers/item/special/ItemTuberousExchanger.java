@@ -47,8 +47,8 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        return killPlayer(player, stack)? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        return killPlayer(player, player.getHeldItem(hand))? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
     }
 
     @Override

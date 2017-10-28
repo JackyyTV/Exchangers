@@ -48,8 +48,8 @@ item.exchangers.mekexcore_t2.name=通用机械交换器核心（等级 2）
 item.exchangers.mekexcore_t3.name=通用机械交换器核心（等级 3）
 #Immersive Engineering
 item.exchangers.ieexcore_t1.name=Immersive Engineering 交换器核心（等级 1）
-item.exchangers.ieexcore_t2.name=Immersive Engineering 交换器核心（等级 1）
-item.exchangers.ieexcore_t3.name=Immersive Engineering 交换器核心（等级 1）
+item.exchangers.ieexcore_t2.name=Immersive Engineering 交换器核心（等级 2）
+item.exchangers.ieexcore_t3.name=Immersive Engineering 交换器核心（等级 3）
 
 #Special Exchangers
 item.exchangers.expotato.name=马铃薯方块交换器

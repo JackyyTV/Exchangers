@@ -160,7 +160,7 @@ public class Recipes {
         }
 
         if (Config.enderIOModule) {
-            if (Loader.isModLoaded("EnderIO")) {
+            if (Loader.isModLoaded("enderio")) {
                 GameRegistry.addRecipe(
                         new ShapedOreRecipe(new ItemStack(ExchangersItems.conductiveIronExchanger),
                                 "IBI", "ICI", "IBI",
@@ -407,7 +407,7 @@ public class Recipes {
         }
 
         if (Config.mekanismModule) {
-            if (Loader.isModLoaded("Mekanism")) {
+            if (Loader.isModLoaded("mekanism")) {
                 GameRegistry.addRecipe(
                         new ShapedOreRecipe(new ItemStack(ExchangersItems.basicExchanger),
                                 "BTB", "BCB", "BTB",

@@ -1,0 +1,91 @@
+#Creative Tab
+itemGroup.exchangers=Wymieniacze
+
+#Key Bindings
+key.categories.exchangers=Wymieniacze
+key.exchangermode=Zmiana Trybu Wymieniaczy
+
+#Death
+death.attack.exchangerpotato=%1$s próbował używać ziemniaczanego wymieniacza
+death.attack.exchangerpotato.player=%1$s próbował używać ziemniaczanego wymieniacza
+death.attack.exchangerpotato.item=%1$s próbował używać ziemniaczanego wymieniacza
+
+#Tooltips
+exchangers.tooltip.durability=Wytrzymałość
+exchangers.tooltip.tier=Poziom %d
+exchangers.tooltip.holdShift=Przytrzymaj %s dla Szczegółów
+exchangers.tooltip.holdShift.shift=Shift
+exchangers.tooltip.shift1=Kucając Kucając kliknij prawy przycisk myszki na blok by go wybrać.
+exchangers.tooltip.shift2=Kliknij prawym przyciskiem myszy na blok by go wymienić.
+exchangers.tooltip.shift3=Użyj przycisku do zmieniania trybów by zmienić tryb.
+exchangers.tooltip.tuberousExchanger.warning=§c§oSprytne! Ale niewymienne.
+exchangers.tooltip.selectedblock=§2Wybrany Blok:
+exchangers.tooltip.currentrange=§2Aktualny Zasięg:
+exchangers.tooltip.maxrange=§2Maksymalny Zasięg:
+exchangers.tooltip.noselectedblock=§4Brak Wybranego Bloku
+
+#Error Messages
+exchangers.error.invalidblock=§cError: Nieprwaidłowy Blok!
+exchangers.error.outofblock=§cError: Brak bloków!
+exchangers.error.nopower=§cError: Brak Energii!
+
+#Crafting Components
+#Vanilla
+item.exchangers.excore_t1.name=Rdzeń Wymieniacza (Poziom 1)
+item.exchangers.excore_t2.name=Rdzeń Wymieniacza (Poziom 2)
+item.exchangers.excore_t3.name=Rdzeń Wymieniacza (Poziom 3)
+#Ender IO
+item.exchangers.eioexcore_t1.name=Rdzeń Wymieniacza z Ender IO (Poziom 1)
+item.exchangers.eioexcore_t2.name=Rdzeń Wymieniacza z Ender IO (Poziom 2)
+item.exchangers.eioexcore_t3.name=Rdzeń Wymieniacza z Ender IO (Poziom 3)
+#Thermal Expansion
+item.exchangers.teexcore_t1.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 1)
+item.exchangers.teexcore_t2.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 2)
+item.exchangers.teexcore_t3.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 3)
+#Mekanism
+item.exchangers.mekexcore_t1.name=Rdzeń Wymieniacza z Mekanismu (Poziom 1)
+item.exchangers.mekexcore_t2.name=Rdzeń Wymieniacza z Mekanismu (Poziom 2)
+item.exchangers.mekexcore_t3.name=Rdzeń Wymieniacza z Mekanismu (Poziom 3)
+#Immersive Engineering
+item.exchangers.ieexcore_t1.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 1)
+item.exchangers.ieexcore_t2.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 2)
+item.exchangers.ieexcore_t3.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 3)
+
+#Special Exchangers
+item.exchangers.expotato.name=Bulwiasty Wymieniacz
+item.exchangers.excreative.name=Kreatywny Wymieniacz
+
+#Vanilla Exchangers
+item.exchangers.exwooden.name=Drewniany Wymieniacz
+item.exchangers.exstone.name=Kamienny Wymieniacz
+item.exchangers.exgolden.name=Złoty Wymieniacz
+item.exchangers.exiron.name=Żelazny Wymieniacz
+item.exchangers.exdiamond.name=Diamentowy Wymieniacz
+item.exchangers.exemerald.name=Szmaragdowy Wymieniacz
+item.exchangers.exobsidian.name=Obsydianowy Wymieniacz
+
+#Ender IO Exchangers
+item.exchangers.exconductive.name=Wymieniacz z Przewodzącego Żelaza
+item.exchangers.expulsating.name=Wymieniacz z Pulsującego Żelaza
+item.exchangers.exelectricalsteel.name=Wymieniacz z Elektrycznej Stali
+item.exchangers.exenergetic.name=EnergetycznyWymieniacz
+item.exchangers.exdarksteel.name=Wymieniacz z Ciemnej Stali
+item.exchangers.exvibrant.name=Wibrujący Wymieniacz
+
+#Thermal Expansion Exchangers
+item.exchangers.exleadstone.name=Ołowiany Wymieniacz
+item.exchangers.exhardened.name=Utwardzony Wymieniacz
+item.exchangers.exreinforced.name=Wzmocniony Wymieniacz
+item.exchangers.exsignalum.name=Wymieniacz z Signalum
+item.exchangers.exresonant.name=Rezonansowy Wymieniacz
+
+#Mekanism Exchangers
+item.exchangers.exbasic.name=Podstawowy Wymieniacz
+item.exchangers.exadvanced.name=Zaawansowany Wymieniacz
+item.exchangers.exelite.name=Elitarny Wymieniacz
+item.exchangers.exultimate.name=Najlepszy Wymieniacz
+
+#Immersive Engineering Exchangers
+item.exchangers.exlv.name=LV Wymieniacz
+item.exchangers.exmv.name=MV Wymieniacz
+item.exchangers.exhv.name=HV Wymieniacz

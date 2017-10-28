@@ -14,6 +14,7 @@ import me.jacky1356400.exchangers.util.Data;
 import me.jacky1356400.exchangers.util.EnumTier;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,6 +25,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import javax.annotation.Nonnull;
 
 public class ModRegistry {
 
@@ -821,43 +825,43 @@ public class ModRegistry {
                     GameRegistry.addShapedRecipe(
                             new ResourceLocation(Data.MODID + ":vanilla_core_tier2_easy"), null, new ItemStack(CORE_2),
                                     "ILI", "LEL", "ILI",
-                                    'I', "ingotIron", 'E', Items.ENDER_EYE, 'L', "gemLapis", 'C', CORE_1
+                                    'I', "ingotIron", 'E', Items.ENDER_EYE, 'L', "gemLapis"
                     );
                     GameRegistry.addShapedRecipe(
                             new ResourceLocation(Data.MODID + ":vanilla_core_tier3_easy"), null, new ItemStack(CORE_3),
                                     "DED", "EBE", "DED",
-                                    'D', "gemDiamond", 'E', "gemEmerald", 'C', CORE_2, 'B', "blockDiamond"
+                                    'D', "gemDiamond", 'E', "gemEmerald", 'B', "blockDiamond"
                     );
                     break;
                 }
                 case "normal": {
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":stone_exchanger_normal"), null, new ItemStack(STONE),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":stone_exchanger_normal"), new ItemStack(STONE), new ItemStack(WOODEN),
                                     "SCS", "EXE", "SSS",
                                     'S', "stone", 'E', Items.ENDER_EYE, 'C', CORE_1, 'X', WOODEN
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":golden_exchanger_normal"), null, new ItemStack(GOLD),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":golden_exchanger_normal"), new ItemStack(GOLD), new ItemStack(STONE),
                                     "GCG", "EXE", "GGG",
                                     'G', "ingotGold", 'E', Items.ENDER_EYE, 'C', CORE_2, 'X', STONE
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":iron_exchanger_normal"), null, new ItemStack(IRON),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":iron_exchanger_normal"), new ItemStack(IRON), new ItemStack(GOLD),
                                     "ICI", "EXE", "III",
                                     'I', "ingotIron", 'E', Items.ENDER_EYE, 'C', CORE_2, 'X', GOLD
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":diamond_exchanger_normal"), null, new ItemStack(DIAMOND),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":diamond_exchanger_normal"), new ItemStack(DIAMOND), new ItemStack(IRON),
                                     "DCD", "EXE", "DDD",
                                     'D', "gemDiamond", 'E', Items.ENDER_EYE, 'C', CORE_3, 'X', IRON
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":emerald_exchanger_normal"), null, new ItemStack(EMERALD),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":emerald_exchanger_normal"), new ItemStack(EMERALD), new ItemStack(DIAMOND),
                                     "MCM", "EXE", "MMM",
                                     'M', "gemEmerald", 'E', Items.ENDER_EYE, 'C', CORE_3, 'X', DIAMOND
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":obsidian_exchanger_normal"), null, new ItemStack(OBSIDIAN),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":obsidian_exchanger_normal"), new ItemStack(OBSIDIAN), new ItemStack(EMERALD),
                                     "OCO", "EXE", "OOO",
                                     'O', "obsidian", 'E', Items.ENDER_EYE, 'C', CORE_3, 'X', EMERALD
                     );
@@ -874,33 +878,33 @@ public class ModRegistry {
                     break;
                 }
                 case "hard": {
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":stone_exchanger_hard"), null, new ItemStack(STONE),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":stone_exchanger_hard"), new ItemStack(STONE), new ItemStack(WOODEN),
                                     "SES", "CXC", "SES",
                                     'S', "stone", 'E', Items.ENDER_EYE, 'C', CORE_1, 'X', WOODEN
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":golden_exchanger_hard"), null, new ItemStack(GOLD),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":golden_exchanger_hard"), new ItemStack(GOLD), new ItemStack(STONE),
                                     "GEG", "CXC", "GEG",
                                     'G', "ingotGold", 'E', Items.ENDER_EYE, 'C', CORE_2, 'X', STONE
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":iron_exchanger_hard"), null, new ItemStack(IRON),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":iron_exchanger_hard"), new ItemStack(IRON), new ItemStack(GOLD),
                                     "IEI", "CXC", "IEI",
                                     'I', "ingotIron", 'E', Items.ENDER_EYE, 'C', CORE_2, 'X', GOLD
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":diamond_exchanger_hard"), null, new ItemStack(DIAMOND),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":diamond_exchanger_hard"), new ItemStack(DIAMOND), new ItemStack(IRON),
                                     "DED", "CXC", "DED",
                                     'D', "gemDiamond", 'E', Items.ENDER_EYE, 'C', CORE_3, 'X', IRON
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":emerald_exchanger_hard"), null, new ItemStack(EMERALD),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":emerald_exchanger_hard"), new ItemStack(EMERALD), new ItemStack(DIAMOND),
                                     "MEM", "CXC", "MEM",
                                     'M', "gemEmerald", 'E', Items.ENDER_EYE, 'C', CORE_3, 'X', DIAMOND
                     );
-                    GameRegistry.addShapedRecipe(
-                            new ResourceLocation(Data.MODID + ":obsidian_exchanger_hard"), null, new ItemStack(OBSIDIAN),
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Data.MODID + ":obsidian_exchanger_hard"), new ItemStack(OBSIDIAN), new ItemStack(EMERALD),
                                     "OEO", "CXC", "OEO",
                                     'O', "obsidian", 'E', Items.ENDER_EYE, 'C', CORE_3, 'X', EMERALD
                     );
@@ -961,38 +965,38 @@ public class ModRegistry {
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Data.MODID + ":eio_core_tier2_easy"), null, new ItemStack(EIOCORE_2),
                                         "PSP", "SDS", "PSP",
-                                        'P', "itemPulsatingPowder", 'S', "ingotElectricalSteel", 'C', EIOCORE_1, 'D', EnderIOIntegration.bucketDewOfTheVoid
+                                        'P', "itemPulsatingPowder", 'S', "ingotElectricalSteel", 'D', EnderIOIntegration.bucketDewOfTheVoid
                         );
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Data.MODID + ":eio_core_tier3_easy"), null, new ItemStack(EIOCORE_3),
                                         "DBD", "BVB", "DBD",
-                                        'C', EIOCORE_2, 'D', "ingotDarkSteel", 'B', EnderIOIntegration.basicCapacitor, 'V', EnderIOIntegration.bucketVaporOfLevity
+                                        'D', "ingotDarkSteel", 'B', EnderIOIntegration.basicCapacitor, 'V', EnderIOIntegration.bucketVaporOfLevity
                         );
                         break;
                     }
                     case "normal": {
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":pulsating_exchanger_normal"), null, new ItemStack(PULSATING),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":pulsating_exchanger_normal"), new ItemStack(PULSATING), new ItemStack(CONDUCTIVE),
                                         "ICI", "PXP", "IBI",
                                         'I', "ingotPulsatingIron", 'P', EnderIOIntegration.pulsatingCrystal, 'B', EnderIOIntegration.basicCapacitor, 'C', EIOCORE_1, 'X', CONDUCTIVE
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":electricalsteel_exchanger_normal"), null, new ItemStack(ELECTRICALSTEEL),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":electricalsteel_exchanger_normal"), new ItemStack(ELECTRICALSTEEL), new ItemStack(PULSATING),
                                         "SCS", "DXD", "SBS",
                                         'S', "ingotElectricalSteel", 'B', EnderIOIntegration.capacitorBankBasic, 'D', EnderIOIntegration.doubleLayerCapacitor, 'C', EIOCORE_2, 'X', PULSATING
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":energetic_exchanger_normal"), null, new ItemStack(ENERGETIC),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":energetic_exchanger_normal"), new ItemStack(ENERGETIC), new ItemStack(ELECTRICALSTEEL),
                                         "ACA", "DXD", "ABA",
                                         'A', "ingotEnergeticAlloy", 'B', EnderIOIntegration.capacitorBank, 'D', EnderIOIntegration.doubleLayerCapacitor, 'C', EIOCORE_2, 'X', ELECTRICALSTEEL
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":darksteel_exchanger_normal"), null, new ItemStack(DARKSTEEL),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":darksteel_exchanger_normal"), new ItemStack(DARKSTEEL), new ItemStack(ENERGETIC),
                                         "SCS", "VXV", "SOS",
                                         'S', "ingotDarkSteel", 'O', EnderIOIntegration.octadicCapacitor, 'V', EnderIOIntegration.vibrantCrystal, 'C', EIOCORE_3, 'X', ENERGETIC
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":vibrant_exchanger_normal"), null, new ItemStack(VIBRANT),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":vibrant_exchanger_normal"), new ItemStack(VIBRANT), new ItemStack(DARKSTEEL),
                                         "ACA", "EXE", "ABA",
                                         'A', "ingotVibrantAlloy", 'B', EnderIOIntegration.capacitorBankVibrant, 'E', EnderIOIntegration.enderCrystal, 'C', EIOCORE_3, 'X', DARKSTEEL
                         );
@@ -1009,28 +1013,28 @@ public class ModRegistry {
                         break;
                     }
                     case "hard": {
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":pulsating_exchanger_hard"), null, new ItemStack(PULSATING),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":pulsating_exchanger_hard"), new ItemStack(PULSATING), new ItemStack(CONDUCTIVE),
                                         "IPI", "CXC", "IBI",
                                         'I', "ingotPulsatingIron", 'P', EnderIOIntegration.pulsatingCrystal, 'B', EnderIOIntegration.basicCapacitor, 'C', EIOCORE_1, 'X', CONDUCTIVE
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":electricalsteel_exchanger_hard"), null, new ItemStack(ELECTRICALSTEEL),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":electricalsteel_exchanger_hard"), new ItemStack(ELECTRICALSTEEL), new ItemStack(PULSATING),
                                         "SDS", "CXC", "SBS",
                                         'S', "ingotElectricalSteel", 'B', EnderIOIntegration.capacitorBankBasic, 'D', EnderIOIntegration.doubleLayerCapacitor, 'C', EIOCORE_2, 'X', PULSATING
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":energetic_exchanger_hard"), null, new ItemStack(ENERGETIC),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":energetic_exchanger_hard"), new ItemStack(ENERGETIC), new ItemStack(ELECTRICALSTEEL),
                                         "ADA", "CXC", "ABA",
                                         'A', "ingotEnergeticAlloy", 'B', EnderIOIntegration.capacitorBank, 'D', EnderIOIntegration.doubleLayerCapacitor, 'C', EIOCORE_2, 'X', ELECTRICALSTEEL
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":darksteel_exchanger_hard"), null, new ItemStack(DARKSTEEL),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":darksteel_exchanger_hard"), new ItemStack(DARKSTEEL), new ItemStack(ENERGETIC),
                                         "SVS", "CXC", "SOS",
                                         'S', "ingotDarkSteel", 'O', EnderIOIntegration.octadicCapacitor, 'V', EnderIOIntegration.vibrantCrystal, 'C', EIOCORE_3, 'X', ENERGETIC
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":vibrant_exchanger_hard"), null, new ItemStack(VIBRANT),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":vibrant_exchanger_hard"), new ItemStack(VIBRANT), new ItemStack(DARKSTEEL),
                                         "AEA", "CXC", "ABA",
                                         'A', "ingotVibrantAlloy", 'B', EnderIOIntegration.capacitorBankVibrant, 'E', EnderIOIntegration.enderCrystal, 'C', EIOCORE_3, 'X', DARKSTEEL
                         );
@@ -1087,33 +1091,33 @@ public class ModRegistry {
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Data.MODID + ":te_core_tier2_easy"), null, new ItemStack(TECORE_2),
                                         "BIB", "IGI", "BIB",
-                                        'B', "gearBronze", 'I', "gearInvar", 'C', TECORE_1, 'G', ThermalExpansionIntegration.bucketEnergizedGlowstone
+                                        'B', "gearBronze", 'I', "gearInvar", 'G', ThermalExpansionIntegration.bucketEnergizedGlowstone
                         );
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Data.MODID + ":te_core_tier3_easy"), null, new ItemStack(TECORE_3),
                                         "LSL", "SGS", "LSL",
-                                        'C', TECORE_2, 'S', "gearSignalum", 'L', "gearLumium", 'G', ThermalExpansionIntegration.bucketGelidCryotheum
+                                        'S', "gearSignalum", 'L', "gearLumium", 'G', ThermalExpansionIntegration.bucketGelidCryotheum
                         );
                         break;
                     }
                     case "normal": {
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":hardened_exchanger_normal"), null, new ItemStack(HARDENED),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":hardened_exchanger_normal"), new ItemStack(HARDENED), new ItemStack(LEADSTONE),
                                         "ICI", "RXR", "IFI",
                                         'I', "ingotInvar", 'R', ThermalExpansionIntegration.redstoneReceptionCoil, 'F', ThermalExpansionIntegration.fluxCapacitorHardened, 'C', TECORE_1, 'X', LEADSTONE
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":reinforced_exchanger_normal"), null, new ItemStack(REINFORCED),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":reinforced_exchanger_normal"), new ItemStack(REINFORCED), new ItemStack(HARDENED),
                                         "ECE", "RXR", "EFE",
                                         'E', "ingotElectrum", 'R', ThermalExpansionIntegration.redstoneTransmissionCoil, 'F', ThermalExpansionIntegration.fluxCapacitorReinforced, 'C', TECORE_2, 'X', HARDENED
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":signalum_exchanger_normal"), null, new ItemStack(SIGNALUM),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":signalum_exchanger_normal"), new ItemStack(SIGNALUM), new ItemStack(REINFORCED),
                                         "SCS", "RXR", "SFS",
                                         'S', "ingotSignalum", 'R', ThermalExpansionIntegration.redstoneConductanceCoil, 'F', ThermalExpansionIntegration.fluxCapacitorSignalum, 'C', TECORE_3, 'X', REINFORCED
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":resonant_exchanger_normal"), null, new ItemStack(RESONANT),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":resonant_exchanger_normal"), new ItemStack(RESONANT), new ItemStack(SIGNALUM),
                                         "ICI", "RXR", "IFI",
                                         'I', "ingotEnderium", 'R', ThermalExpansionIntegration.redstoneConductanceCoil, 'F', ThermalExpansionIntegration.fluxCapacitorResonant, 'C', TECORE_3, 'X', SIGNALUM
                         );
@@ -1130,23 +1134,23 @@ public class ModRegistry {
                         break;
                     }
                     case "hard": {
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":hardened_exchanger_hard"), null, new ItemStack(HARDENED),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":hardened_exchanger_hard"), new ItemStack(HARDENED), new ItemStack(LEADSTONE),
                                         "IRI", "CXC", "IFI",
                                         'I', "ingotInvar", 'R', ThermalExpansionIntegration.redstoneReceptionCoil, 'F', ThermalExpansionIntegration.fluxCapacitorHardened, 'C', TECORE_1, 'X', LEADSTONE
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":reinforced_exchanger_hard"), null, new ItemStack(REINFORCED),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":reinforced_exchanger_hard"), new ItemStack(REINFORCED), new ItemStack(HARDENED),
                                         "ERE", "CXC", "EFE",
                                         'E', "ingotElectrum", 'R', ThermalExpansionIntegration.redstoneTransmissionCoil, 'F', ThermalExpansionIntegration.fluxCapacitorReinforced, 'C', TECORE_2, 'X', HARDENED
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":signalum_exchanger_hard"), null, new ItemStack(SIGNALUM),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":signalum_exchanger_hard"), new ItemStack(SIGNALUM), new ItemStack(REINFORCED),
                                         "SRS", "CXC", "SFS",
                                         'S', "ingotSignalum", 'R', ThermalExpansionIntegration.redstoneConductanceCoil, 'F', ThermalExpansionIntegration.fluxCapacitorSignalum, 'C', TECORE_3, 'X', REINFORCED
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":resonant_exchanger_hard"), null, new ItemStack(RESONANT),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":resonant_exchanger_hard"), new ItemStack(RESONANT), new ItemStack(SIGNALUM),
                                         "IRI", "CXC", "IFI",
                                         'I', "ingotEnderium", 'R', ThermalExpansionIntegration.redstoneConductanceCoil, 'F', ThermalExpansionIntegration.fluxCapacitorResonant, 'C', TECORE_3, 'X', SIGNALUM
                         );
@@ -1208,18 +1212,18 @@ public class ModRegistry {
                         break;
                     }
                     case "normal": {
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":advanced_exchanger_normal"), null, new ItemStack(ADVANCED),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":advanced_exchanger_normal"), new ItemStack(ADVANCED), new ItemStack(BASIC),
                                         "ACA", "TXT", "AAA",
                                         'A', MekanismIntegration.circuitAdvanced, 'T', MekanismIntegration.energyTablet, 'C', MEKCORE_2, 'X', BASIC
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":elite_exchanger_normal"), null, new ItemStack(ELITE),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":elite_exchanger_normal"), new ItemStack(ELITE), new ItemStack(ADVANCED),
                                         "ECE", "TXT", "EPE",
                                         'E', MekanismIntegration.circuitElite, 'P', MekanismIntegration.teleportationCore, 'T', MekanismIntegration.energyTablet, 'C', MEKCORE_3, 'X', ADVANCED
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":ultimate_exchanger_normal"), null, new ItemStack(ULTIMATE),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":ultimate_exchanger_normal"), new ItemStack(ULTIMATE), new ItemStack(ELITE),
                                         "UCU", "TXT", "UUU",
                                         'U', MekanismIntegration.circuitUltimate, 'T', MekanismIntegration.portableTeleporter, 'C', MEKCORE_3, 'X', ELITE
                         );
@@ -1236,18 +1240,18 @@ public class ModRegistry {
                         break;
                     }
                     case "hard": {
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":advanced_exchanger_hard"), null, new ItemStack(ADVANCED),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":advanced_exchanger_hard"), new ItemStack(ADVANCED), new ItemStack(BASIC),
                                         "ATA", "CXC", "ATA",
                                         'A', MekanismIntegration.circuitAdvanced, 'T', MekanismIntegration.energyTablet, 'C', MEKCORE_2, 'X', BASIC
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":elite_exchanger_hard"), null, new ItemStack(ELITE),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":elite_exchanger_hard"), new ItemStack(ELITE), new ItemStack(ADVANCED),
                                         "EPE", "CXC", "ETE",
                                         'E', MekanismIntegration.circuitElite, 'P', MekanismIntegration.teleportationCore, 'T', MekanismIntegration.energyTablet, 'C', MEKCORE_3, 'X', ADVANCED
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":ultimate_exchanger_hard"), null, new ItemStack(ULTIMATE),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":ultimate_exchanger_hard"), new ItemStack(ULTIMATE), new ItemStack(ELITE),
                                         "UTU", "CXC", "UTU",
                                         'U', MekanismIntegration.circuitUltimate, 'T', MekanismIntegration.portableTeleporter, 'C', MEKCORE_3, 'X', ELITE
                         );
@@ -1304,13 +1308,13 @@ public class ModRegistry {
                         break;
                     }
                     case "normal": {
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":mv_exchanger_normal"), null, new ItemStack(MV),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":mv_exchanger_normal"), new ItemStack(MV), new ItemStack(LV),
                                         "SCS", "MXM", "SSS",
                                         'S', "blockSheetmetalElectrum", 'M', ImmersiveEngineeringIntegration.mvCapacitor, 'C', IECORE_2, 'X', LV
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":hv_exchanger_normal"), null, new ItemStack(HV),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":hv_exchanger_normal"), new ItemStack(HV), new ItemStack(MV),
                                         "SCS", "HXH", "SSS",
                                         'S', "blockSheetmetalSteel", 'H', ImmersiveEngineeringIntegration.hvCapacitor, 'C', IECORE_3, 'X', MV
                         );
@@ -1327,13 +1331,13 @@ public class ModRegistry {
                         break;
                     }
                     case "hard": {
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":mv_exchanger_hard"), null, new ItemStack(MV),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":mv_exchanger_hard"), new ItemStack(MV), new ItemStack(LV),
                                         "SMS", "CXC", "SMS",
                                         'S', "blockSheetmetalElectrum", 'M', ImmersiveEngineeringIntegration.mvCapacitor, 'C', IECORE_2, 'X', LV
                         );
-                        GameRegistry.addShapedRecipe(
-                                new ResourceLocation(Data.MODID + ":hv_exchanger_hard"), null, new ItemStack(HV),
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Data.MODID + ":hv_exchanger_hard"), new ItemStack(HV), new ItemStack(MV),
                                         "SHS", "CXC", "SHS",
                                         'S', "blockSheetmetalSteel", 'H', ImmersiveEngineeringIntegration.hvCapacitor, 'C', IECORE_3, 'X', MV
                         );
@@ -1360,6 +1364,34 @@ public class ModRegistry {
                             'P', Items.POTATO, 'G', "nuggetGold", 'E', "enderpearl"
             );
         }
+    }
+
+    private static class ShapedCopyNBTRecipe extends ShapedOreRecipe {
+
+        private final ItemStack nbtCopyStack;
+
+        private ShapedCopyNBTRecipe(RegistryEvent.Register<IRecipe> e, ResourceLocation group, @Nonnull ItemStack result, ItemStack nbtCopyStack, Object... recipe) {
+            super(group, result, recipe);
+            this.nbtCopyStack = nbtCopyStack;
+
+            e.getRegistry().register(this.setRegistryName(group));
+        }
+
+        @Override
+        public ItemStack getCraftingResult(InventoryCrafting inventory) {
+            ItemStack stack = super.getCraftingResult(inventory);
+            if (stack != ItemStack.EMPTY) {
+                for (int i = 0; i < inventory.getSizeInventory(); i++) {
+                    ItemStack input = inventory.getStackInSlot(i);
+                    if (this.nbtCopyStack.isItemEqual(input)) {
+                        stack.setTagCompound(input.getTagCompound());
+                        break;
+                    }
+                }
+            }
+            return stack;
+        }
+
     }
 
 }

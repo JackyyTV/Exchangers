@@ -1,6 +1,7 @@
 package me.jacky1356400.exchangers.proxy;
 
 import me.jacky1356400.exchangers.Config;
+import me.jacky1356400.exchangers.handler.EventsHandler;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
 import me.jacky1356400.exchangers.init.ModRegistry;
 import me.jacky1356400.exchangers.util.Data;
@@ -22,6 +23,7 @@ public class CommonProxy {
         Config.readConfig();
         MinecraftForge.EVENT_BUS.register(new ModRegistry());
         PacketHandler.registerMessages(Data.MODID);
+        MinecraftForge.EVENT_BUS.register(new EventsHandler());
     }
 
     public void init(FMLInitializationEvent e) {

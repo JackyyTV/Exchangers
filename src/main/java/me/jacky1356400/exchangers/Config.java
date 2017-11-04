@@ -172,104 +172,104 @@ public class Config {
 
         //Vanilla Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_VANILLA, "Vanilla Exchanger Tweaks");
-        woodMaxDmg = cfg.getInt("Wooden Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 256, 1, 2147483647,
+        woodMaxDmg = cfg.getInt("Wooden Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 256, 1, Integer.MAX_VALUE,
                 "Set the durability for Wooden Exchanger");
-        stoneMaxDmg = cfg.getInt("Stone Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 384, 1, 2147483647,
+        stoneMaxDmg = cfg.getInt("Stone Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 384, 1, Integer.MAX_VALUE,
                 "Set the durability for Stone Exchanger");
-        goldMaxDmg = cfg.getInt("Golden Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 512, 1, 2147483647,
+        goldMaxDmg = cfg.getInt("Golden Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 512, 1, Integer.MAX_VALUE,
                 "Set the durability for Golden Exchanger");
-        ironMaxDmg = cfg.getInt("Iron Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 1024, 1, 2147483647,
+        ironMaxDmg = cfg.getInt("Iron Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 1024, 1, Integer.MAX_VALUE,
                 "Set the durability for Iron Exchanger");
-        diaMaxDmg = cfg.getInt("Diamond Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 4096, 1, 2147483647,
+        diaMaxDmg = cfg.getInt("Diamond Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 4096, 1, Integer.MAX_VALUE,
                 "Set the durability for Diamond Exchanger");
-        emeMaxDmg = cfg.getInt("Emerald Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 8192, 1, 2147483647,
+        emeMaxDmg = cfg.getInt("Emerald Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 8192, 1, Integer.MAX_VALUE,
                 "Set the durability for Emerald Exchanger");
-        obsMaxDmg = cfg.getInt("Obsidian Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 16384, 1, 2147483647,
+        obsMaxDmg = cfg.getInt("Obsidian Exchanger Max Durability", CATEGORY_TWEAKS_VANILLA, 16384, 1, Integer.MAX_VALUE,
                 "Set the durability for Obsidian Exchanger");
 
         //Ender IO Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_EIO, "Ender IO Exchanger Tweaks");
         conductiveMaxEnergy = cfg.getInt("Conductive Iron Exchanger Capacity", CATEGORY_TWEAKS_EIO, 80000,
-                1000, 100000000, "Set the RF capacity for Conductive Iron Exchanger");
+                1000, Integer.MAX_VALUE, "Set the RF capacity for Conductive Iron Exchanger");
         conductivePerBlockUse = cfg.getInt("Conductive Iron Exchanger Power Consumption",
-                CATEGORY_TWEAKS_EIO, 10, 1, 250, "Set the Rf consumption per block for Conductive Iron Exchanger");
+                CATEGORY_TWEAKS_EIO, 10, 1, conductiveMaxEnergy / 10, "Set the Rf consumption per block for Conductive Iron Exchanger");
         pulsatingMaxEnergy = cfg.getInt("Pulsating Iron Exchanger Capacity", CATEGORY_TWEAKS_EIO, 400000, 1000,
-                100000000, "Set the RF capacity for Pulsating Iron Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for Pulsating Iron Exchanger");
         pulsatingPerBlockUse = cfg.getInt("Pulsating Iron Exchanger Power Consumption", CATEGORY_TWEAKS_EIO,
-                50, 1, 500, "Set the RF consumption per block for Pulsating Iron Exchanger");
+                50, 1, pulsatingMaxEnergy / 10, "Set the RF consumption per block for Pulsating Iron Exchanger");
         electricalSteelMaxEnergy = cfg.getInt("Electrical Steel Exchanger Capacity", CATEGORY_TWEAKS_EIO, 800000,
-                1000, 100000000, "Set the RF capacity for Electrical Steel Exchanger");
+                1000, Integer.MAX_VALUE, "Set the RF capacity for Electrical Steel Exchanger");
         electricalSteelPerBlockUse = cfg.getInt("Electrical Steel Exchanger Power Consumption",
-                CATEGORY_TWEAKS_EIO, 100, 1, 1000, "Set the RF consumption per block for Electrical Steel Exchanger");
+                CATEGORY_TWEAKS_EIO, 100, 1, electricalSteelMaxEnergy / 10, "Set the RF consumption per block for Electrical Steel Exchanger");
         energeticMaxEnergy = cfg.getInt("Energetic Exchanger Capacity", CATEGORY_TWEAKS_EIO, 5000000, 1000,
-                100000000, "Set the RF capacity for Energetic Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for Energetic Exchanger");
         energeticPerBlockUse = cfg.getInt("Energetic Exchanger Power Consumption", CATEGORY_TWEAKS_EIO, 250, 1,
-                2500, "Set the RF consumption per block for Energetic Exchanger");
+                energeticMaxEnergy / 10, "Set the RF consumption per block for Energetic Exchanger");
         darkSteelMaxEnergy = cfg.getInt("Dark Steel Exchanger Capacity", CATEGORY_TWEAKS_EIO, 10000000, 1000,
-                100000000, "Set the RF capacity for Dark Steel Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for Dark Steel Exchanger");
         darkSteelPerBlockUse = cfg.getInt("Dark Steel Exchanger Power Consumption", CATEGORY_TWEAKS_EIO, 500, 1,
-                5000, "Set the RF consumption per block for Dark Steel Exchanger");
-        vibrantMaxEnergy = cfg.getInt("Vibrant Exchanger Capacity", CATEGORY_TWEAKS_EIO, 20000000, 1000, 100000000,
+                darkSteelMaxEnergy / 10, "Set the RF consumption per block for Dark Steel Exchanger");
+        vibrantMaxEnergy = cfg.getInt("Vibrant Exchanger Capacity", CATEGORY_TWEAKS_EIO, 20000000, 1000, Integer.MAX_VALUE,
                 "Set the RF capacity for Vibrant Exchanger");
         vibrantPerBlockUse = cfg.getInt("Vibrant Exchanger Power Consumption", CATEGORY_TWEAKS_EIO, 1000, 1,
-                10000, "Set the RF consumption per block for Vibrant Exchanger");
+                vibrantMaxEnergy / 10, "Set the RF consumption per block for Vibrant Exchanger");
 
         //Thermal Expansion Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_TE, "Thermal Expansion Exchanger Tweaks");
-        leadstoneMaxEnergy = cfg.getInt("Leadstone Exchanger Capacity", CATEGORY_TWEAKS_TE, 80000, 1000, 100000000,
+        leadstoneMaxEnergy = cfg.getInt("Leadstone Exchanger Capacity", CATEGORY_TWEAKS_TE, 80000, 1000, Integer.MAX_VALUE,
                 "Set the RF capacity for Leadstone Exchanger");
         leadstonePerBlockUse = cfg.getInt("Leadstone Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 10, 1,
-                250, "Set the RF consumption per block for Leadstone Exchanger");
-        hardenedMaxEnergy = cfg.getInt("Hardened Exchanger Capacity", CATEGORY_TWEAKS_TE, 500000, 1000, 100000000,
+                leadstoneMaxEnergy / 10, "Set the RF consumption per block for Leadstone Exchanger");
+        hardenedMaxEnergy = cfg.getInt("Hardened Exchanger Capacity", CATEGORY_TWEAKS_TE, 500000, 1000, Integer.MAX_VALUE,
                 "Set the RF capacity for Hardened Exchanger");
-        hardenedPerBlockUse = cfg.getInt("Hardened Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 50, 1, 500,
+        hardenedPerBlockUse = cfg.getInt("Hardened Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 50, 1, hardenedMaxEnergy / 10,
                 "Set the RF consumption per block for Hardened Exchanger");
         reinforcedMaxEnergy = cfg.getInt("Reinforced Exchanger Capacity", CATEGORY_TWEAKS_TE, 1000000, 1000,
-                100000000, "Set the RF capacity for Reinforced Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for Reinforced Exchanger");
         reinforcedPerBlockUse = cfg.getInt("Reinforced Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 100, 1,
-                1000, "Set the RF consumption per block for Reinforced Exchanger");
+                reinforcedMaxEnergy / 10, "Set the RF consumption per block for Reinforced Exchanger");
         signalumMaxEnergy = cfg.getInt("Signalum Exchanger Capacity", CATEGORY_TWEAKS_TE, 10000000, 1000,
-                100000000, "Set the RF capacity for Signalum Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for Signalum Exchanger");
         signalumPerBlockUse = cfg.getInt("Signalum Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 500, 1,
-                5000, "Set the RF consumption per block for Signalum Exchanger");
+                signalumMaxEnergy / 10, "Set the RF consumption per block for Signalum Exchanger");
         resonantMaxEnergy = cfg.getInt("Resonant Exchanger Capacity", CATEGORY_TWEAKS_TE, 20000000, 1000,
-                100000000, "Set the RF capacity for Resonant Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for Resonant Exchanger");
         resonantPerBlockUse = cfg.getInt("Resonant Exchanger Power Consumption", CATEGORY_TWEAKS_TE, 1000, 1,
-                10000, "Set the RF consumption per block for Resonant Exchanger");
+                resonantMaxEnergy / 10, "Set the RF consumption per block for Resonant Exchanger");
 
         //Mekanism Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_MEKANISM, "Mekanism Exchanger Tweaks");
-        basicMaxEnergy = cfg.getInt("Basic Exchanger Capacity", CATEGORY_TWEAKS_MEKANISM, 100000, 1000, 100000000,
+        basicMaxEnergy = cfg.getInt("Basic Exchanger Capacity", CATEGORY_TWEAKS_MEKANISM, 100000, 1000, Integer.MAX_VALUE,
                 "Set the RF capacity for Basic Exchanger");
-        basicPerBlockUse = cfg.getInt("Basic Exchanger Power Consumption", CATEGORY_TWEAKS_MEKANISM, 50, 1, 500,
+        basicPerBlockUse = cfg.getInt("Basic Exchanger Power Consumption", CATEGORY_TWEAKS_MEKANISM, 50, 1, basicMaxEnergy / 10,
                 "Set the RF consumption per block for Basic Exchanger");
         advancedMaxEnergy = cfg.getInt("Advanced Exchanger Capacity", CATEGORY_TWEAKS_MEKANISM, 800000, 1000,
-                100000000, "Set the RF capacity for Advanced Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for Advanced Exchanger");
         advancedPerBlockUse = cfg.getInt("Advanced Exchanger Power Consumption", CATEGORY_TWEAKS_MEKANISM, 100,
-                1, 1000, "Set the RF consumption per block for Advanced Exchanger");
-        eliteMaxEnergy = cfg.getInt("Elite Exchanger Capacity", CATEGORY_TWEAKS_MEKANISM, 5000000, 1000, 100000000,
+                1, advancedMaxEnergy / 10, "Set the RF consumption per block for Advanced Exchanger");
+        eliteMaxEnergy = cfg.getInt("Elite Exchanger Capacity", CATEGORY_TWEAKS_MEKANISM, 5000000, 1000, Integer.MAX_VALUE,
                 "Set the RF capacity for Elite Exchanger");
         elitePerBlockUse = cfg.getInt("Elite Exchanger Power Consumption", CATEGORY_TWEAKS_MEKANISM, 250, 1,
-                2500, "Set the RF consumption per block for Elite Exchanger");
+                eliteMaxEnergy / 10, "Set the RF consumption per block for Elite Exchanger");
         ultimateMaxEnergy = cfg.getInt("Ultimate Exchanger Capacity", CATEGORY_TWEAKS_MEKANISM, 10000000, 1000,
-                100000000, "Set the RF capacity for Ultimate Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for Ultimate Exchanger");
         ultimatePerBlockUse = cfg.getInt("Ultimate Exchanger Power Consumption", CATEGORY_TWEAKS_MEKANISM, 500,
-                1, 5000, "Set the RF consumption per block for Ultimate Exchanger");
+                1, ultimateMaxEnergy / 10, "Set the RF consumption per block for Ultimate Exchanger");
 
         //Immersive Engineering Tweaks
         cfg.addCustomCategoryComment(CATEGORY_TWEAKS_IE, "Immersive Engineering Exchanger Tweaks");
-        lvMaxEnergy = cfg.getInt("LV Exchanger Capacity", CATEGORY_TWEAKS_IE, 100000, 1000, 100000000,
+        lvMaxEnergy = cfg.getInt("LV Exchanger Capacity", CATEGORY_TWEAKS_IE, 100000, 1000, Integer.MAX_VALUE,
                 "Set the RF capacity for LV Exchanger");
-        lvPerBlockUse = cfg.getInt("LV Exchanger Power Consumption", CATEGORY_TWEAKS_IE, 100, 1, 1000,
+        lvPerBlockUse = cfg.getInt("LV Exchanger Power Consumption", CATEGORY_TWEAKS_IE, 100, 1, lvMaxEnergy / 10,
                 "Set the RF consumption per block for LV Exchanger");
         mvMaxEnergy = cfg.getInt("MV Exchanger Capacity", CATEGORY_TWEAKS_IE, 500000, 1000,
-                100000000, "Set the RF capacity for MV Exchanger");
+                Integer.MAX_VALUE, "Set the RF capacity for MV Exchanger");
         mvPerBlockUse = cfg.getInt("MV Exchanger Power Consumption", CATEGORY_TWEAKS_IE, 250,
-                1, 2500, "Set the RF consumption per block for MV Exchanger");
-        hvMaxEnergy = cfg.getInt("HV Exchanger Capacity", CATEGORY_TWEAKS_IE, 2500000, 1000, 100000000,
+                1, mvMaxEnergy / 10, "Set the RF consumption per block for MV Exchanger");
+        hvMaxEnergy = cfg.getInt("HV Exchanger Capacity", CATEGORY_TWEAKS_IE, 2500000, 1000, Integer.MAX_VALUE,
                 "Set the RF capacity for HV Exchanger");
         hvPerBlockUse = cfg.getInt("HV Exchanger Power Consumption", CATEGORY_TWEAKS_IE, 500, 1,
-                5000, "Set the RF consumption per block for HV Exchanger");
+                hvMaxEnergy / 10, "Set the RF consumption per block for HV Exchanger");
 
     }
 

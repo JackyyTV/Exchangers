@@ -4,11 +4,13 @@ import me.jacky1356400.exchangers.Config;
 import me.jacky1356400.exchangers.Exchangers;
 import me.jacky1356400.exchangers.ExchangersItems;
 import me.jacky1356400.exchangers.Recipes;
+import me.jacky1356400.exchangers.handler.EventsHandler;
 import me.jacky1356400.exchangers.handler.network.PacketHandler;
 import me.jacky1356400.exchangers.integration.EnderIOIntegration;
 import me.jacky1356400.exchangers.integration.ImmersiveEngineeringIntegration;
 import me.jacky1356400.exchangers.integration.MekanismIntegration;
 import me.jacky1356400.exchangers.integration.ThermalExpansionIntegration;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -48,6 +50,7 @@ public class CommonProxy {
         }
         Recipes.init();
         PacketHandler.registerMessages(Exchangers.MODID);
+        MinecraftForge.EVENT_BUS.register(new EventsHandler());
     }
 
     public void init(FMLInitializationEvent e) {

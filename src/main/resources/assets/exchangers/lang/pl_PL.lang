@@ -86,6 +86,6 @@ item.exchangers.exelite.name=Elitarny Wymieniacz
 item.exchangers.exultimate.name=Najlepszy Wymieniacz
 
 #Immersive Engineering Exchangers
-item.exchangers.exlv.name=LV Wymieniacz
-item.exchangers.exmv.name=MV Wymieniacz
-item.exchangers.exhv.name=HV Wymieniacz
+item.exchangers.exlv.name=Niskonapięciowy Wymieniacz
+item.exchangers.exmv.name=Średnionapięciowy Wymieniacz
+item.exchangers.exhv.name=Wysokonapięciowy Wymieniacz

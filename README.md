@@ -1,7 +1,7 @@
 # Exchangers
 [![Downloads](http://cf.way2muchnoise.eu/full_exchangers_downloads.svg)](https://minecraft.curseforge.com/projects/exchangers) [![MCVersion](http://cf.way2muchnoise.eu/versions/exchangers.svg)](https://minecraft.curseforge.com/projects/exchangers)
 
-[![GitHub issues](https://img.shields.io/github/issues/Jacky1356400/Exchangers.svg)](https://github.com/Jacky1356400/Exchangers/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/Jacky1356400/Exchangers.svg)](https://github.com/Jacky1356400/Exchangers/pulls) [![license](https://img.shields.io/github/license/Jacky1356400/Exchangers.svg)](../dev-1.12/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/JackyyTV/Exchangers.svg)](https://github.com/JackyyTV/Exchangers/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/JackyyTV/Exchangers.svg)](https://github.com/JackyyTV/Exchangers/pulls) [![license](https://img.shields.io/github/license/JackyyTV/Exchangers.svg)](../dev-1.12/LICENSE)
 
 [![Logo](https://i.gyazo.com/00a2bbe43870bb032e19e1399fa72411.png)](https://minecraft.curseforge.com/projects/exchangers)
 
@@ -13,9 +13,9 @@ Block Exchangers for 1.10.2+
 
 This is the GitHub repo for the Exchangers Minecraft mod, where the source code and issue tracker are in here.
 
-Submit any bug reports / suggestions via [issue tracker](https://github.com/Jacky1356400/Exchangers/issues).
+Submit any bug reports / suggestions via [issue tracker](https://github.com/JackyyTV/Exchangers/issues).
 
-[Pull requests](https://github.com/Jacky1356400/Exchangers/pulls) are welcome if you would like to add features / help with bug fixes or translations.
+[Pull requests](https://github.com/JackyyTV/Exchangers/pulls) are welcome if you would like to add features / help with bug fixes or translations.
 
 ---
 
@@ -33,8 +33,8 @@ Submit any bug reports / suggestions via [issue tracker](https://github.com/Jack
 If you would like to set up the workspace yourself to submit PRs of features additions or bug fixes, or compile the mod, here's how you do it.
 
 1. Clone the mod.
-    - HTTPS: `git clone https://github.com/Jacky1356400/Exchangers.git`
-    - SSH: `git clone git@github.com:Jacky1356400/Exchangers.git`
+    - HTTPS: `git clone https://github.com/JackyyTV/Exchangers.git`
+    - SSH: `git clone git@github.com:JackyyTV/Exchangers.git`
     - Or, use the GitHub desktop app to clone the repo via GUI interface.
 
 2. Setting up the workspace, depending on what you need.

@@ -1,0 +1,91 @@
+#Creative Tab
+itemGroup.exchangers=Exchangers
+
+#Key Bindings
+key.categories.exchangers=Exchangers
+key.exchangermode=Alternar entre modos
+
+#Death
+death.attack.exchangerpotato=%1$s Tentou operar um Alterador de Batata
+death.attack.exchangerpotato.player=%1$s Tentou operar um Alterador de Batata
+death.attack.exchangerpotato.item=%1$s Tentou operar um Alterador de Batata
+
+#Tooltips
+exchangers.tooltip.durability=Durabilidade
+exchangers.tooltip.tier=Nível %d
+exchangers.tooltip.holdShift=Segure %s para detalhes
+exchangers.tooltip.holdShift.shift=Shift
+exchangers.tooltip.shift1=Shift+clique direito em um bloco para selecionar.
+exchangers.tooltip.shift2=Clique direito em um bloco para alterar.
+exchangers.tooltip.shift3=Use a tecla de atalho para alternar entre os modos.
+exchangers.tooltip.tuberousExchanger.warning=§c§oEsperto! Mas não alterável.
+exchangers.tooltip.selectedblock=§2Bloco selecionado:
+exchangers.tooltip.currentrange=§2Área Atual:
+exchangers.tooltip.maxrange=§2Área Máxima:
+exchangers.tooltip.noselectedblock=§4Nenhum bloco selecionado
+
+#Error Messages
+exchangers.error.invalidblock=§cErro: Bloco inválido!
+exchangers.error.outofblock=§cErro: Sem mais blocos!
+exchangers.error.nopower=§cErro: Sem energia!
+
+#Crafting Components
+#Vanilla
+item.exchangers.excore_t1.name=Núcleo de Alteração (Nível 1)
+item.exchangers.excore_t2.name=Núcleo de Alteração (Nível 2)
+item.exchangers.excore_t3.name=Núcleo de Alteração (Nível 3)
+#Ender IO
+item.exchangers.eioexcore_t1.name=Núcleo de Alteração do Ender IO (Nível 1)
+item.exchangers.eioexcore_t2.name=Núcleo de Alteração do Ender IO (Nível 2)
+item.exchangers.eioexcore_t3.name=Núcleo de Alteração do Ender IO (Nível 3)
+#Thermal Expansion
+item.exchangers.teexcore_t1.name=Núcleo de Alteração do Thermal Expansion (Nível 1)
+item.exchangers.teexcore_t2.name=Núcleo de Alteração do Thermal Expansion (Nível 2)
+item.exchangers.teexcore_t3.name=Núcleo de Alteração do Thermal Expansion (Nível 3)
+#Mekanism
+item.exchangers.mekexcore_t1.name=Núcleo de Alteração do Mekanism (Nível 1)
+item.exchangers.mekexcore_t2.name=Núcleo de Alteração do Mekanism (Nível 2)
+item.exchangers.mekexcore_t3.name=Núcleo de Alteração do Mekanism (Nível 3)
+#Immersive Engineering
+item.exchangers.ieexcore_t1.name=Núcleo de Alteração do Immersive Engineering (Nível 1)
+item.exchangers.ieexcore_t2.name=Núcleo de Alteração do Immersive Engineering (Nível 2)
+item.exchangers.ieexcore_t3.name=Núcleo de Alteração do Immersive Engineering (Nível 3)
+
+#Special Exchangers
+item.exchangers.expotato.name=Alterador Batatozo
+item.exchangers.excreative.name=Alterador Criativo
+
+#Vanilla Exchangers
+item.exchangers.exwooden.name=Alterador de Madeira
+item.exchangers.exstone.name=Alterador de Pedra
+item.exchangers.exgolden.name=Alterador de Ouro
+item.exchangers.exiron.name=Alterador de Ferro
+item.exchangers.exdiamond.name=Alterador de Diamante
+item.exchangers.exemerald.name=Alterador de Esmeralda
+item.exchangers.exobsidian.name=Alterador de Obsidiana
+
+#Ender IO Exchangers
+item.exchangers.exconductive.name=Alterador de Ferro Condutivo
+item.exchangers.expulsating.name=Alterador de Ferro Pulsante
+item.exchangers.exelectricalsteel.name=Alterador de Aço Elétrico
+item.exchangers.exenergetic.name=Alterador de Liga Energética
+item.exchangers.exdarksteel.name=Alterador de Aço Negro
+item.exchangers.exvibrant.name=Alterador de Liga Vibrante
+
+#Thermal Expansion Exchangers
+item.exchangers.exleadstone.name=Alterador de Chumbo
+item.exchangers.exhardened.name=Alterador Endurecido
+item.exchangers.exreinforced.name=Alterador Reforçado
+item.exchangers.exsignalum.name=Alterador de Signalo
+item.exchangers.exresonant.name=Alterador Resonante
+
+#Mekanism Exchangers
+item.exchangers.exbasic.name=Alterador Básico
+item.exchangers.exadvanced.name=Alterador Avançado
+item.exchangers.exelite.name=Alterador Elite
+item.exchangers.exultimate.name=Alterador Final
+
+#Immersive Engineering Exchangers
+item.exchangers.exlv.name=Alterador de Baixa Voltagem
+item.exchangers.exmv.name=Alterador de Média Voltagem
+item.exchangers.exhv.name=Alterador de Alta Voltagem

@@ -25,7 +25,9 @@ exchangers.tooltip.maxrange=§2Maksymalny Zasięg:
 exchangers.tooltip.noselectedblock=§4Brak Wybranego Bloku
 
 #Error Messages
-exchangers.error.invalidblock=§cError: Nieprwaidłowy Blok!
+exchangers.error.invalidblock.te=§cError: Nieprwaidłowy Blok! (Tile Entities)
+exchangers.error.invalidblock.unbreakable=§cError: Nieprwaidłowy Blok! (Unbreakable Blocks)
+exchangers.error.invalidblock.null=§cError: Nieprwaidłowy Blok! (Null Display Name)
 exchangers.error.outofblock=§cError: Brak bloków!
 exchangers.error.nopower=§cError: Brak Energii!
 
@@ -89,4 +91,3 @@ item.exchangers.ultimate_exchanger.name=Najlepszy Wymieniacz
 item.exchangers.lv_exchanger.name=Niskonapięciowy Wymieniacz
 item.exchangers.mv_exchanger.name=Średnionapięciowy Wymieniacz
 item.exchangers.hv_exchanger.name=Wysokonapięciowy Wymieniacz
-

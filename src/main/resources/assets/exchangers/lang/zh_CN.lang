@@ -25,7 +25,9 @@ exchangers.tooltip.maxrange=§2最大更替范围：
 exchangers.tooltip.noselectedblock=§4没有选定方块
 
 #Error Messages
-exchangers.error.invalidblock=§c错误：对此方块无效！
+exchangers.error.invalidblock.te=§c错误：对此方块无效！(Tile Entities)
+exchangers.error.invalidblock.unbreakable=§c错误：对此方块无效！(Unbreakable Blocks)
+exchangers.error.invalidblock.null=§c错误：对此方块无效！(Null Display Name)
 exchangers.error.outofblock=§c错误：选定方块耗尽！
 exchangers.error.nopower=§c错误：能量不足！
 

@@ -1,0 +1,93 @@
+#Creative Tab
+itemGroup.exchangers=Exchangers
+
+#Key Bindings
+key.categories.exchangers=Exchangers
+key.exchangermode=Alternar entre modos
+
+#Death
+death.attack.exchangerpotato=%1$s Tentou operar um Alterador de Batata
+death.attack.exchangerpotato.player=%1$s Tentou operar um Alterador de Batata
+death.attack.exchangerpotato.item=%1$s Tentou operar um Alterador de Batata
+
+#Tooltips
+exchangers.tooltip.durability=Durabilidade
+exchangers.tooltip.tier=Nível %d
+exchangers.tooltip.holdShift=Segure %s para detalhes
+exchangers.tooltip.holdShift.shift=Shift
+exchangers.tooltip.shift1=Shift+clique direito em um bloco para selecionar.
+exchangers.tooltip.shift2=Clique direito em um bloco para alterar.
+exchangers.tooltip.shift3=Use a tecla de atalho para alternar entre os modos.
+exchangers.tooltip.tuberousExchanger.warning=§c§oEsperto! Mas não alterável.
+exchangers.tooltip.selectedblock=§2Bloco selecionado:
+exchangers.tooltip.currentrange=§2Área Atual:
+exchangers.tooltip.maxrange=§2Área Máxima:
+exchangers.tooltip.noselectedblock=§4Nenhum bloco selecionado
+
+#Error Messages
+exchangers.error.invalidblock.te=§cErro: Bloco inválido! (Tile Entities)
+exchangers.error.invalidblock.unbreakable=§cErro: Bloco inválido! (Unbreakable Blocks)
+exchangers.error.invalidblock.null=§cErro: Bloco inválido! (Null Display Name)
+exchangers.error.outofblock=§cErro: Sem mais blocos!
+exchangers.error.nopower=§cErro: Sem energia!
+
+#Crafting Components
+#Vanilla
+item.exchangers.exchanger_core_tier1.name=Núcleo de Alteração (Nível 1)
+item.exchangers.exchanger_core_tier2.name=Núcleo de Alteração (Nível 2)
+item.exchangers.exchanger_core_tier3.name=Núcleo de Alteração (Nível 3)
+#Ender IO
+item.exchangers.eio_exchanger_core_tier1.name=Núcleo de Alteração do Ender IO (Nível 1)
+item.exchangers.eio_exchanger_core_tier2.name=Núcleo de Alteração do Ender IO (Nível 2)
+item.exchangers.eio_exchanger_core_tier3.name=Núcleo de Alteração do Ender IO (Nível 3)
+#Thermal Expansion
+item.exchangers.te_exchanger_core_tier1.name=Núcleo de Alteração do Thermal Expansion (Nível 1)
+item.exchangers.te_exchanger_core_tier2.name=Núcleo de Alteração do Thermal Expansion (Nível 2)
+item.exchangers.te_exchanger_core_tier3.name=Núcleo de Alteração do Thermal Expansion (Nível 3)
+#Mekanism
+item.exchangers.mekanism_exchanger_core_tier1.name=Núcleo de Alteração do Mekanism (Nível 1)
+item.exchangers.mekanism_exchanger_core_tier2.name=Núcleo de Alteração do Mekanism (Nível 2)
+item.exchangers.mekanism_exchanger_core_tier3.name=Núcleo de Alteração do Mekanism (Nível 3)
+#Immersive Engineering
+item.exchangers.ie_exchanger_core_tier1.name=Núcleo de Alteração do Immersive Engineering (Nível 1)
+item.exchangers.ie_exchanger_core_tier2.name=Núcleo de Alteração do Immersive Engineering (Nível 2)
+item.exchangers.ie_exchanger_core_tier3.name=Núcleo de Alteração do Immersive Engineering (Nível 3)
+
+#Special Exchangers
+item.exchangers.tuberous_exchanger.name=Alterador Batatozo
+item.exchangers.creative_exchanger.name=Alterador Criativo
+
+#Vanilla Exchangers
+item.exchangers.wooden_exchanger.name=Alterador de Madeira
+item.exchangers.stone_exchanger.name=Alterador de Pedra
+item.exchangers.golden_exchanger.name=Alterador de Ouro
+item.exchangers.iron_exchanger.name=Alterador de Ferro
+item.exchangers.diamond_exchanger.name=Alterador de Diamante
+item.exchangers.emerald_exchanger.name=Alterador de Esmeralda
+item.exchangers.obsidian_exchanger.name=Alterador de Obsidiana
+
+#Ender IO Exchangers
+item.exchangers.conductive_iron_exchanger.name=Alterador de Ferro Condutivo
+item.exchangers.pulsating_iron_exchanger.name=Alterador de Ferro Pulsante
+item.exchangers.electrical_steel_exchanger.name=Alterador de Aço Elétrico
+item.exchangers.energetic_exchanger.name=Alterador de Liga Energética
+item.exchangers.dark_steel_exchanger.name=Alterador de Aço Negro
+item.exchangers.vibrant_exchanger.name=Alterador de Liga Vibrante
+
+#Thermal Expansion Exchangers
+item.exchangers.leadstone_exchanger.name=Alterador de Chumbo
+item.exchangers.hardened_exchanger.name=Alterador Endurecido
+item.exchangers.reinforced_exchanger.name=Alterador Reforçado
+item.exchangers.signalum_exchanger.name=Alterador de Signalo
+item.exchangers.resonant_exchanger.name=Alterador Resonante
+
+#Mekanism Exchangers
+item.exchangers.basic_exchanger.name=Alterador Básico
+item.exchangers.advanced_exchanger.name=Alterador Avançado
+item.exchangers.elite_exchanger.name=Alterador Elite
+item.exchangers.ultimate_exchanger.name=Alterador Final
+
+#Immersive Engineering Exchangers
+item.exchangers.lv_exchanger.name=Alterador de Baixa Voltagem
+item.exchangers.mv_exchanger.name=Alterador de Média Voltagem
+item.exchangers.hv_exchanger.name=Alterador de Alta Voltagem

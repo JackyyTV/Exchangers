@@ -25,7 +25,9 @@ exchangers.tooltip.maxrange=§2Maximale Reichweite:
 exchangers.tooltip.noselectedblock=§4Kein Block ausgewählt.
 
 #Error Messages
-exchangers.error.invalidblock=§cFehler: Ungültiger Block!
+exchangers.error.invalidblock.te=§cFehler: Ungültiger Block! (Tile Entities)
+exchangers.error.invalidblock.unbreakable=§cFehler: Ungültiger Block! (Unbreakable Blocks)
+exchangers.error.invalidblock.null=§cFehler: Ungültiger Block! (Null Display Name)
 exchangers.error.outofblock=§cFehler: Nicht genügend Blöcke!
 exchangers.error.nopower=§cFehler: Nicht genügend Energie!
 

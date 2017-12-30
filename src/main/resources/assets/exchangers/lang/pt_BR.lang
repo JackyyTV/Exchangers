@@ -25,7 +25,9 @@ exchangers.tooltip.maxrange=§2Área Máxima:
 exchangers.tooltip.noselectedblock=§4Nenhum bloco selecionado
 
 #Error Messages
-exchangers.error.invalidblock=§cErro: Bloco inválido!
+exchangers.error.invalidblock.te=§cErro: Bloco inválido! (Tile Entities)
+exchangers.error.invalidblock.unbreakable=§cErro: Bloco inválido! (Unbreakable Blocks)
+exchangers.error.invalidblock.null=§cErro: Bloco inválido! (Null Display Name)
 exchangers.error.outofblock=§cErro: Sem mais blocos!
 exchangers.error.nopower=§cErro: Sem energia!
 

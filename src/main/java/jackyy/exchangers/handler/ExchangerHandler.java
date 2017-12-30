@@ -120,7 +120,7 @@ public class ExchangerHandler extends Item {
 
         ItemStack heldItem = player.getHeldItemMainhand();
 
-        if (heldItem != null) {
+        if (heldItem != ItemStack.EMPTY) {
             if (modeSwitch > getMaxRange())
                 modeSwitch = MODE_1X1;
         }

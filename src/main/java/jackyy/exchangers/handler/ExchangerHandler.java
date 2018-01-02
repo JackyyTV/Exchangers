@@ -6,9 +6,12 @@ import jackyy.exchangers.helper.ChatHelper;
 import jackyy.exchangers.helper.StringHelper;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +20,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
 
@@ -199,15 +203,20 @@ public class ExchangerHandler extends Item {
         Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);
         boolean notEnough = false;
         for (BlockPos coordinate : coordinates) {
-            BlockEvent.PlaceEvent event = new BlockEvent.PlaceEvent(new BlockSnapshot(world, coordinate, block.getStateFromMeta(meta)), oldState, player, null);
-            if (!event.isCanceled()) {
+            world.captureBlockSnapshots = false;
+            BlockEvent.PlaceEvent event = new BlockEvent.PlaceEvent(BlockSnapshot.getBlockSnapshot(world, coordinate, 3), Blocks.AIR.getDefaultState(), player, null);
+            world.setBlockState(coordinate, block.getStateFromMeta(meta), 3);
+            world.captureBlockSnapshots = true;
+            if (!MinecraftForge.EVENT_BUS.post(event)) {
                 if (consumeItemInInventory(Item.getItemFromBlock(block), meta, player.inventory, player)) {
                     if (!player.capabilities.isCreativeMode && !isCreative()) {
                         if (Config.doExchangersSilkTouch) {
                             ItemStack oldblockItem = oldblock.getItem(world, pos, oldState);
                             giveItem(world, player, pos, oldblockItem);
                         } else {
-                            List<ItemStack> oldblockItems = oldblock.getDrops(world, pos, oldState, 0);
+                            Enchantment fortune = Enchantment.getEnchantmentByLocation("minecraft:fortune");
+                            int fortuneLevel = EnchantmentHelper.getEnchantmentLevel(fortune, stack);
+                            List<ItemStack> oldblockItems = oldblock.getDrops(world, pos, oldState, fortuneLevel);
                             for (ItemStack oldblockItem : oldblockItems) {
                                 giveItem(world, player, pos, oldblockItem);
                             }
@@ -220,12 +229,13 @@ public class ExchangerHandler extends Item {
                     }
                     world.playSound(null, coordinate.getX(), coordinate.getY(), coordinate.getZ(),
                             SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 0.1F, 1F);
-                    world.setBlockState(coordinate, block.getStateFromMeta(meta), 3);
                     player.openContainer.detectAndSendChanges();
-                }
-                else {
+                } else {
                     notEnough = true;
                 }
+            } else {
+                event.getBlockSnapshot().restore(true);
+                ChatHelper.msgPlayer(player, "error.event_cancelled");
             }
         }
         if (notEnough) {

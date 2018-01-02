@@ -32,6 +32,7 @@ exchangers.error.invalid_block.unbreakable=§cFehler: Ungültiger Block! (Unbrea
 exchangers.error.invalid_block.null=§cFehler: Ungültiger Block! (Null Display Name)
 exchangers.error.out_of_block=§cFehler: Nicht genügend Blöcke!
 exchangers.error.out_of_power=§cFehler: Nicht genügend Energie!
+exchangers.error.event_cancelled=§cFehler: Exchange event cancelled by other mods!
 
 #Crafting Components
 #Vanilla

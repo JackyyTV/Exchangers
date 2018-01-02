@@ -32,6 +32,7 @@ exchangers.error.invalid_block.unbreakable=§cErro: Bloco inválido! (Unbreakabl
 exchangers.error.invalid_block.null=§cErro: Bloco inválido! (Null Display Name)
 exchangers.error.out_of_block=§cErro: Sem mais blocos!
 exchangers.error.out_of_power=§cErro: Sem energia!
+exchangers.error.event_cancelled=§cErro: Exchange event cancelled by other mods!
 
 #Crafting Components
 #Vanilla

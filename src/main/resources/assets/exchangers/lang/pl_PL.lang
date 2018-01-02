@@ -32,6 +32,7 @@ exchangers.error.invalid_block.unbreakable=§cError: Nieprwaidłowy Blok! (Unbre
 exchangers.error.invalid_block.null=§cError: Nieprwaidłowy Blok! (Null Display Name)
 exchangers.error.out_of_block=§cError: Brak bloków!
 exchangers.error.out_of_power=§cError: Brak Energii!
+exchangers.error.event_cancelled=§cError: Exchange event cancelled by other mods!
 
 #Crafting Components
 #Vanilla

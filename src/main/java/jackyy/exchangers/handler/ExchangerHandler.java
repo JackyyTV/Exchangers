@@ -4,8 +4,7 @@ import jackyy.exchangers.Config;
 import jackyy.exchangers.client.Keys;
 import jackyy.exchangers.helper.ChatHelper;
 import jackyy.exchangers.helper.StringHelper;
-import jackyy.exchangers.util.StackUtil;
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +15,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.event.world.BlockEvent;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,14 +46,19 @@ public class ExchangerHandler extends Item {
             "19x19", "21x21", "23x23", "25x25" };
 
     public static void setDefaultTagCompound(ItemStack stack) {
-        stack.setTagCompound(new NBTTagCompound());
-        stack.getTagCompound().setInteger("block", 0);
-        stack.getTagCompound().setInteger("meta", 0);
-        stack.getTagCompound().setInteger("mode", 0);
-    }
-
-    public static boolean stackTagCompoundNull(ItemStack stack) {
-        return stack.getTagCompound() == null;
+        if (stack.getTagCompound() == null) {
+            NBTTagCompound compound = new NBTTagCompound();
+            compound.setString("block", "minecraft:air");
+            compound.setInteger("meta", 0);
+            compound.setInteger("mode", 0);
+            stack.setTagCompound(compound);
+        } else {
+            if (stack.getTagCompound().hasKey("Energy") && !stack.getTagCompound().hasKey("mode")) {
+                stack.getTagCompound().setString("block", "minecraft:air");
+                stack.getTagCompound().setInteger("meta", 0);
+                stack.getTagCompound().setInteger("mode", 0);
+            }
+        }
     }
 
     @Override
@@ -61,28 +68,31 @@ public class ExchangerHandler extends Item {
             tooltip.add(StringHelper.getShiftText());
         }
 
-        if (stackTagCompoundNull(stack))
-            setDefaultTagCompound(stack);
+        setDefaultTagCompound(stack);
 
         NBTTagCompound compound = stack.getTagCompound();
+        String id = compound.getString("block");
 
         if (StringHelper.isShiftKeyDown()) {
-            if (compound.getInteger("block") == 0) {
-                tooltip.add(StringHelper.localize("tooltip.noselectedblock"));
-                tooltip.add(StringHelper.localize("tooltip.currentrange") + " " + modeSwitchList[compound.getInteger("mode")]);
-                tooltip.add(StringHelper.localize("tooltip.maxrange") + " " + modeSwitchList[getMaxRange()]);
+            if (id.equals("minecraft:air")) {
+                tooltip.add(StringHelper.localize("tooltip.no_selected_block"));
+                tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
+                tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
             } else {
-                int id = compound.getInteger("block");
-                Block block = Block.getBlockById(id);
+                Block block = Block.getBlockFromName(id);
                 int meta = compound.getInteger("meta");
-
-                tooltip.add(StringHelper.localize("tooltip.selectedblock") + " " + getBlockName(block, meta));
-                tooltip.add(StringHelper.localize("tooltip.currentrange") + " " + modeSwitchList[compound.getInteger("mode")]);
-                tooltip.add(StringHelper.localize("tooltip.maxrange") + " " + modeSwitchList[getMaxRange()]);
+                tooltip.add(StringHelper.localize("tooltip.selected_block") + " " + getBlockName(block, meta));
+                tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
+                tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
+            }
+            if (Config.doExchangersSilkTouch) {
+                tooltip.add(StringHelper.localize("tooltip.silk_touch.on"));
+            } else {
+                tooltip.add(StringHelper.localize("tooltip.silk_touch.off"));
             }
             tooltip.add(StringHelper.localize("tooltip.shift1"));
             tooltip.add(StringHelper.localize("tooltip.shift2"));
-            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + Keys.MODE_KEY.getDisplayName() + ")");
+            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + TextFormatting.GREEN + Keys.MODE_KEY.getDisplayName() + TextFormatting.GRAY + ")");
             tooltip.add(StringHelper.getTierText(getTier()));
         }
     }
@@ -112,8 +122,7 @@ public class ExchangerHandler extends Item {
     }
 
     public void switchMode(EntityPlayer player, ItemStack stack) {
-        if (stackTagCompoundNull(stack))
-            setDefaultTagCompound(stack);
+        setDefaultTagCompound(stack);
 
         int modeSwitch = stack.getTagCompound().getInteger("mode");
         modeSwitch++;
@@ -149,13 +158,23 @@ public class ExchangerHandler extends Item {
         return world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("tconstruct");
     }
 
+    private boolean isSpecial(Block block) {
+        return block instanceof BlockLog
+                || block instanceof BlockLeaves
+                || block instanceof BlockRedstoneOre
+                || block instanceof BlockTrapDoor
+                || block instanceof BlockDoor
+                || block instanceof BlockFenceGate
+                || block instanceof BlockRedstoneLight;
+    }
+
     @SuppressWarnings("deprecation")
     private void placeBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side) {
         NBTTagCompound tagCompound = stack.getTagCompound();
         Block block;
         int meta;
-        int id = tagCompound.getInteger("block");
-        block = Block.REGISTRY.getObjectById(id);
+        String id = tagCompound.getString("block");
+        block = Block.getBlockFromName(id);
         meta = tagCompound.getInteger("meta");
 
         IBlockState oldState = world.getBlockState(pos);
@@ -163,82 +182,84 @@ public class ExchangerHandler extends Item {
 
         int oldmeta = oldblock.getMetaFromState(oldState);
         float blockHardness = oldblock.getBlockHardness(oldState, world, pos);
-        if (id == 0) {
+        if (id.equals("minecraft:air")) {
             return;
-        }
-        if ((block == oldblock) && (meta == oldmeta)) {
+        } else if ((block == oldblock) && (meta == oldmeta)) {
             return;
-        }
-        if (world.getTileEntity(pos) != null && !this.isWhitelisted(world, pos)) {
-            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock.te"));
+        } else if (world.getTileEntity(pos) != null && !this.isWhitelisted(world, pos)) {
+            ChatHelper.msgPlayer(player, "error.invalid_block.te");
             return;
-        }
-        if (blockHardness < -0.1F) {
-            if (!isCreative()) {
-                ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock.unbreakable"));
-                return;
-            }
-        }
-        if (isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockUse()) {
-            if (!isCreative()) {
-                ChatHelper.msgPlayer(player, StringHelper.localize("error.nopower"));
-                return;
-            }
+        } else if (!isCreative() && blockHardness < -0.1F) {
+            ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
+            return;
+        } else if (!isCreative() && isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockUse()) {
+            ChatHelper.msgPlayer(player, "error.out_of_power");
+            return;
         }
         Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);
         boolean notEnough = false;
         for (BlockPos coordinate : coordinates) {
-            if (consumeItemInInventory(Item.getItemFromBlock(block), meta, player.inventory, player)) {
-                if (!player.capabilities.isCreativeMode && !isCreative()) {
-                    ItemStack oldblockItem = oldblock.getItem(world, pos, oldState);
-                    giveItem(world, player, pos, oldblockItem);
-                    if (!isPowered() && !isCreative()) {
-                        stack.damageItem(1, player);
-                    } else if (stack.getTagCompound().getInteger("Energy") >= getPerBlockUse()) {
-                        stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerBlockUse());
+            BlockEvent.PlaceEvent event = new BlockEvent.PlaceEvent(new BlockSnapshot(world, coordinate, block.getStateFromMeta(meta)), oldState, player, null);
+            if (!event.isCanceled()) {
+                if (consumeItemInInventory(Item.getItemFromBlock(block), meta, player.inventory, player)) {
+                    if (!player.capabilities.isCreativeMode && !isCreative()) {
+                        if (Config.doExchangersSilkTouch) {
+                            ItemStack oldblockItem = oldblock.getItem(world, pos, oldState);
+                            giveItem(world, player, pos, oldblockItem);
+                        } else {
+                            List<ItemStack> oldblockItems = oldblock.getDrops(world, pos, oldState, 0);
+                            for (ItemStack oldblockItem : oldblockItems) {
+                                giveItem(world, player, pos, oldblockItem);
+                            }
+                        }
+                        if (!isPowered()) {
+                            stack.damageItem(1, player);
+                        } else if (stack.getTagCompound().getInteger("Energy") >= getPerBlockUse()) {
+                            stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerBlockUse());
+                        }
                     }
+                    world.playSound(null, coordinate.getX(), coordinate.getY(), coordinate.getZ(),
+                            SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 0.1F, 1F);
+                    world.setBlockState(coordinate, block.getStateFromMeta(meta), 3);
+                    player.openContainer.detectAndSendChanges();
                 }
-                world.playSound(null, coordinate.getX(), coordinate.getY(), coordinate.getZ(), SoundEvents.ENTITY_ENDERMEN_TELEPORT,
-                        SoundCategory.BLOCKS, 0.1F, 1F);
-                world.setBlockState(coordinate, block.getStateFromMeta(meta), 3);
-                player.openContainer.detectAndSendChanges();
-            }
-            else {
-                notEnough = true;
+                else {
+                    notEnough = true;
+                }
             }
         }
         if (notEnough) {
-            ChatHelper.msgPlayer(player, StringHelper.localize("error.outofblock"));
+            ChatHelper.msgPlayer(player, "error.out_of_block");
         }
     }
 
     @SuppressWarnings("deprecation")
     private void selectBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {
-        if (stackTagCompoundNull(stack))
-            setDefaultTagCompound(stack);
-        IBlockState state = world.getBlockState(pos).getBlock().getDefaultState();
+        setDefaultTagCompound(stack);
+        IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        int meta = block.getMetaFromState(state);
+        int meta;
+        if (isSpecial(block)) {
+            meta = block.getDefaultState().getBlock().getMetaFromState(block.getDefaultState());
+        } else {
+            meta = block.getMetaFromState(state);
+        }
         NBTTagCompound tagCompound = getTagCompound(stack);
         String name = getBlockName(block, meta);
         float blockHardness = block.getBlockHardness(state, world, pos);
         if (name == null) {
-            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock.null"));
-        }
-        if (world.getTileEntity(pos) != null && !this.isWhitelisted(world, pos)) {
-            ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock.te"));
+            ChatHelper.msgPlayer(player, "error.invalid_block.null");
+            return;
+        } else if (world.getTileEntity(pos) != null && !this.isWhitelisted(world, pos)) {
+            ChatHelper.msgPlayer(player, "error.invalid_block.te");
+            return;
+        } else if (!isCreative() && blockHardness < -0.1F) {
+            ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
             return;
         }
-        if (blockHardness < -0.1F) {
-            if (!isCreative()) {
-                ChatHelper.msgPlayer(player, StringHelper.localize("error.invalidblock.unbreakable"));
-            }
-        }
-        else {
-            int id = Block.REGISTRY.getIDForObject(block);
-            tagCompound.setInteger("block", id);
-            tagCompound.setInteger("meta", meta);
-        }
+        String id = Block.REGISTRY.getNameForObject(block).toString();
+        tagCompound.setString("block", id);
+        tagCompound.setInteger("meta", meta);
     }
 
     @SuppressWarnings("unchecked")
@@ -293,9 +314,11 @@ public class ExchangerHandler extends Item {
             return false;
         }
         ItemStack stackInSlot = inv.getStackInSlot(i);
-        stackInSlot = StackUtil.incStackSize(stackInSlot, -1);
-        if (StackUtil.getStackSize(stackInSlot) == 0) {
-            inv.setInventorySlotContents(i, StackUtil.getEmptyStack());
+        if (stackInSlot != null) {
+            stackInSlot.stackSize--;
+            if (stackInSlot.stackSize == 0) {
+                inv.setInventorySlotContents(i, null);
+            }
         }
         return true;
     }
@@ -303,7 +326,7 @@ public class ExchangerHandler extends Item {
     private static int findItem(Item item, int meta, InventoryPlayer inv) {
         for (int i = 0; i < 36; i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            if ((StackUtil.isValid(stack)) && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
+            if (stack != null && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
                 return i;
             }
         }

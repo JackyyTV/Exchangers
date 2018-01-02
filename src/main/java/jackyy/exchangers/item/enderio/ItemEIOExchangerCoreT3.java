@@ -2,26 +2,20 @@ package jackyy.exchangers.item.enderio;
 
 import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
+import jackyy.exchangers.item.ItemCoreBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import java.util.List;
-
-public class ItemEIOExchangerCoreT3 extends Item {
+public class ItemEIOExchangerCoreT3 extends ItemCoreBase {
 
     public ItemEIOExchangerCoreT3(){
         setRegistryName(Exchangers.MODID + ":eio_exchanger_core_tier3");
         setUnlocalizedName(Exchangers.MODID + ".eio_exchanger_core_tier3");
-        setMaxStackSize(16);
-        setCreativeTab(Exchangers.TAB);
     }
 
     @SideOnly(Side.CLIENT)
@@ -30,13 +24,8 @@ public class ItemEIOExchangerCoreT3 extends Item {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
-        if (Config.enderIOModule) {
-            if (Loader.isModLoaded(Exchangers.EIO)) {
-                list.add(new ItemStack(this));
-            }
-        }
+    public boolean checkLoaded() {
+        return Config.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
     }
 
     @Override

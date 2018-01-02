@@ -3,33 +3,35 @@ itemGroup.exchangers=Exchangers
 
 #Key Bindings
 key.categories.exchangers=Exchangers
-key.exchangermode=Alternar entre modos
+key.exchanger_mode=Alternar entre modos
 
 #Death
-death.attack.exchangerpotato=%1$s Tentou operar um Alterador de Batata
-death.attack.exchangerpotato.player=%1$s Tentou operar um Alterador de Batata
-death.attack.exchangerpotato.item=%1$s Tentou operar um Alterador de Batata
+death.attack.tuberous_exchanger=%1$s Tentou operar um Alterador de Batata
+death.attack.tuberous_exchanger.player=%1$s Tentou operar um Alterador de Batata
+death.attack.tuberous_exchanger.item=%1$s Tentou operar um Alterador de Batata
 
 #Tooltips
 exchangers.tooltip.durability=Durabilidade
 exchangers.tooltip.tier=Nível %d
-exchangers.tooltip.holdShift=Segure %s para detalhes
-exchangers.tooltip.holdShift.shift=Shift
+exchangers.tooltip.hold_shift=Segure %s para detalhes
+exchangers.tooltip.hold_shift.shift=Shift
 exchangers.tooltip.shift1=Shift+clique direito em um bloco para selecionar.
 exchangers.tooltip.shift2=Clique direito em um bloco para alterar.
 exchangers.tooltip.shift3=Use a tecla de atalho para alternar entre os modos.
-exchangers.tooltip.tuberousExchanger.warning=§c§oEsperto! Mas não alterável.
-exchangers.tooltip.selectedblock=§2Bloco selecionado:
-exchangers.tooltip.currentrange=§2Área Atual:
-exchangers.tooltip.maxrange=§2Área Máxima:
-exchangers.tooltip.noselectedblock=§4Nenhum bloco selecionado
+exchangers.tooltip.tuberous_exchanger.warning=§c§oEsperto! Mas não alterável.
+exchangers.tooltip.selected_block=§2Bloco selecionado:
+exchangers.tooltip.current_range=§2Área Atual:
+exchangers.tooltip.max_range=§2Área Máxima:
+exchangers.tooltip.no_selected_block=§4Nenhum bloco selecionado
+exchangers.tooltip.silk_touch.on=§fSilk Touch mode is §a§lenabled§r in config.
+exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in config.
 
 #Error Messages
-exchangers.error.invalidblock.te=§cErro: Bloco inválido! (Tile Entities)
-exchangers.error.invalidblock.unbreakable=§cErro: Bloco inválido! (Unbreakable Blocks)
-exchangers.error.invalidblock.null=§cErro: Bloco inválido! (Null Display Name)
-exchangers.error.outofblock=§cErro: Sem mais blocos!
-exchangers.error.nopower=§cErro: Sem energia!
+exchangers.error.invalid_block.te=§cErro: Bloco inválido! (Tile Entities)
+exchangers.error.invalid_block.unbreakable=§cErro: Bloco inválido! (Unbreakable Blocks)
+exchangers.error.invalid_block.null=§cErro: Bloco inválido! (Null Display Name)
+exchangers.error.out_of_block=§cErro: Sem mais blocos!
+exchangers.error.out_of_power=§cErro: Sem energia!
 
 #Crafting Components
 #Vanilla

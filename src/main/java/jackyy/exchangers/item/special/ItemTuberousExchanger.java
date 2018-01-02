@@ -5,10 +5,8 @@ import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -17,7 +15,6 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ItemTuberousExchanger extends ItemExchangerBase {
@@ -25,9 +22,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     public ItemTuberousExchanger(){
         setRegistryName(Exchangers.MODID + ":tuberous_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".tuberous_exchanger");
-        setMaxStackSize(1);
         setMaxDamage(1);
-        setCreativeTab(Exchangers.TAB);
     }
 
     @SideOnly(Side.CLIENT)
@@ -40,7 +35,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
         if (StringHelper.isShiftKeyDown()) {
-            tooltip.add(StringHelper.localize("tooltip.tuberousExchanger.warning"));
+            tooltip.add(StringHelper.localize("tooltip.tuberous_exchanger.warning"));
         }
     }
 
@@ -63,7 +58,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     private static boolean killPlayer(EntityPlayer player, ItemStack stack) {
         if (player != null) {
             stack.stackSize = 0;
-            player.attackEntityFrom(new EntityDamageSource("exchangerpotato", player), 100000.0F);
+            player.attackEntityFrom(new EntityDamageSource("tuberous_exchanger", player), 100000.0F);
             player.worldObj.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
             return true;
         }
@@ -76,11 +71,8 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
-        if (Config.specialModule) {
-            list.add(new ItemStack(this));
-        }
+    public boolean checkLoaded() {
+        return Config.specialModule;
     }
 
     @Override

@@ -92,6 +92,7 @@ public class Config {
     public static String[] blocksWhitelist;
     public static boolean holdingEnchantment;
     public static boolean useOreDictCircuits;
+    public static boolean doExchangersSilkTouch;
 
     public static void readConfig() {
         Configuration cfg = CommonProxy.config;
@@ -288,6 +289,8 @@ public class Config {
                         + "Calculation formula: Base Energy + (Base Energy * Enchantment Level / 2)\n");
         useOreDictCircuits = cfg.getBoolean("Use OreDict Circuits", CATEGORY_MISC, false,
                 "If true, allows Circuits in Mekanism Exchanger recipes to use OreDict");
+        doExchangersSilkTouch = cfg.getBoolean("Exchangers Silk Touch", CATEGORY_MISC, true,
+                "If true, enables Silk Touch (gets the blocks itself rather than drops) in all Exchangers");
 
     }
 

@@ -91,6 +91,7 @@ public class Config {
     //Misc
     public static String[] blocksWhitelist;
     public static boolean holdingEnchantment;
+    public static boolean unbreakingPoweredExchangers;
     public static boolean useOreDictCircuits;
     public static boolean doExchangersSilkTouch;
 
@@ -287,6 +288,8 @@ public class Config {
         holdingEnchantment = cfg.getBoolean("Holding Enchantment", CATEGORY_MISC, true,
                 "If true, allows the Holding Enchantment from CoFHCore to be used in Powered Exchangers\n"
                         + "Calculation formula: Base Energy + (Base Energy * Enchantment Level / 2)\n");
+        unbreakingPoweredExchangers = cfg.getBoolean("Unbreaking Enchantment Affects Powered Exchangers", CATEGORY_MISC, true,
+                "If true, allows Unbreaking Enchantment to affect Powered Exchangers");
         useOreDictCircuits = cfg.getBoolean("Use OreDict Circuits", CATEGORY_MISC, false,
                 "If true, allows Circuits in Mekanism Exchanger recipes to use OreDict");
         doExchangersSilkTouch = cfg.getBoolean("Exchangers Silk Touch", CATEGORY_MISC, true,

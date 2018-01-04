@@ -20,6 +20,7 @@ public class ItemExchangerBase extends ExchangerHandler {
         setCreativeTab(Exchangers.TAB);
     }
 
+    @Override
 	public boolean showDurabilityBar(ItemStack stack) {
 		return stack.isItemDamaged();
 	}
@@ -45,10 +46,6 @@ public class ItemExchangerBase extends ExchangerHandler {
         if (checkLoaded()) {
             list.add(new ItemStack(this));
         }
-    }
-
-    public boolean checkLoaded() {
-        return this.checkLoaded();
     }
 
     @Override @SideOnly(Side.CLIENT)

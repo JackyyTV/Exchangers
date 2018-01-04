@@ -4,20 +4,22 @@ import jackyy.exchangers.Config;
 import jackyy.exchangers.client.Keys;
 import jackyy.exchangers.helper.ChatHelper;
 import jackyy.exchangers.helper.StringHelper;
+import jackyy.exchangers.util.IExchanger;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,9 +28,10 @@ import net.minecraftforge.event.world.BlockEvent;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
-public class ExchangerHandler extends Item {
+public class ExchangerHandler extends Item implements IExchanger {
 
     public static final int MODE_1X1 = 0;
     public static final int MODE_3X3 = 1;
@@ -101,28 +104,14 @@ public class ExchangerHandler extends Item {
         }
     }
 
-    public int getTier() {
-        return this.getTier();
-    }
-
-    public int getMaxRange() {
-        return this.getMaxRange();
-    }
-
-    public int getMaxEnergy() {
-        return this.getMaxEnergy();
-    }
-
-    public int getPerBlockUse() {
+    private int getPerBlockEnergy(ItemStack stack) {
+        if (Config.unbreakingPoweredExchangers) {
+            int level = MathHelper.clamp_int(EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack), 0, 10);
+            if (new Random().nextInt(2 + level) >= 2) {
+                return 0;
+            }
+        }
         return this.getPerBlockUse();
-    }
-
-    public boolean isCreative() {
-        return false;
-    }
-
-    public boolean isPowered() {
-        return false;
     }
 
     public void switchMode(EntityPlayer player, ItemStack stack) {
@@ -196,7 +185,7 @@ public class ExchangerHandler extends Item {
         } else if (!isCreative() && blockHardness < -0.1F) {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
             return;
-        } else if (!isCreative() && isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockUse()) {
+        } else if (!isCreative() && isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockEnergy(stack)) {
             ChatHelper.msgPlayer(player, "error.out_of_power");
             return;
         }
@@ -204,18 +193,17 @@ public class ExchangerHandler extends Item {
         boolean notEnough = false;
         for (BlockPos coordinate : coordinates) {
             world.captureBlockSnapshots = false;
-            BlockEvent.PlaceEvent event = new BlockEvent.PlaceEvent(BlockSnapshot.getBlockSnapshot(world, coordinate, 3), Blocks.AIR.getDefaultState(), player, null);
+            BlockEvent.PlaceEvent event = new BlockEvent.PlaceEvent(BlockSnapshot.getBlockSnapshot(world, coordinate, 3), Blocks.AIR.getDefaultState(), player, player.getActiveHand());
             world.setBlockState(coordinate, block.getStateFromMeta(meta), 3);
             world.captureBlockSnapshots = true;
             if (!MinecraftForge.EVENT_BUS.post(event)) {
                 if (consumeItemInInventory(Item.getItemFromBlock(block), meta, player.inventory, player)) {
                     if (!player.capabilities.isCreativeMode && !isCreative()) {
-                        if (Config.doExchangersSilkTouch) {
+                        if (Config.doExchangersSilkTouch || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                             ItemStack oldblockItem = oldblock.getItem(world, pos, oldState);
                             giveItem(world, player, pos, oldblockItem);
                         } else {
-                            Enchantment fortune = Enchantment.getEnchantmentByLocation("minecraft:fortune");
-                            int fortuneLevel = EnchantmentHelper.getEnchantmentLevel(fortune, stack);
+                            int fortuneLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
                             List<ItemStack> oldblockItems = oldblock.getDrops(world, pos, oldState, fortuneLevel);
                             for (ItemStack oldblockItem : oldblockItems) {
                                 giveItem(world, player, pos, oldblockItem);
@@ -223,13 +211,13 @@ public class ExchangerHandler extends Item {
                         }
                         if (!isPowered()) {
                             stack.damageItem(1, player);
-                        } else if (stack.getTagCompound().getInteger("Energy") >= getPerBlockUse()) {
-                            stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerBlockUse());
+                        } else if (stack.getTagCompound().getInteger("Energy") >= getPerBlockEnergy(stack)) {
+                            stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerBlockEnergy(stack));
                         }
+                        player.openContainer.detectAndSendChanges();
                     }
                     world.playSound(null, coordinate.getX(), coordinate.getY(), coordinate.getZ(),
                             SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 0.1F, 1F);
-                    player.openContainer.detectAndSendChanges();
                 } else {
                     notEnough = true;
                 }

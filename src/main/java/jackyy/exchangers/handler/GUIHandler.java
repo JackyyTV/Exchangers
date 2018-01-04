@@ -31,7 +31,7 @@ public class GUIHandler extends Gui {
         EntityPlayer player = (EntityPlayer) mc.getRenderViewEntity();
 
         if (player == null || !mc.inGameHasFocus || !Minecraft.isGuiEnabled()) return;
-        if (player.getHeldItemMainhand() == null || !(player.getHeldItemMainhand().getItem() instanceof ItemExchangerBase))  return;
+        if (player.getHeldItemMainhand() == ItemStack.EMPTY || !(player.getHeldItemMainhand().getItem() instanceof ItemExchangerBase))  return;
 
         ItemStack stack = player.getHeldItemMainhand();
 

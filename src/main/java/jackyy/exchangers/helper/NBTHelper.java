@@ -26,10 +26,9 @@ public class NBTHelper {
     public static int receiveEnergy(ItemStack container, int energy, int maxEnergy, boolean simulate) {
         int stored = getEnergyStored(container);
         int accepted = Math.min(energy, maxEnergy-stored);
-        if(!simulate)
-        {
+        if (!simulate) {
             stored += accepted;
-            NBTHelper.setInt(container, "Energy", stored);
+            setInt(container, "Energy", stored);
         }
         return accepted;
     }
@@ -37,10 +36,9 @@ public class NBTHelper {
     public static int extractEnergy(ItemStack container, int energy, boolean simulate) {
         int stored = getEnergyStored(container);
         int extracted = Math.min(energy, stored);
-        if(!simulate)
-        {
+        if (!simulate) {
             stored -= extracted;
-            NBTHelper.setInt(container, "Energy", stored);
+            setInt(container, "Energy", stored);
         }
         return extracted;
     }
@@ -48,4 +46,5 @@ public class NBTHelper {
     public static int getEnergyStored(ItemStack container) {
         return getInt(container, "Energy");
     }
+
 }

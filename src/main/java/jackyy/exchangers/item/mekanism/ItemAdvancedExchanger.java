@@ -2,29 +2,20 @@ package jackyy.exchangers.item.mekanism;
 
 import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
-import jackyy.exchangers.helper.EnergyHelper;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nonnull;
 
 public class ItemAdvancedExchanger extends ItemExchangerBasePowered {
 
     public ItemAdvancedExchanger(){
         setRegistryName(Exchangers.MODID + ":advanced_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".advanced_exchanger");
-        setMaxStackSize(1);
-        setCreativeTab(Exchangers.TAB);
-        setNoRepair();
     }
 
     @SideOnly(Side.CLIENT)
@@ -43,17 +34,8 @@ public class ItemAdvancedExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (Config.mekanismModule) {
-            if (Loader.isModLoaded(Exchangers.MEK)) {
-                ItemStack empty = new ItemStack(this);
-                list.add(empty);
-                ItemStack full = new ItemStack(this);
-                EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                list.add(full);
-            }
-        }
+    public boolean checkLoaded() {
+        return Config.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
     }
 
     @Override

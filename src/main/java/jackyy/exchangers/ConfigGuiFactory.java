@@ -21,12 +21,12 @@ public class ConfigGuiFactory implements IModGuiFactory {
 
     @Override
     public GuiScreen createConfigGui(GuiScreen parentScreen) {
-        return null;
+        return new ConfigGui(parentScreen);
     }
 
-    @Override
+    @Override @SuppressWarnings("deprecation")
     public Class<? extends GuiScreen> mainConfigGuiClass() {
-        return ConfigGui.class;
+        return null;
     }
 
     @Override

@@ -3,25 +3,36 @@ package jackyy.exchangers.item;
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.core.item.IEnchantableItem;
 import jackyy.exchangers.Config;
+import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.helper.EnergyHelper;
 import jackyy.exchangers.helper.NBTHelper;
 import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.util.EnergyContainerItemWrapper;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
     private Enchantment holding = Enchantment.getEnchantmentByLocation("cofhcore:holding");
+
+    public ItemExchangerBasePowered(){
+        setNoRepair();
+    }
 
 	@Override
 	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
@@ -67,6 +78,20 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
             tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
         }
 	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+    public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+        if (checkLoaded()) {
+            ItemStack empty = new ItemStack(this);
+            ExchangerHandler.setDefaultTagCompound(empty);
+            list.add(empty);
+            ItemStack full = new ItemStack(this);
+            ExchangerHandler.setDefaultTagCompound(full);
+            EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
+            list.add(full);
+        }
+    }
 
 	@Override
 	public boolean isDamaged(ItemStack stack) {

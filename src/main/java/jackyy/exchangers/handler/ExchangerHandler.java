@@ -221,7 +221,9 @@ public class ExchangerHandler extends Item implements IExchanger {
                     notEnough = true;
                 }
             } else {
+                world.restoringBlockSnapshots = true;
                 event.getBlockSnapshot().restore(true);
+                world.restoringBlockSnapshots = false;
                 ChatHelper.msgPlayer(player, "error.event_cancelled");
             }
         }

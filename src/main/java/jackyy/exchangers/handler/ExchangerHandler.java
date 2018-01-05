@@ -191,11 +191,10 @@ public class ExchangerHandler extends Item implements IExchanger {
         }
         Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);
         boolean notEnough = false;
+        world.captureBlockSnapshots = false;
         for (BlockPos coordinate : coordinates) {
-            world.captureBlockSnapshots = false;
             BlockEvent.PlaceEvent event = new BlockEvent.PlaceEvent(BlockSnapshot.getBlockSnapshot(world, coordinate, 3), Blocks.AIR.getDefaultState(), player, player.getActiveHand());
             world.setBlockState(coordinate, block.getStateFromMeta(meta), 3);
-            world.captureBlockSnapshots = true;
             if (!MinecraftForge.EVENT_BUS.post(event)) {
                 if (consumeItemInInventory(Item.getItemFromBlock(block), meta, player.inventory, player)) {
                     if (!player.capabilities.isCreativeMode && !isCreative()) {
@@ -226,6 +225,7 @@ public class ExchangerHandler extends Item implements IExchanger {
                 ChatHelper.msgPlayer(player, "error.event_cancelled");
             }
         }
+        world.captureBlockSnapshots = true;
         if (notEnough) {
             ChatHelper.msgPlayer(player, "error.out_of_block");
         }

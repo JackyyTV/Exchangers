@@ -3,33 +3,36 @@ itemGroup.exchangers=Austauscher
 
 #Key Bindings
 key.categories.exchangers=Austauscher
-key.exchangermode=Austauscher Modus
+key.exchanger_mode=Austauscher Modus
 
 #Death
-death.attack.exchangerpotato=%1$s versuchte einene Kartoffel Austauscher zu verwenden
-death.attack.exchangerpotato.player=%1$s versuchte einene Kartoffel Austauscher zu verwenden
-death.attack.exchangerpotato.item=%1$s versuchte einene Kartoffel Austauscher zu verwenden
+death.attack.tuberous_exchanger=%1$s versuchte einene Kartoffel Austauscher zu verwenden
+death.attack.tuberous_exchanger.player=%1$s versuchte einene Kartoffel Austauscher zu verwenden
+death.attack.tuberous_exchanger.item=%1$s versuchte einene Kartoffel Austauscher zu verwenden
 
 #Tooltips
 exchangers.tooltip.durability=Haltbarkeit
 exchangers.tooltip.tier=Stufe %d
-exchangers.tooltip.holdShift=Drücke %s für Details
-exchangers.tooltip.holdShift.shift=Shift
+exchangers.tooltip.hold_shift=Drücke %s für Details
+exchangers.tooltip.hold_shift.shift=Shift
 exchangers.tooltip.shift1=Schleichen und Block rechtsklicken um zu wählen.
 exchangers.tooltip.shift2=Block rechtsklicken um auszutauschen.
 exchangers.tooltip.shift3=Verwende die Modus Taste um den Modus zu wechseln.
-exchangers.tooltip.tuberousExchanger.warning=§c§oKlever! Aber nicht austauschbar.
-exchangers.tooltip.selectedblock=§2Ausgewählter Block:
-exchangers.tooltip.currentrange=§2Reichweite:
-exchangers.tooltip.maxrange=§2Maximale Reichweite:
-exchangers.tooltip.noselectedblock=§4Kein Block ausgewählt.
+exchangers.tooltip.tuberous_exchanger.warning=§c§oKlever! Aber nicht austauschbar.
+exchangers.tooltip.selected_block=§2Ausgewählter Block:
+exchangers.tooltip.current_range=§2Reichweite:
+exchangers.tooltip.max_range=§2Maximale Reichweite:
+exchangers.tooltip.no_selected_block=§4Kein Block ausgewählt.
+exchangers.tooltip.silk_touch.on=§fSilk Touch mode is §a§lenabled§r in config.
+exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in config.
 
 #Error Messages
-exchangers.error.invalidblock.te=§cFehler: Ungültiger Block! (Tile Entities)
-exchangers.error.invalidblock.unbreakable=§cFehler: Ungültiger Block! (Unbreakable Blocks)
-exchangers.error.invalidblock.null=§cFehler: Ungültiger Block! (Null Display Name)
-exchangers.error.outofblock=§cFehler: Nicht genügend Blöcke!
-exchangers.error.nopower=§cFehler: Nicht genügend Energie!
+exchangers.error.invalid_block.te=§cFehler: Ungültiger Block! (Tile Entities)
+exchangers.error.invalid_block.unbreakable=§cFehler: Ungültiger Block! (Unbreakable Blocks)
+exchangers.error.invalid_block.null=§cFehler: Ungültiger Block! (Null Display Name)
+exchangers.error.out_of_block=§cFehler: Nicht genügend Blöcke!
+exchangers.error.out_of_power=§cFehler: Nicht genügend Energie!
+exchangers.error.event_cancelled=§cFehler: Exchange event cancelled by other mods!
 
 #Crafting Components
 #Vanilla

@@ -14,10 +14,6 @@ public class PacketHandler {
 
     public static void registerMessages(String channelName) {
         INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(channelName);
-
-        // Server side
         INSTANCE.registerMessage(PacketToggleMode.class, PacketToggleMode.class, nextID(), Side.SERVER);
-
-        // Client side
     }
 }

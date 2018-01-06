@@ -6,7 +6,6 @@ import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -24,9 +23,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     public ItemTuberousExchanger(){
         setRegistryName(Exchangers.MODID + ":expotato");
         setUnlocalizedName(Exchangers.MODID + ".expotato");
-        setMaxStackSize(1);
         setMaxDamage(1);
-        setCreativeTab(Exchangers.TAB);
     }
 
     @SideOnly(Side.CLIENT)
@@ -39,7 +36,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
         super.addInformation(stack, world, tooltip, bool);
         if (StringHelper.isShiftKeyDown()) {
-            tooltip.add(StringHelper.localize("tooltip.tuberousExchanger.warning"));
+            tooltip.add(StringHelper.localize("tooltip.tuberous_exchanger.warning"));
         }
     }
 
@@ -62,7 +59,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     private static boolean killPlayer(EntityPlayer player, ItemStack stack) {
         if (player != null) {
             stack.setCount(0);
-            player.attackEntityFrom(new EntityDamageSource("exchangerpotato", player), 100000.0F);
+            player.attackEntityFrom(new EntityDamageSource("tuberous_exchanger", player), 100000.0F);
             player.world.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
             return true;
         }
@@ -75,12 +72,8 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (Config.specialModule) {
-            if (isInCreativeTab(tab)) {
-                list.add(new ItemStack(this));
-            }
-        }
+    public boolean checkLoaded() {
+        return Config.specialModule;
     }
 
     @Override

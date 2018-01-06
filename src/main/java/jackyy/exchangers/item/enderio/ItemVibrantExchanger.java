@@ -2,13 +2,10 @@ package jackyy.exchangers.item.enderio;
 
 import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
-import jackyy.exchangers.helper.EnergyHelper;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,9 +16,6 @@ public class ItemVibrantExchanger extends ItemExchangerBasePowered {
     public ItemVibrantExchanger(){
         setRegistryName(Exchangers.MODID + ":exvibrant");
         setUnlocalizedName(Exchangers.MODID + ".exvibrant");
-        setMaxStackSize(1);
-        setCreativeTab(Exchangers.TAB);
-        setNoRepair();
     }
 
     @SideOnly(Side.CLIENT)
@@ -40,18 +34,8 @@ public class ItemVibrantExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (Config.enderIOModule) {
-            if (Loader.isModLoaded(Exchangers.EIO)) {
-                if (isInCreativeTab(tab)) {
-                    ItemStack empty = new ItemStack(this);
-                    list.add(empty);
-                    ItemStack full = new ItemStack(this);
-                    EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                    list.add(full);
-                }
-            }
-        }
+    public boolean checkLoaded() {
+        return Config.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
     }
 
     @Override

@@ -4,10 +4,8 @@ import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -17,9 +15,7 @@ public class ItemStoneExchanger extends ItemExchangerBase {
     public ItemStoneExchanger(){
         setRegistryName(Exchangers.MODID + ":exstone");
         setUnlocalizedName(Exchangers.MODID + ".exstone");
-        setMaxStackSize(1);
         setMaxDamage(Config.stoneMaxDmg);
-        setCreativeTab(Exchangers.TAB);
     }
 
     @SideOnly(Side.CLIENT)
@@ -38,12 +34,8 @@ public class ItemStoneExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (Config.vanillaModule) {
-            if (isInCreativeTab(tab)) {
-                list.add(new ItemStack(this));
-            }
-        }
+    public boolean checkLoaded() {
+        return Config.vanillaModule;
     }
 
     @Override

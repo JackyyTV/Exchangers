@@ -1,7 +1,6 @@
 package jackyy.exchangers.handler;
 
 import jackyy.exchangers.item.ItemExchangerBase;
-import jackyy.exchangers.util.StackUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -13,7 +12,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -30,8 +28,8 @@ public class RenderOverlayHandler {
     public void renderWorldLastEvent(RenderWorldLastEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayerSP player = mc.player;
-        ItemStack stack = player.getHeldItem(EnumHand.MAIN_HAND);
-        if (StackUtil.isEmpty(stack)) {
+        ItemStack stack = player.getHeldItemMainhand();
+        if (stack == ItemStack.EMPTY) {
             return;
         }
         if ((stack.getItem() instanceof ItemExchangerBase)) {
@@ -118,9 +116,8 @@ public class RenderOverlayHandler {
             Block block = state.getBlock();
             if ((block != null) && (block.getMaterial(state) != Material.AIR)) {
                 int meta = block.getMetaFromState(state);
-
-                int exId = ExchangerHandler.getTagCompound(stack).getInteger("block");
-                Block exBlock = Block.REGISTRY.getObjectById(exId);
+                String exId = ExchangerHandler.getTagCompound(stack).getString("block");
+                Block exBlock = Block.getBlockFromName(exId);
                 int exMeta = ExchangerHandler.getTagCompound(stack).getInteger("meta");
                 if ((exBlock == block) && (exMeta == meta)) {
                     return;

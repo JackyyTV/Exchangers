@@ -89,7 +89,6 @@ public class ExchangerHandler extends Item implements IExchanger {
                 Block block = Block.getBlockFromName(id);
                 int meta = compound.getInteger("meta");
                 tooltip.add(StringHelper.localize("tooltip.selected_block") + " " + getBlockName(block, meta));
-                /* DEBUG */ tooltip.add("Metadata: " + meta);
                 tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
                 tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
             }

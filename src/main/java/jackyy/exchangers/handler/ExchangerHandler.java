@@ -157,7 +157,8 @@ public class ExchangerHandler extends Item implements IExchanger {
                 return true;
             }
         }
-        return world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("tconstruct");
+        return world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("tconstruct")
+                || world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("blockcraftery");
     }
 
     private boolean isSpecial(Block block) {

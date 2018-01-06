@@ -118,13 +118,21 @@ public class ExchangerHandler extends Item implements IExchanger {
         setDefaultTagCompound(stack);
 
         int modeSwitch = stack.getTagCompound().getInteger("mode");
-        modeSwitch++;
+
+        if (player.isSneaking()) {
+            modeSwitch--;
+        } else {
+            modeSwitch++;
+        }
 
         ItemStack heldItem = player.getHeldItemMainhand();
 
         if (heldItem != ItemStack.EMPTY) {
-            if (modeSwitch > getMaxRange())
+            if (modeSwitch > getMaxRange()) {
                 modeSwitch = MODE_1X1;
+            } else if (modeSwitch < MODE_1X1) {
+                modeSwitch = getMaxRange();
+            }
         }
 
         stack.getTagCompound().setInteger("mode", modeSwitch);
@@ -153,7 +161,6 @@ public class ExchangerHandler extends Item implements IExchanger {
 
     private boolean isSpecial(Block block) {
         return block instanceof BlockLog
-                || block instanceof BlockLeaves
                 || block instanceof BlockRedstoneOre
                 || block instanceof BlockTrapDoor
                 || block instanceof BlockDoor
@@ -218,6 +225,9 @@ public class ExchangerHandler extends Item implements IExchanger {
                     world.playSound(null, coordinate.getX(), coordinate.getY(), coordinate.getZ(),
                             SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.BLOCKS, 0.1F, 1F);
                 } else {
+                    world.restoringBlockSnapshots = true;
+                    event.getBlockSnapshot().restore(true);
+                    world.restoringBlockSnapshots = false;
                     notEnough = true;
                 }
             } else {
@@ -227,10 +237,10 @@ public class ExchangerHandler extends Item implements IExchanger {
                 ChatHelper.msgPlayer(player, "error.event_cancelled");
             }
         }
-        world.captureBlockSnapshots = true;
         if (notEnough) {
             ChatHelper.msgPlayer(player, "error.out_of_block");
         }
+        world.captureBlockSnapshots = true;
     }
 
     @SuppressWarnings("deprecation")

@@ -275,9 +275,8 @@ public class ExchangerHandler extends Item implements IExchanger {
         tagCompound.setInteger("meta", meta);
     }
 
-    @SuppressWarnings("unchecked")
     protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
-        Set<BlockPos> coordinates = new HashSet();
+        Set<BlockPos> coordinates = new HashSet<>();
         int mode = stack.getTagCompound().getInteger("mode");
         int x = pos.getX();
         int y = pos.getY();

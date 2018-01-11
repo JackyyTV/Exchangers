@@ -42,6 +42,8 @@ public class RenderOverlayHandler {
         double doubleY = p.lastTickPosY + (p.posY - p.lastTickPosY) * evt.getPartialTicks();
         double doubleZ = p.lastTickPosZ + (p.posZ - p.lastTickPosZ) * evt.getPartialTicks();
 
+        GlStateManager.pushMatrix();
+        
         RenderHelper.disableStandardItemLighting();
         Minecraft.getMinecraft().entityRenderer.disableLightmap();
         GlStateManager.disableDepth();
@@ -49,16 +51,20 @@ public class RenderOverlayHandler {
         GlStateManager.disableLighting();
         GlStateManager.disableAlpha();
         GlStateManager.depthMask(false);
-
+        
         GlStateManager.pushMatrix();
         GlStateManager.translate(-doubleX, -doubleY, -doubleZ);
-
         renderOutlines(coordinates, r, g, b, 4);
-
         GlStateManager.popMatrix();
-
+        
+        RenderHelper.enableStandardItemLighting();
         Minecraft.getMinecraft().entityRenderer.enableLightmap();
+        GlStateManager.enableDepth();
         GlStateManager.enableTexture2D();
+        GlStateManager.enableLighting();
+        GlStateManager.enableAlpha();
+        
+        GlStateManager.popMatrix();
     }
 
     private static void renderOutlines(Set<BlockPos> coordinates, int r, int g, int b, int thickness) {

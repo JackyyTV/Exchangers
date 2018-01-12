@@ -24,7 +24,7 @@ import java.util.Set;
 public class RenderOverlayHandler {
 
     @SubscribeEvent @SuppressWarnings("deprecation")
-    public void RenderWorldLastEvent(RenderWorldLastEvent event) {
+    public void renderWorldLastEvent(RenderWorldLastEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
         RayTraceResult mouseOver = mc.objectMouseOver;
         EntityPlayerSP player = mc.thePlayer;

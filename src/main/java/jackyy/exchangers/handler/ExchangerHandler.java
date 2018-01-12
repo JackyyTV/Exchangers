@@ -191,7 +191,7 @@ public class ExchangerHandler extends Item implements IExchanger {
             ChatHelper.msgPlayer(player, "error.out_of_power");
             return;
         }
-        Set<BlockPos> coordinates = findSuitableBlocks(stack, player, world, side, pos, oldblock, oldmeta);
+        Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);
         boolean notEnough = false;
         world.captureBlockSnapshots = false;
         for (BlockPos coordinate : coordinates) {
@@ -267,7 +267,7 @@ public class ExchangerHandler extends Item implements IExchanger {
         tagCompound.setInteger("meta", meta);
     }
 
-    protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, EntityPlayer player, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
+    protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
         Set<BlockPos> coordinates = new HashSet<>();
         int mode = stack.getTagCompound().getInteger("mode");
         int x = pos.getX();

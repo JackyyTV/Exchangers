@@ -37,7 +37,7 @@ public class RenderOverlayHandler {
                 ItemStack stack = player.getHeldItemMainhand();
                 float partialTicks = event.getPartialTicks();
                 if (stack != null && stack.getItem() instanceof ItemExchangerBase && stack.getTagCompound() != null && mouseOver.sideHit != null) {
-                    Set<BlockPos> coordinates = ExchangerHandler.findSuitableBlocks(stack, player , player.getEntityWorld(), mouseOver.sideHit, mouseOver.getBlockPos(), block, meta);
+                    Set<BlockPos> coordinates = ExchangerHandler.findSuitableBlocks(stack, player.getEntityWorld(), mouseOver.sideHit, mouseOver.getBlockPos(), block, meta);
                     double offsetX = player.prevPosX + (player.posX - player.prevPosX) * (double) partialTicks;
                     double offsetY = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTicks;
                     double offsetZ = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) partialTicks;

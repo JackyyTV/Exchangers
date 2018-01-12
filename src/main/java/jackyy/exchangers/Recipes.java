@@ -596,7 +596,7 @@ public class Recipes {
                         new ShapedCopyNBTRecipe(
                                 e, new ResourceLocation(Exchangers.MODID + ":mv_exchanger_hard"), new ItemStack(ExchangersItems.mvExchanger), new ItemStack(ExchangersItems.lvExchanger),
                                 "SMS", "CXC", "SMS",
-                                'S', "blockSheetmetalElectrum", 'M', ImmersiveEngineeringIntegration.mvCapacitor, 'C', ExchangersItems.ieExchangerCoreT3, 'X', ExchangersItems.lvExchanger
+                                'S', "blockSheetmetalElectrum", 'M', ImmersiveEngineeringIntegration.mvCapacitor, 'C', ExchangersItems.ieExchangerCoreT2, 'X', ExchangersItems.lvExchanger
                         );
                         new ShapedCopyNBTRecipe(
                                 e, new ResourceLocation(Exchangers.MODID + ":hv_exchanger_hard"), new ItemStack(ExchangersItems.hvExchanger), new ItemStack(ExchangersItems.mvExchanger),

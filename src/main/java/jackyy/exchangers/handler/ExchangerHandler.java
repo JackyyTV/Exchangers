@@ -117,17 +117,13 @@ public class ExchangerHandler extends Item implements IExchanger {
 
     public void switchMode(EntityPlayer player, ItemStack stack) {
         setDefaultTagCompound(stack);
-
         int modeSwitch = stack.getTagCompound().getInteger("mode");
-
         if (player.isSneaking()) {
             modeSwitch--;
         } else {
             modeSwitch++;
         }
-
         ItemStack heldItem = player.getHeldItemMainhand();
-
         if (heldItem != ItemStack.EMPTY) {
             if (modeSwitch > getMaxRange()) {
                 modeSwitch = MODE_1X1;
@@ -135,7 +131,6 @@ public class ExchangerHandler extends Item implements IExchanger {
                 modeSwitch = getMaxRange();
             }
         }
-
         stack.getTagCompound().setInteger("mode", modeSwitch);
     }
 
@@ -151,7 +146,7 @@ public class ExchangerHandler extends Item implements IExchanger {
         return EnumActionResult.SUCCESS;
     }
 
-    private boolean isWhitelisted(World world, BlockPos pos) {
+    public static boolean isWhitelisted(World world, BlockPos pos) {
         for (String block : Config.blocksWhitelist) {
             if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
                 return true;
@@ -188,7 +183,7 @@ public class ExchangerHandler extends Item implements IExchanger {
             return;
         } else if ((block == oldblock) && (meta == oldmeta)) {
             return;
-        } else if (world.getTileEntity(pos) != null && !this.isWhitelisted(world, pos)) {
+        } else if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.invalid_block.te");
             return;
         } else if (!isCreative() && blockHardness < -0.1F) {
@@ -263,7 +258,7 @@ public class ExchangerHandler extends Item implements IExchanger {
         if (name == null) {
             ChatHelper.msgPlayer(player, "error.invalid_block.null");
             return;
-        } else if (world.getTileEntity(pos) != null && !this.isWhitelisted(world, pos)) {
+        } else if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.invalid_block.te");
             return;
         } else if (!isCreative() && blockHardness < -0.1F) {

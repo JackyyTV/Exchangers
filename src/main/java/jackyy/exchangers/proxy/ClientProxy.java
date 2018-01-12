@@ -6,7 +6,6 @@ import jackyy.exchangers.handler.ClientTickHandler;
 import jackyy.exchangers.handler.GUIHandler;
 import jackyy.exchangers.handler.KeyBindingsHandler;
 import jackyy.exchangers.handler.RenderOverlayHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -39,7 +38,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit(FMLPostInitializationEvent e) {
         super.postInit(e);
-        MinecraftForge.EVENT_BUS.register(new GUIHandler(Minecraft.getMinecraft()));
+        MinecraftForge.EVENT_BUS.register(new GUIHandler());
     }
 
 }

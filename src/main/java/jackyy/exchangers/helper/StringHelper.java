@@ -1,12 +1,11 @@
 package jackyy.exchangers.helper;
 
-import java.text.NumberFormat;
-
-import org.lwjgl.input.Keyboard;
-
 import jackyy.exchangers.Exchangers;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+import org.lwjgl.input.Keyboard;
+
+import java.text.NumberFormat;
 
 public class StringHelper {
 

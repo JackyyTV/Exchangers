@@ -2,16 +2,17 @@ package jackyy.exchangers.item;
 
 import cofh.core.item.IEnchantableItem;
 import cofh.redstoneflux.api.IEnergyContainerItem;
+import cofh.redstoneflux.util.EnergyContainerItemWrapper;
 import jackyy.exchangers.Config;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.helper.EnergyHelper;
 import jackyy.exchangers.helper.NBTHelper;
 import jackyy.exchangers.helper.StringHelper;
-import jackyy.exchangers.util.EnergyContainerItemWrapper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
@@ -19,17 +20,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 
 @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
-    private Enchantment holding = Enchantment.getEnchantmentByLocation("cofhcore:holding");
-
     public ItemExchangerBasePowered(){
-        setNoRepair();
+        setMaxDamage(1);
     }
+
+    @GameRegistry.ObjectHolder("cofhcore:holding")
+    public static final Enchantment holding = null;
 
 	@Override
 	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
@@ -92,11 +95,6 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
     }
 
 	@Override
-	public boolean isDamaged(ItemStack stack) {
-		return true;
-	}
-
-	@Override
 	public boolean isPowered() {
 		return true;
 	}
@@ -107,10 +105,16 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
         return new EnergyContainerItemWrapper(stack, this);
     }
 
-    /* HOLDING ENCHANT */
     @Override
     public boolean canEnchant(ItemStack stack, Enchantment enchantment) {
         return Config.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == Enchantments.FORTUNE
+                || enchantment == Enchantments.SILK_TOUCH
+                || enchantment == Enchantments.UNBREAKING;
     }
 
 }

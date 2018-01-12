@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -27,11 +28,12 @@ import java.util.List;
 @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
-    private Enchantment holding = Enchantment.getEnchantmentByLocation("cofhcore:holding");
-
     public ItemExchangerBasePowered(){
-        setNoRepair();
+        setMaxDamage(1);
     }
+
+    @GameRegistry.ObjectHolder("cofhcore:holding")
+    public static final Enchantment holding = null;
 
 	@Override
 	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
@@ -91,11 +93,6 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
             list.add(full);
         }
     }
-
-	@Override
-	public boolean isDamaged(ItemStack stack) {
-		return true;
-	}
 
 	@Override
 	public boolean isPowered() {

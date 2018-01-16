@@ -28,23 +28,23 @@ public class EnderIOIntegration {
     public static void init() {
         Exchangers.logger.info("Fetching items for Ender IO integration...");
 
-        Block capBankBlock = Block.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "blockcapbank"));
+        Block capBankBlock = Block.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "block_cap_bank"));
         capacitorBankBasic = new ItemStack(capBankBlock, 1, 1);
         capacitorBank = new ItemStack(capBankBlock, 1, 2);
         capacitorBankVibrant = new ItemStack(capBankBlock, 1, 3);
 
-        Item capacitorItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "itembasiccapacitor"));
+        Item capacitorItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "item_basic_capacitor"));
         if (capacitorItem != null) {
             basicCapacitor = new ItemStack(capacitorItem, 1, 0);
             doubleLayerCapacitor = new ItemStack(capacitorItem, 1, 1);
             octadicCapacitor = new ItemStack(capacitorItem, 1, 2);
         }
 
-        Item eioMaterialsItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "itemmaterial"));
+        Item eioMaterialsItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "item_material"));
         if (eioMaterialsItem != null) {
-            pulsatingCrystal = new ItemStack(eioMaterialsItem, 1, 5);
-            vibrantCrystal = new ItemStack(eioMaterialsItem, 1, 6);
-            enderCrystal = new ItemStack(eioMaterialsItem, 1, 8);
+            pulsatingCrystal = new ItemStack(eioMaterialsItem, 1, 13);
+            vibrantCrystal = new ItemStack(eioMaterialsItem, 1, 14);
+            enderCrystal = new ItemStack(eioMaterialsItem, 1, 15);
         }
 
         Fluid nutrientDistillation = FluidRegistry.getFluid("nutrient_distillation");

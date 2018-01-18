@@ -4,6 +4,7 @@ itemGroup.exchangers=Exchangers
 #Key Bindings
 key.categories.exchangers=Exchangers
 key.exchanger_mode=Exchanger Mode Switch
+key.exchanger_external_inventory=Exchanger External Inventories Mode Switch
 
 #Death
 death.attack.tuberous_exchanger=%1$s tried to operate a potato exchanger
@@ -25,6 +26,8 @@ exchangers.tooltip.max_range=§2Maximum Range:
 exchangers.tooltip.no_selected_block=§4No Selected Block
 exchangers.tooltip.silk_touch.on=§fSilk Touch mode is §a§lenabled§r in config.
 exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in config.
+exchangers.tooltip.ext_inv.on=§fExternal inventories mode is §a§lenabled§r.
+exchangers.tooltip.ext_inv.off=§fExternal inventories mode is §4§ldisabled§r.
 
 #Error Messages
 exchangers.error.invalid_block.te=§cError: Invalid block! (Tile Entities)

@@ -22,8 +22,20 @@ public class Keys {
         }
     }, Keyboard.KEY_COMMA, "key.categories.exchangers");
 
+    public static final KeyBinding EXT_INV_KEY = new KeyBinding("key.exchanger_external_inventory", new IKeyConflictContext() {
+        @Override
+        public boolean isActive() {
+            return KeyConflictContext.IN_GAME.isActive();
+        }
+        @Override
+        public boolean conflicts(IKeyConflictContext other) {
+            return other == this || KeyConflictContext.IN_GAME.isActive();
+        }
+    }, Keyboard.KEY_PERIOD, "key.categories.exchangers");
+
     public static void init() {
         ClientRegistry.registerKeyBinding(MODE_KEY);
+        ClientRegistry.registerKeyBinding(EXT_INV_KEY);
     }
 
 }

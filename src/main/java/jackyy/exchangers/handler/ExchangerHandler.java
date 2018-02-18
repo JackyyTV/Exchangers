@@ -14,6 +14,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,6 +26,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -354,13 +357,17 @@ public class ExchangerHandler extends Item implements IExchanger {
 		return false;
 	}
 
-    private boolean consumeItemInInventory(Item item, int meta, InventoryPlayer inv, EntityPlayer player) {
+    private boolean consumeItemInInventory(Item item, int meta, InventoryPlayer playerInv, EntityPlayer player) {
         if (player.capabilities.isCreativeMode || isCreative()) {
             return true;
         }
+        IInventory inv = playerInv;
         int i = findItem(item, meta, inv);
         if (i < 0) {
-            return false;
+        	inv = findItemHolder(item, meta, inv);
+        	if(inv == null)
+        		return false;
+        	i = findItem(item, meta, inv);
         }
         ItemStack stackInSlot = inv.getStackInSlot(i);
         if (stackInSlot != null) {
@@ -372,7 +379,7 @@ public class ExchangerHandler extends Item implements IExchanger {
         return true;
     }
 
-    private static int findItem(Item item, int meta, InventoryPlayer inv) {
+    private static int findItem(Item item, int meta, IInventory inv) {
         for (int i = 0; i < 36; i++) {
             ItemStack stack = inv.getStackInSlot(i);
             if (stack != null && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
@@ -380,6 +387,18 @@ public class ExchangerHandler extends Item implements IExchanger {
             }
         }
         return -1;
+    }
+    
+    private static IInventory findItemHolder(Item item, int meta, IInventory inv) {
+        for (int i = 0; i < 36; i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (stack != null && stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+            	InvWrapper invW = (InvWrapper) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            	if(findItem(item, meta, invW.getInv()) != -1)
+            		return invW.getInv();
+            }
+        }
+        return null;
     }
 
     private static void giveItem(World world, EntityPlayer player, BlockPos pos, ItemStack oldStack) {

@@ -25,8 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import java.util.HashSet;
 import java.util.List;
@@ -60,16 +58,12 @@ public class ExchangerHandler extends Item implements IExchanger {
             compound.setString("block", "minecraft:air");
             compound.setInteger("meta", 0);
             compound.setInteger("mode", 0);
-            compound.setBoolean("ext", true);
             stack.setTagCompound(compound);
         } else {
             if (stack.getTagCompound().hasKey("Energy") && !stack.getTagCompound().hasKey("mode")) {
                 stack.getTagCompound().setString("block", "minecraft:air");
                 stack.getTagCompound().setInteger("meta", 0);
                 stack.getTagCompound().setInteger("mode", 0);
-                stack.getTagCompound().setBoolean("ext", true);
-            } if (!stack.getTagCompound().hasKey("ext")) {
-                stack.getTagCompound().setBoolean("ext", true);
             }
         }
     }
@@ -102,11 +96,6 @@ public class ExchangerHandler extends Item implements IExchanger {
                 tooltip.add(StringHelper.localize("tooltip.silk_touch.on"));
             } else {
                 tooltip.add(StringHelper.localize("tooltip.silk_touch.off"));
-            }
-            if (compound.getBoolean("ext")) {
-                tooltip.add(StringHelper.localize("tooltip.ext_inv.on") + " " + "(" + TextFormatting.GREEN + Keys.EXT_INV_KEY.getDisplayName() + TextFormatting.GRAY + ")");
-            } else {
-                tooltip.add(StringHelper.localize("tooltip.ext_inv.off") + " " + "(" + TextFormatting.GREEN + Keys.EXT_INV_KEY.getDisplayName() + TextFormatting.GRAY + ")");
             }
             tooltip.add(StringHelper.localize("tooltip.shift1"));
             tooltip.add(StringHelper.localize("tooltip.shift2"));
@@ -142,16 +131,6 @@ public class ExchangerHandler extends Item implements IExchanger {
             }
         }
         stack.getTagCompound().setInteger("mode", modeSwitch);
-    }
-
-    public void toggleExtMode(EntityPlayer player, ItemStack stack) {
-        setDefaultTagCompound(stack);
-        boolean extMode = stack.getTagCompound().getBoolean("ext");
-        ItemStack heldItem = player.getHeldItemMainhand();
-        if (heldItem != null) {
-            extMode = !extMode;
-        }
-        stack.getTagCompound().setBoolean("ext", extMode);
     }
 
     @Override
@@ -335,74 +314,24 @@ public class ExchangerHandler extends Item implements IExchanger {
             return true;
         }
         int i = findItem(item, meta, inv);
-        if (i > 0) {
-            ItemStack stackInSlot = inv.getStackInSlot(i);
-            if (stackInSlot != null) {
-                stackInSlot.stackSize--;
-                if (stackInSlot.stackSize == 0) {
-                    inv.setInventorySlotContents(i, null);
-                }
-                return true;
+        if (i < 0) {
+            return false;
+        }
+        ItemStack stackInSlot = inv.getStackInSlot(i);
+        if (stackInSlot != null) {
+            stackInSlot.stackSize--;
+            if (stackInSlot.stackSize == 0) {
+                inv.setInventorySlotContents(i, null);
             }
         }
-        ItemStack exchanger = player.getHeldItemMainhand();
-        if (exchanger != null && exchanger.getTagCompound().getBoolean("ext")) {
-            int j = findContainer(inv, player);
-            if (j > 0) {
-                ItemStack container = inv.getStackInSlot(j);
-                if (container != null && container.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-                    IItemHandler handler = container.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                    int k = findItemExt(item, meta, inv, player);
-                    if (k > 0) {
-                        ItemStack containerStack = handler.getStackInSlot(k);
-                        if (containerStack != null) {
-                            //containerStack.stackSize--;
-                            handler.extractItem(k, 1, false);
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+        return true;
     }
 
     private static int findItem(Item item, int meta, InventoryPlayer inv) {
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
+        for (int i = 0; i < 36; i++) {
             ItemStack stack = inv.getStackInSlot(i);
             if (stack != null && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
                 return i;
-            }
-        }
-        return -1;
-    }
-
-    private static int findContainer(InventoryPlayer inv, EntityPlayer player) {
-        ItemStack exchanger = player.getHeldItemMainhand();
-        if (exchanger != null && exchanger.getTagCompound().getBoolean("ext")) {
-            for (int i = 0; i < inv.getSizeInventory(); i++) {
-                ItemStack container = inv.getStackInSlot(i);
-                if (container != null && container.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-
-    private static int findItemExt(Item item, int meta, InventoryPlayer inv, EntityPlayer player) {
-        ItemStack exchanger = player.getHeldItemMainhand();
-        if (exchanger != null && exchanger.getTagCompound().getBoolean("ext")) {
-            int i = findContainer(inv, player);
-            if (i > 0) {
-                ItemStack container = inv.getStackInSlot(i);
-                IItemHandler handler = container.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                for (int j = 0; j < handler.getSlots(); j++) {
-                    ItemStack containerStack = inv.getStackInSlot(j);
-                    if (containerStack != null && (containerStack.getItem() == item) && (meta == containerStack.getItemDamage())) {
-                        return j;
-                    }
-                }
             }
         }
         return -1;

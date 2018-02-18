@@ -26,6 +26,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -267,47 +268,91 @@ public class ExchangerHandler extends Item implements IExchanger {
         tagCompound.setInteger("meta", meta);
     }
 
-    protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
-        Set<BlockPos> coordinates = new HashSet<>();
-        int mode = stack.getTagCompound().getInteger("mode");
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
-        switch (sideHit) {
-            case UP:
-            case DOWN:
-                for (int dx = x - mode; dx <= x + mode; dx++) {
-                    for (int dz = z - mode; dz <= z + mode; dz++) {
-                        checkAndAddBlock(world, dx, y, dz, centerBlock, centerMeta, coordinates);
-                    }
-                }
-                break;
-            case SOUTH:
-            case NORTH:
-                for (int dx = x - mode; dx <= x + mode; dx++) {
-                    for (int dy = y - mode; dy <= y + mode; dy++) {
-                        checkAndAddBlock(world, dx, dy, z, centerBlock, centerMeta, coordinates);
-                    }
-                }
-                break;
-            case EAST:
-            case WEST:
-                for (int dy = y - mode; dy <= y + mode; dy++) {
-                    for (int dz = z - mode; dz <= z + mode; dz++) {
-                        checkAndAddBlock(world, x, dy, dz, centerBlock, centerMeta, coordinates);
-                    }
-                }
-        }
-        return coordinates;
-    }
+	protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta)
+	{
 
-    private static void checkAndAddBlock(World world, int x, int y, int z, Block centerBlock, int centerMeta, Set<BlockPos> coordinates) {
-        BlockPos pos = new BlockPos(x, y, z);
-        IBlockState state = world.getBlockState(pos);
-        if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta)) {
-            coordinates.add(pos);
-        }
-    }
+		Set<BlockPos> coordinates = new HashSet<>();
+		int mode = stack.getTagCompound().getInteger("mode");
+
+		List<BlockPos> possibleLocs = new ArrayList<>();
+		possibleLocs.add(pos);
+		int index = 0;
+		do
+		{
+			BlockPos currentPos = possibleLocs.get(index);
+			checkAndAddBlock(world, currentPos.getX(), currentPos.getY(), currentPos.getZ(), centerBlock, centerMeta, coordinates);
+			getConnectedBlocks(possibleLocs, world, currentPos, pos, mode);
+			index++;
+		} while(index < possibleLocs.size());
+		return coordinates;
+
+		// Set<BlockPos> coordinates = new HashSet<>();
+		// int mode = stack.getTagCompound().getInteger("mode");
+		// int x = pos.getX();
+		// int y = pos.getY();
+		// int z = pos.getZ();
+		// switch (sideHit) {
+		// case UP:
+		// case DOWN:
+		// for (int dx = x - mode; dx <= x + mode; dx++) {
+		// for (int dz = z - mode; dz <= z + mode; dz++) {
+		// checkAndAddBlock(world, dx, y, dz, centerBlock, centerMeta, coordinates);
+		// }
+		// }
+		// break;
+		// case SOUTH:
+		// case NORTH:
+		// for (int dx = x - mode; dx <= x + mode; dx++) {
+		// for (int dy = y - mode; dy <= y + mode; dy++) {
+		// checkAndAddBlock(world, dx, dy, z, centerBlock, centerMeta, coordinates);
+		// }
+		// }
+		// break;
+		// case EAST:
+		// case WEST:
+		// for (int dy = y - mode; dy <= y + mode; dy++) {
+		// for (int dz = z - mode; dz <= z + mode; dz++) {
+		// checkAndAddBlock(world, x, dy, dz, centerBlock, centerMeta, coordinates);
+		// }
+		// }
+		// }
+		// return coordinates;
+	}
+
+	private static void checkAndAddBlock(World world, int x, int y, int z, Block centerBlock, int centerMeta, Set<BlockPos> coordinates)
+	{
+		BlockPos pos = new BlockPos(x, y, z);
+		IBlockState state = world.getBlockState(pos);
+		if((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta))
+		{
+			coordinates.add(pos);
+		}
+	}
+
+	private static void getConnectedBlocks(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, int mode)
+	{
+		for(int x = -1; x < 2; x++)
+		{
+			for(int y = -1; y < 2; y++)
+			{
+				BlockPos newPos = currentPos.add(x, 0, y);
+				if(!isLocationContained(possibleLocs, newPos))
+					if(newPos.getX() <= centerPos.getX() + mode && newPos.getX() >= centerPos.getX() - mode)
+						if(newPos.getZ() <= centerPos.getZ() + mode && newPos.getZ() >= centerPos.getZ() - mode)
+							if(!world.getBlockState(newPos.add(0, 1, 0)).isFullBlock())
+								possibleLocs.add(newPos);
+			}
+		}
+	}
+
+	private static boolean isLocationContained(List<BlockPos> possibleLocs, BlockPos toFind)
+	{
+		for(BlockPos pos : possibleLocs)
+			if(pos.getX() == toFind.getX() && pos.getY() == toFind.getY() && pos.getZ() == toFind.getZ())
+				return true;
+
+		return false;
+	}
 
     private boolean consumeItemInInventory(Item item, int meta, InventoryPlayer inv, EntityPlayer player) {
         if (player.capabilities.isCreativeMode || isCreative()) {

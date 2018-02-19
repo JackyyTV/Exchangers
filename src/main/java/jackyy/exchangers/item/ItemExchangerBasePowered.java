@@ -12,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -110,6 +111,13 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
     @Override
     public boolean canEnchant(ItemStack stack, Enchantment enchantment) {
         return ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return enchantment == Enchantments.FORTUNE
+                || enchantment == Enchantments.SILK_TOUCH
+                || enchantment == Enchantments.UNBREAKING;
     }
 
 }

@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -15,7 +15,7 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
     public ItemGoldenExchanger(){
         setRegistryName(Exchangers.MODID + ":golden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".golden_exchanger");
-        setMaxDamage(Config.goldMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.goldMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.vanillaModule;
+        return ModConfig.modules.vanillaModule;
     }
 
     @Override

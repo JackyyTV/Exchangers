@@ -1,9 +1,9 @@
 package jackyy.exchangers.handler;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.client.Keys;
 import jackyy.exchangers.helper.ChatHelper;
 import jackyy.exchangers.helper.StringHelper;
+import jackyy.exchangers.registry.ModConfig;
 import jackyy.exchangers.util.IExchanger;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -58,12 +58,16 @@ public class ExchangerHandler extends Item implements IExchanger {
             compound.setString("block", "minecraft:air");
             compound.setInteger("meta", 0);
             compound.setInteger("mode", 0);
+            compound.setBoolean("forceDropItems", false);
             stack.setTagCompound(compound);
         } else {
             if (stack.getTagCompound().hasKey("Energy") && !stack.getTagCompound().hasKey("mode")) {
                 stack.getTagCompound().setString("block", "minecraft:air");
                 stack.getTagCompound().setInteger("meta", 0);
                 stack.getTagCompound().setInteger("mode", 0);
+            }
+            if (!stack.getTagCompound().hasKey("forceDropItems")) {
+                stack.getTagCompound().setBoolean("forceDropItems", false);
             }
         }
     }
@@ -92,10 +96,15 @@ public class ExchangerHandler extends Item implements IExchanger {
                 tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
                 tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
             }
-            if (Config.doExchangersSilkTouch) {
+            if (ModConfig.misc.doExchangersSilkTouch) {
                 tooltip.add(StringHelper.localize("tooltip.silk_touch.on"));
             } else {
                 tooltip.add(StringHelper.localize("tooltip.silk_touch.off"));
+            }
+            if (compound.getBoolean("forceDropItems")) {
+                tooltip.add(StringHelper.localize("tooltip.force_drop_items.on") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.FORCE_DROP_ITEMS_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+            } else {
+                tooltip.add(StringHelper.localize("tooltip.force_drop_items.off") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.FORCE_DROP_ITEMS_KEY.getDisplayName() + TextFormatting.GRAY + ")");
             }
             tooltip.add(StringHelper.localize("tooltip.shift1"));
             tooltip.add(StringHelper.localize("tooltip.shift2"));
@@ -105,7 +114,7 @@ public class ExchangerHandler extends Item implements IExchanger {
     }
 
     private int getPerBlockEnergy(ItemStack stack) {
-        if (Config.unbreakingPoweredExchangers) {
+        if (ModConfig.misc.unbreakingPoweredExchangers) {
             int level = MathHelper.clamp_int(EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack), 0, 10);
             if (new Random().nextInt(2 + level) >= 2) {
                 return 0;
@@ -133,6 +142,16 @@ public class ExchangerHandler extends Item implements IExchanger {
         stack.getTagCompound().setInteger("mode", modeSwitch);
     }
 
+    public void toggleForceDropItems(EntityPlayer player, ItemStack stack) {
+        setDefaultTagCompound(stack);
+        boolean toggle = stack.getTagCompound().getBoolean("forceDropItems");
+        ItemStack heldItem = player.getHeldItemMainhand();
+        if (heldItem != null) {
+            toggle = !toggle;
+        }
+        stack.getTagCompound().setBoolean("forceDropItems", toggle);
+    }
+
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
@@ -146,7 +165,7 @@ public class ExchangerHandler extends Item implements IExchanger {
     }
 
     public static boolean isWhitelisted(World world, BlockPos pos) {
-        for (String block : Config.blocksWhitelist) {
+        for (String block : ModConfig.misc.blocksWhitelist) {
             if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
                 return true;
             }
@@ -200,7 +219,7 @@ public class ExchangerHandler extends Item implements IExchanger {
             if (!MinecraftForge.EVENT_BUS.post(event)) {
                 if (consumeItemInInventory(Item.getItemFromBlock(block), meta, player.inventory, player)) {
                     if (!player.capabilities.isCreativeMode && !isCreative()) {
-                        if (Config.doExchangersSilkTouch || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
+                        if (ModConfig.misc.doExchangersSilkTouch || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                             ItemStack oldblockItem = oldblock.getItem(world, pos, oldState);
                             giveItem(world, player, pos, oldblockItem);
                         } else {
@@ -267,91 +286,49 @@ public class ExchangerHandler extends Item implements IExchanger {
         tagCompound.setInteger("meta", meta);
     }
 
-	protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta)
-	{
+    protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
+        Set<BlockPos> coordinates = new HashSet<>();
+        int mode = stack.getTagCompound().getInteger("mode");
 
-		Set<BlockPos> coordinates = new HashSet<>();
-		int mode = stack.getTagCompound().getInteger("mode");
+        List<BlockPos> possibleLocs = new ArrayList<>();
+        possibleLocs.add(pos);
+        int index = 0;
+        do {
+            BlockPos currentPos = possibleLocs.get(index);
+            checkAndAddBlock(world, currentPos.getX(), currentPos.getY(), currentPos.getZ(), centerBlock, centerMeta, coordinates);
+            getConnectedBlocks(possibleLocs, world, currentPos, pos, mode);
+            index++;
+        } while (index < possibleLocs.size());
+        return coordinates;
+    }
 
-		List<BlockPos> possibleLocs = new ArrayList<>();
-		possibleLocs.add(pos);
-		int index = 0;
-		do
-		{
-			BlockPos currentPos = possibleLocs.get(index);
-			checkAndAddBlock(world, currentPos.getX(), currentPos.getY(), currentPos.getZ(), centerBlock, centerMeta, coordinates);
-			getConnectedBlocks(possibleLocs, world, currentPos, pos, mode);
-			index++;
-		} while(index < possibleLocs.size());
-		return coordinates;
+    private static void checkAndAddBlock(World world, int x, int y, int z, Block centerBlock, int centerMeta, Set<BlockPos> coordinates) {
+        BlockPos pos = new BlockPos(x, y, z);
+        IBlockState state = world.getBlockState(pos);
+        if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta)) {
+            coordinates.add(pos);
+        }
+    }
 
-		// Set<BlockPos> coordinates = new HashSet<>();
-		// int mode = stack.getTagCompound().getInteger("mode");
-		// int x = pos.getX();
-		// int y = pos.getY();
-		// int z = pos.getZ();
-		// switch (sideHit) {
-		// case UP:
-		// case DOWN:
-		// for (int dx = x - mode; dx <= x + mode; dx++) {
-		// for (int dz = z - mode; dz <= z + mode; dz++) {
-		// checkAndAddBlock(world, dx, y, dz, centerBlock, centerMeta, coordinates);
-		// }
-		// }
-		// break;
-		// case SOUTH:
-		// case NORTH:
-		// for (int dx = x - mode; dx <= x + mode; dx++) {
-		// for (int dy = y - mode; dy <= y + mode; dy++) {
-		// checkAndAddBlock(world, dx, dy, z, centerBlock, centerMeta, coordinates);
-		// }
-		// }
-		// break;
-		// case EAST:
-		// case WEST:
-		// for (int dy = y - mode; dy <= y + mode; dy++) {
-		// for (int dz = z - mode; dz <= z + mode; dz++) {
-		// checkAndAddBlock(world, x, dy, dz, centerBlock, centerMeta, coordinates);
-		// }
-		// }
-		// }
-		// return coordinates;
-	}
+    private static void getConnectedBlocks(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, int mode) {
+        for (int x = -1; x < 2; x++) {
+            for (int y = -1; y < 2; y++) {
+                BlockPos newPos = currentPos.add(x, 0, y);
+                if (!isLocationContained(possibleLocs, newPos))
+                    if (newPos.getX() <= centerPos.getX() + mode && newPos.getX() >= centerPos.getX() - mode)
+                        if (newPos.getZ() <= centerPos.getZ() + mode && newPos.getZ() >= centerPos.getZ() - mode)
+                            if (!world.getBlockState(newPos.add(0, 1, 0)).isFullBlock())
+                                possibleLocs.add(newPos);
+            }
+        }
+    }
 
-	private static void checkAndAddBlock(World world, int x, int y, int z, Block centerBlock, int centerMeta, Set<BlockPos> coordinates)
-	{
-		BlockPos pos = new BlockPos(x, y, z);
-		IBlockState state = world.getBlockState(pos);
-		if((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta))
-		{
-			coordinates.add(pos);
-		}
-	}
-
-	private static void getConnectedBlocks(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, int mode)
-	{
-		for(int x = -1; x < 2; x++)
-		{
-			for(int y = -1; y < 2; y++)
-			{
-				BlockPos newPos = currentPos.add(x, 0, y);
-				if(!isLocationContained(possibleLocs, newPos))
-					if(newPos.getX() <= centerPos.getX() + mode && newPos.getX() >= centerPos.getX() - mode)
-						if(newPos.getZ() <= centerPos.getZ() + mode && newPos.getZ() >= centerPos.getZ() - mode)
-							if(!world.getBlockState(newPos.add(0, 1, 0)).isFullBlock())
-								possibleLocs.add(newPos);
-			}
-		}
-	}
-
-	private static boolean isLocationContained(List<BlockPos> possibleLocs, BlockPos toFind)
-	{
-		for(BlockPos pos : possibleLocs)
-			if(pos.getX() == toFind.getX() && pos.getY() == toFind.getY() && pos.getZ() == toFind.getZ())
-				return true;
-
-		return false;
-	}
+    private static boolean isLocationContained(List<BlockPos> possibleLocs, BlockPos toFind) {
+        for (BlockPos pos : possibleLocs)
+            if (pos.getX() == toFind.getX() && pos.getY() == toFind.getY() && pos.getZ() == toFind.getZ())
+                return true;
+        return false;
+    }
 
     private boolean consumeItemInInventory(Item item, int meta, InventoryPlayer playerInv, EntityPlayer player) {
         if (player.capabilities.isCreativeMode || isCreative()) {
@@ -360,10 +337,10 @@ public class ExchangerHandler extends Item implements IExchanger {
         IInventory inv = playerInv;
         int i = findItem(item, meta, inv);
         if (i < 0) {
-        	inv = findItemHolder(item, meta, inv);
-        	if(inv == null)
-        		return false;
-        	i = findItem(item, meta, inv);
+            inv = findItemHolder(item, meta, inv);
+            if (inv == null)
+                return false;
+            i = findItem(item, meta, inv);
         }
         ItemStack stackInSlot = inv.getStackInSlot(i);
         if (stackInSlot != null) {
@@ -376,7 +353,7 @@ public class ExchangerHandler extends Item implements IExchanger {
     }
 
     private static int findItem(Item item, int meta, IInventory inv) {
-        for (int i = 0; i < 36; i++) {
+        for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
             if (stack != null && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
                 return i;
@@ -384,23 +361,27 @@ public class ExchangerHandler extends Item implements IExchanger {
         }
         return -1;
     }
-    
+
     private static IInventory findItemHolder(Item item, int meta, IInventory inv) {
         for (int i = 0; i < 36; i++) {
             ItemStack stack = inv.getStackInSlot(i);
             if (stack != null && stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-            	InvWrapper invW = (InvWrapper) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            	if(findItem(item, meta, invW.getInv()) != -1)
-            		return invW.getInv();
+                InvWrapper invW = (InvWrapper) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                if (findItem(item, meta, invW.getInv()) != -1)
+                    return invW.getInv();
             }
         }
         return null;
     }
 
     private static void giveItem(World world, EntityPlayer player, BlockPos pos, ItemStack oldStack) {
-        if (!player.inventory.addItemStackToInventory(oldStack)) {
-            EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), oldStack);
+        EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), oldStack);
+        if (player.getHeldItemMainhand().getTagCompound().getBoolean("forceDropItems")) {
             world.spawnEntityInWorld(entityItem);
+        } else {
+            if (!player.inventory.addItemStackToInventory(oldStack)) {
+                world.spawnEntityInWorld(entityItem);
+            }
         }
     }
 

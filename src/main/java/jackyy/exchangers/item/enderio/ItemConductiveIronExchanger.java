@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.enderio;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -25,17 +25,17 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.conductiveMaxEnergy;
+        return ModConfig.enderIOTweaks.conductiveMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.conductivePerBlockUse;
+        return ModConfig.enderIOTweaks.conductivePerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
+        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package jackyy.exchangers;
 
 import jackyy.exchangers.proxy.CommonProxy;
+import jackyy.exchangers.registry.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -33,11 +34,11 @@ public class Exchangers {
             + "after:" + TE + ";"
             + "after:" + MEK + ";"
             + "after:" + IE + ";";
-    public static final String GUIFACTORY = "jackyy.exchangers.ConfigGuiFactory";
+    public static final String GUIFACTORY = "jackyy.exchangers.registry.ConfigGuiFactory";
     public static final CreativeTabs TAB = new CreativeTabs(MODID) {
         @Override
         public Item getTabIconItem() {
-            return ExchangersItems.obsidianExchanger;
+            return ModItems.obsidianExchanger;
         }
     };
     public static final EnumRarity TIER_1 = EnumHelper.addRarity("TIER_1", TextFormatting.GREEN, "Tier 1");

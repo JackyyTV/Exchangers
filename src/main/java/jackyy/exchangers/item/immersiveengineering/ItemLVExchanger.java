@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.immersiveengineering;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -25,17 +25,17 @@ public class ItemLVExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.lvMaxEnergy;
+        return ModConfig.immersiveEngineeringTweaks.lvMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.lvPerBlockUse;
+        return ModConfig.immersiveEngineeringTweaks.lvPerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.immersiveEngineeringModule && Loader.isModLoaded(Exchangers.IE);
+        return ModConfig.modules.immersiveEngineeringModule && Loader.isModLoaded(Exchangers.IE);
     }
 
     @Override

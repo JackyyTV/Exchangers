@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.mekanism;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -25,17 +25,17 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.basicMaxEnergy;
+        return ModConfig.mekanismTweaks.basicMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.basicPerBlockUse;
+        return ModConfig.mekanismTweaks.basicPerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
+        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
     }
 
     @Override

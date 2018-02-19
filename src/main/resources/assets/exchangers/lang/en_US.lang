@@ -25,6 +25,8 @@ exchangers.tooltip.max_range=§2Maximum Range:
 exchangers.tooltip.no_selected_block=§4No Selected Block
 exchangers.tooltip.silk_touch.on=§fSilk Touch mode is §a§lenabled§r in config.
 exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in config.
+exchangers.tooltip.force_drop_items.on=§fForce Drop Items mode is §a§lenabled§r.
+exchangers.tooltip.force_drop_items.off=§fForce Drop Items mode is §4§ldisabled§r.
 
 #Error Messages
 exchangers.error.invalid_block.te=§cError: Invalid block! (Tile Entities)

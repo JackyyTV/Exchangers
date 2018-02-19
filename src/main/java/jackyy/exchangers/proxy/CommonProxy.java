@@ -1,15 +1,15 @@
 package jackyy.exchangers.proxy;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
-import jackyy.exchangers.ExchangersItems;
-import jackyy.exchangers.Recipes;
 import jackyy.exchangers.handler.EventsHandler;
 import jackyy.exchangers.handler.network.PacketHandler;
 import jackyy.exchangers.integration.EnderIOIntegration;
 import jackyy.exchangers.integration.ImmersiveEngineeringIntegration;
 import jackyy.exchangers.integration.MekanismIntegration;
 import jackyy.exchangers.integration.ThermalExpansionIntegration;
+import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModItems;
+import jackyy.exchangers.registry.ModRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
@@ -17,38 +17,33 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import java.io.File;
-
 public class CommonProxy {
 
     public static Configuration config;
 
     public void preInit(FMLPreInitializationEvent e) {
-        File configDir = e.getModConfigurationDirectory();
-        config = new Configuration(new File(configDir.getPath(), "Exchangers.cfg"));
-        Config.readConfig();
-        ExchangersItems.init();
-        if (Config.enderIOModule) {
+        ModItems.init();
+        if (ModConfig.modules.enderIOModule) {
             if (Loader.isModLoaded(Exchangers.EIO)) {
                 EnderIOIntegration.init();
             }
         }
-        if (Config.thermalExpansionModule) {
+        if (ModConfig.modules.thermalExpansionModule) {
             if (Loader.isModLoaded(Exchangers.TE)) {
                 ThermalExpansionIntegration.init();
             }
         }
-        if (Config.mekanismModule) {
+        if (ModConfig.modules.mekanismModule) {
             if (Loader.isModLoaded(Exchangers.MEK)) {
                 MekanismIntegration.init();
             }
         }
-        if (Config.immersiveEngineeringModule) {
+        if (ModConfig.modules.immersiveEngineeringModule) {
             if (Loader.isModLoaded(Exchangers.IE)) {
                 ImmersiveEngineeringIntegration.init();
             }
         }
-        Recipes.init();
+        ModRecipes.init();
         PacketHandler.registerMessages(Exchangers.MODID);
         MinecraftForge.EVENT_BUS.register(new EventsHandler());
     }

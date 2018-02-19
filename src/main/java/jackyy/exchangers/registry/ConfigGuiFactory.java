@@ -1,11 +1,14 @@
-package jackyy.exchangers;
+package jackyy.exchangers.registry;
 
-import jackyy.exchangers.proxy.CommonProxy;
+import jackyy.exchangers.Exchangers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.common.config.ConfigElement;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.IModGuiFactory;
 import net.minecraftforge.fml.client.config.GuiConfig;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class ConfigGuiFactory implements IModGuiFactory {
@@ -30,15 +33,15 @@ public class ConfigGuiFactory implements IModGuiFactory {
     }
 
     public static class ConfigGui extends GuiConfig {
+        private static Configuration config = ModConfig.ConfigHolder.getConfig();
         public ConfigGui(GuiScreen parentScreen) {
-            super(parentScreen, Config.getConfigElements(), Exchangers.MODID, false,
-                    false, GuiConfig.getAbridgedConfigPath(CommonProxy.config.toString()));
+            super(parentScreen, new ArrayList<>(new ConfigElement(config.getCategory("general")).getChildElements()),
+                    Exchangers.MODID, false, false, GuiConfig.getAbridgedConfigPath(config.toString()));
         }
-
         @Override
         public void onGuiClosed() {
             super.onGuiClosed();
-            CommonProxy.config.save();
+            config.save();
         }
     }
 

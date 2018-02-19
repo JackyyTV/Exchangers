@@ -15,5 +15,6 @@ public class PacketHandler {
     public static void registerMessages(String channelName) {
         INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(channelName);
         INSTANCE.registerMessage(PacketToggleMode.class, PacketToggleMode.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketToggleForceDropItemsMode.class, PacketToggleForceDropItemsMode.class, nextID(), Side.SERVER);
     }
 }

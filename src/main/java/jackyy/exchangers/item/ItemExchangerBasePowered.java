@@ -2,11 +2,11 @@ package jackyy.exchangers.item;
 
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.core.item.IEnchantableItem;
-import jackyy.exchangers.Config;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.helper.EnergyHelper;
 import jackyy.exchangers.helper.NBTHelper;
 import jackyy.exchangers.helper.StringHelper;
+import jackyy.exchangers.registry.ModConfig;
 import jackyy.exchangers.util.EnergyContainerItemWrapper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -52,7 +52,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-	    if (Config.holdingEnchantment && Loader.isModLoaded("cofhcore")) {
+	    if (ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore")) {
             int enchant = EnchantmentHelper.getEnchantmentLevel(holding, container);
             return getMaxEnergy() + getMaxEnergy() * enchant / 2;
         }
@@ -108,7 +108,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
     /* HOLDING ENCHANT */
     @Override
     public boolean canEnchant(ItemStack stack, Enchantment enchantment) {
-        return Config.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
+        return ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
     }
 
 }

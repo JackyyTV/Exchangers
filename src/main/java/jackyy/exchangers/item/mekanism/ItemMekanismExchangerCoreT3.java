@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.mekanism;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public class ItemMekanismExchangerCoreT3 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
+        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
     }
     @Override
     public EnumRarity getRarity(ItemStack stack) {

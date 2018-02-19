@@ -11,15 +11,12 @@ import jackyy.exchangers.registry.ModConfig;
 import jackyy.exchangers.registry.ModItems;
 import jackyy.exchangers.registry.ModRecipes;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
-
-    public static Configuration config;
 
     public void preInit(FMLPreInitializationEvent e) {
         ModItems.init();

@@ -150,6 +150,7 @@ public class ExchangerHandler extends Item implements IExchanger {
             toggle = !toggle;
         }
         stack.getTagCompound().setBoolean("forceDropItems", toggle);
+        ChatHelper.msgPlayer(player, toggle ? "msg.force_drop_items.on" : "msg.force_drop_items.off");
     }
 
     @Override
@@ -298,23 +299,23 @@ public class ExchangerHandler extends Item implements IExchanger {
             checkAndAddBlock(world, currentPos, centerBlock, centerMeta, coordinates);
             switch (sideHit) {
                 case UP:
-                	getConnectedBlocksUD(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, true);
-                	 break;
+                    getConnectedBlocksUD(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, true);
+                    break;
                 case DOWN:
-                	getConnectedBlocksUD(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
+                    getConnectedBlocksUD(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
                     break;
                 case SOUTH:
-                	getConnectedBlocksNS(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, true);
-                	 break;
+                    getConnectedBlocksNS(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, true);
+                    break;
                 case NORTH:
-                	getConnectedBlocksNS(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
+                    getConnectedBlocksNS(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
                     break;
                 case EAST:
-                	getConnectedBlocksEW(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode,true);
-                	 break;
+                    getConnectedBlocksEW(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode,true);
+                    break;
                 case WEST:
-                	getConnectedBlocksEW(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
-                	 break;
+                    getConnectedBlocksEW(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
+                    break;
             }
             index++;
         } while (index < possibleLocs.size());
@@ -323,17 +324,13 @@ public class ExchangerHandler extends Item implements IExchanger {
 
     private static void checkAndAddBlock(World world, BlockPos pos, Block centerBlock, int centerMeta, Set<BlockPos> coordinates) {
         IBlockState state = world.getBlockState(pos);
-        if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta)) {
+        if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta))
             coordinates.add(pos);
-        }
     }
-    
+
     private static boolean checkBlock(World world, BlockPos pos, Block centerBlock, int centerMeta) {
         IBlockState state = world.getBlockState(pos);
-        if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta)) {
-            return true;
-        }
-        return false;
+        return (state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta);
     }
 
     private static void getConnectedBlocksUD(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
@@ -348,7 +345,7 @@ public class ExchangerHandler extends Item implements IExchanger {
             }
         }
     }
-    
+
     private static void getConnectedBlocksNS(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
@@ -361,7 +358,7 @@ public class ExchangerHandler extends Item implements IExchanger {
             }
         }
     }
-    
+
     private static void getConnectedBlocksEW(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {

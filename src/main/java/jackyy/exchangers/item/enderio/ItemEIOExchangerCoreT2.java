@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.enderio;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -25,7 +25,7 @@ public class ItemEIOExchangerCoreT2 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
+        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
     }
 
     @Override

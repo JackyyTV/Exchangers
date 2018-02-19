@@ -18,9 +18,9 @@ public class EnderIOIntegration {
     public static ItemStack basicCapacitor;
     public static ItemStack doubleLayerCapacitor;
     public static ItemStack octadicCapacitor;
-    public static ItemStack pulsatingCrystal;
-    public static ItemStack vibrantCrystal;
-    public static ItemStack enderCrystal;
+    public static Object pulsatingCrystal;
+    public static Object vibrantCrystal;
+    public static Object enderCrystal;
     public static ItemStack bucketNutrientDistillation;
     public static ItemStack bucketDewOfTheVoid;
     public static ItemStack bucketVaporOfLevity;
@@ -40,12 +40,9 @@ public class EnderIOIntegration {
             octadicCapacitor = new ItemStack(capacitorItem, 1, 2);
         }
 
-        Item eioMaterialsItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "item_material"));
-        if (eioMaterialsItem != null) {
-            pulsatingCrystal = new ItemStack(eioMaterialsItem, 1, 13);
-            vibrantCrystal = new ItemStack(eioMaterialsItem, 1, 14);
-            enderCrystal = new ItemStack(eioMaterialsItem, 1, 15);
-        }
+        pulsatingCrystal = "itemPulsatingCrystal";
+        vibrantCrystal = "itemVibrantCrystal";
+        enderCrystal = "itemEnderCrystal";
 
         Fluid nutrientDistillation = FluidRegistry.getFluid("nutrient_distillation");
         bucketNutrientDistillation = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, nutrientDistillation);

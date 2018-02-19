@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -15,7 +15,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
     public ItemObsidianExchanger(){
         setRegistryName(Exchangers.MODID + ":obsidian_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".obsidian_exchanger");
-        setMaxDamage(Config.obsMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.obsMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.vanillaModule;
+        return ModConfig.modules.vanillaModule;
     }
 
     @Override

@@ -4,9 +4,7 @@ import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.helper.StringHelper;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -59,14 +57,6 @@ public class ItemExchangerBase extends ExchangerHandler {
     @Override
     public int getItemEnchantability() {
         return 20;
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.FORTUNE
-                || enchantment == Enchantments.SILK_TOUCH
-                || enchantment == Enchantments.UNBREAKING
-                || enchantment == Enchantments.MENDING;
     }
 
 }

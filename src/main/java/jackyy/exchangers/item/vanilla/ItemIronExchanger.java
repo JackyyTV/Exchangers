@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -15,7 +15,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
     public ItemIronExchanger(){
         setRegistryName(Exchangers.MODID + ":iron_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".iron_exchanger");
-        setMaxDamage(Config.ironMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.ironMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.vanillaModule;
+        return ModConfig.modules.vanillaModule;
     }
 
     @Override

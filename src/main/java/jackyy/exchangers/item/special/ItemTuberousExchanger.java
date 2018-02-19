@@ -1,9 +1,9 @@
 package jackyy.exchangers.item.special;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -46,13 +46,13 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        return killPlayer(player, player.getHeldItem(hand))? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+        return killPlayer(player, player.getHeldItemMainhand())? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        boolean result = killPlayer(player, player.getHeldItem(hand));
-        return ActionResult.newResult(result? EnumActionResult.SUCCESS : EnumActionResult.FAIL, player.getHeldItem(hand));
+        boolean result = killPlayer(player, player.getHeldItemMainhand());
+        return ActionResult.newResult(result? EnumActionResult.SUCCESS : EnumActionResult.FAIL, player.getHeldItemMainhand());
     }
 
     private static boolean killPlayer(EntityPlayer player, ItemStack stack) {
@@ -72,7 +72,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.specialModule;
+        return ModConfig.modules.specialModule;
     }
 
     @Override

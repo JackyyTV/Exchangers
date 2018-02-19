@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -24,7 +24,7 @@ public class ItemExchangerCoreT1 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.vanillaModule;
+        return ModConfig.modules.vanillaModule;
     }
 
     @Override

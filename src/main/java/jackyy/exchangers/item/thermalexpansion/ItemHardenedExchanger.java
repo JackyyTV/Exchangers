@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.thermalexpansion;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -25,17 +25,17 @@ public class ItemHardenedExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.hardenedMaxEnergy;
+        return ModConfig.thermalExpansionTweaks.hardenedMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.hardenedPerBlockUse;
+        return ModConfig.thermalExpansionTweaks.hardenedPerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.thermalExpansionModule && Loader.isModLoaded(Exchangers.TE);
+        return ModConfig.modules.thermalExpansionModule && Loader.isModLoaded(Exchangers.TE);
     }
 
     @Override

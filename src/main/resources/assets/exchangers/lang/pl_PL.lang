@@ -26,7 +26,7 @@ exchangers.tooltip.no_selected_block=§4Brak Wybranego Bloku
 exchangers.tooltip.silk_touch.on=§fSilk Touch mode is §a§lenabled§r in config.
 exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in config.
 
-#Error Messages
+#Messages
 exchangers.error.invalid_block.te=§cError: Nieprwaidłowy Blok! (Tile Entities)
 exchangers.error.invalid_block.unbreakable=§cError: Nieprwaidłowy Blok! (Unbreakable Blocks)
 exchangers.error.invalid_block.null=§cError: Nieprwaidłowy Blok! (Null Display Name)

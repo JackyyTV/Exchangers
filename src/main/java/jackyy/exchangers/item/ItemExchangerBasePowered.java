@@ -2,17 +2,16 @@ package jackyy.exchangers.item;
 
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.core.item.IEnchantableItem;
-import jackyy.exchangers.Config;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.helper.EnergyHelper;
 import jackyy.exchangers.helper.NBTHelper;
 import jackyy.exchangers.helper.StringHelper;
+import jackyy.exchangers.registry.ModConfig;
 import jackyy.exchangers.util.EnergyContainerItemWrapper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,7 +30,7 @@ import java.util.List;
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
     public ItemExchangerBasePowered(){
-		setMaxDamage(1);
+        setMaxDamage(1);
     }
 
     @GameRegistry.ObjectHolder("cofhcore:holding")
@@ -54,7 +53,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-	    if (Config.holdingEnchantment && Loader.isModLoaded("cofhcore")) {
+	    if (ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore")) {
             int enchant = EnchantmentHelper.getEnchantmentLevel(holding, container);
             return getMaxEnergy() + getMaxEnergy() * enchant / 2;
         }
@@ -110,14 +109,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
     /* HOLDING ENCHANT */
     @Override
     public boolean canEnchant(ItemStack stack, Enchantment enchantment) {
-        return Config.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.FORTUNE
-                || enchantment == Enchantments.SILK_TOUCH
-                || enchantment == Enchantments.UNBREAKING;
+        return ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
     }
 
 }

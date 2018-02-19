@@ -1,4 +1,4 @@
-package jackyy.exchangers;
+package jackyy.exchangers.registry;
 
 import jackyy.exchangers.item.enderio.*;
 import jackyy.exchangers.item.immersiveengineering.*;
@@ -9,7 +9,7 @@ import jackyy.exchangers.item.thermalexpansion.*;
 import jackyy.exchangers.item.vanilla.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ExchangersItems {
+public class ModItems {
 
     public static ItemTuberousExchanger tuberousExchanger;
     public static ItemCreativeExchanger creativeExchanger;

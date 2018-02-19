@@ -295,29 +295,81 @@ public class ExchangerHandler extends Item implements IExchanger {
         int index = 0;
         do {
             BlockPos currentPos = possibleLocs.get(index);
-            checkAndAddBlock(world, currentPos.getX(), currentPos.getY(), currentPos.getZ(), centerBlock, centerMeta, coordinates);
-            getConnectedBlocks(possibleLocs, world, currentPos, pos, mode);
+            checkAndAddBlock(world, currentPos, centerBlock, centerMeta, coordinates);
+            switch (sideHit) {
+                case UP:
+                	getConnectedBlocksUD(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, true);
+                	 break;
+                case DOWN:
+                	getConnectedBlocksUD(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
+                    break;
+                case SOUTH:
+                	getConnectedBlocksNS(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, true);
+                	 break;
+                case NORTH:
+                	getConnectedBlocksNS(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
+                    break;
+                case EAST:
+                	getConnectedBlocksEW(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode,true);
+                	 break;
+                case WEST:
+                	getConnectedBlocksEW(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
+                	 break;
+            }
             index++;
         } while (index < possibleLocs.size());
         return coordinates;
     }
 
-    private static void checkAndAddBlock(World world, int x, int y, int z, Block centerBlock, int centerMeta, Set<BlockPos> coordinates) {
-        BlockPos pos = new BlockPos(x, y, z);
+    private static void checkAndAddBlock(World world, BlockPos pos, Block centerBlock, int centerMeta, Set<BlockPos> coordinates) {
         IBlockState state = world.getBlockState(pos);
         if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta)) {
             coordinates.add(pos);
         }
     }
+    
+    private static boolean checkBlock(World world, BlockPos pos, Block centerBlock, int centerMeta) {
+        IBlockState state = world.getBlockState(pos);
+        if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta)) {
+            return true;
+        }
+        return false;
+    }
 
-    private static void getConnectedBlocks(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, int mode) {
+    private static void getConnectedBlocksUD(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 BlockPos newPos = currentPos.add(x, 0, y);
                 if (!isLocationContained(possibleLocs, newPos))
                     if (newPos.getX() <= centerPos.getX() + mode && newPos.getX() >= centerPos.getX() - mode)
                         if (newPos.getZ() <= centerPos.getZ() + mode && newPos.getZ() >= centerPos.getZ() - mode)
-                            if (!world.getBlockState(newPos.add(0, 1, 0)).isFullBlock())
+                            if (!world.getBlockState(newPos.add(0, side ? 1 : -1, 0)).isFullBlock() && checkBlock(world, newPos, centerBlock, centerMeta))
+                                possibleLocs.add(newPos);
+            }
+        }
+    }
+    
+    private static void getConnectedBlocksNS(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
+        for (int x = -1; x < 2; x++) {
+            for (int y = -1; y < 2; y++) {
+                BlockPos newPos = currentPos.add(x, y, 0);
+                if (!isLocationContained(possibleLocs, newPos))
+                    if (newPos.getX() <= centerPos.getX() + mode && newPos.getX() >= centerPos.getX() - mode)
+                        if (newPos.getY() <= centerPos.getY() + mode && newPos.getY() >= centerPos.getY() - mode)
+                            if (!world.getBlockState(newPos.add(0, 0, side ? 1 : -1)).isFullBlock() && checkBlock(world, newPos, centerBlock, centerMeta))
+                                possibleLocs.add(newPos);
+            }
+        }
+    }
+    
+    private static void getConnectedBlocksEW(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
+        for (int x = -1; x < 2; x++) {
+            for (int y = -1; y < 2; y++) {
+                BlockPos newPos = currentPos.add(0, x, y);
+                if (!isLocationContained(possibleLocs, newPos))
+                    if (newPos.getY() <= centerPos.getY() + mode && newPos.getY() >= centerPos.getY() - mode)
+                        if (newPos.getZ() <= centerPos.getZ() + mode && newPos.getZ() >= centerPos.getZ() - mode)
+                            if (!world.getBlockState(newPos.add(side ? 1 : -1, 0, 0)).isFullBlock() && checkBlock(world, newPos, centerBlock, centerMeta))
                                 possibleLocs.add(newPos);
             }
         }

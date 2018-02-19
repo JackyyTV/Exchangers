@@ -394,13 +394,7 @@ public class ExchangerHandler extends Item implements IExchanger {
                 return false;
             i = findItem(item, meta, inv);
         }
-        ItemStack stackInSlot = inv.getStackInSlot(i);
-        if (stackInSlot != null) {
-            stackInSlot.stackSize--;
-            if (stackInSlot.stackSize == 0) {
-                inv.setInventorySlotContents(i, null);
-            }
-        }
+        inv.decrStackSize(i, 1);
         return true;
     }
 

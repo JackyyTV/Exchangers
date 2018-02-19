@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.mekanism;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemEliteExchanger extends ItemExchangerBasePowered {
 
     public ItemEliteExchanger(){
-        setRegistryName(Exchangers.MODID + ":exelite");
-        setUnlocalizedName(Exchangers.MODID + ".exelite");
+        setRegistryName(Exchangers.MODID + ":elite_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".elite_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,17 +25,17 @@ public class ItemEliteExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.eliteMaxEnergy;
+        return ModConfig.mekanismTweaks.eliteMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.elitePerBlockUse;
+        return ModConfig.mekanismTweaks.elitePerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
+        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
     }
 
     @Override

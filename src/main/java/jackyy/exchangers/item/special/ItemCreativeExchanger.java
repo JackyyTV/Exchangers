@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.special;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -13,8 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemCreativeExchanger extends ItemExchangerBase {
 
     public ItemCreativeExchanger(){
-        setRegistryName(Exchangers.MODID + ":excreative");
-        setUnlocalizedName(Exchangers.MODID + ".excreative");
+        setRegistryName(Exchangers.MODID + ":creative_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".creative_exchanger");
         setMaxDamage(9001);
     }
 
@@ -40,7 +40,7 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.specialModule;
+        return ModConfig.modules.specialModule;
     }
 
     @Override

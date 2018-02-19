@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.enderio;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
 
     public ItemElectricalSteelExchanger(){
-        setRegistryName(Exchangers.MODID + ":exelectricalsteel");
-        setUnlocalizedName(Exchangers.MODID + ".exelectricalsteel");
+        setRegistryName(Exchangers.MODID + ":electrical_steel_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".electrical_steel_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,17 +25,17 @@ public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.electricalSteelMaxEnergy;
+        return ModConfig.enderIOTweaks.electricalSteelMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.electricalSteelPerBlockUse;
+        return ModConfig.enderIOTweaks.electricalSteelPerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
+        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
     }
 
     @Override

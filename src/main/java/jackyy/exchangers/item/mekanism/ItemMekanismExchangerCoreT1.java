@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.mekanism;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemMekanismExchangerCoreT1 extends ItemCoreBase {
 
     public ItemMekanismExchangerCoreT1(){
-        setRegistryName(Exchangers.MODID + ":mekexcore_t1");
-        setUnlocalizedName(Exchangers.MODID + ".mekexcore_t1");
+        setRegistryName(Exchangers.MODID + ":mekanism_exchanger_core_tier1");
+        setUnlocalizedName(Exchangers.MODID + ".mekanism_exchanger_core_tier1");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,7 +25,7 @@ public class ItemMekanismExchangerCoreT1 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
+        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
     }
 
     @Override

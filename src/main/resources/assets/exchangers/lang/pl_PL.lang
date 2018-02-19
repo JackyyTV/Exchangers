@@ -26,7 +26,7 @@ exchangers.tooltip.no_selected_block=§4Brak Wybranego Bloku
 exchangers.tooltip.silk_touch.on=§fSilk Touch mode is §a§lenabled§r in config.
 exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in config.
 
-#Error Messages
+#Messages
 exchangers.error.invalid_block.te=§cError: Nieprwaidłowy Blok! (Tile Entities)
 exchangers.error.invalid_block.unbreakable=§cError: Nieprwaidłowy Blok! (Unbreakable Blocks)
 exchangers.error.invalid_block.null=§cError: Nieprwaidłowy Blok! (Null Display Name)
@@ -36,61 +36,61 @@ exchangers.error.event_cancelled=§cError: Exchange event cancelled by other mod
 
 #Crafting Components
 #Vanilla
-item.exchangers.excore_t1.name=Rdzeń Wymieniacza (Poziom 1)
-item.exchangers.excore_t2.name=Rdzeń Wymieniacza (Poziom 2)
-item.exchangers.excore_t3.name=Rdzeń Wymieniacza (Poziom 3)
+item.exchangers.exchanger_core_tier1.name=Rdzeń Wymieniacza (Poziom 1)
+item.exchangers.exchanger_core_tier2.name=Rdzeń Wymieniacza (Poziom 2)
+item.exchangers.exchanger_core_tier3.name=Rdzeń Wymieniacza (Poziom 3)
 #Ender IO
-item.exchangers.eioexcore_t1.name=Rdzeń Wymieniacza z Ender IO (Poziom 1)
-item.exchangers.eioexcore_t2.name=Rdzeń Wymieniacza z Ender IO (Poziom 2)
-item.exchangers.eioexcore_t3.name=Rdzeń Wymieniacza z Ender IO (Poziom 3)
+item.exchangers.eio_exchanger_core_tier1.name=Rdzeń Wymieniacza z Ender IO (Poziom 1)
+item.exchangers.eio_exchanger_core_tier2.name=Rdzeń Wymieniacza z Ender IO (Poziom 2)
+item.exchangers.eio_exchanger_core_tier3.name=Rdzeń Wymieniacza z Ender IO (Poziom 3)
 #Thermal Expansion
-item.exchangers.teexcore_t1.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 1)
-item.exchangers.teexcore_t2.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 2)
-item.exchangers.teexcore_t3.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 3)
+item.exchangers.te_exchanger_core_tier1.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 1)
+item.exchangers.te_exchanger_core_tier2.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 2)
+item.exchangers.te_exchanger_core_tier3.name=Rdzeń Wymieniacza z Thermal Expansion (Poziom 3)
 #Mekanism
-item.exchangers.mekexcore_t1.name=Rdzeń Wymieniacza z Mekanismu (Poziom 1)
-item.exchangers.mekexcore_t2.name=Rdzeń Wymieniacza z Mekanismu (Poziom 2)
-item.exchangers.mekexcore_t3.name=Rdzeń Wymieniacza z Mekanismu (Poziom 3)
+item.exchangers.mekanism_exchanger_core_tier1.name=Rdzeń Wymieniacza z Mekanismu (Poziom 1)
+item.exchangers.mekanism_exchanger_core_tier2.name=Rdzeń Wymieniacza z Mekanismu (Poziom 2)
+item.exchangers.mekanism_exchanger_core_tier3.name=Rdzeń Wymieniacza z Mekanismu (Poziom 3)
 #Immersive Engineering
-item.exchangers.ieexcore_t1.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 1)
-item.exchangers.ieexcore_t2.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 2)
-item.exchangers.ieexcore_t3.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 3)
+item.exchangers.ie_exchanger_core_tier1.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 1)
+item.exchangers.ie_exchanger_core_tier2.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 2)
+item.exchangers.ie_exchanger_core_tier3.name=Rdzeń Wymieniacza z Immersive Engineering (Poziom 3)
 
 #Special Exchangers
-item.exchangers.expotato.name=Bulwiasty Wymieniacz
-item.exchangers.excreative.name=Kreatywny Wymieniacz
+item.exchangers.tuberous_exchanger.name=Bulwiasty Wymieniacz
+item.exchangers.creative_exchanger.name=Kreatywny Wymieniacz
 
 #Vanilla Exchangers
-item.exchangers.exwooden.name=Drewniany Wymieniacz
-item.exchangers.exstone.name=Kamienny Wymieniacz
-item.exchangers.exgolden.name=Złoty Wymieniacz
-item.exchangers.exiron.name=Żelazny Wymieniacz
-item.exchangers.exdiamond.name=Diamentowy Wymieniacz
-item.exchangers.exemerald.name=Szmaragdowy Wymieniacz
-item.exchangers.exobsidian.name=Obsydianowy Wymieniacz
+item.exchangers.wooden_exchanger.name=Drewniany Wymieniacz
+item.exchangers.stone_exchanger.name=Kamienny Wymieniacz
+item.exchangers.golden_exchanger.name=Złoty Wymieniacz
+item.exchangers.iron_exchanger.name=Żelazny Wymieniacz
+item.exchangers.diamond_exchanger.name=Diamentowy Wymieniacz
+item.exchangers.emerald_exchanger.name=Szmaragdowy Wymieniacz
+item.exchangers.obsidian_exchanger.name=Obsydianowy Wymieniacz
 
 #Ender IO Exchangers
-item.exchangers.exconductive.name=Wymieniacz z Przewodzącego Żelaza
-item.exchangers.expulsating.name=Wymieniacz z Pulsującego Żelaza
-item.exchangers.exelectricalsteel.name=Wymieniacz z Elektrycznej Stali
-item.exchangers.exenergetic.name=EnergetycznyWymieniacz
-item.exchangers.exdarksteel.name=Wymieniacz z Ciemnej Stali
-item.exchangers.exvibrant.name=Wibrujący Wymieniacz
+item.exchangers.conductive_iron_exchanger.name=Wymieniacz z Przewodzącego Żelaza
+item.exchangers.pulsating_iron_exchanger.name=Wymieniacz z Pulsującego Żelaza
+item.exchangers.electrical_steel_exchanger.name=Wymieniacz z Elektrycznej Stali
+item.exchangers.energetic_exchanger.name=EnergetycznyWymieniacz
+item.exchangers.dark_steel_exchanger.name=Wymieniacz z Ciemnej Stali
+item.exchangers.vibrant_exchanger.name=Wibrujący Wymieniacz
 
 #Thermal Expansion Exchangers
-item.exchangers.exleadstone.name=Ołowiany Wymieniacz
-item.exchangers.exhardened.name=Utwardzony Wymieniacz
-item.exchangers.exreinforced.name=Wzmocniony Wymieniacz
-item.exchangers.exsignalum.name=Wymieniacz z Signalum
-item.exchangers.exresonant.name=Rezonansowy Wymieniacz
+item.exchangers.leadstone_exchanger.name=Ołowiany Wymieniacz
+item.exchangers.hardened_exchanger.name=Utwardzony Wymieniacz
+item.exchangers.reinforced_exchanger.name=Wzmocniony Wymieniacz
+item.exchangers.signalum_exchanger.name=Wymieniacz z Signalum
+item.exchangers.resonant_exchanger.name=Rezonansowy Wymieniacz
 
 #Mekanism Exchangers
-item.exchangers.exbasic.name=Podstawowy Wymieniacz
-item.exchangers.exadvanced.name=Zaawansowany Wymieniacz
-item.exchangers.exelite.name=Elitarny Wymieniacz
-item.exchangers.exultimate.name=Najlepszy Wymieniacz
+item.exchangers.basic_exchanger.name=Podstawowy Wymieniacz
+item.exchangers.advanced_exchanger.name=Zaawansowany Wymieniacz
+item.exchangers.elite_exchanger.name=Elitarny Wymieniacz
+item.exchangers.ultimate_exchanger.name=Najlepszy Wymieniacz
 
 #Immersive Engineering Exchangers
-item.exchangers.exlv.name=Niskonapięciowy Wymieniacz
-item.exchangers.exmv.name=Średnionapięciowy Wymieniacz
-item.exchangers.exhv.name=Wysokonapięciowy Wymieniacz
+item.exchangers.lv_exchanger.name=Niskonapięciowy Wymieniacz
+item.exchangers.mv_exchanger.name=Średnionapięciowy Wymieniacz
+item.exchangers.hv_exchanger.name=Wysokonapięciowy Wymieniacz

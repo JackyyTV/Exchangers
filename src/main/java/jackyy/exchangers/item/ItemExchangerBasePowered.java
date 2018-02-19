@@ -3,11 +3,11 @@ package jackyy.exchangers.item;
 import cofh.core.item.IEnchantableItem;
 import cofh.redstoneflux.api.IEnergyContainerItem;
 import cofh.redstoneflux.util.EnergyContainerItemWrapper;
-import jackyy.exchangers.Config;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.helper.EnergyHelper;
 import jackyy.exchangers.helper.NBTHelper;
 import jackyy.exchangers.helper.StringHelper;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -21,10 +21,15 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-@Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
+@Optional.InterfaceList(value = {
+        @Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux"),
+        @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
+})
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
     public ItemExchangerBasePowered(){
@@ -51,7 +56,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-	    if (Config.holdingEnchantment && Loader.isModLoaded("cofhcore")) {
+	    if (ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore")) {
             int enchant = EnchantmentHelper.getEnchantmentLevel(holding, container);
             return getMaxEnergy() + getMaxEnergy() * enchant / 2;
         }
@@ -72,16 +77,17 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
-		super.addInformation(stack, world, tooltip, bool);
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
         if (StringHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
         }
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-    	if (isInCreativeTab(tab)) {
+	    if (isInCreativeTab(tab)) {
             if (checkLoaded()) {
                 ItemStack empty = new ItemStack(this);
                 ExchangerHandler.setDefaultTagCompound(empty);
@@ -100,14 +106,15 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 	}
 
     /* CAPABILITIES */
-    @Override
+    @Override @Optional.Method(modid = "redstoneflux")
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
         return new EnergyContainerItemWrapper(stack, this);
     }
 
+    /* HOLDING ENCHANT */
     @Override
     public boolean canEnchant(ItemStack stack, Enchantment enchantment) {
-        return Config.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
+        return ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
     }
 
     @Override

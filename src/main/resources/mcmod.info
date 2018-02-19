@@ -3,14 +3,14 @@
   "modid": "exchangers",
   "name": "Exchangers",
   "description": "Block Exchangers.",
-  "version": "1.12.2-2.6.2",
-  "mcversion": "1.12",
+  "version": "1.12.2-2.7",
+  "mcversion": "1.12.2",
   "url": "https://github.com/JackyyTV/Exchangers",
   "updateUrl": "",
   "authorList": ["Jackyy", "Turkey2349"],
   "credits": "ThatGamerBlue, ColossalPercy, JCOnline_ and many other people that helped the development of this mod!",
   "logoFile": "assets/exchangers/logo.png",
   "screenshots": [],
-  "dependencies": ["redstoneflux"]
+  "dependencies": []
 }
 ]

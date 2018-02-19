@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.enderio;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
 
     public ItemEnergeticExchanger(){
-        setRegistryName(Exchangers.MODID + ":exenergetic");
-        setUnlocalizedName(Exchangers.MODID + ".exenergetic");
+        setRegistryName(Exchangers.MODID + ":energetic_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".energetic_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,17 +25,17 @@ public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.energeticMaxEnergy;
+        return ModConfig.enderIOTweaks.energeticMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.energeticPerBlockUse;
+        return ModConfig.enderIOTweaks.energeticPerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
+        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
     }
 
     @Override

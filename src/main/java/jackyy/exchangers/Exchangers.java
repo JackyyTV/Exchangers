@@ -1,6 +1,7 @@
 package jackyy.exchangers;
 
 import jackyy.exchangers.proxy.CommonProxy;
+import jackyy.exchangers.registry.ModItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -15,10 +16,10 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Exchangers.MODID, version = Exchangers.VERSION, name = Exchangers.MODNAME, dependencies = Exchangers.DEPENDS, guiFactory = Exchangers.GUIFACTORY, certificateFingerprint = "@FINGERPRINT@", acceptedMinecraftVersions = Exchangers.MCVERSION, useMetadata = true)
+@Mod(modid = Exchangers.MODID, version = Exchangers.VERSION, name = Exchangers.MODNAME, dependencies = Exchangers.DEPENDS, certificateFingerprint = "@FINGERPRINT@", acceptedMinecraftVersions = Exchangers.MCVERSION, useMetadata = true)
 public class Exchangers {
 
-    public static final String VERSION = "1.12.2-2.6.2";
+    public static final String VERSION = "1.12.2-2.7";
     public static final String MCVERSION = "[1.12,1.13)";
     public static final String MODID = "exchangers";
     public static final String MODNAME = "Exchangers";
@@ -27,17 +28,17 @@ public class Exchangers {
     public static final String MEK = "mekanism";
     public static final String IE = "immersiveengineering";
     public static final String DEPENDS
-            = "after:" + EIO + ";"
+            = "after:redstoneflux;"
+            + "after:" + EIO + ";"
             + "after:cofhcore;"
             + "after:thermalfoundation;"
             + "after:" + TE + ";"
             + "after:" + MEK + ";"
             + "after:" + IE + ";";
-    public static final String GUIFACTORY = "jackyy.exchangers.ConfigGuiFactory";
     public static final CreativeTabs TAB = new CreativeTabs(MODID) {
         @Override
         public ItemStack getTabIconItem() {
-            return new ItemStack(ExchangersItems.obsidianExchanger);
+            return new ItemStack(ModItems.obsidianExchanger);
         }
     };
     public static final EnumRarity TIER_1 = EnumHelper.addRarity("TIER_1", TextFormatting.GREEN, "Tier 1");

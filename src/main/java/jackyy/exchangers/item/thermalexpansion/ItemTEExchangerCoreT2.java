@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.thermalexpansion;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemTEExchangerCoreT2 extends ItemCoreBase {
 
     public ItemTEExchangerCoreT2(){
-        setRegistryName(Exchangers.MODID + ":teexcore_t2");
-        setUnlocalizedName(Exchangers.MODID + ".teexcore_t2");
+        setRegistryName(Exchangers.MODID + ":te_exchanger_core_tier2");
+        setUnlocalizedName(Exchangers.MODID + ".te_exchanger_core_tier2");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,7 +25,7 @@ public class ItemTEExchangerCoreT2 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.thermalExpansionModule && Loader.isModLoaded(Exchangers.TE);
+        return ModConfig.modules.thermalExpansionModule && Loader.isModLoaded(Exchangers.TE);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.thermalexpansion;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemLeadstoneExchanger extends ItemExchangerBasePowered {
 
     public ItemLeadstoneExchanger(){
-        setRegistryName(Exchangers.MODID + ":exleadstone");
-        setUnlocalizedName(Exchangers.MODID + ".exleadstone");
+        setRegistryName(Exchangers.MODID + ":leadstone_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".leadstone_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,17 +25,17 @@ public class ItemLeadstoneExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.leadstoneMaxEnergy;
+        return ModConfig.thermalExpansionTweaks.leadstoneMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.leadstonePerBlockUse;
+        return ModConfig.thermalExpansionTweaks.leadstonePerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.thermalExpansionModule && Loader.isModLoaded(Exchangers.TE);
+        return ModConfig.modules.thermalExpansionModule && Loader.isModLoaded(Exchangers.TE);
     }
 
     @Override

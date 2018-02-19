@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -13,9 +13,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemStoneExchanger extends ItemExchangerBase {
 
     public ItemStoneExchanger(){
-        setRegistryName(Exchangers.MODID + ":exstone");
-        setUnlocalizedName(Exchangers.MODID + ".exstone");
-        setMaxDamage(Config.stoneMaxDmg);
+        setRegistryName(Exchangers.MODID + ":stone_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".stone_exchanger");
+        setMaxDamage(ModConfig.vanillaTweaks.stoneMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class ItemStoneExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.vanillaModule;
+        return ModConfig.modules.vanillaModule;
     }
 
     @Override

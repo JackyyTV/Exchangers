@@ -33,8 +33,8 @@ public class ItemExchangerBase extends ExchangerHandler {
     }
 
 	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
-		super.addInformation(stack, world, tooltip, bool);
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
         if (StringHelper.isShiftKeyDown()) {
             if (!isPowered()) {
                 tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + StringHelper.localize("tooltip.durability"));
@@ -43,6 +43,7 @@ public class ItemExchangerBase extends ExchangerHandler {
 	}
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
         if (isInCreativeTab(tab)) {
             if (checkLoaded()) {

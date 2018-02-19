@@ -26,7 +26,7 @@ exchangers.tooltip.no_selected_block=§4Kein Block ausgewählt.
 exchangers.tooltip.silk_touch.on=§fSilk Touch mode is §a§lenabled§r in config.
 exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in config.
 
-#Error Messages
+#Messages
 exchangers.error.invalid_block.te=§cFehler: Ungültiger Block! (Tile Entities)
 exchangers.error.invalid_block.unbreakable=§cFehler: Ungültiger Block! (Unbreakable Blocks)
 exchangers.error.invalid_block.null=§cFehler: Ungültiger Block! (Null Display Name)
@@ -36,61 +36,61 @@ exchangers.error.event_cancelled=§cFehler: Exchange event cancelled by other mo
 
 #Crafting Components
 #Vanilla
-item.exchangers.excore_t1.name=Austauscher Kern (Stufe 1)
-item.exchangers.excore_t2.name=Austauscher Kern (Stufe 2)
-item.exchangers.excore_t3.name=Austauscher Kern (Stufe 3)
+item.exchangers.exchanger_core_tier1.name=Austauscher Kern (Stufe 1)
+item.exchangers.exchanger_core_tier2.name=Austauscher Kern (Stufe 2)
+item.exchangers.exchanger_core_tier3.name=Austauscher Kern (Stufe 3)
 #Ender IO
-item.exchangers.eioexcore_t1.name=Ender IO Austauscher Kern (Stufe 1)
-item.exchangers.eioexcore_t2.name=Ender IO Austauscher Kern (Stufe 2)
-item.exchangers.eioexcore_t3.name=Ender IO Austauscher Kern (Stufe 3)
+item.exchangers.eio_exchanger_core_tier1.name=Ender IO Austauscher Kern (Stufe 1)
+item.exchangers.eio_exchanger_core_tier2.name=Ender IO Austauscher Kern (Stufe 2)
+item.exchangers.eio_exchanger_core_tier3.name=Ender IO Austauscher Kern (Stufe 3)
 #Thermal Expansion
-item.exchangers.teexcore_t1.name=Thermal Expansion Austauscher Kern (Stufe 1)
-item.exchangers.teexcore_t2.name=Thermal Expansion Austauscher Kern (Stufe 2)
-item.exchangers.teexcore_t3.name=Thermal Expansion Austauscher Kern (Stufe 3)
+item.exchangers.te_exchanger_core_tier1.name=Thermal Expansion Austauscher Kern (Stufe 1)
+item.exchangers.te_exchanger_core_tier2.name=Thermal Expansion Austauscher Kern (Stufe 2)
+item.exchangers.te_exchanger_core_tier3.name=Thermal Expansion Austauscher Kern (Stufe 3)
 #Mekanism
-item.exchangers.mekexcore_t1.name=Mekanism Austauscher Kern (Stufe 1)
-item.exchangers.mekexcore_t2.name=Mekanism Austauscher Kern (Stufe 2)
-item.exchangers.mekexcore_t3.name=Mekanism Austauscher Kern (Stufe 3)
+item.exchangers.mekanism_exchanger_core_tier1.name=Mekanism Austauscher Kern (Stufe 1)
+item.exchangers.mekanism_exchanger_core_tier2.name=Mekanism Austauscher Kern (Stufe 2)
+item.exchangers.mekanism_exchanger_core_tier3.name=Mekanism Austauscher Kern (Stufe 3)
 #Immersive Engineering
-item.exchangers.ieexcore_t1.name=Immersive Engineering Austauscher Kern (Stufe 1)
-item.exchangers.ieexcore_t2.name=Immersive Engineering Austauscher Kern (Stufe 2)
-item.exchangers.ieexcore_t3.name=Immersive Engineering Austauscher Kern (Stufe 3)
+item.exchangers.ie_exchanger_core_tier1.name=Immersive Engineering Austauscher Kern (Stufe 1)
+item.exchangers.ie_exchanger_core_tier2.name=Immersive Engineering Austauscher Kern (Stufe 2)
+item.exchangers.ie_exchanger_core_tier3.name=Immersive Engineering Austauscher Kern (Stufe 3)
 
 #Special Exchangers
-item.exchangers.expotato.name=Knolliger Austauscher
-item.exchangers.excreative.name=Kreativer Austauscher
+item.exchangers.tuberous_exchanger.name=Knolliger Austauscher
+item.exchangers.creative_exchanger.name=Kreativer Austauscher
 
 #Vanilla Exchangers
-item.exchangers.exwooden.name=Holz Austauscher
-item.exchangers.exstone.name=Stein Austauscher
-item.exchangers.exgolden.name=Gold Austauscher
-item.exchangers.exiron.name=Eisen Austauscher
-item.exchangers.exdiamond.name=Diamant Austauscher
-item.exchangers.exemerald.name=Smaragd Austauscher
-item.exchangers.exobsidian.name=Obsidian Austauscher
+item.exchangers.wooden_exchanger.name=Holz Austauscher
+item.exchangers.stone_exchanger.name=Stein Austauscher
+item.exchangers.golden_exchanger.name=Gold Austauscher
+item.exchangers.iron_exchanger.name=Eisen Austauscher
+item.exchangers.diamond_exchanger.name=Diamant Austauscher
+item.exchangers.emerald_exchanger.name=Smaragd Austauscher
+item.exchangers.obsidian_exchanger.name=Obsidian Austauscher
 
 #Ender IO Exchangers
-item.exchangers.exconductive.name=Leitendes Eisen Austauscher
-item.exchangers.expulsating.name=Pulsierender Eisen Austauscher
-item.exchangers.exelectricalsteel.name=Elektrischer Stahl Austauscher
-item.exchangers.exenergetic.name=Energetisierte Legierung Austauscher
-item.exchangers.exdarksteel.name=Dunkelstahl Austauscher
-item.exchangers.exvibrant.name=Dynamische Legierung Austauscher
+item.exchangers.conductive_iron_exchanger.name=Leitendes Eisen Austauscher
+item.exchangers.pulsating_iron_exchanger.name=Pulsierender Eisen Austauscher
+item.exchangers.electrical_steel_exchanger.name=Elektrischer Stahl Austauscher
+item.exchangers.energetic_exchanger.name=Energetisierte Legierung Austauscher
+item.exchangers.dark_steel_exchanger.name=Dunkelstahl Austauscher
+item.exchangers.vibrant_exchanger.name=Dynamische Legierung Austauscher
 
 #Thermal Expansion Exchangers
-item.exchangers.exleadstone.name=Blei Austauscher
-item.exchangers.exhardened.name=Gehärteter Austauscher
-item.exchangers.exreinforced.name=Verstärkter Austauscher
-item.exchangers.exsignalum.name=Signalum Austauscher
-item.exchangers.exresonant.name=Resonanter Austauscher
+item.exchangers.leadstone_exchanger.name=Blei Austauscher
+item.exchangers.hardened_exchanger.name=Gehärteter Austauscher
+item.exchangers.reinforced_exchanger.name=Verstärkter Austauscher
+item.exchangers.signalum_exchanger.name=Signalum Austauscher
+item.exchangers.resonant_exchanger.name=Resonanter Austauscher
 
 #Mekanism Exchangers
-item.exchangers.exbasic.name=Basis Austauscher
-item.exchangers.exadvanced.name=Fortgeschr. Austauscher
-item.exchangers.exelite.name=Elite Austauscher
-item.exchangers.exultimate.name=Ultimativer Austauscher
+item.exchangers.basic_exchanger.name=Basis Austauscher
+item.exchangers.advanced_exchanger.name=Fortgeschr. Austauscher
+item.exchangers.elite_exchanger.name=Elite Austauscher
+item.exchangers.ultimate_exchanger.name=Ultimativer Austauscher
 
 #Immersive Engineering Exchangers
-item.exchangers.exlv.name=LV Austauscher
-item.exchangers.exmv.name=MV Austauscher
-item.exchangers.exhv.name=HV Austauscher
+item.exchangers.lv_exchanger.name=LV Austauscher
+item.exchangers.mv_exchanger.name=MV Austauscher
+item.exchangers.hv_exchanger.name=HV Austauscher

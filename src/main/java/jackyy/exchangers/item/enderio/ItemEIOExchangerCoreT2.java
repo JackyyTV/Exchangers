@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.enderio;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemEIOExchangerCoreT2 extends ItemCoreBase {
 
     public ItemEIOExchangerCoreT2(){
-        setRegistryName(Exchangers.MODID + ":eioexcore_t2");
-        setUnlocalizedName(Exchangers.MODID + ".eioexcore_t2");
+        setRegistryName(Exchangers.MODID + ":eio_exchanger_core_tier2");
+        setUnlocalizedName(Exchangers.MODID + ".eio_exchanger_core_tier2");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,7 +25,7 @@ public class ItemEIOExchangerCoreT2 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
+        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
     }
 
     @Override

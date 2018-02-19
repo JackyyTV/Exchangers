@@ -41,7 +41,7 @@ public class CapeBufferDownload extends Thread {
 
     private void download() {
         try {
-            resourceLocation = new ResourceLocation("exchangers/" + StringUtils.stripControlCodes(username));
+            resourceLocation = new ResourceLocation("cache/exchangers/" + StringUtils.stripControlCodes(username));
             capeImage = downloadCape();
         } catch(Exception e) {
             e.printStackTrace();

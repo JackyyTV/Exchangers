@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.enderio;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
 
     public ItemConductiveIronExchanger(){
-        setRegistryName(Exchangers.MODID + ":exconductive");
-        setUnlocalizedName(Exchangers.MODID + ".exconductive");
+        setRegistryName(Exchangers.MODID + ":conductive_iron_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".conductive_iron_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,17 +25,17 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.conductiveMaxEnergy;
+        return ModConfig.enderIOTweaks.conductiveMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.conductivePerBlockUse;
+        return ModConfig.enderIOTweaks.conductivePerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
+        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
     }
 
     @Override

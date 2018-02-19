@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.thermalexpansion;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemResonantExchanger extends ItemExchangerBasePowered {
 
     public ItemResonantExchanger(){
-        setRegistryName(Exchangers.MODID + ":exresonant");
-        setUnlocalizedName(Exchangers.MODID + ".exresonant");
+        setRegistryName(Exchangers.MODID + ":resonant_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".resonant_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,17 +25,17 @@ public class ItemResonantExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return Config.resonantMaxEnergy;
+        return ModConfig.thermalExpansionTweaks.resonantMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return Config.resonantPerBlockUse;
+        return ModConfig.thermalExpansionTweaks.resonantPerBlockUse;
     }
 
     @Override
     public boolean checkLoaded() {
-        return Config.thermalExpansionModule && Loader.isModLoaded(Exchangers.TE);
+        return ModConfig.modules.thermalExpansionModule && Loader.isModLoaded(Exchangers.TE);
     }
 
     @Override

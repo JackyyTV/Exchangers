@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.immersiveengineering;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemIEExchangerCoreT3 extends ItemCoreBase {
 
     public ItemIEExchangerCoreT3(){
-        setRegistryName(Exchangers.MODID + ":ieexcore_t3");
-        setUnlocalizedName(Exchangers.MODID + ".ieexcore_t3");
+        setRegistryName(Exchangers.MODID + ":ie_exchanger_core_tier3");
+        setUnlocalizedName(Exchangers.MODID + ".ie_exchanger_core_tier3");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,7 +25,7 @@ public class ItemIEExchangerCoreT3 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.immersiveEngineeringModule && Loader.isModLoaded(Exchangers.IE);
+        return ModConfig.modules.immersiveEngineeringModule && Loader.isModLoaded(Exchangers.IE);
     }
 
     @Override

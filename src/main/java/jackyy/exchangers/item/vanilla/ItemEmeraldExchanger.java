@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -13,10 +13,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemEmeraldExchanger extends ItemExchangerBase {
 
     public ItemEmeraldExchanger(){
-        setRegistryName(Exchangers.MODID + ":exemerald");
-        setUnlocalizedName(Exchangers.MODID + ".exemerald");
+        setRegistryName(Exchangers.MODID + ":emerald_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".emerald_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(Config.emeMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.emeMaxDmg);
         setCreativeTab(Exchangers.TAB);
     }
 
@@ -37,7 +37,7 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.vanillaModule;
+        return ModConfig.modules.vanillaModule;
     }
 
     @Override

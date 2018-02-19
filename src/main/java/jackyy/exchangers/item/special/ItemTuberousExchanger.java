@@ -1,9 +1,9 @@
 package jackyy.exchangers.item.special;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,8 +21,8 @@ import java.util.List;
 public class ItemTuberousExchanger extends ItemExchangerBase {
 
     public ItemTuberousExchanger(){
-        setRegistryName(Exchangers.MODID + ":expotato");
-        setUnlocalizedName(Exchangers.MODID + ".expotato");
+        setRegistryName(Exchangers.MODID + ":tuberous_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".tuberous_exchanger");
         setMaxDamage(1);
     }
 
@@ -33,8 +33,8 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag bool) {
-        super.addInformation(stack, world, tooltip, bool);
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+        super.addInformation(stack, world, tooltip, flag);
         if (StringHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.localize("tooltip.tuberous_exchanger.warning"));
         }
@@ -47,13 +47,13 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        return killPlayer(player, player.getHeldItem(hand))? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
+        return killPlayer(player, player.getHeldItemMainhand())? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        boolean result = killPlayer(player, player.getHeldItem(hand));
-        return ActionResult.newResult(result? EnumActionResult.SUCCESS : EnumActionResult.FAIL, player.getHeldItem(hand));
+        boolean result = killPlayer(player, player.getHeldItemMainhand());
+        return ActionResult.newResult(result? EnumActionResult.SUCCESS : EnumActionResult.FAIL, player.getHeldItemMainhand());
     }
 
     private static boolean killPlayer(EntityPlayer player, ItemStack stack) {
@@ -73,7 +73,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.specialModule;
+        return ModConfig.modules.specialModule;
     }
 
     @Override

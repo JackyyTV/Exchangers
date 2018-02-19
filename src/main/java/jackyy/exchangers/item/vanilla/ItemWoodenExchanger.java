@@ -1,8 +1,8 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -13,9 +13,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemWoodenExchanger extends ItemExchangerBase {
 
     public ItemWoodenExchanger(){
-        setRegistryName(Exchangers.MODID + ":exwooden");
-        setUnlocalizedName(Exchangers.MODID + ".exwooden");
-        setMaxDamage(Config.woodMaxDmg);
+        setRegistryName(Exchangers.MODID + ":wooden_exchanger");
+        setUnlocalizedName(Exchangers.MODID + ".wooden_exchanger");
+        setMaxDamage(ModConfig.vanillaTweaks.woodMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return Config.vanillaModule;
+        return ModConfig.modules.vanillaModule;
     }
 
     @Override

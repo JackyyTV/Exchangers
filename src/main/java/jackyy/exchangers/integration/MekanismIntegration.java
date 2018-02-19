@@ -1,7 +1,7 @@
 package jackyy.exchangers.integration;
 
-import jackyy.exchangers.Config;
 import jackyy.exchangers.Exchangers;
+import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +19,7 @@ public class MekanismIntegration {
     public static void init() {
         Exchangers.logger.info("Fetching items for Mekanism integration...");
 
-        if (Config.useOreDictCircuits) {
+        if (ModConfig.misc.useOreDictCircuits) {
             circuitBasic = "circuitBasic";
             circuitAdvanced = "circuitAdvanced";
             circuitElite = "circuitElite";

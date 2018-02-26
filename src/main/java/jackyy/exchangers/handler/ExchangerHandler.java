@@ -27,7 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.IItemHandler;
 
 import java.util.*;
 
@@ -383,15 +383,19 @@ public class ExchangerHandler extends Item implements IExchanger {
         if (player.capabilities.isCreativeMode || isCreative()) {
             return true;
         }
-        IInventory inv = playerInv;
-        int i = findItem(item, meta, inv);
+        int i = findItem(item, meta, playerInv);
         if (i < 0) {
-            inv = findItemHolder(item, meta, inv);
+            IItemHandler inv = findItemHolder(playerInv);
             if (inv == null)
                 return false;
-            i = findItem(item, meta, inv);
+            i = findItemInContainer(item, meta, inv);
+            if (i < 0)
+                return false;
+            ItemStack extracted = inv.extractItem(i, 1, false);
+            return extracted != null;
+        } else {
+            playerInv.decrStackSize(i, 1);
         }
-        inv.decrStackSize(i, 1);
         return true;
     }
 
@@ -405,13 +409,21 @@ public class ExchangerHandler extends Item implements IExchanger {
         return -1;
     }
 
-    private static IInventory findItemHolder(Item item, int meta, IInventory inv) {
-        for (int i = 0; i < 36; i++) {
+    private static int findItemInContainer(Item item, int meta, IItemHandler inv) {
+        for (int i = 0; i < inv.getSlots(); i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (stack != null && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static IItemHandler findItemHolder(IInventory inv) {
+        for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
             if (stack != null && stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-                InvWrapper invW = (InvWrapper) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (findItem(item, meta, invW.getInv()) != -1)
-                    return invW.getInv();
+                return stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             }
         }
         return null;

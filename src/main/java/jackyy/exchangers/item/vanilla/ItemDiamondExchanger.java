@@ -16,7 +16,7 @@ public class ItemDiamondExchanger extends ItemExchangerBase {
     public ItemDiamondExchanger() {
         setRegistryName(Exchangers.MODID + ":diamond_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".diamond_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.diaMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.diamondMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -31,7 +31,7 @@ public class ItemDiamondExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return 3;
+        return ModConfig.vanillaTweaks.diamondMaxHarvestLevel;
     }
 
     @Override

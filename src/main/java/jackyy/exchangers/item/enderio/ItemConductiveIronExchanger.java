@@ -45,7 +45,7 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 1;
+        return ModConfig.enderIOTweaks.conductiveMaxHarvestLevel;
     }
 
     @Override

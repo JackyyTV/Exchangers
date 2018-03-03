@@ -45,7 +45,7 @@ public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 3;
+        return ModConfig.enderIOTweaks.energeticMaxHarvestLevel;
     }
 
     @Override

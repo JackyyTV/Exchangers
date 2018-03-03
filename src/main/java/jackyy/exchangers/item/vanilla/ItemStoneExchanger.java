@@ -31,7 +31,7 @@ public class ItemStoneExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return 1;
+        return ModConfig.vanillaTweaks.stoneMaxHarvestLevel;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class ItemAdvancedExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 3;
+        return ModConfig.mekanismTweaks.advancedMaxHarvestLevel;
     }
 
     @Override

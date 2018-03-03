@@ -4,6 +4,7 @@ itemGroup.exchangers=Exchangers
 #Key Bindings
 key.categories.exchangers=Exchangers
 key.exchanger_mode=Exchanger Mode Switch
+key.exchanger_force_drop_items=Force Drop Items mode toggle
 
 #Death
 death.attack.tuberous_exchanger=%1$s tried to operate a potato exchanger

@@ -45,7 +45,7 @@ public class ItemResonantExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 4;
+        return ModConfig.thermalExpansionTweaks.resonantMaxHarvestLevel;
     }
 
     @Override

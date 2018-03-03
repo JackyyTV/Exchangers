@@ -45,7 +45,7 @@ public class ItemMVExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 3;
+        return ModConfig.immersiveEngineeringTweaks.mvMaxHarvestLevel;
     }
 
     @Override

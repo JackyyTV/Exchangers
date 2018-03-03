@@ -16,7 +16,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
     public ItemObsidianExchanger() {
         setRegistryName(Exchangers.MODID + ":obsidian_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".obsidian_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.obsMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.obsidianMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -31,7 +31,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return 4;
+        return ModConfig.vanillaTweaks.obsidianMaxHarvestLevel;
     }
 
     @Override

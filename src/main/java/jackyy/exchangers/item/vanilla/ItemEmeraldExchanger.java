@@ -17,7 +17,7 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
         setRegistryName(Exchangers.MODID + ":emerald_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".emerald_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(ModConfig.vanillaTweaks.emeMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.emeraldMaxDmg);
         setCreativeTab(Exchangers.TAB);
     }
 
@@ -33,7 +33,7 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return 4;
+        return ModConfig.vanillaTweaks.emeraldMaxHarvestLevel;
     }
 
     @Override

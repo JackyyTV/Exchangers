@@ -15,7 +15,7 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
     public ItemWoodenExchanger() {
         setRegistryName(Exchangers.MODID + ":wooden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".wooden_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.woodMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.woodenMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -30,7 +30,7 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return 0;
+        return ModConfig.vanillaTweaks.woodenMaxHarvestLevel;
     }
 
     @Override

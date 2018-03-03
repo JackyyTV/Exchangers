@@ -40,8 +40,7 @@ public class ItemExchangerBase extends ExchangerHandler {
         }
 	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
+    @Override @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
         if (checkLoaded()) {
             list.add(new ItemStack(this));

@@ -16,7 +16,7 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
     public ItemGoldenExchanger() {
         setRegistryName(Exchangers.MODID + ":golden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".golden_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.goldMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.goldenMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -31,7 +31,7 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return 1;
+        return ModConfig.vanillaTweaks.goldenMaxHarvestLevel;
     }
 
     @Override

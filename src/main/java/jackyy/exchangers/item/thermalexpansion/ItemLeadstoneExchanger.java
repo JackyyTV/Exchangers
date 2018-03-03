@@ -45,7 +45,7 @@ public class ItemLeadstoneExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 1;
+        return ModConfig.thermalExpansionTweaks.leadstoneMaxHarvestLevel;
     }
 
     @Override

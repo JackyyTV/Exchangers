@@ -45,7 +45,7 @@ public class ItemSignalumExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 4;
+        return ModConfig.thermalExpansionTweaks.signalumMaxHarvestLevel;
     }
 
     @Override

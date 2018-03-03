@@ -45,7 +45,7 @@ public class ItemVibrantExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 4;
+        return ModConfig.enderIOTweaks.vibrantMaxHarvestLevel;
     }
 
     @Override

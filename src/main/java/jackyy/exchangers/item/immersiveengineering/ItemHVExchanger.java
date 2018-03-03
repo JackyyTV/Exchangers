@@ -45,7 +45,7 @@ public class ItemHVExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 4;
+        return ModConfig.immersiveEngineeringTweaks.hvMaxHarvestLevel;
     }
 
     @Override

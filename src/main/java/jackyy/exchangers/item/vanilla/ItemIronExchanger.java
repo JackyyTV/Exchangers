@@ -31,7 +31,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return 2;
+        return ModConfig.vanillaTweaks.ironMaxHarvestLevel;
     }
 
     @Override

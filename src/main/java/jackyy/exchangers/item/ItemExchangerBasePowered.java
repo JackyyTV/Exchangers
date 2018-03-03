@@ -80,8 +80,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
         }
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
+	@Override @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, List<ItemStack> list) {
         if (checkLoaded()) {
             ItemStack empty = new ItemStack(this);

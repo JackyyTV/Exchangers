@@ -45,7 +45,7 @@ public class ItemReinforcedExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 3;
+        return ModConfig.thermalExpansionTweaks.reinforcedMaxHarvestLevel;
     }
 
     @Override

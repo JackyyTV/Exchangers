@@ -45,7 +45,7 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 2;
+        return ModConfig.enderIOTweaks.pulsatingMaxHarvestLevel;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class ItemHardenedExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getHarvestLevel() {
-        return 2;
+        return ModConfig.thermalExpansionTweaks.hardenedMaxHarvestLevel;
     }
 
     @Override

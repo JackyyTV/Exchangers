@@ -28,7 +28,7 @@ import java.util.List;
 @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
-    public ItemExchangerBasePowered(){
+    public ItemExchangerBasePowered() {
         setMaxDamage(1);
     }
 

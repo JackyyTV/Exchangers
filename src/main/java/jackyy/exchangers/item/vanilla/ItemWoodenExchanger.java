@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemWoodenExchanger extends ItemExchangerBase {
 
-    public ItemWoodenExchanger(){
+    public ItemWoodenExchanger() {
         setRegistryName(Exchangers.MODID + ":wooden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".wooden_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.woodMaxDmg);

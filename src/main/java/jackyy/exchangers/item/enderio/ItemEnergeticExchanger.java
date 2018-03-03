@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
 
-    public ItemEnergeticExchanger(){
+    public ItemEnergeticExchanger() {
         setRegistryName(Exchangers.MODID + ":energetic_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".energetic_exchanger");
     }

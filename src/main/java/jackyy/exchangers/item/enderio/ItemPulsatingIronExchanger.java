@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
-    public ItemPulsatingIronExchanger(){
+    public ItemPulsatingIronExchanger() {
         setRegistryName(Exchangers.MODID + ":pulsating_iron_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".pulsating_iron_exchanger");
     }

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class ItemTuberousExchanger extends ItemExchangerBase {
 
-    public ItemTuberousExchanger(){
+    public ItemTuberousExchanger() {
         setRegistryName(Exchangers.MODID + ":tuberous_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".tuberous_exchanger");
         setMaxDamage(1);

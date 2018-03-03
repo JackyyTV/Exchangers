@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemStoneExchanger extends ItemExchangerBase {
 
-    public ItemStoneExchanger(){
+    public ItemStoneExchanger() {
         setRegistryName(Exchangers.MODID + ":stone_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".stone_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.stoneMaxDmg);

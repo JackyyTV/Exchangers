@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemGoldenExchanger extends ItemExchangerBase {
 
-    public ItemGoldenExchanger(){
+    public ItemGoldenExchanger() {
         setRegistryName(Exchangers.MODID + ":golden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".golden_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.goldMaxDmg);

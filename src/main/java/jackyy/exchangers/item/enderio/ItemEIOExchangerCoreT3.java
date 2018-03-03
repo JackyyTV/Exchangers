@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemEIOExchangerCoreT3 extends ItemCoreBase {
 
-    public ItemEIOExchangerCoreT3(){
+    public ItemEIOExchangerCoreT3() {
         setRegistryName(Exchangers.MODID + ":eio_exchanger_core_tier3");
         setUnlocalizedName(Exchangers.MODID + ".eio_exchanger_core_tier3");
     }

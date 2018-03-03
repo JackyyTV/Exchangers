@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemHardenedExchanger extends ItemExchangerBasePowered {
 
-    public ItemHardenedExchanger(){
+    public ItemHardenedExchanger() {
         setRegistryName(Exchangers.MODID + ":hardened_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".hardened_exchanger");
     }

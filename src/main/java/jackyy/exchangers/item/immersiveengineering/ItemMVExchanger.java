@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMVExchanger extends ItemExchangerBasePowered {
 
-    public ItemMVExchanger(){
+    public ItemMVExchanger() {
         setRegistryName(Exchangers.MODID + ":mv_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".mv_exchanger");
     }

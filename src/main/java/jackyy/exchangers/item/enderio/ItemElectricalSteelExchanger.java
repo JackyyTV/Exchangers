@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
 
-    public ItemElectricalSteelExchanger(){
+    public ItemElectricalSteelExchanger() {
         setRegistryName(Exchangers.MODID + ":electrical_steel_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".electrical_steel_exchanger");
     }

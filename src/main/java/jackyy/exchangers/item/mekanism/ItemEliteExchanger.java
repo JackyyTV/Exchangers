@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemEliteExchanger extends ItemExchangerBasePowered {
 
-    public ItemEliteExchanger(){
+    public ItemEliteExchanger() {
         setRegistryName(Exchangers.MODID + ":elite_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".elite_exchanger");
     }

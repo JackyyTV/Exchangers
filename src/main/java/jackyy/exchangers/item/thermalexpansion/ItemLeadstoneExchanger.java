@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemLeadstoneExchanger extends ItemExchangerBasePowered {
 
-    public ItemLeadstoneExchanger(){
+    public ItemLeadstoneExchanger() {
         setRegistryName(Exchangers.MODID + ":leadstone_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".leadstone_exchanger");
     }

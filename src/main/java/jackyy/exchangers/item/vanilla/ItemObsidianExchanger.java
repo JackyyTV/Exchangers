@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemObsidianExchanger extends ItemExchangerBase {
 
-    public ItemObsidianExchanger(){
+    public ItemObsidianExchanger() {
         setRegistryName(Exchangers.MODID + ":obsidian_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".obsidian_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.obsMaxDmg);

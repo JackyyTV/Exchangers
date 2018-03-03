@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemEmeraldExchanger extends ItemExchangerBase {
 
-    public ItemEmeraldExchanger(){
+    public ItemEmeraldExchanger() {
         setRegistryName(Exchangers.MODID + ":emerald_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".emerald_exchanger");
         setMaxStackSize(1);

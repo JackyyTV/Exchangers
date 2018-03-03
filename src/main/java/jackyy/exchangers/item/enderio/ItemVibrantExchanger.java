@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemVibrantExchanger extends ItemExchangerBasePowered {
 
-    public ItemVibrantExchanger(){
+    public ItemVibrantExchanger() {
         setRegistryName(Exchangers.MODID + ":vibrant_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".vibrant_exchanger");
     }

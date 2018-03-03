@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemReinforcedExchanger extends ItemExchangerBasePowered {
 
-    public ItemReinforcedExchanger(){
+    public ItemReinforcedExchanger() {
         setRegistryName(Exchangers.MODID + ":reinforced_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".reinforced_exchanger");
     }

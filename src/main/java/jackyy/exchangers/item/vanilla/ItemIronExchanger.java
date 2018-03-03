@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemIronExchanger extends ItemExchangerBase {
 
-    public ItemIronExchanger(){
+    public ItemIronExchanger() {
         setRegistryName(Exchangers.MODID + ":iron_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".iron_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.ironMaxDmg);

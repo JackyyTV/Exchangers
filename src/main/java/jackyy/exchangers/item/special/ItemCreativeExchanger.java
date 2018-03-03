@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCreativeExchanger extends ItemExchangerBase {
 
-    public ItemCreativeExchanger(){
+    public ItemCreativeExchanger() {
         setRegistryName(Exchangers.MODID + ":creative_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".creative_exchanger");
         setMaxDamage(9001);

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSignalumExchanger extends ItemExchangerBasePowered {
 
-    public ItemSignalumExchanger(){
+    public ItemSignalumExchanger() {
         setRegistryName(Exchangers.MODID + ":signalum_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".signalum_exchanger");
     }

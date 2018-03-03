@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
 
-    public ItemDarkSteelExchanger(){
+    public ItemDarkSteelExchanger() {
         setRegistryName(Exchangers.MODID + ":dark_steel_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".dark_steel_exchanger");
     }

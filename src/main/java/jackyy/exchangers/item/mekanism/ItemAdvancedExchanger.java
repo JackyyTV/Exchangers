@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemAdvancedExchanger extends ItemExchangerBasePowered {
 
-    public ItemAdvancedExchanger(){
+    public ItemAdvancedExchanger() {
         setRegistryName(Exchangers.MODID + ":advanced_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".advanced_exchanger");
     }

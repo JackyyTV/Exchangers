@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ItemExchangerBase extends ExchangerHandler {
 
-    public ItemExchangerBase(){
+    public ItemExchangerBase() {
         setMaxStackSize(1);
         setCreativeTab(Exchangers.TAB);
     }

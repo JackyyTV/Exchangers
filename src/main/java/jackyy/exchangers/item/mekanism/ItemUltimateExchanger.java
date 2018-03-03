@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemUltimateExchanger extends ItemExchangerBasePowered {
 
-    public ItemUltimateExchanger(){
+    public ItemUltimateExchanger() {
         setRegistryName(Exchangers.MODID + ":ultimate_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".ultimate_exchanger");
     }

@@ -44,8 +44,8 @@ import java.util.UUID;
 @SideOnly(Side.CLIENT)
 public class ClientEventsHandler {
 
-    public static Minecraft mc = FMLClientHandler.instance().getClient();
-    public static final String DEV_CAPE = "https://jackyytv.github.io/imgs/mc_mods/exchangers/capes/cape_dev.png";
+    private static Minecraft mc = FMLClientHandler.instance().getClient();
+    private static final String DEV_CAPE = "https://jackyytv.github.io/imgs/mc_mods/exchangers/capes/cape_dev.png";
 
     private Map<String, CapeBufferDownload> buffer = new HashMap<>();
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ItemCoreBase extends Item {
 
-    public ItemCoreBase(){
+    public ItemCoreBase() {
         setMaxStackSize(16);
         setCreativeTab(Exchangers.TAB);
     }

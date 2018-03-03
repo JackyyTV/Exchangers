@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemExchangerCoreT1 extends ItemCoreBase {
 
-    public ItemExchangerCoreT1(){
+    public ItemExchangerCoreT1() {
         setRegistryName(Exchangers.MODID + ":exchanger_core_tier1");
         setUnlocalizedName(Exchangers.MODID + ".exchanger_core_tier1");
     }

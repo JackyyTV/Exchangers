@@ -222,12 +222,12 @@ public class ExchangerHandler extends Item implements IExchanger {
                     if (!player.capabilities.isCreativeMode && !isCreative()) {
                         if (ModConfig.misc.doExchangersSilkTouch || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                             ItemStack oldblockItem = oldblock.getItem(world, pos, oldState);
-                            giveItem(world, player, pos, oldblockItem);
+                            giveItem(world, player, oldblockItem);
                         } else {
                             int fortuneLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
                             List<ItemStack> oldblockItems = oldblock.getDrops(world, pos, oldState, fortuneLevel);
                             for (ItemStack oldblockItem : oldblockItems) {
-                                giveItem(world, player, pos, oldblockItem);
+                                giveItem(world, player, oldblockItem);
                             }
                         }
                         if (!isPowered()) {
@@ -429,8 +429,8 @@ public class ExchangerHandler extends Item implements IExchanger {
         return null;
     }
 
-    private static void giveItem(World world, EntityPlayer player, BlockPos pos, ItemStack oldStack) {
-        EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), oldStack);
+    private static void giveItem(World world, EntityPlayer player, ItemStack oldStack) {
+        EntityItem entityItem = new EntityItem(world, player.posX, player.posY, player.posZ, oldStack);
         if (player.getHeldItemMainhand().getTagCompound().getBoolean("forceDropItems")) {
             world.spawnEntityInWorld(entityItem);
         } else {

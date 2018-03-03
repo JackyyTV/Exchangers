@@ -29,6 +29,11 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
     }
 
     @Override
+    public int getHarvestLevel() {
+        return 9001;
+    }
+
+    @Override
     public boolean isCreative() {
         return true;
     }

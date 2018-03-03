@@ -29,6 +29,11 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
     }
 
     @Override
+    public int getHarvestLevel() {
+        return 0;
+    }
+
+    @Override
     public int getMaxRange() {
         return MODE_1X1;
     }

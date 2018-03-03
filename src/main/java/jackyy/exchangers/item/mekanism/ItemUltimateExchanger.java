@@ -44,6 +44,11 @@ public class ItemUltimateExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
+    public int getHarvestLevel() {
+        return 4;
+    }
+
+    @Override
     public int getMaxRange() {
         return MODE_15X15;
     }

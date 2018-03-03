@@ -44,6 +44,11 @@ public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
+    public int getHarvestLevel() {
+        return 3;
+    }
+
+    @Override
     public int getMaxRange() {
         return MODE_9X9;
     }

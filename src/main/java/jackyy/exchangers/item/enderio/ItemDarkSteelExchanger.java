@@ -44,6 +44,11 @@ public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
+    public int getHarvestLevel() {
+        return 4;
+    }
+
+    @Override
     public int getMaxRange() {
         return MODE_13X13;
     }

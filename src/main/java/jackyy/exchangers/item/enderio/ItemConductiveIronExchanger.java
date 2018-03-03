@@ -44,6 +44,11 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
+    public int getHarvestLevel() {
+        return 1;
+    }
+
+    @Override
     public int getMaxRange() {
         return MODE_3X3;
     }

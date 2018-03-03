@@ -61,12 +61,13 @@ public class ExchangerHandler extends Item implements IExchanger {
             compound.setBoolean("forceDropItems", false);
             stack.setTagCompound(compound);
         } else {
-            if (stack.getTagCompound().hasKey("Energy") && !stack.getTagCompound().hasKey("mode")) {
+            if (!stack.getTagCompound().hasKey("block")) {
                 stack.getTagCompound().setString("block", "minecraft:air");
+            } else if (!stack.getTagCompound().hasKey("meta")) {
                 stack.getTagCompound().setInteger("meta", 0);
+            } else if (!stack.getTagCompound().hasKey("mode")) {
                 stack.getTagCompound().setInteger("mode", 0);
-            }
-            if (!stack.getTagCompound().hasKey("forceDropItems")) {
+            } else if (!stack.getTagCompound().hasKey("forceDropItems")) {
                 stack.getTagCompound().setBoolean("forceDropItems", false);
             }
         }
@@ -87,15 +88,14 @@ public class ExchangerHandler extends Item implements IExchanger {
         if (StringHelper.isShiftKeyDown()) {
             if (id.equals("minecraft:air")) {
                 tooltip.add(StringHelper.localize("tooltip.no_selected_block"));
-                tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
-                tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
             } else {
                 Block block = Block.getBlockFromName(id);
                 int meta = compound.getInteger("meta");
                 tooltip.add(StringHelper.localize("tooltip.selected_block") + " " + getBlockName(block, meta));
-                tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
-                tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
             }
+            tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
+            tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
+            tooltip.add(StringHelper.localize("tooltip.max_harvest_level") + " " + StringHelper.formatHarvestLevel(getHarvestLevel()));
             if (ModConfig.misc.doExchangersSilkTouch) {
                 tooltip.add(StringHelper.localize("tooltip.silk_touch.on"));
             } else {
@@ -209,6 +209,9 @@ public class ExchangerHandler extends Item implements IExchanger {
             return;
         } else if (!isCreative() && isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockEnergy(stack)) {
             ChatHelper.msgPlayer(player, "error.out_of_power");
+            return;
+        } else if (!isCreative() && getHarvestLevel() < oldblock.getHarvestLevel(oldState)) {
+            ChatHelper.msgPlayer(player, "error.low_harvest_level");
             return;
         }
         Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);

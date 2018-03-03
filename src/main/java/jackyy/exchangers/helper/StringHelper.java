@@ -7,6 +7,7 @@ import org.lwjgl.input.Keyboard;
 
 import java.text.NumberFormat;
 
+@SuppressWarnings("deprecation")
 public class StringHelper {
 
     public static String getTierText(int tier) {
@@ -25,7 +26,10 @@ public class StringHelper {
         return NumberFormat.getInstance().format(number);
     }
 
-    @SuppressWarnings("deprecation")
+    public static String formatHarvestLevel(int harvestLevel) {
+        return localize("harvest_level." + harvestLevel);
+    }
+
     public static String localize(String unlocalized, Object... args) {
         String toLocalize = Exchangers.MODID + "." + unlocalized;
         if (args != null && args.length > 0) {

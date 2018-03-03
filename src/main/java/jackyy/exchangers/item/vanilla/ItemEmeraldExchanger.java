@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemEmeraldExchanger extends ItemExchangerBase {
 
@@ -31,6 +32,11 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
     }
 
     @Override
+    public int getHarvestLevel() {
+        return 4;
+    }
+
+    @Override
     public int getMaxRange() {
         return MODE_11X11;
     }
@@ -43,6 +49,11 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return OreDictionary.containsMatch(false, OreDictionary.getOres("gemEmerald"), repair);
     }
 
 }

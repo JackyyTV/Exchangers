@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemLeadstoneExchanger extends ItemExchangerBasePowered {
 
-    public ItemLeadstoneExchanger(){
+    public ItemLeadstoneExchanger() {
         setRegistryName(Exchangers.MODID + ":leadstone_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".leadstone_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemLeadstoneExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 1;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.thermalExpansionTweaks.leadstoneMaxHarvestLevel;
     }
 
     @Override

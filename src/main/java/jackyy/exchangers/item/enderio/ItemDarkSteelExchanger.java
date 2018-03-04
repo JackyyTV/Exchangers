@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
 
-    public ItemDarkSteelExchanger(){
+    public ItemDarkSteelExchanger() {
         setRegistryName(Exchangers.MODID + ":dark_steel_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".dark_steel_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 5;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.enderIOTweaks.darkSteelMaxHarvestLevel;
     }
 
     @Override

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemHardenedExchanger extends ItemExchangerBasePowered {
 
-    public ItemHardenedExchanger(){
+    public ItemHardenedExchanger() {
         setRegistryName(Exchangers.MODID + ":hardened_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".hardened_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemHardenedExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 2;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.thermalExpansionTweaks.hardenedMaxHarvestLevel;
     }
 
     @Override

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCoreBase extends Item {
 
-    public ItemCoreBase(){
+    public ItemCoreBase() {
         setMaxStackSize(16);
         setCreativeTab(Exchangers.TAB);
     }

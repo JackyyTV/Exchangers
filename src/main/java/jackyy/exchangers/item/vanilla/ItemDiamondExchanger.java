@@ -9,13 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemDiamondExchanger extends ItemExchangerBase {
 
-    public ItemDiamondExchanger(){
+    public ItemDiamondExchanger() {
         setRegistryName(Exchangers.MODID + ":diamond_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".diamond_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.diaMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.diamondMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -26,6 +27,11 @@ public class ItemDiamondExchanger extends ItemExchangerBase {
     @Override
     public int getTier() {
         return 5;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.vanillaTweaks.diamondMaxHarvestLevel;
     }
 
     @Override
@@ -41,6 +47,11 @@ public class ItemDiamondExchanger extends ItemExchangerBase {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return OreDictionary.containsMatch(false, OreDictionary.getOres("gemDiamond"), repair);
     }
 
 }

@@ -26,13 +26,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-@Optional.InterfaceList(value = {
-        @Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux"),
-        @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
-})
+@Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
-    public ItemExchangerBasePowered(){
+    public ItemExchangerBasePowered() {
         setMaxDamage(1);
     }
 
@@ -84,8 +81,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
         }
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
+	@Override @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
 	    if (isInCreativeTab(tab)) {
             if (checkLoaded()) {
@@ -106,7 +102,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 	}
 
     /* CAPABILITIES */
-    @Override @Optional.Method(modid = "redstoneflux")
+    @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
         return new EnergyContainerItemWrapper(stack, this);
     }

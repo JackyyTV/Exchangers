@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemMVExchanger extends ItemExchangerBasePowered {
 
-    public ItemMVExchanger(){
+    public ItemMVExchanger() {
         setRegistryName(Exchangers.MODID + ":mv_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".mv_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemMVExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 2;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.immersiveEngineeringTweaks.mvMaxHarvestLevel;
     }
 
     @Override

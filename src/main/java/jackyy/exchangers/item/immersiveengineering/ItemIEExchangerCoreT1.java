@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemIEExchangerCoreT1 extends ItemCoreBase {
 
-    public ItemIEExchangerCoreT1(){
+    public ItemIEExchangerCoreT1() {
         setRegistryName(Exchangers.MODID + ":ie_exchanger_core_tier1");
         setUnlocalizedName(Exchangers.MODID + ".ie_exchanger_core_tier1");
     }

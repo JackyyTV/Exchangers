@@ -3,19 +3,23 @@ package jackyy.exchangers.util;
 public interface IExchanger {
 
     default int getTier() {
-        return this.getTier();
+        return 0;
+    }
+
+    default int getHarvestLevel() {
+        return 0;
     }
 
     default int getMaxRange() {
-        return this.getMaxRange();
+        return 0;
     }
 
     default int getMaxEnergy() {
-        return this.getMaxEnergy();
+        return 0;
     }
 
     default int getPerBlockUse() {
-        return this.getPerBlockUse();
+        return 0;
     }
 
     default boolean isCreative() {
@@ -27,7 +31,7 @@ public interface IExchanger {
     }
 
     default boolean checkLoaded() {
-        return this.checkLoaded();
+        return true;
     }
 
 }

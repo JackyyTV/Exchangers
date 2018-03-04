@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ItemExchangerBase extends ExchangerHandler {
 
-    public ItemExchangerBase(){
+    public ItemExchangerBase() {
         setMaxStackSize(1);
         setCreativeTab(Exchangers.TAB);
     }
@@ -42,8 +42,7 @@ public class ItemExchangerBase extends ExchangerHandler {
         }
 	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
+    @Override @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
         if (isInCreativeTab(tab)) {
             if (checkLoaded()) {

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
 
-    public ItemEnergeticExchanger(){
+    public ItemEnergeticExchanger() {
         setRegistryName(Exchangers.MODID + ":energetic_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".energetic_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 4;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.enderIOTweaks.energeticMaxHarvestLevel;
     }
 
     @Override

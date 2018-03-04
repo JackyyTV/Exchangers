@@ -12,10 +12,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemWoodenExchanger extends ItemExchangerBase {
 
-    public ItemWoodenExchanger(){
+    public ItemWoodenExchanger() {
         setRegistryName(Exchangers.MODID + ":wooden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".wooden_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.woodMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.woodenMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -26,6 +26,11 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
     @Override
     public int getTier() {
         return 1;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.vanillaTweaks.woodenMaxHarvestLevel;
     }
 
     @Override

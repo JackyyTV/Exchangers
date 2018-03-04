@@ -9,10 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemStoneExchanger extends ItemExchangerBase {
 
-    public ItemStoneExchanger(){
+    public ItemStoneExchanger() {
         setRegistryName(Exchangers.MODID + ":stone_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".stone_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.stoneMaxDmg);
@@ -29,6 +30,11 @@ public class ItemStoneExchanger extends ItemExchangerBase {
     }
 
     @Override
+    public int getHarvestLevel() {
+        return ModConfig.vanillaTweaks.stoneMaxHarvestLevel;
+    }
+
+    @Override
     public int getMaxRange() {
         return MODE_3X3;
     }
@@ -41,6 +47,11 @@ public class ItemStoneExchanger extends ItemExchangerBase {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return Exchangers.TIER_1;
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return OreDictionary.containsMatch(false, OreDictionary.getOres("stone"), repair);
     }
 
 }

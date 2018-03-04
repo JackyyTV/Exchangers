@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBasicExchanger extends ItemExchangerBasePowered {
 
-    public ItemBasicExchanger(){
+    public ItemBasicExchanger() {
         setRegistryName(Exchangers.MODID + ":basic_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".basic_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 1;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.mekanismTweaks.basicMaxHarvestLevel;
     }
 
     @Override

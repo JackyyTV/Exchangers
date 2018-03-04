@@ -30,7 +30,7 @@ import java.util.List;
 @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
-    public ItemExchangerBasePowered(){
+    public ItemExchangerBasePowered() {
         setMaxDamage(1);
     }
 
@@ -82,8 +82,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
         }
 	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
+	@Override @SideOnly(Side.CLIENT)
     public void getSubItems(@Nonnull Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         if (checkLoaded()) {
             ItemStack empty = new ItemStack(this);

@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCreativeExchanger extends ItemExchangerBase {
 
-    public ItemCreativeExchanger(){
+    public ItemCreativeExchanger() {
         setRegistryName(Exchangers.MODID + ":creative_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".creative_exchanger");
         setMaxDamage(9001);
@@ -25,6 +25,11 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
 
     @Override
     public int getTier() {
+        return 9001;
+    }
+
+    @Override
+    public int getHarvestLevel() {
         return 9001;
     }
 

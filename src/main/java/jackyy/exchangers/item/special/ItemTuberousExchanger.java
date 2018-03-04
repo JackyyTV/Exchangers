@@ -8,7 +8,10 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -19,7 +22,7 @@ import java.util.List;
 
 public class ItemTuberousExchanger extends ItemExchangerBase {
 
-    public ItemTuberousExchanger(){
+    public ItemTuberousExchanger() {
         setRegistryName(Exchangers.MODID + ":tuberous_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".tuberous_exchanger");
         setMaxDamage(1);
@@ -40,34 +43,14 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public int getTier() {
-        return 0;
-    }
-
-    @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        return killPlayer(player, player.getHeldItemMainhand())? EnumActionResult.SUCCESS : EnumActionResult.FAIL;
-    }
-
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        boolean result = killPlayer(player, player.getHeldItemMainhand());
-        return ActionResult.newResult(result? EnumActionResult.SUCCESS : EnumActionResult.FAIL, player.getHeldItemMainhand());
-    }
-
-    private static boolean killPlayer(EntityPlayer player, ItemStack stack) {
         if (player != null) {
-            stack.setCount(0);
+            player.getHeldItemMainhand().setCount(0);
             player.attackEntityFrom(new EntityDamageSource("tuberous_exchanger", player), 100000.0F);
             player.world.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
-            return true;
+            return EnumActionResult.SUCCESS;
         }
-        return false;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return MODE_1X1;
+        return EnumActionResult.FAIL;
     }
 
     @Override

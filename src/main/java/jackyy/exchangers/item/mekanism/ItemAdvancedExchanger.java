@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemAdvancedExchanger extends ItemExchangerBasePowered {
 
-    public ItemAdvancedExchanger(){
+    public ItemAdvancedExchanger() {
         setRegistryName(Exchangers.MODID + ":advanced_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".advanced_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemAdvancedExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 2;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.mekanismTweaks.advancedMaxHarvestLevel;
     }
 
     @Override

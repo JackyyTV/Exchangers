@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
 
-    public ItemConductiveIronExchanger(){
+    public ItemConductiveIronExchanger() {
         setRegistryName(Exchangers.MODID + ":conductive_iron_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".conductive_iron_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 1;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.enderIOTweaks.conductiveMaxHarvestLevel;
     }
 
     @Override

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
 
-    public ItemElectricalSteelExchanger(){
+    public ItemElectricalSteelExchanger() {
         setRegistryName(Exchangers.MODID + ":electrical_steel_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".electrical_steel_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 3;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.enderIOTweaks.electricalSteelMaxHarvestLevel;
     }
 
     @Override

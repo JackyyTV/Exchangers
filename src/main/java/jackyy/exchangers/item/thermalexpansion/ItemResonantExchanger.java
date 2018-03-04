@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemResonantExchanger extends ItemExchangerBasePowered {
 
-    public ItemResonantExchanger(){
+    public ItemResonantExchanger() {
         setRegistryName(Exchangers.MODID + ":resonant_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".resonant_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemResonantExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 5;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.thermalExpansionTweaks.resonantMaxHarvestLevel;
     }
 
     @Override

@@ -27,7 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.IItemHandler;
 
 import java.util.*;
 
@@ -61,12 +61,13 @@ public class ExchangerHandler extends Item implements IExchanger {
             compound.setBoolean("forceDropItems", false);
             stack.setTagCompound(compound);
         } else {
-            if (stack.getTagCompound().hasKey("Energy") && !stack.getTagCompound().hasKey("mode")) {
+            if (!stack.getTagCompound().hasKey("block")) {
                 stack.getTagCompound().setString("block", "minecraft:air");
+            } else if (!stack.getTagCompound().hasKey("meta")) {
                 stack.getTagCompound().setInteger("meta", 0);
+            } else if (!stack.getTagCompound().hasKey("mode")) {
                 stack.getTagCompound().setInteger("mode", 0);
-            }
-            if (!stack.getTagCompound().hasKey("forceDropItems")) {
+            } else if (!stack.getTagCompound().hasKey("forceDropItems")) {
                 stack.getTagCompound().setBoolean("forceDropItems", false);
             }
         }
@@ -87,15 +88,14 @@ public class ExchangerHandler extends Item implements IExchanger {
         if (StringHelper.isShiftKeyDown()) {
             if (id.equals("minecraft:air")) {
                 tooltip.add(StringHelper.localize("tooltip.no_selected_block"));
-                tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
-                tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
             } else {
                 Block block = Block.getBlockFromName(id);
                 int meta = compound.getInteger("meta");
                 tooltip.add(StringHelper.localize("tooltip.selected_block") + " " + getBlockName(block, meta));
-                tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
-                tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
             }
+            tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
+            tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
+            tooltip.add(StringHelper.localize("tooltip.max_harvest_level") + " " + StringHelper.formatHarvestLevel(getHarvestLevel()));
             if (ModConfig.misc.doExchangersSilkTouch) {
                 tooltip.add(StringHelper.localize("tooltip.silk_touch.on"));
             } else {
@@ -210,6 +210,9 @@ public class ExchangerHandler extends Item implements IExchanger {
         } else if (!isCreative() && isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockEnergy(stack)) {
             ChatHelper.msgPlayer(player, "error.out_of_power");
             return;
+        } else if (!isCreative() && getHarvestLevel() < oldblock.getHarvestLevel(oldState)) {
+            ChatHelper.msgPlayer(player, "error.low_harvest_level");
+            return;
         }
         Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);
         boolean notEnough = false;
@@ -222,12 +225,12 @@ public class ExchangerHandler extends Item implements IExchanger {
                     if (!player.capabilities.isCreativeMode && !isCreative()) {
                         if (ModConfig.misc.doExchangersSilkTouch || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                             ItemStack oldblockItem = oldblock.getItem(world, pos, oldState);
-                            giveItem(world, player, pos, oldblockItem);
+                            giveItem(world, player, oldblockItem);
                         } else {
                             int fortuneLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
                             List<ItemStack> oldblockItems = oldblock.getDrops(world, pos, oldState, fortuneLevel);
                             for (ItemStack oldblockItem : oldblockItems) {
-                                giveItem(world, player, pos, oldblockItem);
+                                giveItem(world, player, oldblockItem);
                             }
                         }
                         if (!isPowered()) {
@@ -383,15 +386,19 @@ public class ExchangerHandler extends Item implements IExchanger {
         if (player.capabilities.isCreativeMode || isCreative()) {
             return true;
         }
-        IInventory inv = playerInv;
-        int i = findItem(item, meta, inv);
+        int i = findItem(item, meta, playerInv);
         if (i < 0) {
-            inv = findItemHolder(item, meta, inv);
+            IItemHandler inv = findItemHolder(playerInv);
             if (inv == null)
                 return false;
-            i = findItem(item, meta, inv);
+            i = findItemInContainer(item, meta, inv);
+            if (i < 0)
+                return false;
+            ItemStack extracted = inv.extractItem(i, 1, false);
+            return extracted != ItemStack.EMPTY;
+        } else {
+            playerInv.decrStackSize(i, 1);
         }
-        inv.decrStackSize(i, 1);
         return true;
     }
 
@@ -405,20 +412,28 @@ public class ExchangerHandler extends Item implements IExchanger {
         return -1;
     }
 
-    private static IInventory findItemHolder(Item item, int meta, IInventory inv) {
-        for (int i = 0; i < 36; i++) {
+    private static int findItemInContainer(Item item, int meta, IItemHandler inv) {
+        for (int i = 0; i < inv.getSlots(); i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (stack != ItemStack.EMPTY && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static IItemHandler findItemHolder(IInventory inv) {
+        for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
             if (stack != ItemStack.EMPTY && stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-                InvWrapper invW = (InvWrapper) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-                if (findItem(item, meta, invW.getInv()) != -1)
-                    return invW.getInv();
+                return stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             }
         }
         return null;
     }
 
-    private static void giveItem(World world, EntityPlayer player, BlockPos pos, ItemStack oldStack) {
-        EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), oldStack);
+    private static void giveItem(World world, EntityPlayer player, ItemStack oldStack) {
+        EntityItem entityItem = new EntityItem(world, player.posX, player.posY, player.posZ, oldStack);
         if (player.getHeldItemMainhand().getTagCompound().getBoolean("forceDropItems")) {
             world.spawnEntity(entityItem);
         } else {

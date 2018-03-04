@@ -9,13 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemObsidianExchanger extends ItemExchangerBase {
 
-    public ItemObsidianExchanger(){
+    public ItemObsidianExchanger() {
         setRegistryName(Exchangers.MODID + ":obsidian_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".obsidian_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.obsMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.obsidianMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -26,6 +27,11 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
     @Override
     public int getTier() {
         return 7;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.vanillaTweaks.obsidianMaxHarvestLevel;
     }
 
     @Override
@@ -41,6 +47,11 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return OreDictionary.containsMatch(false, OreDictionary.getOres("obsidian"), repair);
     }
 
 }

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemEliteExchanger extends ItemExchangerBasePowered {
 
-    public ItemEliteExchanger(){
+    public ItemEliteExchanger() {
         setRegistryName(Exchangers.MODID + ":elite_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".elite_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemEliteExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 3;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.mekanismTweaks.eliteMaxHarvestLevel;
     }
 
     @Override

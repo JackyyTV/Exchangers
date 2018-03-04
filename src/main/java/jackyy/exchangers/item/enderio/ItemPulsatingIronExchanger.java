@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
-    public ItemPulsatingIronExchanger(){
+    public ItemPulsatingIronExchanger() {
         setRegistryName(Exchangers.MODID + ":pulsating_iron_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".pulsating_iron_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 2;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.enderIOTweaks.pulsatingMaxHarvestLevel;
     }
 
     @Override

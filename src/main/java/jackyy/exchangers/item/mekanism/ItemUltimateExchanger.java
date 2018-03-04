@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemUltimateExchanger extends ItemExchangerBasePowered {
 
-    public ItemUltimateExchanger(){
+    public ItemUltimateExchanger() {
         setRegistryName(Exchangers.MODID + ":ultimate_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".ultimate_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemUltimateExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 4;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.mekanismTweaks.ultimateMaxHarvestLevel;
     }
 
     @Override

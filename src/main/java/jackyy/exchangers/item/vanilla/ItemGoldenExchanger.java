@@ -9,13 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemGoldenExchanger extends ItemExchangerBase {
 
-    public ItemGoldenExchanger(){
+    public ItemGoldenExchanger() {
         setRegistryName(Exchangers.MODID + ":golden_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".golden_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.goldMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.goldenMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -26,6 +27,11 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
     @Override
     public int getTier() {
         return 3;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.vanillaTweaks.goldenMaxHarvestLevel;
     }
 
     @Override
@@ -41,6 +47,11 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return OreDictionary.containsMatch(false, OreDictionary.getOres("ingotGold"), repair);
     }
 
 }

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemVibrantExchanger extends ItemExchangerBasePowered {
 
-    public ItemVibrantExchanger(){
+    public ItemVibrantExchanger() {
         setRegistryName(Exchangers.MODID + ":vibrant_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".vibrant_exchanger");
     }
@@ -41,6 +41,11 @@ public class ItemVibrantExchanger extends ItemExchangerBasePowered {
     @Override
     public int getTier() {
         return 6;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.enderIOTweaks.vibrantMaxHarvestLevel;
     }
 
     @Override

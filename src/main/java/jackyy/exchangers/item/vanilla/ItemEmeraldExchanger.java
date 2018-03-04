@@ -9,14 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemEmeraldExchanger extends ItemExchangerBase {
 
-    public ItemEmeraldExchanger(){
+    public ItemEmeraldExchanger() {
         setRegistryName(Exchangers.MODID + ":emerald_exchanger");
         setUnlocalizedName(Exchangers.MODID + ".emerald_exchanger");
         setMaxStackSize(1);
-        setMaxDamage(ModConfig.vanillaTweaks.emeMaxDmg);
+        setMaxDamage(ModConfig.vanillaTweaks.emeraldMaxDmg);
         setCreativeTab(Exchangers.TAB);
     }
 
@@ -28,6 +29,11 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
     @Override
     public int getTier() {
         return 6;
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return ModConfig.vanillaTweaks.emeraldMaxHarvestLevel;
     }
 
     @Override
@@ -43,6 +49,11 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
     @Override
     public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.EPIC;
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+        return OreDictionary.containsMatch(false, OreDictionary.getOres("gemEmerald"), repair);
     }
 
 }

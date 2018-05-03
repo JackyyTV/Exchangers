@@ -133,7 +133,7 @@ public class ExchangerHandler extends Item implements IExchanger {
             modeSwitch++;
         }
         ItemStack heldItem = player.getHeldItemMainhand();
-        if (heldItem != ItemStack.EMPTY) {
+        if (!heldItem.isEmpty()) {
             if (modeSwitch > getMaxRange()) {
                 modeSwitch = MODE_1X1;
             } else if (modeSwitch < MODE_1X1) {
@@ -147,7 +147,7 @@ public class ExchangerHandler extends Item implements IExchanger {
         setDefaultTagCompound(stack);
         boolean toggle = stack.getTagCompound().getBoolean("forceDropItems");
         ItemStack heldItem = player.getHeldItemMainhand();
-        if (heldItem != ItemStack.EMPTY) {
+        if (!heldItem.isEmpty()) {
             toggle = !toggle;
         }
         stack.getTagCompound().setBoolean("forceDropItems", toggle);
@@ -175,13 +175,24 @@ public class ExchangerHandler extends Item implements IExchanger {
         return world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("tconstruct");
     }
 
+    public static boolean isBlacklisted(World world, BlockPos pos) {
+        for (String block : ModConfig.misc.blocksBlacklist) {
+            if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isSpecial(Block block) {
         return block instanceof BlockLog
-                || block instanceof BlockRedstoneOre
                 || block instanceof BlockTrapDoor
                 || block instanceof BlockDoor
-                || block instanceof BlockFenceGate
-                || block instanceof BlockRedstoneLight;
+                || block instanceof BlockFenceGate;
+    }
+
+    private boolean isMoreSpecial(Block block) {
+        return block instanceof BlockTorch;
     }
 
     @SuppressWarnings("deprecation")
@@ -204,6 +215,9 @@ public class ExchangerHandler extends Item implements IExchanger {
             return;
         } else if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.invalid_block.te");
+            return;
+        } else if (isBlacklisted(world, pos)) {
+            ChatHelper.msgPlayer(player, "error.blacklisted");
             return;
         } else if (!isCreative() && blockHardness < -0.1F) {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
@@ -270,6 +284,8 @@ public class ExchangerHandler extends Item implements IExchanger {
         int meta;
         if (isSpecial(block)) {
             meta = block.getDefaultState().getBlock().getMetaFromState(block.getDefaultState());
+        } else if (isMoreSpecial(block)) {
+            meta = 0;
         } else {
             meta = block.getMetaFromState(state);
         }
@@ -281,6 +297,9 @@ public class ExchangerHandler extends Item implements IExchanger {
             return;
         } else if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.invalid_block.te");
+            return;
+        } else if (isBlacklisted(world, pos)) {
+            ChatHelper.msgPlayer(player, "error.blacklisted");
             return;
         } else if (!isCreative() && blockHardness < -0.1F) {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
@@ -396,7 +415,7 @@ public class ExchangerHandler extends Item implements IExchanger {
             if (i < 0)
                 return false;
             ItemStack extracted = inv.extractItem(i, 1, false);
-            return extracted != ItemStack.EMPTY;
+            return !extracted.isEmpty();
         } else {
             playerInv.decrStackSize(i, 1);
         }
@@ -406,7 +425,7 @@ public class ExchangerHandler extends Item implements IExchanger {
     private static int findItem(Item item, int meta, IInventory inv) {
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            if (stack != ItemStack.EMPTY && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
+            if (!stack.isEmpty() && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
                 return i;
             }
         }
@@ -416,7 +435,7 @@ public class ExchangerHandler extends Item implements IExchanger {
     private static int findItemInContainer(Item item, int meta, IItemHandler inv) {
         for (int i = 0; i < inv.getSlots(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            if (stack != ItemStack.EMPTY && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
+            if (!stack.isEmpty() && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
                 return i;
             }
         }
@@ -426,7 +445,7 @@ public class ExchangerHandler extends Item implements IExchanger {
     private static IItemHandler findItemHolder(IInventory inv) {
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            if (stack != ItemStack.EMPTY && stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+            if (!stack.isEmpty() && stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
                 return stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             }
         }

@@ -26,7 +26,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-@Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
+@Optional.InterfaceList(value = {
+        @Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux"),
+        @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
+})
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
 
     public ItemExchangerBasePowered() {
@@ -102,7 +105,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 	}
 
     /* CAPABILITIES */
-    @Override
+    @Override @Optional.Method(modid = "redstoneflux")
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
         return new EnergyContainerItemWrapper(stack, this);
     }

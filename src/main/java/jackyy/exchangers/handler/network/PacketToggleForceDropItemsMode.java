@@ -22,7 +22,7 @@ public class PacketToggleForceDropItemsMode implements IMessage, IMessageHandler
     public IMessage onMessage(PacketToggleForceDropItemsMode message, MessageContext context) {
         EntityPlayerMP playerMP = context.getServerHandler().player;
         ItemStack heldItem = playerMP.getHeldItemMainhand();
-        if (heldItem != ItemStack.EMPTY && heldItem.getItem() instanceof ItemExchangerBase) {
+        if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
             ItemExchangerBase exchanger = (ItemExchangerBase) (heldItem.getItem());
             exchanger.toggleForceDropItems(playerMP, heldItem);
         }

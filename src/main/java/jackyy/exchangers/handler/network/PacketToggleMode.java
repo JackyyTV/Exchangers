@@ -22,7 +22,7 @@ public class PacketToggleMode implements IMessage, IMessageHandler<PacketToggleM
     public IMessage onMessage(PacketToggleMode message, MessageContext context) {
         EntityPlayerMP playerMP = context.getServerHandler().player;
         ItemStack heldItem = playerMP.getHeldItemMainhand();
-        if (heldItem != ItemStack.EMPTY && heldItem.getItem() instanceof ItemExchangerBase) {
+        if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
             ItemExchangerBase exchanger = (ItemExchangerBase) (heldItem.getItem());
             exchanger.switchMode(playerMP, heldItem);
         }

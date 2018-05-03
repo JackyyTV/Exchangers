@@ -19,10 +19,10 @@ Submit any bug reports / suggestions via [issue tracker](https://github.com/Jack
 
 ## Contact Me
 
-- Twitter DM - [@JackyyTV](https://twitter.com/JackyyTV)
-- Discord DM - Jacky#3044
-- Twitch PM - [Jackyy](https://www.twitch.tv/jackyy)
-- Reddit DM - [Jacky1356400](https://www.reddit.com/message/compose/?to=Jacky1356400)
+- Twitter - [@JackyyTV](https://twitter.com/JackyyTV)
+- Discord - Jacky#3044
+- Twitch - [Jackyy](https://www.twitch.tv/jackyy)
+- Reddit - [Jacky1356400](https://www.reddit.com/message/compose/?to=Jacky1356400)
 
 ---
 
@@ -39,7 +39,7 @@ If you would like to set up the workspace yourself to submit PRs of features add
     - Decompiled source: `gradlew setupDecompWorkspace`
     - Obfuscated source: `gradlew setupDevWorkspace`
     - CI server: `gradlew setupCIWorkspace`
-    
+
 3. Either use `gradlew build` to build the jar file (Output is in `build/libs`), or setup the IDE if you are going to modify any codes. Both IntelliJ IDEA and Eclipse are included below since they're more popular IDEs.
     - IntelliJ IDEA: Do `gradlew idea`, open the `.ipr` file and import the gradle file, then execute the `genIntellijRuns` task in the "Gradle" tab.
     - Eclipse: Do `gradlew eclipse` and open the directory as project.

@@ -94,7 +94,7 @@ public class ClientEventsHandler {
         if (player == null
                 || !mc.inGameHasFocus
                 || !Minecraft.isGuiEnabled()
-                || player.getHeldItemMainhand() == ItemStack.EMPTY
+                || player.getHeldItemMainhand().isEmpty()
                 || !(player.getHeldItemMainhand().getItem() instanceof ItemExchangerBase))
             return;
 
@@ -135,7 +135,7 @@ public class ClientEventsHandler {
                 int meta = block.getMetaFromState(state);
                 ItemStack stack = player.getHeldItemMainhand();
                 float partialTicks = event.getPartialTicks();
-                if (stack != ItemStack.EMPTY && stack.getItem() instanceof ItemExchangerBase && stack.getTagCompound() != null && mouseOver.sideHit != null) {
+                if (!stack.isEmpty() && stack.getItem() instanceof ItemExchangerBase && stack.getTagCompound() != null && mouseOver.sideHit != null) {
                     Set<BlockPos> coordinates = ExchangerHandler.findSuitableBlocks(stack, player.getEntityWorld(), mouseOver.sideHit, mouseOver.getBlockPos(), block, meta);
                     double offsetX = player.prevPosX + (player.posX - player.prevPosX) * (double) partialTicks;
                     double offsetY = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTicks;

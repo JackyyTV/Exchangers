@@ -616,7 +616,7 @@ public class ModRecipes {
         @Override
         public ItemStack getCraftingResult(InventoryCrafting inventory) {
             ItemStack stack = super.getCraftingResult(inventory);
-            if (stack != ItemStack.EMPTY) {
+            if (!stack.isEmpty()) {
                 for (int i = 0; i < inventory.getSizeInventory(); i++) {
                     ItemStack input = inventory.getStackInSlot(i);
                     if (this.nbtCopyStack.isItemEqual(input)) {

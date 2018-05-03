@@ -27,7 +27,7 @@ public class StringHelper {
     }
 
     public static String formatHarvestLevel(int harvestLevel) {
-        return localize("harvest_level." + harvestLevel);
+        return localize("harvest_level." + harvestLevel).equals(Exchangers.MODID + "." + "harvest_level." + harvestLevel) ? String.valueOf(harvestLevel) : localize("harvest_level." + harvestLevel);
     }
 
     public static String localize(String unlocalized, Object... args) {

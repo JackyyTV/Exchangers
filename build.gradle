@@ -1,11 +1,11 @@
 buildscript {
-    repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
-    }
+  repositories {
+    jcenter()
+    maven { url = "http://files.minecraftforge.net/maven" }
+  }
+  dependencies {
+    classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+  }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
@@ -15,77 +15,77 @@ archivesBaseName = "Exchangers"
 
 sourceCompatibility = targetCompatibility = "1.8"
 compileJava {
-    sourceCompatibility = targetCompatibility = "1.8"
+  sourceCompatibility = targetCompatibility = "1.8"
 }
 
 minecraft {
-    version = "${forge_version}"
-    runDir = "run"
-    mappings = "${mappings_version}"
+  version = "${forge_version}"
+  runDir = "run"
+  mappings = "${mappings_version}"
 
-    replace '@FINGERPRINT@', project.findProperty('signSHA1')
-    replaceIn "Exchangers.java"
+  replace '@FINGERPRINT@', project.findProperty('signSHA1')
+  replaceIn "Exchangers.java"
 }
 
 repositories {
-    maven {
-        name = "JEI Maven"
-        url = "http://dvs1.progwml6.com/files/maven"
-    }
-	maven {
-        name = "Hwyla Maven"
-		url = "https://tehnut.info/maven"
-	}
-	maven {
-        name = "CoFH Maven"
-        url = "http://maven.covers1624.net"
-    }
+  maven {
+    name = "JEI Maven"
+    url = "http://dvs1.progwml6.com/files/maven"
+  }
+  maven {
+    name = "Hwyla Maven"
+    url = "https://tehnut.info/maven"
+  }
+  maven {
+    name = "CoFH Maven"
+    url = "http://maven.covers1624.net"
+  }
 }
 
 dependencies {
-	deobfCompile "mezz.jei:jei_1.10.2:+"
-	deobfCompile "mcp.mobius.waila:Hwyla:1.8.17-B31_1.10.2"
-	deobfCompile "cofh:CoFHCore:1.10.2-4.+:universal"
+  deobfCompile "mezz.jei:jei_1.10.2:+"
+  deobfCompile "mcp.mobius.waila:Hwyla:1.8.17-B31_1.10.2"
+  deobfCompile "cofh:CoFHCore:1.10.2-4.+:universal"
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-	rename '(.+_at.cfg)', 'META-INF/$1'
+  inputs.property "version", project.version
+  inputs.property "mcversion", project.minecraft.version
+  from(sourceSets.main.resources.srcDirs) {
+    include 'mcmod.info'
+    expand 'version':project.version, 'mcversion':project.minecraft.version
+  }
+  from(sourceSets.main.resources.srcDirs) {
+    exclude 'mcmod.info'
+  }
+  rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
 jar {
-    manifest {
-        attributes 'FMLAT': 'exchangers_at.cfg'
-    }
+  manifest {
+    attributes 'FMLAT': 'exchangers_at.cfg'
+  }
 }
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
-    onlyIf {
-		project.hasProperty('keyStore')
-	}
-	keyStore = project.findProperty('keyStore')
-	alias = project.findProperty('keyStoreAlias')
-	storePass = project.findProperty('keyStorePass')
-	keyPass = project.findProperty('keyStoreKeyPass')
-	inputFile = jar.archivePath
-	outputFile = jar.archivePath
+  onlyIf {
+    project.hasProperty('keyStore')
+  }
+  keyStore = project.findProperty('keyStore')
+  alias = project.findProperty('keyStoreAlias')
+  storePass = project.findProperty('keyStorePass')
+  keyPass = project.findProperty('keyStoreKeyPass')
+  inputFile = jar.archivePath
+  outputFile = jar.archivePath
 }
 
 build.dependsOn signJar
 
 task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
+  from sourceSets.main.output
+  classifier = 'deobf'
 }
 
 artifacts {
-    archives deobfJar
+  archives deobfJar
 }

@@ -176,11 +176,13 @@ public class ExchangerHandler extends Item implements IExchanger {
 
     private boolean isSpecial(Block block) {
         return block instanceof BlockLog
-                || block instanceof BlockRedstoneOre
                 || block instanceof BlockTrapDoor
                 || block instanceof BlockDoor
-                || block instanceof BlockFenceGate
-                || block instanceof BlockRedstoneLight;
+                || block instanceof BlockFenceGate;
+    }
+
+    private boolean isMoreSpecial(Block block) {
+        return block instanceof BlockTorch;
     }
 
     @SuppressWarnings("deprecation")
@@ -269,6 +271,8 @@ public class ExchangerHandler extends Item implements IExchanger {
         int meta;
         if (isSpecial(block)) {
             meta = block.getDefaultState().getBlock().getMetaFromState(block.getDefaultState());
+        } else if (isMoreSpecial(block)) {
+            meta = 0;
         } else {
             meta = block.getMetaFromState(state);
         }

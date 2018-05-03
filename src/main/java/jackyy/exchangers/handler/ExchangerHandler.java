@@ -174,6 +174,15 @@ public class ExchangerHandler extends Item implements IExchanger {
         return world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("tconstruct");
     }
 
+    public static boolean isBlacklisted(World world, BlockPos pos) {
+        for (String block : ModConfig.misc.blocksBlacklist) {
+            if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isSpecial(Block block) {
         return block instanceof BlockLog
                 || block instanceof BlockTrapDoor
@@ -205,6 +214,9 @@ public class ExchangerHandler extends Item implements IExchanger {
             return;
         } else if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.invalid_block.te");
+            return;
+        } else if (isBlacklisted(world, pos)) {
+            ChatHelper.msgPlayer(player, "error.blacklisted");
             return;
         } else if (!isCreative() && blockHardness < -0.1F) {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
@@ -284,6 +296,9 @@ public class ExchangerHandler extends Item implements IExchanger {
             return;
         } else if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.invalid_block.te");
+            return;
+        } else if (isBlacklisted(world, pos)) {
+            ChatHelper.msgPlayer(player, "error.blacklisted");
             return;
         } else if (!isCreative() && blockHardness < -0.1F) {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");

@@ -91,55 +91,55 @@ public class ModConfig {
     public static class EnderIOTweaks {
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Conductive Iron Exchanger")
-        public final int conductiveMaxEnergy = 80000;
-        @Config.RangeInt(min = 1, max = conductiveMaxEnergy / 10)
+        public int conductiveMaxEnergy = 80000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the Rf consumption per block for Conductive Iron Exchanger")
-        public final int conductivePerBlockUse = 10;
+        public int conductivePerBlockUse = 10;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Conductive Iron Exchanger")
         public int conductiveMaxHarvestLevel = 1;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Pulsating Iron Exchanger")
-        public final int pulsatingMaxEnergy = 400000;
-        @Config.RangeInt(min = 1, max = pulsatingMaxEnergy / 10)
+        public int pulsatingMaxEnergy = 400000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Pulsating Iron Exchanger")
-        public final int pulsatingPerBlockUse = 50;
+        public int pulsatingPerBlockUse = 50;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Pulsating Iron Exchanger")
         public int pulsatingMaxHarvestLevel = 2;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Electrical Steel Exchanger")
-        public final int electricalSteelMaxEnergy = 800000;
-        @Config.RangeInt(min = 1, max = electricalSteelMaxEnergy / 10)
+        public int electricalSteelMaxEnergy = 800000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Electrical Steel Exchanger")
-        public final int electricalSteelPerBlockUse = 100;
+        public int electricalSteelPerBlockUse = 100;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Electrical Steel Exchanger")
         public int electricalSteelMaxHarvestLevel = 3;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Energetic Exchanger")
-        public final int energeticMaxEnergy = 5000000;
-        @Config.RangeInt(min = 1, max = energeticMaxEnergy / 10)
+        public int energeticMaxEnergy = 5000000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Energetic Exchanger")
-        public final int energeticPerBlockUse = 250;
+        public int energeticPerBlockUse = 250;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Energetic Exchanger")
         public int energeticMaxHarvestLevel = 3;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Dark Steel Exchanger")
-        public final int darkSteelMaxEnergy = 10000000;
-        @Config.RangeInt(min = 1, max = darkSteelMaxEnergy / 10)
+        public int darkSteelMaxEnergy = 10000000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Dark Steel Exchanger")
-        public final int darkSteelPerBlockUse = 500;
+        public int darkSteelPerBlockUse = 500;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Dark Steel Exchanger")
         public int darkSteelMaxHarvestLevel = 4;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Vibrant Exchanger")
-        public final int vibrantMaxEnergy = 20000000;
-        @Config.RangeInt(min = 1, max = vibrantMaxEnergy / 10)
+        public int vibrantMaxEnergy = 20000000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Vibrant Exchanger")
-        public final int vibrantPerBlockUse = 1000;
+        public int vibrantPerBlockUse = 1000;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Vibrant Exchanger")
         public int vibrantMaxHarvestLevel = 4;
@@ -148,46 +148,46 @@ public class ModConfig {
     public static class ThermalExpansionTweaks {
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Leadstone Exchanger")
-        public final int leadstoneMaxEnergy = 80000;
-        @Config.RangeInt(min = 1, max = leadstoneMaxEnergy / 10)
+        public int leadstoneMaxEnergy = 80000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Leadstone Exchanger")
-        public final int leadstonePerBlockUse = 10;
+        public int leadstonePerBlockUse = 10;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Leadstone Exchanger")
         public int leadstoneMaxHarvestLevel = 1;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Hardened Exchanger")
-        public final int hardenedMaxEnergy = 500000;
-        @Config.RangeInt(min = 1, max = hardenedMaxEnergy / 10)
+        public int hardenedMaxEnergy = 500000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Hardened Exchanger")
-        public final int hardenedPerBlockUse = 50;
+        public int hardenedPerBlockUse = 50;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Hardened Exchanger")
         public int hardenedMaxHarvestLevel = 2;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Reinforced Exchanger")
-        public final int reinforcedMaxEnergy = 1000000;
-        @Config.RangeInt(min = 1, max = reinforcedMaxEnergy / 10)
+        public int reinforcedMaxEnergy = 1000000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Reinforced Exchanger")
-        public final int reinforcedPerBlockUse = 100;
+        public int reinforcedPerBlockUse = 100;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Reinforced Exchanger")
         public int reinforcedMaxHarvestLevel = 3;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Signalum Exchanger")
-        public final int signalumMaxEnergy = 10000000;
-        @Config.RangeInt(min = 1, max = signalumMaxEnergy / 10)
+        public int signalumMaxEnergy = 10000000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Signalum Exchanger")
-        public final int signalumPerBlockUse = 500;
+        public int signalumPerBlockUse = 500;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Signalum Exchanger")
         public int signalumMaxHarvestLevel = 4;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Resonant Exchanger")
-        public final int resonantMaxEnergy = 20000000;
-        @Config.RangeInt(min = 1, max = resonantMaxEnergy / 10)
+        public int resonantMaxEnergy = 20000000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Resonant Exchanger")
-        public final int resonantPerBlockUse = 1000;
+        public int resonantPerBlockUse = 1000;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Resonant Exchanger")
         public int resonantMaxHarvestLevel = 4;
@@ -196,37 +196,37 @@ public class ModConfig {
     public static class MekanismTweaks {
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Basic Exchanger")
-        public final int basicMaxEnergy = 100000;
-        @Config.RangeInt(min = 1, max = basicMaxEnergy / 10)
+        public int basicMaxEnergy = 100000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Basic Exchanger")
-        public final int basicPerBlockUse = 50;
+        public int basicPerBlockUse = 50;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Basic Exchanger")
         public int basicMaxHarvestLevel = 1;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Advanced Exchanger")
-        public final int advancedMaxEnergy = 800000;
-        @Config.RangeInt(min = 1, max = advancedMaxEnergy / 10)
+        public int advancedMaxEnergy = 800000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Advanced Exchanger")
-        public final int advancedPerBlockUse = 100;
+        public int advancedPerBlockUse = 100;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Advanced Exchanger")
         public int advancedMaxHarvestLevel = 2;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Elite Exchanger")
-        public final int eliteMaxEnergy = 5000000;
-        @Config.RangeInt(min = 1, max = eliteMaxEnergy / 10)
+        public int eliteMaxEnergy = 5000000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Elite Exchanger")
-        public final int elitePerBlockUse = 250;
+        public int elitePerBlockUse = 250;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Elite Exchanger")
         public int eliteMaxHarvestLevel = 3;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for Ultimate Exchanger")
-        public final int ultimateMaxEnergy = 10000000;
-        @Config.RangeInt(min = 1, max = ultimateMaxEnergy / 10)
+        public int ultimateMaxEnergy = 10000000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for Ultimate Exchanger")
-        public final int ultimatePerBlockUse = 500;
+        public int ultimatePerBlockUse = 500;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for Ultimate Exchanger")
         public int ultimateMaxHarvestLevel = 4;
@@ -235,28 +235,28 @@ public class ModConfig {
     public static class ImmersiveEngineeringTweaks {
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for LV Exchanger")
-        public final int lvMaxEnergy = 100000;
-        @Config.RangeInt(min = 1, max = lvMaxEnergy / 10)
+        public int lvMaxEnergy = 100000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for LV Exchanger")
-        public final int lvPerBlockUse = 100;
+        public int lvPerBlockUse = 100;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for LV Exchanger")
         public int lvMaxHarvestLevel = 2;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for MV Exchanger")
-        public final int mvMaxEnergy = 500000;
-        @Config.RangeInt(min = 1, max = mvMaxEnergy / 10)
+        public int mvMaxEnergy = 500000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for MV Exchanger")
-        public final int mvPerBlockUse = 250;
+        public int mvPerBlockUse = 250;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for MV Exchanger")
         public int mvMaxHarvestLevel = 3;
         @Config.RangeInt(min = 1000)
         @Config.Comment("Set the RF capacity for HV Exchanger")
-        public final int hvMaxEnergy = 2500000;
-        @Config.RangeInt(min = 1, max = hvMaxEnergy / 10)
+        public int hvMaxEnergy = 2500000;
+        @Config.RangeInt(min = 1)
         @Config.Comment("Set the RF consumption per block for HV Exchanger")
-        public final int hvPerBlockUse = 500;
+        public int hvPerBlockUse = 500;
         @Config.RangeInt(min = 0)
         @Config.Comment("Set the max harvest level for HV Exchanger")
         public int hvMaxHarvestLevel = 4;
@@ -307,6 +307,12 @@ public class ModConfig {
                 "(e.g. thermalexpansion:cell)"
         })
         public String[] blocksWhitelist = new String[0];
+        @Config.Comment({
+                "Put a list of block registry names that you wish to be blacklisted from Exchangers.",
+                "Note: Blacklisting a block will prevent it from being selected or being exchanged.",
+                "(e.g. minecraft:grass)"
+        })
+        public String[] blocksBlacklist = new String[0];
         @Config.Comment({
                 "If true, allows the Holding Enchantment from CoFHCore to be used in Powered Exchangers",
                 "Calculation formula: Base Energy + (Base Energy * Enchantment Level / 2)"

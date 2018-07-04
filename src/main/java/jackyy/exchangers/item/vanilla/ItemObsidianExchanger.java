@@ -36,7 +36,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
 
     @Override
     public int getMaxRange() {
-        return MODE_15X15;
+        return ModConfig.vanillaTweaks.obsidianMaxRange;
     }
 
     @Override

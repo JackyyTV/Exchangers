@@ -50,7 +50,7 @@ public class ItemResonantExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_15X15;
+        return ModConfig.thermalExpansionTweaks.resonantMaxRange;
     }
 
     @Override

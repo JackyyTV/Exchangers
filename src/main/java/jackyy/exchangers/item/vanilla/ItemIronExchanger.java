@@ -36,7 +36,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
 
     @Override
     public int getMaxRange() {
-        return MODE_7X7;
+        return ModConfig.vanillaTweaks.ironMaxRange;
     }
 
     @Override

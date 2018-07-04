@@ -50,7 +50,7 @@ public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_13X13;
+        return ModConfig.enderIOTweaks.darkSteelMaxRange;
     }
 
     @Override

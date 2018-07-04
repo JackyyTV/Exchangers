@@ -50,7 +50,7 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_5X5;
+        return ModConfig.enderIOTweaks.pulsatingMaxRange;
     }
 
     @Override

@@ -29,7 +29,6 @@ exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in con
 #Messages
 exchangers.error.invalid_block.te=§cError: Nieprwaidłowy Blok! (Tile Entities)
 exchangers.error.invalid_block.unbreakable=§cError: Nieprwaidłowy Blok! (Unbreakable Blocks)
-exchangers.error.invalid_block.null=§cError: Nieprwaidłowy Blok! (Null Display Name)
 exchangers.error.out_of_block=§cError: Brak bloków!
 exchangers.error.out_of_power=§cError: Brak Energii!
 exchangers.error.event_cancelled=§cError: Exchange event cancelled by other mods!

@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class NBTHelper {
 
     public static NBTTagCompound getTag(ItemStack stack) {
-        if(!stack.hasTagCompound())
+        if (!stack.hasTagCompound())
             stack.setTagCompound(new NBTTagCompound());
         return stack.getTagCompound();
     }
@@ -25,7 +25,7 @@ public class NBTHelper {
 
     public static int receiveEnergy(ItemStack container, int energy, int maxEnergy, boolean simulate) {
         int stored = getEnergyStored(container);
-        int accepted = Math.min(energy, maxEnergy-stored);
+        int accepted = Math.min(energy, maxEnergy - stored);
         if (!simulate) {
             stored += accepted;
             setInt(container, "Energy", stored);

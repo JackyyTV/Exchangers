@@ -36,7 +36,7 @@ public class ItemDiamondExchanger extends ItemExchangerBase {
 
     @Override
     public int getMaxRange() {
-        return MODE_9X9;
+        return ModConfig.vanillaTweaks.diamondMaxRange;
     }
 
     @Override

@@ -50,7 +50,7 @@ public class ItemMVExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_11X11;
+        return ModConfig.immersiveEngineeringTweaks.mvMaxRange;
     }
 
     @Override

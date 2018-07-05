@@ -79,6 +79,9 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 	@Override
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
+		if (!Loader.isModLoaded("redstoneflux")) {
+            tooltip.add(StringHelper.localize("tooltip.redstone_flux_warning"));
+        }
         if (StringHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
         }

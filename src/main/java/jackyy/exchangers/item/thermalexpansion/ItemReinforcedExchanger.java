@@ -50,7 +50,7 @@ public class ItemReinforcedExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_11X11;
+        return ModConfig.thermalExpansionTweaks.reinforcedMaxRange;
     }
 
     @Override

@@ -50,7 +50,7 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_3X3;
+        return ModConfig.enderIOTweaks.conductiveMaxRange;
     }
 
     @Override

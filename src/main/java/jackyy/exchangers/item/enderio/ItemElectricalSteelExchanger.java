@@ -50,7 +50,7 @@ public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_9X9;
+        return ModConfig.enderIOTweaks.electricalSteelMaxRange;
     }
 
     @Override

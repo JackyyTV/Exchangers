@@ -50,7 +50,7 @@ public class ItemAdvancedExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_11X11;
+        return ModConfig.mekanismTweaks.advancedMaxRange;
     }
 
     @Override

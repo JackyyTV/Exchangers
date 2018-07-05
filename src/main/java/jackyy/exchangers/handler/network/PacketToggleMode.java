@@ -1,6 +1,7 @@
 package jackyy.exchangers.handler.network;
 
 import io.netty.buffer.ByteBuf;
+import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.item.ItemExchangerBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -23,8 +24,7 @@ public class PacketToggleMode implements IMessage, IMessageHandler<PacketToggleM
         EntityPlayerMP playerMP = context.getServerHandler().player;
         ItemStack heldItem = playerMP.getHeldItemMainhand();
         if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
-            ItemExchangerBase exchanger = (ItemExchangerBase) (heldItem.getItem());
-            exchanger.switchMode(playerMP, heldItem);
+            ExchangerHandler.switchMode(playerMP, heldItem);
         }
         return null;
     }

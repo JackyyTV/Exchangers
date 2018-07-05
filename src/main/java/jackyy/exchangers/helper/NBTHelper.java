@@ -3,12 +3,10 @@ package jackyy.exchangers.helper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.io.*;
-
 public class NBTHelper {
 
     public static NBTTagCompound getTag(ItemStack stack) {
-        if(!stack.hasTagCompound())
+        if (!stack.hasTagCompound())
             stack.setTagCompound(new NBTTagCompound());
         return stack.getTagCompound();
     }
@@ -27,7 +25,7 @@ public class NBTHelper {
 
     public static int receiveEnergy(ItemStack container, int energy, int maxEnergy, boolean simulate) {
         int stored = getEnergyStored(container);
-        int accepted = Math.min(energy, maxEnergy-stored);
+        int accepted = Math.min(energy, maxEnergy - stored);
         if (!simulate) {
             stored += accepted;
             setInt(container, "Energy", stored);
@@ -47,19 +45,6 @@ public class NBTHelper {
 
     public static int getEnergyStored(ItemStack container) {
         return getInt(container, "Energy");
-    }
-
-    public static byte[] serializeToBytes(Object obj) throws IOException {
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        ObjectOutputStream objOutput = new ObjectOutputStream(output);
-        objOutput.writeObject(obj);
-        return output.toByteArray();
-    }
-
-    public static Object deserializeToObject(byte[] data) throws IOException, ClassNotFoundException {
-        ByteArrayInputStream input = new ByteArrayInputStream(data);
-        ObjectInputStream objInput = new ObjectInputStream(input);
-        return objInput.readObject();
     }
 
 }

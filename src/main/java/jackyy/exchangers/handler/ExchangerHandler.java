@@ -121,7 +121,7 @@ public class ExchangerHandler {
         ChatHelper.msgPlayer(player, toggle ? "msg.force_drop_items.on" : "msg.force_drop_items.off");
     }
 
-    private static boolean isWhitelisted(World world, BlockPos pos) {
+    public static boolean isWhitelisted(World world, BlockPos pos) {
         for (String block : ModConfig.misc.blocksWhitelist) {
             if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
                 return true;
@@ -130,7 +130,7 @@ public class ExchangerHandler {
         return world.getBlockState(pos).getBlock().getRegistryName().equals("tconstruct:seared");
     }
 
-    private static boolean isBlacklisted(World world, BlockPos pos) {
+    public static boolean isBlacklisted(World world, BlockPos pos) {
         for (String block : ModConfig.misc.blocksBlacklist) {
             if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
                 return true;
@@ -241,7 +241,7 @@ public class ExchangerHandler {
         NBTUtil.writeBlockState(tagCompound.getCompoundTag("blockstate"), state);
     }
 
-    private static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
+    public static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
         Set<BlockPos> coordinates = new HashSet<>();
         int mode = stack.getTagCompound().getInteger("mode");
 
@@ -394,7 +394,7 @@ public class ExchangerHandler {
         }
     }
 
-    static NBTTagCompound getTagCompound(ItemStack stack) {
+    public static NBTTagCompound getTagCompound(ItemStack stack) {
         NBTTagCompound tagCompound = stack.getTagCompound();
         if (tagCompound == null) {
             tagCompound = new NBTTagCompound();

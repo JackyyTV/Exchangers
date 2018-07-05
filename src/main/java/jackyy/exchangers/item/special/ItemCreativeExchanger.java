@@ -30,7 +30,7 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return 9001;
+        return Integer.MAX_VALUE;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
 
     @Override
     public int getMaxRange() {
-        return MODE_25X25;
+        return 12;
     }
 
     @Override

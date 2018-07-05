@@ -35,7 +35,7 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
 
     @Override
     public int getMaxRange() {
-        return MODE_1X1;
+        return ModConfig.vanillaTweaks.woodenMaxRange;
     }
 
     @Override

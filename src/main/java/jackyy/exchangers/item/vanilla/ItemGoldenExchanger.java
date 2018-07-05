@@ -36,7 +36,7 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
 
     @Override
     public int getMaxRange() {
-        return MODE_5X5;
+        return ModConfig.vanillaTweaks.goldenMaxRange;
     }
 
     @Override

@@ -38,7 +38,7 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
 
     @Override
     public int getMaxRange() {
-        return MODE_11X11;
+        return ModConfig.vanillaTweaks.emeraldMaxRange;
     }
 
     @Override

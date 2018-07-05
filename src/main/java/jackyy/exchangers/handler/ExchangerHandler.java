@@ -1,11 +1,9 @@
 package jackyy.exchangers.handler;
 
-import jackyy.exchangers.client.Keys;
 import jackyy.exchangers.helper.ChatHelper;
-import jackyy.exchangers.helper.StringHelper;
+import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
-import jackyy.exchangers.util.IExchanger;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
@@ -18,10 +16,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.nbt.NBTUtil;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
@@ -31,21 +31,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import java.util.*;
 
-public class ExchangerHandler extends Item implements IExchanger {
-
-    public static final int MODE_1X1 = 0;
-    public static final int MODE_3X3 = 1;
-    public static final int MODE_5X5 = 2;
-    public static final int MODE_7X7 = 3;
-    public static final int MODE_9X9 = 4;
-    public static final int MODE_11X11 = 5;
-    public static final int MODE_13X13 = 6;
-    public static final int MODE_15X15 = 7;
-    public static final int MODE_17X17 = 8;
-    public static final int MODE_19X19 = 9;
-    public static final int MODE_21X21 = 10;
-    public static final int MODE_23X23 = 11;
-    public static final int MODE_25X25 = 12;
+public class ExchangerHandler {
 
     public static final String[] modeSwitchList = new String[] {
             "1x1", "3x3", "5x5", "7x7", "9x9",
@@ -56,74 +42,56 @@ public class ExchangerHandler extends Item implements IExchanger {
         if (stack.getTagCompound() == null) {
             NBTTagCompound compound = new NBTTagCompound();
             compound.setString("block", "minecraft:air");
-            compound.setInteger("meta", 0);
+            compound.setTag("blockstate", new NBTTagCompound());
             compound.setInteger("mode", 0);
             compound.setBoolean("forceDropItems", false);
             stack.setTagCompound(compound);
         } else {
             if (!stack.getTagCompound().hasKey("block")) {
                 stack.getTagCompound().setString("block", "minecraft:air");
-            } else if (!stack.getTagCompound().hasKey("meta")) {
-                stack.getTagCompound().setInteger("meta", 0);
+            } else if (!stack.getTagCompound().hasKey("blockstate")) {
+                stack.getTagCompound().setTag("blockstate", new NBTTagCompound());
             } else if (!stack.getTagCompound().hasKey("mode")) {
                 stack.getTagCompound().setInteger("mode", 0);
             } else if (!stack.getTagCompound().hasKey("forceDropItems")) {
                 stack.getTagCompound().setBoolean("forceDropItems", false);
+            } else if (stack.getTagCompound().hasKey("meta")) {
+                stack.getTagCompound().removeTag("meta");
             }
         }
     }
 
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
-        super.addInformation(stack, player, tooltip, bool);
-        if (!StringHelper.isShiftKeyDown()) {
-            tooltip.add(StringHelper.getShiftText());
-        }
-
-        setDefaultTagCompound(stack);
-
-        NBTTagCompound compound = stack.getTagCompound();
-        String id = compound.getString("block");
-
-        if (StringHelper.isShiftKeyDown()) {
-            if (id.equals("minecraft:air")) {
-                tooltip.add(StringHelper.localize("tooltip.no_selected_block"));
-            } else {
-                Block block = Block.getBlockFromName(id);
-                int meta = compound.getInteger("meta");
-                tooltip.add(StringHelper.localize("tooltip.selected_block") + " " + getBlockName(block, meta));
-            }
-            tooltip.add(StringHelper.localize("tooltip.current_range") + " " + modeSwitchList[compound.getInteger("mode")]);
-            tooltip.add(StringHelper.localize("tooltip.max_range") + " " + modeSwitchList[getMaxRange()]);
-            tooltip.add(StringHelper.localize("tooltip.max_harvest_level") + " " + StringHelper.formatHarvestLevel(getHarvestLevel()));
-            if (ModConfig.misc.doExchangersSilkTouch) {
-                tooltip.add(StringHelper.localize("tooltip.silk_touch.on"));
-            } else {
-                tooltip.add(StringHelper.localize("tooltip.silk_touch.off"));
-            }
-            if (compound.getBoolean("forceDropItems")) {
-                tooltip.add(StringHelper.localize("tooltip.force_drop_items.on") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.FORCE_DROP_ITEMS_KEY.getDisplayName() + TextFormatting.GRAY + ")");
-            } else {
-                tooltip.add(StringHelper.localize("tooltip.force_drop_items.off") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.FORCE_DROP_ITEMS_KEY.getDisplayName() + TextFormatting.GRAY + ")");
-            }
-            tooltip.add(StringHelper.localize("tooltip.shift1"));
-            tooltip.add(StringHelper.localize("tooltip.shift2"));
-            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + TextFormatting.GREEN + Keys.MODE_KEY.getDisplayName() + TextFormatting.GRAY + ")");
-            tooltip.add(StringHelper.getTierText(getTier()));
-        }
+    private static int getExPerBlockUse(ItemStack stack) {
+        return ((ItemExchangerBase) stack.getItem()).getPerBlockUse();
     }
 
-    private int getPerBlockEnergy(ItemStack stack) {
+    private static int getPerBlockEnergy(ItemStack stack) {
         if (ModConfig.misc.unbreakingPoweredExchangers) {
             int level = MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack), 0, 10);
             if (new Random().nextInt(2 + level) >= 2) {
                 return 0;
             }
         }
-        return this.getPerBlockUse();
+        return getExPerBlockUse(stack);
     }
 
-    public void switchMode(EntityPlayer player, ItemStack stack) {
+    private static int getExHarvestLevel(ItemStack stack) {
+        return ((ItemExchangerBase) stack.getItem()).getHarvestLevel();
+    }
+
+    private static int getExRange(ItemStack stack) {
+        return ((ItemExchangerBase) stack.getItem()).getMaxRange();
+    }
+
+    private static boolean getExIsCreative(ItemStack stack) {
+        return ((ItemExchangerBase) stack.getItem()).isCreative();
+    }
+
+    private static boolean getExIsPowered(ItemStack stack) {
+        return ((ItemExchangerBase) stack.getItem()).isPowered();
+    }
+
+    public static void switchMode(EntityPlayer player, ItemStack stack) {
         setDefaultTagCompound(stack);
         int modeSwitch = stack.getTagCompound().getInteger("mode");
         if (player.isSneaking()) {
@@ -133,16 +101,16 @@ public class ExchangerHandler extends Item implements IExchanger {
         }
         ItemStack heldItem = player.getHeldItemMainhand();
         if (!heldItem.isEmpty()) {
-            if (modeSwitch > getMaxRange()) {
-                modeSwitch = MODE_1X1;
-            } else if (modeSwitch < MODE_1X1) {
-                modeSwitch = getMaxRange();
+            if (modeSwitch > getExRange(stack)) {
+                modeSwitch = 0;
+            } else if (modeSwitch < 0) {
+                modeSwitch = getExRange(stack);
             }
         }
         stack.getTagCompound().setInteger("mode", modeSwitch);
     }
 
-    public void toggleForceDropItems(EntityPlayer player, ItemStack stack) {
+    public static void toggleForceDropItems(EntityPlayer player, ItemStack stack) {
         setDefaultTagCompound(stack);
         boolean toggle = stack.getTagCompound().getBoolean("forceDropItems");
         ItemStack heldItem = player.getHeldItemMainhand();
@@ -153,25 +121,13 @@ public class ExchangerHandler extends Item implements IExchanger {
         ChatHelper.msgPlayer(player, toggle ? "msg.force_drop_items.on" : "msg.force_drop_items.off");
     }
 
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote) {
-            if (player.isSneaking()) {
-                selectBlock(player.getHeldItemMainhand(), player, world, pos);
-            } else {
-                placeBlock(player.getHeldItemMainhand(), player, world, pos, side);
-            }
-        }
-        return EnumActionResult.SUCCESS;
-    }
-
     public static boolean isWhitelisted(World world, BlockPos pos) {
         for (String block : ModConfig.misc.blocksWhitelist) {
             if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
                 return true;
             }
         }
-        return world.getBlockState(pos).getBlock().getRegistryName().getResourceDomain().equals("tconstruct");
+        return world.getBlockState(pos).getBlock().getRegistryName().equals("tconstruct:seared");
     }
 
     public static boolean isBlacklisted(World world, BlockPos pos) {
@@ -183,34 +139,20 @@ public class ExchangerHandler extends Item implements IExchanger {
         return false;
     }
 
-    private boolean isSpecial(Block block) {
-        return block instanceof BlockLog
-                || block instanceof BlockTrapDoor
-                || block instanceof BlockDoor
-                || block instanceof BlockFenceGate;
-    }
-
-    private boolean isMoreSpecial(Block block) {
-        return block instanceof BlockTorch;
-    }
-
     @SuppressWarnings("deprecation")
-    private void placeBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side) {
+    public static void placeBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side) {
         NBTTagCompound tagCompound = stack.getTagCompound();
-        Block block;
-        int meta;
         String id = tagCompound.getString("block");
-        block = Block.getBlockFromName(id);
-        meta = tagCompound.getInteger("meta");
-
+        Block block = Block.getBlockFromName(id);
+        IBlockState state = NBTUtil.readBlockState(tagCompound.getCompoundTag("blockstate"));
         IBlockState oldState = world.getBlockState(pos);
         Block oldblock = oldState.getBlock();
-
         int oldmeta = oldblock.getMetaFromState(oldState);
         float blockHardness = oldblock.getBlockHardness(oldState, world, pos);
+
         if (id.equals("minecraft:air")) {
             return;
-        } else if ((block == oldblock) && (meta == oldmeta)) {
+        } else if ((block == oldblock) && (state == oldState)) {
             return;
         } else if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.invalid_block.te");
@@ -218,25 +160,27 @@ public class ExchangerHandler extends Item implements IExchanger {
         } else if (isBlacklisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.blacklisted");
             return;
-        } else if (!isCreative() && blockHardness < -0.1F) {
+        } else if (!getExIsCreative(stack) && blockHardness < -0.1F) {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
             return;
-        } else if (!isCreative() && isPowered() && stack.getTagCompound().getInteger("Energy") < getPerBlockEnergy(stack)) {
+        } else if (!getExIsCreative(stack) && getExIsPowered(stack) && stack.getTagCompound().getInteger("Energy") < getPerBlockEnergy(stack)) {
             ChatHelper.msgPlayer(player, "error.out_of_power");
             return;
-        } else if (!isCreative() && getHarvestLevel() < oldblock.getHarvestLevel(oldState)) {
+        } else if (!getExIsCreative(stack) && getExHarvestLevel(stack) < oldblock.getHarvestLevel(oldState)) {
             ChatHelper.msgPlayer(player, "error.low_harvest_level");
             return;
         }
+
         Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);
         boolean notEnough = false;
         world.captureBlockSnapshots = false;
+
         for (BlockPos coordinate : coordinates) {
             BlockEvent.PlaceEvent event = new BlockEvent.PlaceEvent(BlockSnapshot.getBlockSnapshot(world, coordinate, 3), Blocks.AIR.getDefaultState(), player, player.getActiveHand());
-            world.setBlockState(coordinate, block.getStateFromMeta(meta), 3);
+            world.setBlockState(coordinate, state, 3);
             if (!MinecraftForge.EVENT_BUS.post(event)) {
-                if (consumeItemInInventory(Item.getItemFromBlock(block), meta, player.inventory, player)) {
-                    if (!player.capabilities.isCreativeMode && !isCreative()) {
+                if (consumeItemInInventory(Item.getItemFromBlock(block), state.getBlock().getItem(world, pos, state).getMetadata(), player.inventory, player)) {
+                    if (!player.capabilities.isCreativeMode && !getExIsCreative(stack)) {
                         if (ModConfig.misc.doExchangersSilkTouch || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                             ItemStack oldblockItem = oldblock.getItem(world, pos, oldState);
                             giveItem(world, player, oldblockItem);
@@ -247,7 +191,7 @@ public class ExchangerHandler extends Item implements IExchanger {
                                 giveItem(world, player, oldblockItem);
                             }
                         }
-                        if (!isPowered()) {
+                        if (!getExIsPowered(stack)) {
                             stack.damageItem(1, player);
                         } else if (stack.getTagCompound().getInteger("Energy") >= getPerBlockEnergy(stack)) {
                             stack.getTagCompound().setInteger("Energy", stack.getTagCompound().getInteger("Energy") - getPerBlockEnergy(stack));
@@ -276,40 +220,28 @@ public class ExchangerHandler extends Item implements IExchanger {
     }
 
     @SuppressWarnings("deprecation")
-    private void selectBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {
+    public static void selectBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos) {
         setDefaultTagCompound(stack);
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        int meta;
-        if (isSpecial(block)) {
-            meta = block.getDefaultState().getBlock().getMetaFromState(block.getDefaultState());
-        } else if (isMoreSpecial(block)) {
-            meta = 0;
-        } else {
-            meta = block.getMetaFromState(state);
-        }
         NBTTagCompound tagCompound = getTagCompound(stack);
-        String name = getBlockName(block, meta);
         float blockHardness = block.getBlockHardness(state, world, pos);
-        if (name == null) {
-            ChatHelper.msgPlayer(player, "error.invalid_block.null");
-            return;
-        } else if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
+        if (world.getTileEntity(pos) != null && !isWhitelisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.invalid_block.te");
             return;
         } else if (isBlacklisted(world, pos)) {
             ChatHelper.msgPlayer(player, "error.blacklisted");
             return;
-        } else if (!isCreative() && blockHardness < -0.1F) {
+        } else if (!getExIsCreative(stack) && blockHardness < -0.1F) {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
             return;
         }
         String id = Block.REGISTRY.getNameForObject(block).toString();
         tagCompound.setString("block", id);
-        tagCompound.setInteger("meta", meta);
+        NBTUtil.writeBlockState(tagCompound.getCompoundTag("blockstate"), state);
     }
 
-    protected static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
+    public static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
         Set<BlockPos> coordinates = new HashSet<>();
         int mode = stack.getTagCompound().getInteger("mode");
 
@@ -401,8 +333,8 @@ public class ExchangerHandler extends Item implements IExchanger {
         return false;
     }
 
-    private boolean consumeItemInInventory(Item item, int meta, InventoryPlayer playerInv, EntityPlayer player) {
-        if (player.capabilities.isCreativeMode || isCreative()) {
+    private static boolean consumeItemInInventory(Item item, int meta, InventoryPlayer playerInv, EntityPlayer player) {
+        if (player.capabilities.isCreativeMode || getExIsCreative(player.getHeldItemMainhand())) {
             return true;
         }
         int i = findItem(item, meta, playerInv);
@@ -462,7 +394,7 @@ public class ExchangerHandler extends Item implements IExchanger {
         }
     }
 
-    protected static NBTTagCompound getTagCompound(ItemStack stack) {
+    public static NBTTagCompound getTagCompound(ItemStack stack) {
         NBTTagCompound tagCompound = stack.getTagCompound();
         if (tagCompound == null) {
             tagCompound = new NBTTagCompound();
@@ -471,9 +403,16 @@ public class ExchangerHandler extends Item implements IExchanger {
         return tagCompound;
     }
 
-    private static String getBlockName(Block block, int meta) {
+    public static String getBlockName(Block block, int meta) {
         ItemStack stack = new ItemStack(block, 1, meta);
-        return stack.getDisplayName();
+        String name;
+        try {
+            name = stack.getDisplayName();
+            return name;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return "Unable to fetch block name.";
     }
 
 }

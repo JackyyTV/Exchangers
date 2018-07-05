@@ -50,7 +50,7 @@ public class ItemLeadstoneExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxRange() {
-        return MODE_3X3;
+        return ModConfig.thermalExpansionTweaks.leadstoneMaxRange;
     }
 
     @Override

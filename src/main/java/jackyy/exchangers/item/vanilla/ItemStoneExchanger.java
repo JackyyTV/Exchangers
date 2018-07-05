@@ -36,7 +36,7 @@ public class ItemStoneExchanger extends ItemExchangerBase {
 
     @Override
     public int getMaxRange() {
-        return MODE_3X3;
+        return ModConfig.vanillaTweaks.stoneMaxRange;
     }
 
     @Override

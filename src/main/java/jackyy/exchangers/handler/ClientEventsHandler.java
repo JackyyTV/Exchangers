@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -132,11 +133,10 @@ public class ClientEventsHandler {
             IBlockState state = world.getBlockState(mouseOver.getBlockPos());
             Block block = state.getBlock();
             if (block.getMaterial(state) != Material.AIR) {
-                int meta = block.getMetaFromState(state);
                 ItemStack stack = player.getHeldItemMainhand();
                 float partialTicks = event.getPartialTicks();
                 if (!stack.isEmpty() && stack.getItem() instanceof ItemExchangerBase && stack.getTagCompound() != null && mouseOver.sideHit != null) {
-                    Set<BlockPos> coordinates = ExchangerHandler.findSuitableBlocks(stack, player.getEntityWorld(), mouseOver.sideHit, mouseOver.getBlockPos(), block, meta);
+                    Set<BlockPos> coordinates = ExchangerHandler.findSuitableBlocks(stack, player.getEntityWorld(), mouseOver.sideHit, mouseOver.getBlockPos(), block, block.getMetaFromState(state));
                     double offsetX = player.prevPosX + (player.posX - player.prevPosX) * (double) partialTicks;
                     double offsetY = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTicks;
                     double offsetZ = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) partialTicks;
@@ -153,10 +153,10 @@ public class ClientEventsHandler {
 
                     for (BlockPos coordinate : coordinates) {
                         String exId = ExchangerHandler.getTagCompound(stack).getString("block");
+                        IBlockState exState = NBTUtil.readBlockState(ExchangerHandler.getTagCompound(stack).getCompoundTag("blockstate"));
                         Block exBlock = Block.getBlockFromName(exId);
-                        int exMeta = ExchangerHandler.getTagCompound(stack).getInteger("meta");
                         float blockHardness = block.getBlockHardness(state, world, coordinate);
-                        if (world.isAirBlock(coordinate) || (exBlock == block && exMeta == meta)) {
+                        if (world.isAirBlock(coordinate) || (exBlock == block && exState == state)) {
                             continue;
                         }
                         double renderX = coordinate.getX() - offsetX;

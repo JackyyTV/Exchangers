@@ -83,6 +83,7 @@ item.exchangers.iron_exchanger.name=Iron Exchanger
 item.exchangers.diamond_exchanger.name=Diamond Exchanger
 item.exchangers.emerald_exchanger.name=Emerald Exchanger
 item.exchangers.obsidian_exchanger.name=Obsidian Exchanger
+item.exchangers.end_exchanger.name=End Exchanger
 
 #Ender IO Exchangers
 item.exchangers.conductive_iron_exchanger.name=Conductive Iron Exchanger

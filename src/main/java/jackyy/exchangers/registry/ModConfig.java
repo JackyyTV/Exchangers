@@ -106,7 +106,16 @@ public class ModConfig {
         public int obsidianMaxHarvestLevel = 4;
         @Config.RangeInt(min = 0, max = 12)
         @Config.Comment("Set the max range for Obsidian Exchanger")
-        public int obsidianMaxRange = 7;
+        public int obsidianMaxRange = 6;
+        @Config.RangeInt(min = 1)
+        @Config.Comment("Set the durability for End Exchanger")
+        public int endMaxDmg = 32768;
+        @Config.RangeInt(min = 0)
+        @Config.Comment("Set the max harvest level for End Exchanger")
+        public int endMaxHarvestLevel = 4;
+        @Config.RangeInt(min = 0, max = 12)
+        @Config.Comment("Set the max range for End Exchanger")
+        public int endMaxRange = 7;
     }
 
     public static class EnderIOTweaks {

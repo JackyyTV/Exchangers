@@ -21,6 +21,7 @@ public class ModItems {
     public static ItemDiamondExchanger diamondExchanger;
     public static ItemEmeraldExchanger emeraldExchanger;
     public static ItemObsidianExchanger obsidianExchanger;
+    public static ItemEndExchanger endExchanger;
     public static ItemExchangerCoreT1 exchangerCoreT1;
     public static ItemExchangerCoreT2 exchangerCoreT2;
     public static ItemExchangerCoreT3 exchangerCoreT3;
@@ -71,6 +72,7 @@ public class ModItems {
         diamondExchanger = GameRegistry.register(new ItemDiamondExchanger());
         emeraldExchanger = GameRegistry.register(new ItemEmeraldExchanger());
         obsidianExchanger = GameRegistry.register(new ItemObsidianExchanger());
+        endExchanger = GameRegistry.register(new ItemEndExchanger());
         exchangerCoreT1 = GameRegistry.register(new ItemExchangerCoreT1());
         exchangerCoreT2 = GameRegistry.register(new ItemExchangerCoreT2());
         exchangerCoreT3 = GameRegistry.register(new ItemExchangerCoreT3());
@@ -122,6 +124,7 @@ public class ModItems {
         diamondExchanger.initModel();
         emeraldExchanger.initModel();
         obsidianExchanger.initModel();
+        endExchanger.initModel();
         exchangerCoreT1.initModel();
         exchangerCoreT2.initModel();
         exchangerCoreT3.initModel();

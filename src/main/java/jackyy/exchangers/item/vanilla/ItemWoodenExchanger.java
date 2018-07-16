@@ -13,7 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class ItemWoodenExchanger extends ItemExchangerBase {
 
@@ -55,8 +54,7 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return OreDictionary.containsMatch(false,
-                Arrays.asList(
+        return OreDictionary.containsMatch(false, Arrays.asList(
                         new ItemStack(Blocks.LOG, 1, 0), new ItemStack(Blocks.LOG, 1, 1), new ItemStack(Blocks.LOG, 1, 2), new ItemStack(Blocks.LOG, 1, 3),
                         new ItemStack(Blocks.LOG2, 1, 0), new ItemStack(Blocks.LOG2, 1, 1)
                 ), repair);

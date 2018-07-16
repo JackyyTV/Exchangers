@@ -4,8 +4,8 @@ import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import jackyy.exchangers.client.CapeBufferDownload;
 import jackyy.exchangers.client.Keys;
 import jackyy.exchangers.handler.network.PacketHandler;
+import jackyy.exchangers.handler.network.PacketSwitchRange;
 import jackyy.exchangers.handler.network.PacketToggleForceDropItemsMode;
-import jackyy.exchangers.handler.network.PacketToggleMode;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.item.special.ItemCreativeExchanger;
 import net.minecraft.block.Block;
@@ -217,7 +217,7 @@ public class ClientEventsHandler {
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (Keys.MODE_KEY.isPressed()) {
-            PacketHandler.INSTANCE.sendToServer(new PacketToggleMode());
+            PacketHandler.INSTANCE.sendToServer(new PacketSwitchRange());
         }
         if (Keys.FORCE_DROP_ITEMS_KEY.isPressed()) {
             PacketHandler.INSTANCE.sendToServer(new PacketToggleForceDropItemsMode());

@@ -75,7 +75,7 @@ public class ItemExchangerBase extends Item implements IExchanger {
                 Block block = Block.getBlockFromName(id);
                 tooltip.add(StringHelper.localize("tooltip.selected_block") + " " + ExchangerHandler.getBlockName(block, state.getBlock().getMetaFromState(state)));
             }
-            tooltip.add(StringHelper.localize("tooltip.current_range") + " " + ExchangerHandler.modeSwitchList[compound.getInteger("mode")]);
+            tooltip.add(StringHelper.localize("tooltip.current_range") + " " + ExchangerHandler.modeSwitchList[compound.getInteger("range")]);
             tooltip.add(StringHelper.localize("tooltip.max_range") + " " + ExchangerHandler.modeSwitchList[getMaxRange()]);
             tooltip.add(StringHelper.localize("tooltip.max_harvest_level") + " " + StringHelper.formatHarvestLevel(getHarvestLevel()));
             if (ModConfig.misc.doExchangersSilkTouch) {

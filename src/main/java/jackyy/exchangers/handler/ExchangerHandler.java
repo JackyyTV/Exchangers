@@ -43,7 +43,8 @@ public class ExchangerHandler {
             NBTTagCompound compound = new NBTTagCompound();
             compound.setString("block", "minecraft:air");
             compound.setTag("blockstate", new NBTTagCompound());
-            compound.setInteger("mode", 0);
+            compound.setInteger("exmode", 0);
+            compound.setInteger("range", 0);
             compound.setBoolean("forceDropItems", false);
             stack.setTagCompound(compound);
         } else {
@@ -51,12 +52,12 @@ public class ExchangerHandler {
                 stack.getTagCompound().setString("block", "minecraft:air");
             } else if (!stack.getTagCompound().hasKey("blockstate")) {
                 stack.getTagCompound().setTag("blockstate", new NBTTagCompound());
-            } else if (!stack.getTagCompound().hasKey("mode")) {
-                stack.getTagCompound().setInteger("mode", 0);
+            } else if (!stack.getTagCompound().hasKey("exmode")) {
+                stack.getTagCompound().setInteger("exmode", 0);
+            } else if (!stack.getTagCompound().hasKey("range")) {
+                stack.getTagCompound().setInteger("range", 0);
             } else if (!stack.getTagCompound().hasKey("forceDropItems")) {
                 stack.getTagCompound().setBoolean("forceDropItems", false);
-            } else if (stack.getTagCompound().hasKey("meta")) {
-                stack.getTagCompound().removeTag("meta");
             }
         }
     }
@@ -91,23 +92,23 @@ public class ExchangerHandler {
         return ((ItemExchangerBase) stack.getItem()).isPowered();
     }
 
-    public static void switchMode(EntityPlayer player, ItemStack stack) {
+    public static void switchRange(EntityPlayer player, ItemStack stack) {
         setDefaultTagCompound(stack);
-        int modeSwitch = stack.getTagCompound().getInteger("mode");
+        int rangeSwitch = stack.getTagCompound().getInteger("range");
         if (player.isSneaking()) {
-            modeSwitch--;
+            rangeSwitch--;
         } else {
-            modeSwitch++;
+            rangeSwitch++;
         }
         ItemStack heldItem = player.getHeldItemMainhand();
         if (heldItem != null) {
-            if (modeSwitch > getExRange(stack)) {
-                modeSwitch = 0;
-            } else if (modeSwitch < 0) {
-                modeSwitch = getExRange(stack);
+            if (rangeSwitch > getExRange(stack)) {
+                rangeSwitch = 0;
+            } else if (rangeSwitch < 0) {
+                rangeSwitch = getExRange(stack);
             }
         }
-        stack.getTagCompound().setInteger("mode", modeSwitch);
+        stack.getTagCompound().setInteger("range", rangeSwitch);
     }
 
     public static void toggleForceDropItems(EntityPlayer player, ItemStack stack) {
@@ -243,7 +244,7 @@ public class ExchangerHandler {
 
     public static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
         Set<BlockPos> coordinates = new HashSet<>();
-        int mode = stack.getTagCompound().getInteger("mode");
+        int mode = stack.getTagCompound().getInteger("range");
 
         List<BlockPos> possibleLocs = new ArrayList<>();
         possibleLocs.add(pos);

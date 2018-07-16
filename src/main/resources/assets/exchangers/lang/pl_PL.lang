@@ -3,7 +3,7 @@ itemGroup.exchangers=Wymieniacze
 
 #Key Bindings
 key.categories.exchangers=Wymieniacze
-key.exchanger_mode=Zmiana Trybu Wymieniaczy
+key.exchanger_range_switch=Zmiana Trybu Wymieniaczy
 
 #Death
 death.attack.tuberous_exchanger=%1$s próbował używać ziemniaczanego wymieniacza

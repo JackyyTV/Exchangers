@@ -4,6 +4,7 @@ import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import jackyy.exchangers.client.CapeBufferDownload;
 import jackyy.exchangers.client.Keys;
 import jackyy.exchangers.handler.network.PacketHandler;
+import jackyy.exchangers.handler.network.PacketSwitchMode;
 import jackyy.exchangers.handler.network.PacketSwitchRange;
 import jackyy.exchangers.handler.network.PacketToggleForceDropItemsMode;
 import jackyy.exchangers.item.ItemExchangerBase;
@@ -110,7 +111,7 @@ public class ClientEventsHandler {
             GlStateManager.disableDepth();
             GlStateManager.disableRescaleNormal();
 
-            String exchangeMode = ExchangerHandler.modeSwitchList[stack.getTagCompound().getInteger("mode")];
+            String exchangeMode = ExchangerHandler.modeSwitchList[stack.getTagCompound().getInteger("range")];
             double scale = exchangeMode.length() > 2 ? 1 : 1;
             double swidth = mc.fontRendererObj.getStringWidth(exchangeMode) * scale;
             GlStateManager.translate((w / 2 - 2 - swidth), h / 2 - 4, 0);
@@ -216,10 +217,11 @@ public class ClientEventsHandler {
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (Keys.MODE_KEY.isPressed()) {
+        if (Keys.RANGE_SWITCH_KEY.isPressed()) {
             PacketHandler.INSTANCE.sendToServer(new PacketSwitchRange());
-        }
-        if (Keys.FORCE_DROP_ITEMS_KEY.isPressed()) {
+        } else if (Keys.MODE_SWITCH_KEY.isPressed()) {
+            PacketHandler.INSTANCE.sendToServer(new PacketSwitchMode());
+        } else if (Keys.FORCE_DROP_ITEMS_KEY.isPressed()) {
             PacketHandler.INSTANCE.sendToServer(new PacketToggleForceDropItemsMode());
         }
     }

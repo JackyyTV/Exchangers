@@ -67,6 +67,7 @@ public class ItemExchangerBase extends Item implements IExchanger {
         NBTTagCompound compound = stack.getTagCompound();
         String id = compound.getString("block");
         IBlockState state = NBTUtil.readBlockState(compound.getCompoundTag("blockstate"));
+        int mode = stack.getTagCompound().getInteger("exmode");
 
         if (StringHelper.isShiftKeyDown()) {
             if (id.equals("minecraft:air")) {
@@ -78,6 +79,20 @@ public class ItemExchangerBase extends Item implements IExchanger {
             tooltip.add(StringHelper.localize("tooltip.current_range") + " " + ExchangerHandler.modeSwitchList[compound.getInteger("range")]);
             tooltip.add(StringHelper.localize("tooltip.max_range") + " " + ExchangerHandler.modeSwitchList[getMaxRange()]);
             tooltip.add(StringHelper.localize("tooltip.max_harvest_level") + " " + StringHelper.formatHarvestLevel(getHarvestLevel()));
+            switch (mode) {
+                case 0:
+                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.wall") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+                    break;
+                case 1:
+                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.wall_bypass") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+                    break;
+                case 2:
+                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.horizontal") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+                    break;
+                case 3:
+                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.vertical") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+                    break;
+            }
             if (ModConfig.misc.doExchangersSilkTouch) {
                 tooltip.add(StringHelper.localize("tooltip.silk_touch.on"));
             } else {
@@ -90,7 +105,7 @@ public class ItemExchangerBase extends Item implements IExchanger {
             }
             tooltip.add(StringHelper.localize("tooltip.shift1"));
             tooltip.add(StringHelper.localize("tooltip.shift2"));
-            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + TextFormatting.GREEN + Keys.MODE_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + TextFormatting.GREEN + Keys.RANGE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
             tooltip.add(StringHelper.getTierText(getTier()));
             if (!isPowered()) {
                 tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + StringHelper.localize("tooltip.durability"));

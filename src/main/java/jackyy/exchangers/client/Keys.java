@@ -11,7 +11,7 @@ import org.lwjgl.input.Keyboard;
 @SideOnly(Side.CLIENT)
 public class Keys {
 
-    public static final KeyBinding MODE_KEY = new KeyBinding("key.exchanger_mode", new IKeyConflictContext() {
+    public static final KeyBinding RANGE_SWITCH_KEY = new KeyBinding("key.exchanger_range_switch", new IKeyConflictContext() {
         @Override
         public boolean isActive() {
             return KeyConflictContext.IN_GAME.isActive();
@@ -21,6 +21,17 @@ public class Keys {
             return other == this || KeyConflictContext.IN_GAME.isActive();
         }
     }, Keyboard.KEY_COMMA, "key.categories.exchangers");
+
+    public static final KeyBinding MODE_SWITCH_KEY = new KeyBinding("key.exchanger_mode_switch", new IKeyConflictContext() {
+        @Override
+        public boolean isActive() {
+            return KeyConflictContext.IN_GAME.isActive();
+        }
+        @Override
+        public boolean conflicts(IKeyConflictContext other) {
+            return other == this || KeyConflictContext.IN_GAME.isActive();
+        }
+    }, Keyboard.KEY_SEMICOLON, "key.categories.exchangers");
 
     public static final KeyBinding FORCE_DROP_ITEMS_KEY = new KeyBinding("key.exchanger_force_drop_items", new IKeyConflictContext() {
         @Override
@@ -34,7 +45,8 @@ public class Keys {
     }, Keyboard.KEY_PERIOD, "key.categories.exchangers");
 
     public static void init() {
-        ClientRegistry.registerKeyBinding(MODE_KEY);
+        ClientRegistry.registerKeyBinding(RANGE_SWITCH_KEY);
+        ClientRegistry.registerKeyBinding(MODE_SWITCH_KEY);
         ClientRegistry.registerKeyBinding(FORCE_DROP_ITEMS_KEY);
     }
 

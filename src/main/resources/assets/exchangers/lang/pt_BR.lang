@@ -3,7 +3,7 @@ itemGroup.exchangers=Exchangers
 
 #Key Bindings
 key.categories.exchangers=Exchangers
-key.exchanger_mode=Alternar entre modos
+key.exchanger_range_switch=Alternar entre modos
 
 #Death
 death.attack.tuberous_exchanger=%1$s Tentou operar um Alterador de Batata

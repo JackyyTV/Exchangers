@@ -3,7 +3,7 @@ itemGroup.exchangers=Austauscher
 
 #Key Bindings
 key.categories.exchangers=Austauscher
-key.exchanger_mode=Austauscher Modus
+key.exchanger_range_switch=Austauscher Modus
 
 #Death
 death.attack.tuberous_exchanger=%1$s versuchte einene Kartoffel Austauscher zu verwenden

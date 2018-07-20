@@ -208,7 +208,7 @@ public class ModRecipes {
                         GameRegistry.addRecipe(
                                 new ShapedOreRecipe(new ItemStack(ModItems.darkSteelExchanger),
                                         "SVS", "SCS", "SOS",
-                                        'S', "ingotDarkSteel", 'B', EnderIOIntegration.octadicCapacitor, 'V', EnderIOIntegration.vibrantCrystal, 'C', ModItems.eioExchangerCoreT3)
+                                        'S', "ingotDarkSteel", 'O', EnderIOIntegration.octadicCapacitor, 'V', EnderIOIntegration.vibrantCrystal, 'C', ModItems.eioExchangerCoreT3)
                         );
                         GameRegistry.addRecipe(
                                 new ShapedOreRecipe(new ItemStack(ModItems.vibrantExchanger),

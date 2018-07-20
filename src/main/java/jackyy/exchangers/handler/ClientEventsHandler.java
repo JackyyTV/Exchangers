@@ -10,7 +10,6 @@ import jackyy.exchangers.handler.network.PacketToggleForceDropItemsMode;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.item.special.ItemCreativeExchanger;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -133,11 +132,11 @@ public class ClientEventsHandler {
         if (mouseOver != null && mouseOver.sideHit != null) {
             IBlockState state = world.getBlockState(mouseOver.getBlockPos());
             Block block = state.getBlock();
-            if (block.getMaterial(state) != Material.AIR) {
+            if (!block.isAir(state, world, mouseOver.getBlockPos())) {
                 ItemStack stack = player.getHeldItemMainhand();
                 float partialTicks = event.getPartialTicks();
                 if (stack != null && stack.getItem() instanceof ItemExchangerBase && stack.getTagCompound() != null && mouseOver.sideHit != null) {
-                    Set<BlockPos> coordinates = ExchangerHandler.findSuitableBlocks(stack, player.getEntityWorld(), mouseOver.sideHit, mouseOver.getBlockPos(), block, block.getMetaFromState(state));
+                    Set<BlockPos> coordinates = ExchangerHandler.findSuitableBlocks(stack, player.getEntityWorld(), player, mouseOver.sideHit, mouseOver.getBlockPos(), state);
                     double offsetX = player.prevPosX + (player.posX - player.prevPosX) * (double) partialTicks;
                     double offsetY = player.prevPosY + (player.posY - player.prevPosY) * (double) partialTicks;
                     double offsetZ = player.prevPosZ + (player.posZ - player.prevPosZ) * (double) partialTicks;
@@ -153,11 +152,9 @@ public class ClientEventsHandler {
                     GlStateManager.disableDepth();
 
                     for (BlockPos coordinate : coordinates) {
-                        String exId = ExchangerHandler.getTagCompound(stack).getString("block");
                         IBlockState exState = NBTUtil.readBlockState(ExchangerHandler.getTagCompound(stack).getCompoundTag("blockstate"));
-                        Block exBlock = Block.getBlockFromName(exId);
                         float blockHardness = block.getBlockHardness(state, world, coordinate);
-                        if (world.isAirBlock(coordinate) || (exBlock == block && exState == state)) {
+                        if (world.isAirBlock(coordinate) || exState == state) {
                             continue;
                         }
                         double renderX = coordinate.getX() - offsetX;
@@ -168,8 +165,9 @@ public class ClientEventsHandler {
                         float g = 1.0f;
                         float b = 1.0f;
                         float a = 1.0f;
-                        if ((player.isSneaking() &&
-                                ((world.getTileEntity(coordinate) != null && !ExchangerHandler.isWhitelisted(world, coordinate))
+                        if ((player.isSneaking()
+                                && ((world.getTileEntity(coordinate) != null && !ExchangerHandler.isWhitelisted(world, coordinate))
+                                        || ExchangerHandler.isBlacklisted(world, coordinate)
                                         || (!(stack.getItem() instanceof ItemCreativeExchanger) && blockHardness < -0.1f)))) {
                             r = 1.0f;
                             g = 0.1f;

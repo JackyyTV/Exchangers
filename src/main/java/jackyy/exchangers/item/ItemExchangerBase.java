@@ -81,15 +81,12 @@ public class ItemExchangerBase extends Item implements IExchanger {
             tooltip.add(StringHelper.localize("tooltip.max_harvest_level") + " " + StringHelper.formatHarvestLevel(getHarvestLevel()));
             switch (mode) {
                 case 0:
-                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.wall") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.plane") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
                     break;
                 case 1:
-                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.wall_bypass") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
-                    break;
-                case 2:
                     tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.horizontal") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
                     break;
-                case 3:
+                case 2:
                     tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.vertical") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
                     break;
             }

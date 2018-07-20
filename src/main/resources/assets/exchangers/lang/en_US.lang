@@ -53,8 +53,7 @@ exchangers.msg.force_drop_items.off=Force Drop Items mode is now §4§ldisabled�
 exchangers.msg.mode=Exchanger Mode is now set to:
 
 #Modes
-exchangers.mode.wall=Wall
-exchangers.mode.wall_bypass=Wall (Bypass)
+exchangers.mode.plane=Plane
 exchangers.mode.horizontal=Horizontal Column
 exchangers.mode.vertical=Vertical Column
 

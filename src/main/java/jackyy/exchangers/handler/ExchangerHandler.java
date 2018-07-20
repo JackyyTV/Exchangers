@@ -1,9 +1,8 @@
 package jackyy.exchangers.handler;
 
-import jackyy.exchangers.handler.mode.ExchangerModeHorizontal;
-import jackyy.exchangers.handler.mode.ExchangerModeVertical;
-import jackyy.exchangers.handler.mode.ExchangerModeWall;
-import jackyy.exchangers.handler.mode.ExchangerModeWallBypass;
+import jackyy.exchangers.handler.mode.ExchangerModeHorizontalCol;
+import jackyy.exchangers.handler.mode.ExchangerModePlane;
+import jackyy.exchangers.handler.mode.ExchangerModeVerticalCol;
 import jackyy.exchangers.helper.ChatHelper;
 import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.item.ItemExchangerBase;
@@ -130,24 +129,21 @@ public class ExchangerHandler {
         }
         ItemStack heldItem = player.getHeldItemMainhand();
         if (heldItem != null) {
-            if (mode > 3) {
+            if (mode > 2) {
                 mode = 0;
             } else if (mode < 0) {
-                mode = 3;
+                mode = 2;
             }
         }
         stack.getTagCompound().setInteger("exmode", mode);
         switch (mode) {
             case 0:
-                ChatHelper.msgPlayerRaw(player, StringHelper.localize("msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize("mode.wall"));
+                ChatHelper.msgPlayerRaw(player, StringHelper.localize("msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize("mode.plane"));
                 break;
             case 1:
-                ChatHelper.msgPlayerRaw(player, StringHelper.localize("msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize("mode.wall_bypass"));
-                break;
-            case 2:
                 ChatHelper.msgPlayerRaw(player, StringHelper.localize("msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize("mode.horizontal"));
                 break;
-            case 3:
+            case 2:
                 ChatHelper.msgPlayerRaw(player, StringHelper.localize("msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize("mode.vertical"));
                 break;
         }
@@ -190,7 +186,6 @@ public class ExchangerHandler {
         IBlockState state = NBTUtil.readBlockState(tagCompound.getCompoundTag("blockstate"));
         IBlockState oldState = world.getBlockState(pos);
         Block oldblock = oldState.getBlock();
-        int oldmeta = oldblock.getMetaFromState(oldState);
         float blockHardness = oldblock.getBlockHardness(oldState, world, pos);
 
         if (id.equals("minecraft:air")) {
@@ -214,7 +209,7 @@ public class ExchangerHandler {
             return;
         }
 
-        Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);
+        Set<BlockPos> coordinates = findSuitableBlocks(stack, world, player, side, pos, oldState);
         boolean notEnough = false;
         world.captureBlockSnapshots = false;
 
@@ -284,32 +279,29 @@ public class ExchangerHandler {
         NBTUtil.writeBlockState(tagCompound.getCompoundTag("blockstate"), state);
     }
 
-    public static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
+    public static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EntityPlayer player, EnumFacing sideHit, BlockPos pos, IBlockState centerState) {
         Set<BlockPos> coordinates = new HashSet<>();
         int range = stack.getTagCompound().getInteger("range");
         int mode = stack.getTagCompound().getInteger("exmode");
 
         switch (mode) {
             case 0:
-                ExchangerModeWall.invoke(coordinates, range, world, sideHit, pos, centerBlock, centerMeta);
+                ExchangerModePlane.invoke(coordinates, range, world, sideHit, pos, centerState);
                 break;
             case 1:
-                ExchangerModeWallBypass.invoke(coordinates, range, world, sideHit, pos, centerBlock, centerMeta);
+                ExchangerModeHorizontalCol.invoke(coordinates, range, world, player, sideHit, pos, centerState);
                 break;
             case 2:
-                ExchangerModeHorizontal.invoke(coordinates, range, world, sideHit, pos, centerBlock, centerMeta);
-                break;
-            case 3:
-                ExchangerModeVertical.invoke(coordinates, range, world, sideHit, pos, centerBlock, centerMeta);
+                ExchangerModeVerticalCol.invoke(coordinates, range, world, player, sideHit, pos, centerState);
                 break;
         }
 
         return coordinates;
     }
 
-    public static void checkAndAddBlock(World world, BlockPos pos, Block centerBlock, int centerMeta, Set<BlockPos> coordinates) {
+    public static void checkAndAddBlock(World world, BlockPos pos, IBlockState centerState, Set<BlockPos> coordinates) {
         IBlockState state = world.getBlockState(pos);
-        if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta))
+        if (state == centerState)
             coordinates.add(pos);
     }
 

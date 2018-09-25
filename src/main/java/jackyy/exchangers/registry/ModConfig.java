@@ -390,7 +390,9 @@ public class ModConfig {
                 "Put a list of block registry names that you wish to be whitelisted from Exchangers.",
                 "(e.g. thermalexpansion:cell)"
         })
-        public String[] blocksWhitelist = new String[0];
+        public String[] blocksWhitelist = new String[] {
+                "tconstruct:seared"
+        };
         @Config.Comment({
                 "Put a list of block registry names that you wish to be blacklisted from Exchangers.",
                 "Note: Blacklisting a block will prevent it from being selected or being exchanged.",

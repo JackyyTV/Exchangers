@@ -163,7 +163,7 @@ public class ExchangerHandler {
                 return true;
             }
         }
-        return world.getBlockState(pos).getBlock().getRegistryName().equals("tconstruct:seared");
+        return false;
     }
 
     public static boolean isBlacklisted(World world, BlockPos pos) {

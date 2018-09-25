@@ -110,8 +110,8 @@ public class ModRecipes {
                     );
                     GameRegistry.addRecipe(
                             new ShapedCopyNBTRecipe(new ItemStack(ModItems.endExchanger), new ItemStack(ModItems.obsidianExchanger),
-                                    "SCS", "EXE", "PSP",
-                                    'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.obsidianExchanger)
+                                    "SCP", "EXE", "PFS",
+                                    'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'F', new ItemStack(Blocks.CHORUS_FLOWER), 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.obsidianExchanger)
                     );
                     GameRegistry.addRecipe(
                             new ShapedOreRecipe(new ItemStack(ModItems.exchangerCoreT2),
@@ -159,7 +159,7 @@ public class ModRecipes {
                     GameRegistry.addRecipe(
                             new ShapedCopyNBTRecipe(new ItemStack(ModItems.endExchanger), new ItemStack(ModItems.obsidianExchanger),
                                     "SEP", "CXC", "PES",
-                                    'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.obsidianExchanger)
+                                    'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'E', Items.END_CRYSTAL, 'C', ModItems.exchangerCoreT3, 'X', ModItems.obsidianExchanger)
                     );
                     GameRegistry.addRecipe(
                             new ShapedOreRecipe(new ItemStack(ModItems.exchangerCoreT2),

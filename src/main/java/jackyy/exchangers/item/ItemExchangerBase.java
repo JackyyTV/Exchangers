@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -58,51 +59,46 @@ public class ItemExchangerBase extends Item implements IExchanger {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean bool) {
         super.addInformation(stack, player, tooltip, bool);
+
+        ExchangerHandler.setDefaultTagCompound(stack);
+        NBTTagCompound compound = stack.getTagCompound();
+        IBlockState state = NBTUtil.readBlockState(compound.getCompoundTag("blockstate"));
+        Block block = state.getBlock();
+        int mode = stack.getTagCompound().getInteger("exmode");
+
         if (!StringHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.getShiftText());
         }
-
-        ExchangerHandler.setDefaultTagCompound(stack);
-
-        NBTTagCompound compound = stack.getTagCompound();
-        String id = compound.getString("block");
-        IBlockState state = NBTUtil.readBlockState(compound.getCompoundTag("blockstate"));
-        int mode = stack.getTagCompound().getInteger("exmode");
-
         if (StringHelper.isShiftKeyDown()) {
-            if (id.equals("minecraft:air")) {
-                tooltip.add(StringHelper.localize("tooltip.no_selected_block"));
-            } else {
-                Block block = Block.getBlockFromName(id);
-                tooltip.add(StringHelper.localize("tooltip.selected_block") + " " + ExchangerHandler.getBlockName(block, state.getBlock().getMetaFromState(state)));
-            }
-            tooltip.add(StringHelper.localize("tooltip.current_range") + " " + ExchangerHandler.modeSwitchList[compound.getInteger("range")]);
-            tooltip.add(StringHelper.localize("tooltip.max_range") + " " + ExchangerHandler.modeSwitchList[getMaxRange()]);
-            tooltip.add(StringHelper.localize("tooltip.max_harvest_level") + " " + StringHelper.formatHarvestLevel(getHarvestLevel()));
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.selected_block") + " " + (block == Blocks.AIR ? TextFormatting.RED + StringHelper.localize("tooltip.selected_block.none") : TextFormatting.GREEN + ExchangerHandler.getBlockName(block, state.getBlock().getMetaFromState(state))));
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.current_range") + " " + TextFormatting.GREEN + ExchangerHandler.modeSwitchList[compound.getInteger("range")]);
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.max_range") + " " + TextFormatting.GREEN + ExchangerHandler.modeSwitchList[getMaxRange()]);
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.max_harvest_level") + " " + TextFormatting.GREEN + StringHelper.formatHarvestLevel(getHarvestLevel()));
             switch (mode) {
                 case 0:
-                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.plane") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+                    tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.current_mode") + " " + TextFormatting.GREEN + StringHelper.localize("mode.plane"));
                     break;
                 case 1:
-                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.horizontal") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+                    tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.current_mode") + " " + TextFormatting.GREEN + StringHelper.localize("mode.horizontal"));
                     break;
                 case 2:
-                    tooltip.add(StringHelper.localize("tooltip.current_mode") + " " + StringHelper.localize("mode.vertical") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+                    tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.current_mode") + " " + TextFormatting.GREEN + StringHelper.localize("mode.vertical"));
                     break;
             }
-            if (ModConfig.misc.doExchangersSilkTouch) {
-                tooltip.add(StringHelper.localize("tooltip.silk_touch.on"));
-            } else {
-                tooltip.add(StringHelper.localize("tooltip.silk_touch.off"));
-            }
-            if (compound.getBoolean("forceDropItems")) {
-                tooltip.add(StringHelper.localize("tooltip.force_drop_items.on") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.FORCE_DROP_ITEMS_KEY.getDisplayName() + TextFormatting.GRAY + ")");
-            } else {
-                tooltip.add(StringHelper.localize("tooltip.force_drop_items.off") + " " + TextFormatting.GRAY + "(" + TextFormatting.GREEN + Keys.FORCE_DROP_ITEMS_KEY.getDisplayName() + TextFormatting.GRAY + ")");
-            }
-            tooltip.add(StringHelper.localize("tooltip.shift1"));
-            tooltip.add(StringHelper.localize("tooltip.shift2"));
-            tooltip.add(StringHelper.localize("tooltip.shift3") + " " + "(" + TextFormatting.GREEN + Keys.RANGE_SWITCH_KEY.getDisplayName() + TextFormatting.GRAY + ")");
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.silk_touch", ModConfig.misc.doExchangersSilkTouch ? TextFormatting.GREEN + StringHelper.localize("tooltip.state.enabled") + TextFormatting.WHITE : TextFormatting.RED + StringHelper.localize("tooltip.state.disabled") + TextFormatting.WHITE));
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.force_drop_items", compound.getBoolean("forceDropItems") ? TextFormatting.GREEN + StringHelper.localize("tooltip.state.enabled") + TextFormatting.WHITE : TextFormatting.RED + StringHelper.localize("tooltip.state.disabled") + TextFormatting.WHITE));
+        }
+        if (!StringHelper.isCtrlKeyDown()) {
+            tooltip.add(StringHelper.getCtrlText());
+        }
+        if (StringHelper.isCtrlKeyDown()) {
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.extra1"));
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.extra2"));
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.extra3", TextFormatting.GREEN + Keys.RANGE_SWITCH_KEY.getDisplayName() + TextFormatting.WHITE));
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.extra4", TextFormatting.GREEN + Keys.MODE_SWITCH_KEY.getDisplayName() + TextFormatting.WHITE));
+            tooltip.add(TextFormatting.WHITE + StringHelper.localize("tooltip.extra5", TextFormatting.GREEN + Keys.FORCE_DROP_ITEMS_KEY.getDisplayName() + TextFormatting.WHITE));
+        }
+        if (StringHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.getTierText(getTier()));
             if (!isPowered()) {
                 tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + StringHelper.localize("tooltip.durability"));

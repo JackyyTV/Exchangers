@@ -49,17 +49,14 @@ public class ExchangerHandler {
     public static void setDefaultTagCompound(ItemStack stack) {
         if (stack.getTagCompound() == null) {
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setString("block", "minecraft:air");
             compound.setTag("blockstate", new NBTTagCompound());
             compound.setInteger("exmode", 0);
             compound.setInteger("range", 0);
             compound.setBoolean("forceDropItems", false);
             stack.setTagCompound(compound);
         } else {
-            if (!stack.getTagCompound().hasKey("block")) {
-                stack.getTagCompound().setString("block", "minecraft:air");
-            } else if (!stack.getTagCompound().hasKey("blockstate")) {
-                stack.getTagCompound().setTag("blockstate", new NBTTagCompound());
+            if (!stack.getTagCompound().hasKey("blockstate")) {
+                NBTUtil.writeBlockState(stack.getTagCompound().getCompoundTag("blockstate"), Blocks.AIR.getDefaultState());
             } else if (!stack.getTagCompound().hasKey("exmode")) {
                 stack.getTagCompound().setInteger("exmode", 0);
             } else if (!stack.getTagCompound().hasKey("range")) {
@@ -181,14 +178,13 @@ public class ExchangerHandler {
     @SuppressWarnings("deprecation")
     public static void placeBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side) {
         NBTTagCompound tagCompound = stack.getTagCompound();
-        String id = tagCompound.getString("block");
-        Block block = Block.getBlockFromName(id);
         IBlockState state = NBTUtil.readBlockState(tagCompound.getCompoundTag("blockstate"));
+        Block block = state.getBlock();
         IBlockState oldState = world.getBlockState(pos);
         Block oldblock = oldState.getBlock();
         float blockHardness = oldblock.getBlockHardness(oldState, world, pos);
 
-        if (id.equals("minecraft:air")) {
+        if (block == Blocks.AIR) {
             return;
         } else if ((block == oldblock) && (state == oldState)) {
             return;
@@ -274,8 +270,6 @@ public class ExchangerHandler {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
             return;
         }
-        String id = Block.REGISTRY.getNameForObject(block).toString();
-        tagCompound.setString("block", id);
         NBTUtil.writeBlockState(tagCompound.getCompoundTag("blockstate"), state);
     }
 

@@ -22,7 +22,7 @@ Submit any bug reports / suggestions via [issue tracker](https://github.com/Jack
 - Twitter - [@JackyyTV](https://twitter.com/JackyyTV)
 - Discord - Jacky#1234
 - Twitch - [Jackyy](https://www.twitch.tv/jackyy)
-- Reddit - [Jacky1356400](https://www.reddit.com/message/compose/?to=Jacky1356400)
+- Reddit - [JackyyTV](https://www.reddit.com/message/compose/?to=JackyyTV)
 
 ---
 

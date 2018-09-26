@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketToggleMode implements IMessage, IMessageHandler<PacketToggleMode, IMessage> {
+public class PacketSwitchMode implements IMessage, IMessageHandler<PacketSwitchMode, IMessage> {
 
     @Override
     public void fromBytes(ByteBuf buf) { }
@@ -17,10 +17,10 @@ public class PacketToggleMode implements IMessage, IMessageHandler<PacketToggleM
     @Override
     public void toBytes(ByteBuf buf) { }
 
-    public PacketToggleMode() { }
+    public PacketSwitchMode() { }
 
     @Override
-    public IMessage onMessage(PacketToggleMode message, MessageContext context) {
+    public IMessage onMessage(PacketSwitchMode message, MessageContext context) {
         EntityPlayerMP playerMP = context.getServerHandler().player;
         ItemStack heldItem = playerMP.getHeldItemMainhand();
         if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {

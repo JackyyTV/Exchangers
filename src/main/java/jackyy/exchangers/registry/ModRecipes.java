@@ -5,6 +5,7 @@ import jackyy.exchangers.integration.EnderIOIntegration;
 import jackyy.exchangers.integration.ImmersiveEngineeringIntegration;
 import jackyy.exchangers.integration.MekanismIntegration;
 import jackyy.exchangers.integration.ThermalExpansionIntegration;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -60,6 +61,11 @@ public class ModRecipes {
                                     'O', "obsidian", 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3)
                     );
                     GameRegistry.addRecipe(
+                            new ShapedOreRecipe(new ItemStack(ModItems.endExchanger),
+                                    "SEP", "PCS", "SEP",
+                                    'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3)
+                    );
+                    GameRegistry.addRecipe(
                             new ShapedOreRecipe(new ItemStack(ModItems.exchangerCoreT2),
                                     "ILI", "LEL", "ILI",
                                     'I', "ingotIron", 'E', Items.ENDER_EYE, 'L', "gemLapis")
@@ -103,6 +109,11 @@ public class ModRecipes {
                                     'O', "obsidian", 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.emeraldExchanger)
                     );
                     GameRegistry.addRecipe(
+                            new ShapedCopyNBTRecipe(new ItemStack(ModItems.endExchanger), new ItemStack(ModItems.obsidianExchanger),
+                                    "SCP", "EXE", "PFS",
+                                    'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'F', new ItemStack(Blocks.CHORUS_FLOWER), 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.obsidianExchanger)
+                    );
+                    GameRegistry.addRecipe(
                             new ShapedOreRecipe(new ItemStack(ModItems.exchangerCoreT2),
                                     "ILI", "ECE", "ILI",
                                     'I', "ingotIron", 'E', Items.ENDER_EYE, 'L', "gemLapis", 'C', ModItems.exchangerCoreT1)
@@ -144,6 +155,11 @@ public class ModRecipes {
                             new ShapedCopyNBTRecipe(new ItemStack(ModItems.obsidianExchanger), new ItemStack(ModItems.emeraldExchanger),
                                     "OEO", "CXC", "OEO",
                                     'O', "obsidian", 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.emeraldExchanger)
+                    );
+                    GameRegistry.addRecipe(
+                            new ShapedCopyNBTRecipe(new ItemStack(ModItems.endExchanger), new ItemStack(ModItems.obsidianExchanger),
+                                    "SEP", "CXC", "PES",
+                                    'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'E', Items.END_CRYSTAL, 'C', ModItems.exchangerCoreT3, 'X', ModItems.obsidianExchanger)
                     );
                     GameRegistry.addRecipe(
                             new ShapedOreRecipe(new ItemStack(ModItems.exchangerCoreT2),
@@ -192,7 +208,7 @@ public class ModRecipes {
                         GameRegistry.addRecipe(
                                 new ShapedOreRecipe(new ItemStack(ModItems.darkSteelExchanger),
                                         "SVS", "SCS", "SOS",
-                                        'S', "ingotDarkSteel", 'B', EnderIOIntegration.octadicCapacitor, 'V', EnderIOIntegration.vibrantCrystal, 'C', ModItems.eioExchangerCoreT3)
+                                        'S', "ingotDarkSteel", 'O', EnderIOIntegration.octadicCapacitor, 'V', EnderIOIntegration.vibrantCrystal, 'C', ModItems.eioExchangerCoreT3)
                         );
                         GameRegistry.addRecipe(
                                 new ShapedOreRecipe(new ItemStack(ModItems.vibrantExchanger),

@@ -18,8 +18,16 @@ public class StringHelper {
         return TextFormatting.GRAY + localize("tooltip.hold_shift", TextFormatting.YELLOW.toString() + TextFormatting.ITALIC + localize("tooltip.hold_shift.shift") + TextFormatting.RESET + TextFormatting.GRAY);
     }
 
+    public static String getCtrlText() {
+        return TextFormatting.GRAY + localize("tooltip.hold_ctrl", TextFormatting.AQUA.toString() + TextFormatting.ITALIC + localize("tooltip.hold_ctrl.ctrl") + TextFormatting.RESET + TextFormatting.GRAY);
+    }
+
     public static boolean isShiftKeyDown() {
-        return Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54);
+        return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+    }
+
+    public static boolean isCtrlKeyDown() {
+        return Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
     }
 
     public static String formatNumber(long number) {

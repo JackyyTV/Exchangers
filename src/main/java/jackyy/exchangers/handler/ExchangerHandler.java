@@ -50,12 +50,14 @@ public class ExchangerHandler {
         if (stack.getTagCompound() == null) {
             NBTTagCompound compound = new NBTTagCompound();
             compound.setTag("blockstate", new NBTTagCompound());
+            NBTUtil.writeBlockState(compound.getCompoundTag("blockstate"), Blocks.AIR.getDefaultState());
             compound.setInteger("exmode", 0);
             compound.setInteger("range", 0);
             compound.setBoolean("forceDropItems", false);
             stack.setTagCompound(compound);
         } else {
             if (!stack.getTagCompound().hasKey("blockstate")) {
+                stack.getTagCompound().setTag("blockstate", new NBTTagCompound());
                 NBTUtil.writeBlockState(stack.getTagCompound().getCompoundTag("blockstate"), Blocks.AIR.getDefaultState());
             } else if (!stack.getTagCompound().hasKey("exmode")) {
                 stack.getTagCompound().setInteger("exmode", 0);

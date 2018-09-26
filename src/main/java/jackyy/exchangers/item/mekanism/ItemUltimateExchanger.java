@@ -15,7 +15,7 @@ public class ItemUltimateExchanger extends ItemExchangerBasePowered {
 
     public ItemUltimateExchanger() {
         setRegistryName(Exchangers.MODID + ":ultimate_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".ultimate_exchanger");
+        setTranslationKey(Exchangers.MODID + ".ultimate_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

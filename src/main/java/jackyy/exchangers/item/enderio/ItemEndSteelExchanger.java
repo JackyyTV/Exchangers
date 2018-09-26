@@ -11,11 +11,11 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
+public class ItemEndSteelExchanger extends ItemExchangerBasePowered {
 
-    public ItemPulsatingIronExchanger() {
-        setRegistryName(Exchangers.MODID + ":pulsating_iron_exchanger");
-        setTranslationKey(Exchangers.MODID + ".pulsating_iron_exchanger");
+    public ItemEndSteelExchanger() {
+        setRegistryName(Exchangers.MODID + ":end_steel_exchanger");
+        setTranslationKey(Exchangers.MODID + ".end_steel_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,12 +25,12 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.enderIOTweaks.pulsatingMaxEnergy;
+        return ModConfig.enderIOTweaks.endSteelMaxEnergy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.enderIOTweaks.pulsatingPerBlockUse;
+        return ModConfig.enderIOTweaks.endSteelPerBlockUse;
     }
 
     @Override
@@ -40,22 +40,22 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public int getTier() {
-        return 2;
+        return 7;
     }
 
     @Override
     public int getHarvestLevel() {
-        return ModConfig.enderIOTweaks.pulsatingMaxHarvestLevel;
+        return ModConfig.enderIOTweaks.endSteelMaxHarvestLevel;
     }
 
     @Override
     public int getMaxRange() {
-        return ModConfig.enderIOTweaks.pulsatingMaxRange;
+        return ModConfig.enderIOTweaks.endSteelMaxRange;
     }
 
     @Override
     public EnumRarity getRarity(ItemStack stack) {
-        return Exchangers.TIER_1;
+        return EnumRarity.EPIC;
     }
 
 }

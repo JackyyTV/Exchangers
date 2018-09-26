@@ -15,7 +15,7 @@ public class ItemReinforcedExchanger extends ItemExchangerBasePowered {
 
     public ItemReinforcedExchanger() {
         setRegistryName(Exchangers.MODID + ":reinforced_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".reinforced_exchanger");
+        setTranslationKey(Exchangers.MODID + ".reinforced_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

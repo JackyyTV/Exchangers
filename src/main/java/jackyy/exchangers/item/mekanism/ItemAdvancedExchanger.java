@@ -15,7 +15,7 @@ public class ItemAdvancedExchanger extends ItemExchangerBasePowered {
 
     public ItemAdvancedExchanger() {
         setRegistryName(Exchangers.MODID + ":advanced_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".advanced_exchanger");
+        setTranslationKey(Exchangers.MODID + ".advanced_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

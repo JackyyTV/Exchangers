@@ -15,7 +15,7 @@ public class ItemTEExchangerCoreT1 extends ItemCoreBase {
 
     public ItemTEExchangerCoreT1() {
         setRegistryName(Exchangers.MODID + ":te_exchanger_core_tier1");
-        setUnlocalizedName(Exchangers.MODID + ".te_exchanger_core_tier1");
+        setTranslationKey(Exchangers.MODID + ".te_exchanger_core_tier1");
     }
 
     @SideOnly(Side.CLIENT)

@@ -3,7 +3,7 @@ itemGroup.exchangers=Wymieniacze
 
 #Key Bindings
 key.categories.exchangers=Wymieniacze
-key.exchanger_mode=Zmiana Trybu Wymieniaczy
+key.exchanger_range_switch=Zmiana Trybu Wymieniaczy
 
 #Death
 death.attack.tuberous_exchanger=%1$s próbował używać ziemniaczanego wymieniacza
@@ -15,16 +15,10 @@ exchangers.tooltip.durability=Wytrzymałość
 exchangers.tooltip.tier=Poziom %d
 exchangers.tooltip.hold_shift=Przytrzymaj %s dla Szczegółów
 exchangers.tooltip.hold_shift.shift=Shift
-exchangers.tooltip.shift1=Kucając Kucając kliknij prawy przycisk myszki na blok by go wybrać.
-exchangers.tooltip.shift2=Kliknij prawym przyciskiem myszy na blok by go wymienić.
-exchangers.tooltip.shift3=Użyj przycisku do zmieniania trybów by zmienić tryb.
 exchangers.tooltip.tuberous_exchanger.warning=§c§oSprytne! Ale niewymienne.
 exchangers.tooltip.selected_block=§2Wybrany Blok:
 exchangers.tooltip.current_range=§2Aktualny Zasięg:
 exchangers.tooltip.max_range=§2Maksymalny Zasięg:
-exchangers.tooltip.no_selected_block=§4Brak Wybranego Bloku
-exchangers.tooltip.silk_touch.on=§fSilk Touch mode is §a§lenabled§r in config.
-exchangers.tooltip.silk_touch.off=§fSilk Touch mode is §4§ldisabled§r in config.
 
 #Messages
 exchangers.error.invalid_block.te=§cError: Nieprwaidłowy Blok! (Tile Entities)

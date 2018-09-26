@@ -15,7 +15,7 @@ public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
 
     public ItemEnergeticExchanger() {
         setRegistryName(Exchangers.MODID + ":energetic_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".energetic_exchanger");
+        setTranslationKey(Exchangers.MODID + ".energetic_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

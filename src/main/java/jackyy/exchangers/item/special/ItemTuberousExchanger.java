@@ -25,7 +25,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
     public ItemTuberousExchanger() {
         setRegistryName(Exchangers.MODID + ":tuberous_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".tuberous_exchanger");
+        setTranslationKey(Exchangers.MODID + ".tuberous_exchanger");
         setMaxDamage(1);
     }
 
@@ -47,7 +47,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (player != null) {
             player.getHeldItem(hand).setCount(0);
-            player.attackEntityFrom(new EntityDamageSource("tuberous_exchanger", player), 100000.0F);
+            player.attackEntityFrom(new EntityDamageSource("tuberous_exchanger", player), Float.MAX_VALUE);
             player.world.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
             return EnumActionResult.SUCCESS;
         }

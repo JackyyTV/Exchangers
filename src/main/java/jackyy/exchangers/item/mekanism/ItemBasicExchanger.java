@@ -15,7 +15,7 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
 
     public ItemBasicExchanger() {
         setRegistryName(Exchangers.MODID + ":basic_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".basic_exchanger");
+        setTranslationKey(Exchangers.MODID + ".basic_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

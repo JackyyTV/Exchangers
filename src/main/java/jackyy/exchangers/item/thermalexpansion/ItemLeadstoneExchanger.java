@@ -15,7 +15,7 @@ public class ItemLeadstoneExchanger extends ItemExchangerBasePowered {
 
     public ItemLeadstoneExchanger() {
         setRegistryName(Exchangers.MODID + ":leadstone_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".leadstone_exchanger");
+        setTranslationKey(Exchangers.MODID + ".leadstone_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

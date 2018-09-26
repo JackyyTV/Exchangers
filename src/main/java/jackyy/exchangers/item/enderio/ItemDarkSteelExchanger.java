@@ -15,7 +15,7 @@ public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
 
     public ItemDarkSteelExchanger() {
         setRegistryName(Exchangers.MODID + ":dark_steel_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".dark_steel_exchanger");
+        setTranslationKey(Exchangers.MODID + ".dark_steel_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

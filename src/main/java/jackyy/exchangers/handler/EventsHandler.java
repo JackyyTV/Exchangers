@@ -59,8 +59,8 @@ public class EventsHandler {
     @SubscribeEvent
     public void onMissingMappings(RegistryEvent.MissingMappings<Item> event) {
         for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getMappings()) {
-            if (mapping.key.getResourceDomain().equals("exchangers")) {
-                switch (mapping.key.getResourcePath()) {
+            if (mapping.key.getNamespace().equals("exchangers")) {
+                switch (mapping.key.getPath()) {
                     case ("expotato") :
                         mapping.remap(ModItems.tuberousExchanger);
                         break;

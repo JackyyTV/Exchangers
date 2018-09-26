@@ -15,7 +15,7 @@ public class ItemEIOExchangerCoreT1 extends ItemCoreBase {
 
     public ItemEIOExchangerCoreT1() {
         setRegistryName(Exchangers.MODID + ":eio_exchanger_core_tier1");
-        setUnlocalizedName(Exchangers.MODID + ".eio_exchanger_core_tier1");
+        setTranslationKey(Exchangers.MODID + ".eio_exchanger_core_tier1");
     }
 
     @SideOnly(Side.CLIENT)

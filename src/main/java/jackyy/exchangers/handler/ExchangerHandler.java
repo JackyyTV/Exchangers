@@ -1,6 +1,10 @@
 package jackyy.exchangers.handler;
 
+import jackyy.exchangers.handler.mode.ExchangerModeHorizontalCol;
+import jackyy.exchangers.handler.mode.ExchangerModePlane;
+import jackyy.exchangers.handler.mode.ExchangerModeVerticalCol;
 import jackyy.exchangers.helper.ChatHelper;
+import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.block.Block;
@@ -22,6 +26,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
@@ -29,7 +34,10 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class ExchangerHandler {
 
@@ -41,22 +49,22 @@ public class ExchangerHandler {
     public static void setDefaultTagCompound(ItemStack stack) {
         if (stack.getTagCompound() == null) {
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setString("block", "minecraft:air");
             compound.setTag("blockstate", new NBTTagCompound());
-            compound.setInteger("mode", 0);
+            NBTUtil.writeBlockState(compound.getCompoundTag("blockstate"), Blocks.AIR.getDefaultState());
+            compound.setInteger("exmode", 0);
+            compound.setInteger("range", 0);
             compound.setBoolean("forceDropItems", false);
             stack.setTagCompound(compound);
         } else {
-            if (!stack.getTagCompound().hasKey("block")) {
-                stack.getTagCompound().setString("block", "minecraft:air");
-            } else if (!stack.getTagCompound().hasKey("blockstate")) {
+            if (!stack.getTagCompound().hasKey("blockstate")) {
                 stack.getTagCompound().setTag("blockstate", new NBTTagCompound());
-            } else if (!stack.getTagCompound().hasKey("mode")) {
-                stack.getTagCompound().setInteger("mode", 0);
+                NBTUtil.writeBlockState(stack.getTagCompound().getCompoundTag("blockstate"), Blocks.AIR.getDefaultState());
+            } else if (!stack.getTagCompound().hasKey("exmode")) {
+                stack.getTagCompound().setInteger("exmode", 0);
+            } else if (!stack.getTagCompound().hasKey("range")) {
+                stack.getTagCompound().setInteger("range", 0);
             } else if (!stack.getTagCompound().hasKey("forceDropItems")) {
                 stack.getTagCompound().setBoolean("forceDropItems", false);
-            } else if (stack.getTagCompound().hasKey("meta")) {
-                stack.getTagCompound().removeTag("meta");
             }
         }
     }
@@ -91,23 +99,53 @@ public class ExchangerHandler {
         return ((ItemExchangerBase) stack.getItem()).isPowered();
     }
 
-    public static void switchMode(EntityPlayer player, ItemStack stack) {
+    public static void switchRange(EntityPlayer player, ItemStack stack) {
         setDefaultTagCompound(stack);
-        int modeSwitch = stack.getTagCompound().getInteger("mode");
+        int rangeSwitch = stack.getTagCompound().getInteger("range");
         if (player.isSneaking()) {
-            modeSwitch--;
+            rangeSwitch--;
         } else {
-            modeSwitch++;
+            rangeSwitch++;
         }
         ItemStack heldItem = player.getHeldItemMainhand();
         if (!heldItem.isEmpty()) {
-            if (modeSwitch > getExRange(stack)) {
-                modeSwitch = 0;
-            } else if (modeSwitch < 0) {
-                modeSwitch = getExRange(stack);
+            if (rangeSwitch > getExRange(stack)) {
+                rangeSwitch = 0;
+            } else if (rangeSwitch < 0) {
+                rangeSwitch = getExRange(stack);
             }
         }
-        stack.getTagCompound().setInteger("mode", modeSwitch);
+        stack.getTagCompound().setInteger("range", rangeSwitch);
+    }
+
+    public static void switchMode(EntityPlayer player, ItemStack stack) {
+        setDefaultTagCompound(stack);
+        int mode = stack.getTagCompound().getInteger("exmode");
+        if (player.isSneaking()) {
+            mode--;
+        } else {
+            mode++;
+        }
+        ItemStack heldItem = player.getHeldItemMainhand();
+        if (!heldItem.isEmpty()) {
+            if (mode > 2) {
+                mode = 0;
+            } else if (mode < 0) {
+                mode = 2;
+            }
+        }
+        stack.getTagCompound().setInteger("exmode", mode);
+        switch (mode) {
+            case 0:
+                ChatHelper.msgPlayerRaw(player, StringHelper.localize("msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize("mode.plane"));
+                break;
+            case 1:
+                ChatHelper.msgPlayerRaw(player, StringHelper.localize("msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize("mode.horizontal"));
+                break;
+            case 2:
+                ChatHelper.msgPlayerRaw(player, StringHelper.localize("msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize("mode.vertical"));
+                break;
+        }
     }
 
     public static void toggleForceDropItems(EntityPlayer player, ItemStack stack) {
@@ -127,7 +165,7 @@ public class ExchangerHandler {
                 return true;
             }
         }
-        return world.getBlockState(pos).getBlock().getRegistryName().equals("tconstruct:seared");
+        return false;
     }
 
     public static boolean isBlacklisted(World world, BlockPos pos) {
@@ -142,15 +180,14 @@ public class ExchangerHandler {
     @SuppressWarnings("deprecation")
     public static void placeBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side) {
         NBTTagCompound tagCompound = stack.getTagCompound();
-        String id = tagCompound.getString("block");
-        Block block = Block.getBlockFromName(id);
         IBlockState state = NBTUtil.readBlockState(tagCompound.getCompoundTag("blockstate"));
+        Block block = state.getBlock();
         IBlockState oldState = world.getBlockState(pos);
         Block oldblock = oldState.getBlock();
         int oldmeta = oldblock.getMetaFromState(oldState);
         float blockHardness = oldblock.getBlockHardness(oldState, world, pos);
 
-        if (id.equals("minecraft:air")) {
+        if (block == Blocks.AIR) {
             return;
         } else if ((block == oldblock) && (state == oldState)) {
             return;
@@ -171,7 +208,7 @@ public class ExchangerHandler {
             return;
         }
 
-        Set<BlockPos> coordinates = findSuitableBlocks(stack, world, side, pos, oldblock, oldmeta);
+        Set<BlockPos> coordinates = findSuitableBlocks(stack, world, player, side, pos, oldState);
         boolean notEnough = false;
         world.captureBlockSnapshots = false;
 
@@ -236,101 +273,33 @@ public class ExchangerHandler {
             ChatHelper.msgPlayer(player, "error.invalid_block.unbreakable");
             return;
         }
-        String id = Block.REGISTRY.getNameForObject(block).toString();
-        tagCompound.setString("block", id);
         NBTUtil.writeBlockState(tagCompound.getCompoundTag("blockstate"), state);
     }
 
-    public static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EnumFacing sideHit, BlockPos pos, Block centerBlock, int centerMeta) {
+    public static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EntityPlayer player, EnumFacing sideHit, BlockPos pos, IBlockState centerState) {
         Set<BlockPos> coordinates = new HashSet<>();
-        int mode = stack.getTagCompound().getInteger("mode");
+        int range = stack.getTagCompound().getInteger("range");
+        int mode = stack.getTagCompound().getInteger("exmode");
 
-        List<BlockPos> possibleLocs = new ArrayList<>();
-        possibleLocs.add(pos);
-        int index = 0;
-        do {
-            BlockPos currentPos = possibleLocs.get(index);
-            checkAndAddBlock(world, currentPos, centerBlock, centerMeta, coordinates);
-            switch (sideHit) {
-                case UP:
-                    getConnectedBlocksUD(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, true);
-                    break;
-                case DOWN:
-                    getConnectedBlocksUD(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
-                    break;
-                case SOUTH:
-                    getConnectedBlocksNS(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, true);
-                    break;
-                case NORTH:
-                    getConnectedBlocksNS(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
-                    break;
-                case EAST:
-                    getConnectedBlocksEW(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode,true);
-                    break;
-                case WEST:
-                    getConnectedBlocksEW(possibleLocs, world, currentPos, pos, centerBlock, centerMeta, mode, false);
-                    break;
-            }
-            index++;
-        } while (index < possibleLocs.size());
+        switch (mode) {
+            case 0:
+                ExchangerModePlane.invoke(coordinates, range, world, sideHit, pos, centerState);
+                break;
+            case 1:
+                ExchangerModeHorizontalCol.invoke(coordinates, range, world, player, sideHit, pos, centerState);
+                break;
+            case 2:
+                ExchangerModeVerticalCol.invoke(coordinates, range, world, player, sideHit, pos, centerState);
+                break;
+        }
+
         return coordinates;
     }
 
-    private static void checkAndAddBlock(World world, BlockPos pos, Block centerBlock, int centerMeta, Set<BlockPos> coordinates) {
+    public static void checkAndAddBlock(World world, BlockPos pos, IBlockState centerState, Set<BlockPos> coordinates) {
         IBlockState state = world.getBlockState(pos);
-        if ((state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta))
+        if (state == centerState)
             coordinates.add(pos);
-    }
-
-    private static boolean checkBlock(World world, BlockPos pos, Block centerBlock, int centerMeta) {
-        IBlockState state = world.getBlockState(pos);
-        return (state.getBlock() == centerBlock) && (state.getBlock().getMetaFromState(state) == centerMeta);
-    }
-
-    private static void getConnectedBlocksUD(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-                BlockPos newPos = currentPos.add(x, 0, y);
-                if (!isLocationContained(possibleLocs, newPos))
-                    if (newPos.getX() <= centerPos.getX() + mode && newPos.getX() >= centerPos.getX() - mode)
-                        if (newPos.getZ() <= centerPos.getZ() + mode && newPos.getZ() >= centerPos.getZ() - mode)
-                            if (!world.getBlockState(newPos.add(0, side ? 1 : -1, 0)).isFullBlock() && checkBlock(world, newPos, centerBlock, centerMeta))
-                                possibleLocs.add(newPos);
-            }
-        }
-    }
-
-    private static void getConnectedBlocksNS(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-                BlockPos newPos = currentPos.add(x, y, 0);
-                if (!isLocationContained(possibleLocs, newPos))
-                    if (newPos.getX() <= centerPos.getX() + mode && newPos.getX() >= centerPos.getX() - mode)
-                        if (newPos.getY() <= centerPos.getY() + mode && newPos.getY() >= centerPos.getY() - mode)
-                            if (!world.getBlockState(newPos.add(0, 0, side ? 1 : -1)).isFullBlock() && checkBlock(world, newPos, centerBlock, centerMeta))
-                                possibleLocs.add(newPos);
-            }
-        }
-    }
-
-    private static void getConnectedBlocksEW(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, Block centerBlock, int centerMeta, int mode, boolean side) {
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-                BlockPos newPos = currentPos.add(0, x, y);
-                if (!isLocationContained(possibleLocs, newPos))
-                    if (newPos.getY() <= centerPos.getY() + mode && newPos.getY() >= centerPos.getY() - mode)
-                        if (newPos.getZ() <= centerPos.getZ() + mode && newPos.getZ() >= centerPos.getZ() - mode)
-                            if (!world.getBlockState(newPos.add(side ? 1 : -1, 0, 0)).isFullBlock() && checkBlock(world, newPos, centerBlock, centerMeta))
-                                possibleLocs.add(newPos);
-            }
-        }
-    }
-
-    private static boolean isLocationContained(List<BlockPos> possibleLocs, BlockPos toFind) {
-        for (BlockPos pos : possibleLocs)
-            if (pos.getX() == toFind.getX() && pos.getY() == toFind.getY() && pos.getZ() == toFind.getZ())
-                return true;
-        return false;
     }
 
     private static boolean consumeItemInInventory(Item item, int meta, InventoryPlayer playerInv, EntityPlayer player) {

@@ -15,7 +15,7 @@ public class ItemVibrantExchanger extends ItemExchangerBasePowered {
 
     public ItemVibrantExchanger() {
         setRegistryName(Exchangers.MODID + ":vibrant_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".vibrant_exchanger");
+        setTranslationKey(Exchangers.MODID + ".vibrant_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

@@ -15,7 +15,7 @@ public class ItemHardenedExchanger extends ItemExchangerBasePowered {
 
     public ItemHardenedExchanger() {
         setRegistryName(Exchangers.MODID + ":hardened_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".hardened_exchanger");
+        setTranslationKey(Exchangers.MODID + ".hardened_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

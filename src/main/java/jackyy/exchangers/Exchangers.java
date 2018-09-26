@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Exchangers.MODID, version = Exchangers.VERSION, name = Exchangers.MODNAME, dependencies = Exchangers.DEPENDS, certificateFingerprint = "@FINGERPRINT@", acceptedMinecraftVersions = Exchangers.MCVERSION, useMetadata = true)
 public class Exchangers {
 
-    public static final String VERSION = "1.12.2-2.7.3";
+    public static final String VERSION = "1.12.2-2.8";
     public static final String MCVERSION = "[1.12,1.13)";
     public static final String MODID = "exchangers";
     public static final String MODNAME = "Exchangers";
@@ -37,7 +37,7 @@ public class Exchangers {
             + "after:" + IE + ";";
     public static final CreativeTabs TAB = new CreativeTabs(MODID) {
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(ModItems.obsidianExchanger);
         }
     };

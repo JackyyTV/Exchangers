@@ -15,7 +15,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
 
     public ItemIronExchanger() {
         setRegistryName(Exchangers.MODID + ":iron_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".iron_exchanger");
+        setTranslationKey(Exchangers.MODID + ".iron_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.ironMaxDmg);
     }
 

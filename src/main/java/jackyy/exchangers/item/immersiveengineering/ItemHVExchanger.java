@@ -15,7 +15,7 @@ public class ItemHVExchanger extends ItemExchangerBasePowered {
 
     public ItemHVExchanger() {
         setRegistryName(Exchangers.MODID + ":hv_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".hv_exchanger");
+        setTranslationKey(Exchangers.MODID + ".hv_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

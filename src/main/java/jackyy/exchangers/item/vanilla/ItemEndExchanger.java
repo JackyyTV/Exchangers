@@ -4,19 +4,21 @@ import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemGoldenExchanger extends ItemExchangerBase {
+public class ItemEndExchanger extends ItemExchangerBase {
 
-    public ItemGoldenExchanger() {
-        setRegistryName(Exchangers.MODID + ":golden_exchanger");
-        setTranslationKey(Exchangers.MODID + ".golden_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.goldenMaxDmg);
+    public ItemEndExchanger() {
+        setRegistryName(Exchangers.MODID + ":end_exchanger");
+        setTranslationKey(Exchangers.MODID + ".end_exchanger");
+        setMaxDamage(ModConfig.vanillaTweaks.endMaxDmg);
     }
 
     @SideOnly(Side.CLIENT)
@@ -26,17 +28,17 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
 
     @Override
     public int getTier() {
-        return 3;
+        return 8;
     }
 
     @Override
     public int getHarvestLevel() {
-        return ModConfig.vanillaTweaks.goldenMaxHarvestLevel;
+        return ModConfig.vanillaTweaks.endMaxHarvestLevel;
     }
 
     @Override
     public int getMaxRange() {
-        return ModConfig.vanillaTweaks.goldenMaxRange;
+        return ModConfig.vanillaTweaks.endMaxRange;
     }
 
     @Override
@@ -46,12 +48,15 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
 
     @Override
     public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+        return EnumRarity.EPIC;
     }
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return OreDictionary.containsMatch(false, OreDictionary.getOres("ingotGold"), repair);
+        NonNullList<ItemStack> list = NonNullList.create();
+        list.add(new ItemStack(Blocks.PURPUR_BLOCK));
+        return OreDictionary.containsMatch(false, OreDictionary.getOres("endstone"), repair)
+                || OreDictionary.containsMatch(false, list, repair);
     }
 
 }

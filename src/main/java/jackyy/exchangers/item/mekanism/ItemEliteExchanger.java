@@ -15,7 +15,7 @@ public class ItemEliteExchanger extends ItemExchangerBasePowered {
 
     public ItemEliteExchanger() {
         setRegistryName(Exchangers.MODID + ":elite_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".elite_exchanger");
+        setTranslationKey(Exchangers.MODID + ".elite_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

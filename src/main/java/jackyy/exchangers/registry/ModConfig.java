@@ -97,7 +97,16 @@ public class ModConfig {
         public int obsidianMaxHarvestLevel = 4;
         @Config.RangeInt(min = 0, max = 12)
         @Config.Comment("Set the max range for Obsidian Exchanger")
-        public int obsidianMaxRange = 7;
+        public int obsidianMaxRange = 6;
+        @Config.RangeInt(min = 1)
+        @Config.Comment("Set the durability for End Exchanger")
+        public int endMaxDmg = 32768;
+        @Config.RangeInt(min = 0)
+        @Config.Comment("Set the max harvest level for End Exchanger")
+        public int endMaxHarvestLevel = 4;
+        @Config.RangeInt(min = 0, max = 12)
+        @Config.Comment("Set the max range for End Exchanger")
+        public int endMaxRange = 7;
     }
 
     public static class EnderIOTweaks {
@@ -173,6 +182,18 @@ public class ModConfig {
         @Config.RangeInt(min = 0, max = 12)
         @Config.Comment("Set the max range for Vibrant Exchanger")
         public int vibrantMaxRange = 7;
+        @Config.RangeInt(min = 1000)
+        @Config.Comment("Set the RF capacity for End Steel Exchanger")
+        public int endSteelMaxEnergy = 50000000;
+        @Config.RangeInt(min = 1)
+        @Config.Comment("Set the RF consumption per block for End Steel Exchanger")
+        public int endSteelPerBlockUse = 5000;
+        @Config.RangeInt(min = 0)
+        @Config.Comment("Set the max harvest level for End Steel Exchanger")
+        public int endSteelMaxHarvestLevel = 4;
+        @Config.RangeInt(min = 0, max = 12)
+        @Config.Comment("Set the max range for End Steel Exchanger")
+        public int endSteelMaxRange = 7;
     }
 
     public static class ThermalExpansionTweaks {
@@ -372,7 +393,9 @@ public class ModConfig {
                 "Put a list of block registry names that you wish to be whitelisted from Exchangers.",
                 "(e.g. thermalexpansion:cell)"
         })
-        public String[] blocksWhitelist = new String[0];
+        public String[] blocksWhitelist = new String[] {
+                "tconstruct:seared"
+        };
         @Config.Comment({
                 "Put a list of block registry names that you wish to be blacklisted from Exchangers.",
                 "Note: Blacklisting a block will prevent it from being selected or being exchanged.",

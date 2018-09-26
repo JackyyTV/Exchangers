@@ -15,7 +15,7 @@ public class ItemMVExchanger extends ItemExchangerBasePowered {
 
     public ItemMVExchanger() {
         setRegistryName(Exchangers.MODID + ":mv_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".mv_exchanger");
+        setTranslationKey(Exchangers.MODID + ".mv_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

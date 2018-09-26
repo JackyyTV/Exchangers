@@ -15,12 +15,14 @@ public class EnderIOIntegration {
     public static ItemStack capacitorBankBasic;
     public static ItemStack capacitorBank;
     public static ItemStack capacitorBankVibrant;
+    public static ItemStack enhancedWirelessChargingAntenna;
     public static ItemStack basicCapacitor;
     public static ItemStack doubleLayerCapacitor;
     public static ItemStack octadicCapacitor;
     public static Object pulsatingCrystal;
     public static Object vibrantCrystal;
     public static Object enderCrystal;
+    public static Object precientCrystal;
     public static ItemStack bucketNutrientDistillation;
     public static ItemStack bucketDewOfTheVoid;
     public static ItemStack bucketVaporOfLevity;
@@ -40,9 +42,12 @@ public class EnderIOIntegration {
             octadicCapacitor = new ItemStack(capacitorItem, 1, 2);
         }
 
+        enhancedWirelessChargingAntenna = new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "block_enhanced_wireless_charger")));
+
         pulsatingCrystal = "itemPulsatingCrystal";
         vibrantCrystal = "itemVibrantCrystal";
         enderCrystal = "itemEnderCrystal";
+        precientCrystal = "itemPrecientCrystal";
 
         Fluid nutrientDistillation = FluidRegistry.getFluid("nutrient_distillation");
         bucketNutrientDistillation = FluidUtil.getFilledBucket(new FluidStack(nutrientDistillation, 1000));

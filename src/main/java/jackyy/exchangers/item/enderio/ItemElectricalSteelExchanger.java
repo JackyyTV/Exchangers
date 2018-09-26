@@ -15,7 +15,7 @@ public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
 
     public ItemElectricalSteelExchanger() {
         setRegistryName(Exchangers.MODID + ":electrical_steel_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".electrical_steel_exchanger");
+        setTranslationKey(Exchangers.MODID + ".electrical_steel_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

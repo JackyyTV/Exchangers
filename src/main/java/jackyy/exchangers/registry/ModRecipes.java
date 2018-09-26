@@ -5,6 +5,7 @@ import jackyy.exchangers.integration.EnderIOIntegration;
 import jackyy.exchangers.integration.ImmersiveEngineeringIntegration;
 import jackyy.exchangers.integration.MekanismIntegration;
 import jackyy.exchangers.integration.ThermalExpansionIntegration;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -86,6 +87,11 @@ public class ModRecipes {
                             'O', "obsidian", 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3
                     );
                     GameRegistry.addShapedRecipe(
+                            new ResourceLocation(Exchangers.MODID + ":end_exchanger_easy"), null, new ItemStack(ModItems.endExchanger),
+                            "SEP", "PCS", "SEP",
+                            'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3
+                    );
+                    GameRegistry.addShapedRecipe(
                             new ResourceLocation(Exchangers.MODID + ":vanilla_core_tier2_easy"), null, new ItemStack(ModItems.exchangerCoreT2),
                             "ILI", "LEL", "ILI",
                             'I', "ingotIron", 'E', Items.ENDER_EYE, 'L', "gemLapis"
@@ -127,6 +133,11 @@ public class ModRecipes {
                             e, new ResourceLocation(Exchangers.MODID + ":obsidian_exchanger_normal"), new ItemStack(ModItems.obsidianExchanger), new ItemStack(ModItems.emeraldExchanger),
                             "OCO", "EXE", "OOO",
                             'O', "obsidian", 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.emeraldExchanger
+                    );
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Exchangers.MODID + ":end_exchanger_normal"), new ItemStack(ModItems.endExchanger), new ItemStack(ModItems.obsidianExchanger),
+                            "SCP", "EXE", "PFS",
+                            'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'F', new ItemStack(Blocks.CHORUS_FLOWER), 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.obsidianExchanger
                     );
                     GameRegistry.addShapedRecipe(
                             new ResourceLocation(Exchangers.MODID + ":vanilla_core_tier2_normal"), null, new ItemStack(ModItems.exchangerCoreT2),
@@ -170,6 +181,11 @@ public class ModRecipes {
                             e, new ResourceLocation(Exchangers.MODID + ":obsidian_exchanger_hard"), new ItemStack(ModItems.obsidianExchanger), new ItemStack(ModItems.emeraldExchanger),
                             "OEO", "CXC", "OEO",
                             'O', "obsidian", 'E', Items.ENDER_EYE, 'C', ModItems.exchangerCoreT3, 'X', ModItems.emeraldExchanger
+                    );
+                    new ShapedCopyNBTRecipe(
+                            e, new ResourceLocation(Exchangers.MODID + ":end_exchanger_hard"), new ItemStack(ModItems.endExchanger), new ItemStack(ModItems.obsidianExchanger),
+                            "SEP", "CXC", "PES",
+                            'S', "endstone", 'P', new ItemStack(Blocks.PURPUR_BLOCK), 'E', Items.END_CRYSTAL, 'C', ModItems.exchangerCoreT3, 'X', ModItems.obsidianExchanger
                     );
                     GameRegistry.addShapedRecipe(
                             new ResourceLocation(Exchangers.MODID + ":vanilla_core_tier2_hard"), null, new ItemStack(ModItems.exchangerCoreT2),
@@ -218,12 +234,17 @@ public class ModRecipes {
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Exchangers.MODID + ":darksteel_exchanger_easy"), null, new ItemStack(ModItems.darkSteelExchanger),
                                 "SVS", "SCS", "SOS",
-                                'S', "ingotDarkSteel", 'B', EnderIOIntegration.octadicCapacitor, 'V', EnderIOIntegration.vibrantCrystal, 'C', ModItems.eioExchangerCoreT3
+                                'S', "ingotDarkSteel", 'O', EnderIOIntegration.octadicCapacitor, 'V', EnderIOIntegration.vibrantCrystal, 'C', ModItems.eioExchangerCoreT3
                         );
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Exchangers.MODID + ":vibrant_exchanger_easy"), null, new ItemStack(ModItems.vibrantExchanger),
                                 "AEA", "ACA", "ABA",
                                 'A', "ingotVibrantAlloy", 'B', EnderIOIntegration.capacitorBankVibrant, 'E', EnderIOIntegration.enderCrystal, 'C', ModItems.eioExchangerCoreT3
+                        );
+                        GameRegistry.addShapedRecipe(
+                                new ResourceLocation(Exchangers.MODID + ":endsteel_exchanger_easy"), null, new ItemStack(ModItems.endSteelExchanger),
+                                "SPS", "SCS", "SAS",
+                                'S', "ingotEndSteel", 'A', EnderIOIntegration.enhancedWirelessChargingAntenna, 'P', EnderIOIntegration.precientCrystal, 'C', ModItems.eioExchangerCoreT3
                         );
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Exchangers.MODID + ":eio_core_tier2_easy"), null, new ItemStack(ModItems.eioExchangerCoreT2),
@@ -263,6 +284,11 @@ public class ModRecipes {
                                 "ACA", "EXE", "ABA",
                                 'A', "ingotVibrantAlloy", 'B', EnderIOIntegration.capacitorBankVibrant, 'E', EnderIOIntegration.enderCrystal, 'C', ModItems.eioExchangerCoreT3, 'X', ModItems.darkSteelExchanger
                         );
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Exchangers.MODID + ":endsteel_exchanger_normal"), new ItemStack(ModItems.endSteelExchanger), new ItemStack(ModItems.vibrantExchanger),
+                                "SCS", "PXP", "SAS",
+                                'S', "ingotEndSteel", 'A', EnderIOIntegration.enhancedWirelessChargingAntenna, 'P', EnderIOIntegration.precientCrystal, 'C', ModItems.eioExchangerCoreT3, 'X', ModItems.vibrantExchanger
+                        );
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Exchangers.MODID + ":eio_core_tier2_normal"), null, new ItemStack(ModItems.eioExchangerCoreT2),
                                 "PSP", "DCD", "PSP",
@@ -300,6 +326,11 @@ public class ModRecipes {
                                 e, new ResourceLocation(Exchangers.MODID + ":vibrant_exchanger_hard"), new ItemStack(ModItems.vibrantExchanger), new ItemStack(ModItems.darkSteelExchanger),
                                 "AEA", "CXC", "ABA",
                                 'A', "ingotVibrantAlloy", 'B', EnderIOIntegration.capacitorBankVibrant, 'E', EnderIOIntegration.enderCrystal, 'C', ModItems.eioExchangerCoreT3, 'X', ModItems.darkSteelExchanger
+                        );
+                        new ShapedCopyNBTRecipe(
+                                e, new ResourceLocation(Exchangers.MODID + ":endsteel_exchanger_hard"), new ItemStack(ModItems.endSteelExchanger), new ItemStack(ModItems.vibrantExchanger),
+                                "SPS", "CXC", "SAS",
+                                'S', "ingotEndSteel", 'A', EnderIOIntegration.enhancedWirelessChargingAntenna, 'P', EnderIOIntegration.precientCrystal, 'C', ModItems.eioExchangerCoreT3, 'X', ModItems.vibrantExchanger
                         );
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Exchangers.MODID + ":eio_core_tier2_hard"), null, new ItemStack(ModItems.eioExchangerCoreT2),

@@ -22,6 +22,7 @@ public class ModItems {
     public static ItemDiamondExchanger diamondExchanger = new ItemDiamondExchanger();
     public static ItemEmeraldExchanger emeraldExchanger = new ItemEmeraldExchanger();
     public static ItemObsidianExchanger obsidianExchanger = new ItemObsidianExchanger();
+    public static ItemEndExchanger endExchanger = new ItemEndExchanger();
     public static ItemExchangerCoreT1 exchangerCoreT1 = new ItemExchangerCoreT1();
     public static ItemExchangerCoreT2 exchangerCoreT2 = new ItemExchangerCoreT2();
     public static ItemExchangerCoreT3 exchangerCoreT3 = new ItemExchangerCoreT3();
@@ -32,6 +33,7 @@ public class ModItems {
     public static ItemEnergeticExchanger energeticExchanger = new ItemEnergeticExchanger();
     public static ItemDarkSteelExchanger darkSteelExchanger = new ItemDarkSteelExchanger();
     public static ItemVibrantExchanger vibrantExchanger = new ItemVibrantExchanger();
+    public static ItemEndSteelExchanger endSteelExchanger = new ItemEndSteelExchanger();
     public static ItemEIOExchangerCoreT1 eioExchangerCoreT1 = new ItemEIOExchangerCoreT1();
     public static ItemEIOExchangerCoreT2 eioExchangerCoreT2 = new ItemEIOExchangerCoreT2();
     public static ItemEIOExchangerCoreT3 eioExchangerCoreT3 = new ItemEIOExchangerCoreT3();
@@ -73,6 +75,7 @@ public class ModItems {
                 diamondExchanger,
                 emeraldExchanger,
                 obsidianExchanger,
+                endExchanger,
                 exchangerCoreT1,
                 exchangerCoreT2,
                 exchangerCoreT3,
@@ -83,6 +86,7 @@ public class ModItems {
                 energeticExchanger,
                 darkSteelExchanger,
                 vibrantExchanger,
+                endSteelExchanger,
                 eioExchangerCoreT1,
                 eioExchangerCoreT2,
                 eioExchangerCoreT3,
@@ -125,6 +129,7 @@ public class ModItems {
         diamondExchanger.initModel();
         emeraldExchanger.initModel();
         obsidianExchanger.initModel();
+        endExchanger.initModel();
         exchangerCoreT1.initModel();
         exchangerCoreT2.initModel();
         exchangerCoreT3.initModel();
@@ -135,6 +140,7 @@ public class ModItems {
         energeticExchanger.initModel();
         darkSteelExchanger.initModel();
         vibrantExchanger.initModel();
+        endSteelExchanger.initModel();
         eioExchangerCoreT1.initModel();
         eioExchangerCoreT2.initModel();
         eioExchangerCoreT3.initModel();

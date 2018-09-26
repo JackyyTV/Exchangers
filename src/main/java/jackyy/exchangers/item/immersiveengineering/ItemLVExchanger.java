@@ -15,7 +15,7 @@ public class ItemLVExchanger extends ItemExchangerBasePowered {
 
     public ItemLVExchanger() {
         setRegistryName(Exchangers.MODID + ":lv_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".lv_exchanger");
+        setTranslationKey(Exchangers.MODID + ".lv_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

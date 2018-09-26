@@ -15,7 +15,7 @@ public class ItemMekanismExchangerCoreT2 extends ItemCoreBase {
 
     public ItemMekanismExchangerCoreT2() {
         setRegistryName(Exchangers.MODID + ":mekanism_exchanger_core_tier2");
-        setUnlocalizedName(Exchangers.MODID + ".mekanism_exchanger_core_tier2");
+        setTranslationKey(Exchangers.MODID + ".mekanism_exchanger_core_tier2");
     }
 
     @SideOnly(Side.CLIENT)

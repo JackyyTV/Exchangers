@@ -15,7 +15,7 @@ public class ItemSignalumExchanger extends ItemExchangerBasePowered {
 
     public ItemSignalumExchanger() {
         setRegistryName(Exchangers.MODID + ":signalum_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".signalum_exchanger");
+        setTranslationKey(Exchangers.MODID + ".signalum_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

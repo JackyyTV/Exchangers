@@ -14,7 +14,7 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
 
     public ItemCreativeExchanger() {
         setRegistryName(Exchangers.MODID + ":creative_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".creative_exchanger");
+        setTranslationKey(Exchangers.MODID + ".creative_exchanger");
         setMaxDamage(9001);
     }
 

@@ -15,7 +15,7 @@ public class ItemStoneExchanger extends ItemExchangerBase {
 
     public ItemStoneExchanger() {
         setRegistryName(Exchangers.MODID + ":stone_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".stone_exchanger");
+        setTranslationKey(Exchangers.MODID + ".stone_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.stoneMaxDmg);
     }
 

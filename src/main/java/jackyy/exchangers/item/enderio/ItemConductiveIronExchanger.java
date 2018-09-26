@@ -15,7 +15,7 @@ public class ItemConductiveIronExchanger extends ItemExchangerBasePowered {
 
     public ItemConductiveIronExchanger() {
         setRegistryName(Exchangers.MODID + ":conductive_iron_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".conductive_iron_exchanger");
+        setTranslationKey(Exchangers.MODID + ".conductive_iron_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

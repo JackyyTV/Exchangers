@@ -15,7 +15,7 @@ public class ItemResonantExchanger extends ItemExchangerBasePowered {
 
     public ItemResonantExchanger() {
         setRegistryName(Exchangers.MODID + ":resonant_exchanger");
-        setUnlocalizedName(Exchangers.MODID + ".resonant_exchanger");
+        setTranslationKey(Exchangers.MODID + ".resonant_exchanger");
     }
 
     @SideOnly(Side.CLIENT)

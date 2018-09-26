@@ -167,8 +167,8 @@ public class ClientEventsHandler {
                         float a = 1.0f;
                         if ((player.isSneaking()
                                 && ((world.getTileEntity(coordinate) != null && !ExchangerHandler.isWhitelisted(world, coordinate))
-                                        || ExchangerHandler.isBlacklisted(world, coordinate)
-                                        || (!(stack.getItem() instanceof ItemCreativeExchanger) && blockHardness < -0.1f)))) {
+                                || ExchangerHandler.isBlacklisted(world, coordinate)
+                                || (!(stack.getItem() instanceof ItemCreativeExchanger) && blockHardness < -0.1f)))) {
                             r = 1.0f;
                             g = 0.1f;
                             b = 0.1f;

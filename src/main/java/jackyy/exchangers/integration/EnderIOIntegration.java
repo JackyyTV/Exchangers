@@ -1,10 +1,10 @@
 package jackyy.exchangers.integration;
 
-import jackyy.exchangers.Exchangers;
+import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.helper.ObjectHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -16,6 +16,8 @@ public class EnderIOIntegration {
     public static ItemStack capacitorBank;
     public static ItemStack capacitorBankVibrant;
     public static ItemStack enhancedWirelessChargingAntenna;
+    public static ItemStack telepadBlock;
+    public static ItemStack dimensionalTransceiver;
     public static ItemStack basicCapacitor;
     public static ItemStack doubleLayerCapacitor;
     public static ItemStack octadicCapacitor;
@@ -26,23 +28,27 @@ public class EnderIOIntegration {
     public static ItemStack bucketNutrientDistillation;
     public static ItemStack bucketDewOfTheVoid;
     public static ItemStack bucketVaporOfLevity;
+    public static ItemStack bucketLiquidSunshine;
+    public static ItemStack bucketConcentratedCloudSeed;
 
     public static void init() {
-        Exchangers.logger.info("Fetching items for Ender IO integration...");
+        Reference.LOGGER.info("Fetching items for Ender IO integration...");
 
-        Block capBankBlock = Block.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "block_cap_bank"));
+        Block capBankBlock = ObjectHelper.getBlockByName(Reference.EIO, "block_cap_bank");
         capacitorBankBasic = new ItemStack(capBankBlock, 1, 1);
         capacitorBank = new ItemStack(capBankBlock, 1, 2);
         capacitorBankVibrant = new ItemStack(capBankBlock, 1, 3);
 
-        Item capacitorItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "item_basic_capacitor"));
+        Item capacitorItem = ObjectHelper.getItemByName(Reference.EIO, "item_basic_capacitor");
         if (capacitorItem != null) {
             basicCapacitor = new ItemStack(capacitorItem, 1, 0);
             doubleLayerCapacitor = new ItemStack(capacitorItem, 1, 1);
             octadicCapacitor = new ItemStack(capacitorItem, 1, 2);
         }
 
-        enhancedWirelessChargingAntenna = new ItemStack(Block.REGISTRY.getObject(new ResourceLocation(Exchangers.EIO, "block_enhanced_wireless_charger")));
+        enhancedWirelessChargingAntenna = ObjectHelper.getBlockStackByName(Reference.EIO, "block_enhanced_wireless_charger", 1, 0);
+        telepadBlock = ObjectHelper.getBlockStackByName(Reference.EIO, "block_tele_pad", 1, 0);
+        dimensionalTransceiver = ObjectHelper.getBlockStackByName(Reference.EIO, "block_transceiver", 1, 0);
 
         pulsatingCrystal = "itemPulsatingCrystal";
         vibrantCrystal = "itemVibrantCrystal";
@@ -55,6 +61,10 @@ public class EnderIOIntegration {
         bucketDewOfTheVoid = FluidUtil.getFilledBucket(new FluidStack(dewOfTheVoid, 1000));
         Fluid vaporOfLevity = FluidRegistry.getFluid("vapor_of_levity");
         bucketVaporOfLevity = FluidUtil.getFilledBucket(new FluidStack(vaporOfLevity, 1000));
+        Fluid liquidSunshine = FluidRegistry.getFluid("liquid_sunshine");
+        bucketLiquidSunshine = FluidUtil.getFilledBucket(new FluidStack(liquidSunshine, 1000));
+        Fluid concentratedCloudSeed = FluidRegistry.getFluid("cloud_seed_concentrated");
+        bucketConcentratedCloudSeed = FluidUtil.getFilledBucket(new FluidStack(concentratedCloudSeed, 1000));
     }
 
 }

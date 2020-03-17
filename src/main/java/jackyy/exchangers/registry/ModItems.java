@@ -1,6 +1,7 @@
 package jackyy.exchangers.registry;
 
 import jackyy.exchangers.item.enderio.*;
+import jackyy.exchangers.item.enderioendergy.*;
 import jackyy.exchangers.item.immersiveengineering.*;
 import jackyy.exchangers.item.mekanism.*;
 import jackyy.exchangers.item.special.ItemCreativeExchanger;
@@ -37,6 +38,16 @@ public class ModItems {
     public static ItemEIOExchangerCoreT1 eioExchangerCoreT1 = new ItemEIOExchangerCoreT1();
     public static ItemEIOExchangerCoreT2 eioExchangerCoreT2 = new ItemEIOExchangerCoreT2();
     public static ItemEIOExchangerCoreT3 eioExchangerCoreT3 = new ItemEIOExchangerCoreT3();
+
+    public static ItemCrudeSteelExchanger crudeSteelExchanger = new ItemCrudeSteelExchanger();
+    public static ItemEnergeticSilverExchanger energeticSilverExchanger = new ItemEnergeticSilverExchanger();
+    public static ItemVividExchanger vividExchanger = new ItemVividExchanger();
+    public static ItemCrystallineExchanger crystallineExchanger = new ItemCrystallineExchanger();
+    public static ItemMelodicExchanger melodicExchanger = new ItemMelodicExchanger();
+    public static ItemStellarExchanger stellarExchanger = new ItemStellarExchanger();
+    public static ItemEIOEndergyExchangerCoreT1 eioEndergyExchangerCoreT1 = new ItemEIOEndergyExchangerCoreT1();
+    public static ItemEIOEndergyExchangerCoreT2 eioEndergyExchangerCoreT2 = new ItemEIOEndergyExchangerCoreT2();
+    public static ItemEIOEndergyExchangerCoreT3 eioEndergyExchangerCoreT3 = new ItemEIOEndergyExchangerCoreT3();
 
     public static ItemLeadstoneExchanger leadstoneExchanger = new ItemLeadstoneExchanger();
     public static ItemHardenedExchanger hardenedExchanger = new ItemHardenedExchanger();
@@ -90,6 +101,16 @@ public class ModItems {
                 eioExchangerCoreT1,
                 eioExchangerCoreT2,
                 eioExchangerCoreT3,
+                //Ender IO Endergy Exchangers
+                crudeSteelExchanger,
+                energeticSilverExchanger,
+                vividExchanger,
+                crystallineExchanger,
+                melodicExchanger,
+                stellarExchanger,
+                eioEndergyExchangerCoreT1,
+                eioEndergyExchangerCoreT2,
+                eioEndergyExchangerCoreT3,
                 //Thermal Expansion Exchangers
                 leadstoneExchanger,
                 hardenedExchanger,
@@ -144,6 +165,16 @@ public class ModItems {
         eioExchangerCoreT1.initModel();
         eioExchangerCoreT2.initModel();
         eioExchangerCoreT3.initModel();
+        //Ender IO Endergy Exchangers
+        crudeSteelExchanger.initModel();
+        energeticSilverExchanger.initModel();
+        vividExchanger.initModel();
+        crystallineExchanger.initModel();
+        melodicExchanger.initModel();
+        stellarExchanger.initModel();
+        eioEndergyExchangerCoreT1.initModel();
+        eioEndergyExchangerCoreT2.initModel();
+        eioEndergyExchangerCoreT3.initModel();
         //Thermal Expansion Exchangers
         leadstoneExchanger.initModel();
         hardenedExchanger.initModel();

@@ -1,10 +1,10 @@
 package jackyy.exchangers.integration;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.helper.ObjectHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class MekanismIntegration {
 
@@ -17,7 +17,7 @@ public class MekanismIntegration {
     public static ItemStack portableTeleporter;
 
     public static void init() {
-        Exchangers.logger.info("Fetching items for Mekanism integration...");
+        Reference.LOGGER.info("Fetching items for Mekanism integration...");
 
         if (ModConfig.misc.useOreDictCircuits) {
             circuitBasic = "circuitBasic";
@@ -25,7 +25,7 @@ public class MekanismIntegration {
             circuitElite = "circuitElite";
             circuitUltimate = "circuitUltimate";
         } else {
-            Item circuitsItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.MEK, "controlcircuit"));
+            Item circuitsItem = ObjectHelper.getItemByName(Reference.MEK, "controlcircuit");
             if (circuitsItem != null) {
                 circuitBasic = new ItemStack(circuitsItem, 1, 0);
                 circuitAdvanced = new ItemStack(circuitsItem, 1, 1);
@@ -34,17 +34,17 @@ public class MekanismIntegration {
             }
         }
 
-        Item energyTabletItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.MEK, "energytablet"));
+        Item energyTabletItem = ObjectHelper.getItemByName(Reference.MEK, "energytablet");
         if (energyTabletItem != null) {
             energyTablet = new ItemStack(energyTabletItem, 1, 0);
         }
 
-        Item teleportationCoreItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.MEK, "teleportationcore"));
+        Item teleportationCoreItem = ObjectHelper.getItemByName(Reference.MEK, "teleportationcore");
         if (teleportationCoreItem != null) {
             teleportationCore = new ItemStack(teleportationCoreItem, 1, 0);
         }
 
-        Item portableTeleporterItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.MEK, "portableteleporter"));
+        Item portableTeleporterItem = ObjectHelper.getItemByName(Reference.MEK, "portableteleporter");
         if (portableTeleporterItem != null) {
             portableTeleporter = new ItemStack(portableTeleporterItem, 1, 0);
         }

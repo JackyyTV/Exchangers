@@ -1,12 +1,12 @@
 package jackyy.exchangers.item.mekanism;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBasicExchanger extends ItemExchangerBasePowered {
 
     public ItemBasicExchanger() {
-        setRegistryName(Exchangers.MODID + ":basic_exchanger");
-        setTranslationKey(Exchangers.MODID + ".basic_exchanger");
+        setRegistryName(Reference.MODID + ":basic_exchanger");
+        setTranslationKey(Reference.MODID + ".basic_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
 
     @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
+        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Reference.MEK);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class ItemBasicExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        return Exchangers.TIER_1;
+    public IRarity getForgeRarity(ItemStack stack) {
+        return Reference.TIER_1;
     }
 
 }

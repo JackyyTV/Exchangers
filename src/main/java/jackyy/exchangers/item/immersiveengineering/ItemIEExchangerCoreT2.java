@@ -1,12 +1,13 @@
 package jackyy.exchangers.item.immersiveengineering;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -14,8 +15,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemIEExchangerCoreT2 extends ItemCoreBase {
 
     public ItemIEExchangerCoreT2() {
-        setRegistryName(Exchangers.MODID + ":ie_exchanger_core_tier2");
-        setTranslationKey(Exchangers.MODID + ".ie_exchanger_core_tier2");
+        setRegistryName(Reference.MODID + ":ie_exchanger_core_tier2");
+        setTranslationKey(Reference.MODID + ".ie_exchanger_core_tier2");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,11 +26,11 @@ public class ItemIEExchangerCoreT2 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.immersiveEngineeringModule && Loader.isModLoaded(Exchangers.IE);
+        return ModConfig.modules.immersiveEngineeringModule && Loader.isModLoaded(Reference.IE);
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.RARE;
     }
 

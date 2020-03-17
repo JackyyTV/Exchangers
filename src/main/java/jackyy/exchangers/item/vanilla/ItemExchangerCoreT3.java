@@ -1,20 +1,21 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemExchangerCoreT3 extends ItemCoreBase {
 
     public ItemExchangerCoreT3() {
-        setRegistryName(Exchangers.MODID + ":exchanger_core_tier3");
-        setTranslationKey(Exchangers.MODID + ".exchanger_core_tier3");
+        setRegistryName(Reference.MODID + ":exchanger_core_tier3");
+        setTranslationKey(Reference.MODID + ".exchanger_core_tier3");
     }
 
     @SideOnly(Side.CLIENT)
@@ -28,7 +29,7 @@ public class ItemExchangerCoreT3 extends ItemCoreBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.EPIC;
     }
 

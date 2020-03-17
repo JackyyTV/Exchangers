@@ -1,14 +1,15 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -16,8 +17,8 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ItemEndExchanger extends ItemExchangerBase {
 
     public ItemEndExchanger() {
-        setRegistryName(Exchangers.MODID + ":end_exchanger");
-        setTranslationKey(Exchangers.MODID + ".end_exchanger");
+        setRegistryName(Reference.MODID + ":end_exchanger");
+        setTranslationKey(Reference.MODID + ".end_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.endMaxDmg);
     }
 
@@ -47,7 +48,7 @@ public class ItemEndExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.EPIC;
     }
 

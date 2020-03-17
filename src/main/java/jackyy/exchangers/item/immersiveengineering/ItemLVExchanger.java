@@ -1,12 +1,12 @@
 package jackyy.exchangers.item.immersiveengineering;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemLVExchanger extends ItemExchangerBasePowered {
 
     public ItemLVExchanger() {
-        setRegistryName(Exchangers.MODID + ":lv_exchanger");
-        setTranslationKey(Exchangers.MODID + ".lv_exchanger");
+        setRegistryName(Reference.MODID + ":lv_exchanger");
+        setTranslationKey(Reference.MODID + ".lv_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class ItemLVExchanger extends ItemExchangerBasePowered {
 
     @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.immersiveEngineeringModule && Loader.isModLoaded(Exchangers.IE);
+        return ModConfig.modules.immersiveEngineeringModule && Loader.isModLoaded(Reference.IE);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class ItemLVExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        return Exchangers.TIER_1;
+    public IRarity getForgeRarity(ItemStack stack) {
+        return Reference.TIER_1;
     }
 
 }

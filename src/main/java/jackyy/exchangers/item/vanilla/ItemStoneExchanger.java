@@ -1,12 +1,12 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -14,8 +14,8 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ItemStoneExchanger extends ItemExchangerBase {
 
     public ItemStoneExchanger() {
-        setRegistryName(Exchangers.MODID + ":stone_exchanger");
-        setTranslationKey(Exchangers.MODID + ".stone_exchanger");
+        setRegistryName(Reference.MODID + ":stone_exchanger");
+        setTranslationKey(Reference.MODID + ".stone_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.stoneMaxDmg);
     }
 
@@ -45,8 +45,8 @@ public class ItemStoneExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        return Exchangers.TIER_1;
+    public IRarity getForgeRarity(ItemStack stack) {
+        return Reference.TIER_1;
     }
 
     @Override

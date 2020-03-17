@@ -1,12 +1,12 @@
 package jackyy.exchangers.item.mekanism;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemCoreBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemMekanismExchangerCoreT1 extends ItemCoreBase {
 
     public ItemMekanismExchangerCoreT1() {
-        setRegistryName(Exchangers.MODID + ":mekanism_exchanger_core_tier1");
-        setTranslationKey(Exchangers.MODID + ".mekanism_exchanger_core_tier1");
+        setRegistryName(Reference.MODID + ":mekanism_exchanger_core_tier1");
+        setTranslationKey(Reference.MODID + ".mekanism_exchanger_core_tier1");
     }
 
     @SideOnly(Side.CLIENT)
@@ -25,12 +25,12 @@ public class ItemMekanismExchangerCoreT1 extends ItemCoreBase {
 
     @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Exchangers.MEK);
+        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Reference.MEK);
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        return Exchangers.TIER_1;
+    public IRarity getForgeRarity(ItemStack stack) {
+        return Reference.TIER_1;
     }
 
 }

@@ -17,5 +17,6 @@ public class PacketHandler {
         INSTANCE.registerMessage(PacketSwitchRange.class, PacketSwitchRange.class, nextID(), Side.SERVER);
         INSTANCE.registerMessage(PacketSwitchMode.class, PacketSwitchMode.class, nextID(), Side.SERVER);
         INSTANCE.registerMessage(PacketToggleForceDropItemsMode.class, PacketToggleForceDropItemsMode.class, nextID(), Side.SERVER);
+        INSTANCE.registerMessage(PacketToggleDirectionalPlacement.class, PacketToggleDirectionalPlacement.class, nextID(), Side.SERVER);
     }
 }

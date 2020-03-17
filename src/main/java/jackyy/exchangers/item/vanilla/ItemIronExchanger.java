@@ -1,12 +1,13 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -14,8 +15,8 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ItemIronExchanger extends ItemExchangerBase {
 
     public ItemIronExchanger() {
-        setRegistryName(Exchangers.MODID + ":iron_exchanger");
-        setTranslationKey(Exchangers.MODID + ".iron_exchanger");
+        setRegistryName(Reference.MODID + ":iron_exchanger");
+        setTranslationKey(Reference.MODID + ".iron_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.ironMaxDmg);
     }
 
@@ -45,7 +46,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.RARE;
     }
 

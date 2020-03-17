@@ -4,10 +4,12 @@ import cofh.core.item.IEnchantableItem;
 import cofh.redstoneflux.api.IEnergyContainerItem;
 import cofh.redstoneflux.util.EnergyContainerItemWrapper;
 import jackyy.exchangers.handler.ExchangerHandler;
-import jackyy.exchangers.helper.EnergyHelper;
-import jackyy.exchangers.helper.NBTHelper;
-import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.helper.EnergyHelper;
+import jackyy.gunpowderlib.helper.KeyHelper;
+import jackyy.gunpowderlib.helper.NBTHelper;
+import jackyy.gunpowderlib.helper.StringHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -80,9 +82,9 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
 		if (!Loader.isModLoaded("redstoneflux")) {
-            tooltip.add(StringHelper.localize("tooltip.redstone_flux_warning"));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.redstone_flux_warning"));
         }
-        if (StringHelper.isShiftKeyDown()) {
+        if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
         }
 	}

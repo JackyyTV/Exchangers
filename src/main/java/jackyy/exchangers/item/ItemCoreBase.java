@@ -1,6 +1,6 @@
 package jackyy.exchangers.item;
 
-import jackyy.exchangers.Exchangers;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,7 +12,7 @@ public class ItemCoreBase extends Item {
 
     public ItemCoreBase() {
         setMaxStackSize(16);
-        setCreativeTab(Exchangers.TAB);
+        setCreativeTab(Reference.TAB);
     }
 
     @Override

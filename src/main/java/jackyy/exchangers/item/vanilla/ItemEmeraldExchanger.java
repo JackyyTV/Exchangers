@@ -1,12 +1,13 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -14,11 +15,11 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ItemEmeraldExchanger extends ItemExchangerBase {
 
     public ItemEmeraldExchanger() {
-        setRegistryName(Exchangers.MODID + ":emerald_exchanger");
-        setTranslationKey(Exchangers.MODID + ".emerald_exchanger");
+        setRegistryName(Reference.MODID + ":emerald_exchanger");
+        setTranslationKey(Reference.MODID + ".emerald_exchanger");
         setMaxStackSize(1);
         setMaxDamage(ModConfig.vanillaTweaks.emeraldMaxDmg);
-        setCreativeTab(Exchangers.TAB);
+        setCreativeTab(Reference.TAB);
     }
 
     @SideOnly(Side.CLIENT)
@@ -47,7 +48,7 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.EPIC;
     }
 

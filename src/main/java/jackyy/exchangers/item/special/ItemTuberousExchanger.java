@@ -1,9 +1,10 @@
 package jackyy.exchangers.item.special;
 
-import jackyy.exchangers.Exchangers;
-import jackyy.exchangers.helper.StringHelper;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.helper.KeyHelper;
+import jackyy.gunpowderlib.helper.StringHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -24,8 +26,8 @@ import java.util.List;
 public class ItemTuberousExchanger extends ItemExchangerBase {
 
     public ItemTuberousExchanger() {
-        setRegistryName(Exchangers.MODID + ":tuberous_exchanger");
-        setTranslationKey(Exchangers.MODID + ".tuberous_exchanger");
+        setRegistryName(Reference.MODID + ":tuberous_exchanger");
+        setTranslationKey(Reference.MODID + ".tuberous_exchanger");
         setMaxDamage(1);
     }
 
@@ -38,8 +40,8 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
-        if (StringHelper.isShiftKeyDown()) {
-            tooltip.add(StringHelper.localize("tooltip.tuberous_exchanger.warning"));
+        if (KeyHelper.isShiftKeyDown()) {
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.tuberous_exchanger.warning"));
         }
     }
 
@@ -60,7 +62,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.UNCOMMON;
     }
 

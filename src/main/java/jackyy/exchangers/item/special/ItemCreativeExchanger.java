@@ -1,20 +1,21 @@
 package jackyy.exchangers.item.special;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCreativeExchanger extends ItemExchangerBase {
 
     public ItemCreativeExchanger() {
-        setRegistryName(Exchangers.MODID + ":creative_exchanger");
-        setTranslationKey(Exchangers.MODID + ".creative_exchanger");
+        setRegistryName(Reference.MODID + ":creative_exchanger");
+        setTranslationKey(Reference.MODID + ".creative_exchanger");
         setMaxDamage(9001);
     }
 
@@ -49,7 +50,7 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.EPIC;
     }
 

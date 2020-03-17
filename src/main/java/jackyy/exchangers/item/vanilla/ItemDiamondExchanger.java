@@ -1,12 +1,13 @@
 package jackyy.exchangers.item.vanilla;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -14,8 +15,8 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ItemDiamondExchanger extends ItemExchangerBase {
 
     public ItemDiamondExchanger() {
-        setRegistryName(Exchangers.MODID + ":diamond_exchanger");
-        setTranslationKey(Exchangers.MODID + ".diamond_exchanger");
+        setRegistryName(Reference.MODID + ":diamond_exchanger");
+        setTranslationKey(Reference.MODID + ".diamond_exchanger");
         setMaxDamage(ModConfig.vanillaTweaks.diamondMaxDmg);
     }
 
@@ -45,7 +46,7 @@ public class ItemDiamondExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public IRarity getForgeRarity(ItemStack stack) {
         return EnumRarity.EPIC;
     }
 

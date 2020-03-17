@@ -1,12 +1,12 @@
 package jackyy.exchangers.item.enderio;
 
-import jackyy.exchangers.Exchangers;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
     public ItemPulsatingIronExchanger() {
-        setRegistryName(Exchangers.MODID + ":pulsating_iron_exchanger");
-        setTranslationKey(Exchangers.MODID + ".pulsating_iron_exchanger");
+        setRegistryName(Reference.MODID + ":pulsating_iron_exchanger");
+        setTranslationKey(Reference.MODID + ".pulsating_iron_exchanger");
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
     @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Exchangers.EIO);
+        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Reference.EIO);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
-        return Exchangers.TIER_1;
+    public IRarity getForgeRarity(ItemStack stack) {
+        return Reference.TIER_1;
     }
 
 }

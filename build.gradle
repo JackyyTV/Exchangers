@@ -2,12 +2,15 @@ buildscript {
   repositories {
     jcenter()
     maven { url = "http://files.minecraftforge.net/maven" }
+    maven { url = "https://plugins.gradle.org/m2/" }
   }
   dependencies {
     classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    classpath 'com.wynprice.cursemaven:CurseMaven:2.+'
   }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.wynprice.cursemaven'
 
 version = "${mc_version}-${mod_version}"
 group = "jackyy.exchangers"
@@ -44,8 +47,11 @@ repositories {
 
 dependencies {
   deobfCompile "mezz.jei:jei_1.12.2:+"
-  deobfCompile "mcp.mobius.waila:Hwyla:+"
+  deobfCompile "mcp.mobius.waila:Hwyla:1.8.26-B41_1.12.2"
+  deobfCompile "cofh:RedstoneFlux:1.12-2.+:universal"
   deobfCompile "cofh:CoFHCore:1.12.2-4.+:universal"
+  deobfCompile "curse.maven:gunpowderlib:2852431"
+  deobfCompile "curse.maven:better-with-mods:2885221"
 }
 
 processResources {
@@ -57,13 +63,6 @@ processResources {
   }
   from(sourceSets.main.resources.srcDirs) {
     exclude 'mcmod.info'
-  }
-  rename '(.+_at.cfg)', 'META-INF/$1'
-}
-
-jar {
-  manifest {
-    attributes 'FMLAT': 'exchangers_at.cfg'
   }
 }
 

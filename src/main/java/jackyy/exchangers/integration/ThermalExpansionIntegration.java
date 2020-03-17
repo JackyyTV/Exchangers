@@ -1,9 +1,9 @@
 package jackyy.exchangers.integration;
 
-import jackyy.exchangers.Exchangers;
+import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.helper.ObjectHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -25,9 +25,9 @@ public class ThermalExpansionIntegration {
     public static ItemStack bucketGelidCryotheum;
 
     public static void init() {
-        Exchangers.logger.info("Fetching items for Thermal Expansion integration...");
+        Reference.LOGGER.info("Fetching items for Thermal Expansion integration...");
 
-        Item fluxCapacitorItem = Item.REGISTRY.getObject(new ResourceLocation(Exchangers.TE, "capacitor"));
+        Item fluxCapacitorItem = ObjectHelper.getItemByName(Reference.TE, "capacitor");
         if (fluxCapacitorItem != null) {
             fluxCapacitorBasic = new ItemStack(fluxCapacitorItem, 1, 0);
             fluxCapacitorHardened = new ItemStack(fluxCapacitorItem, 1, 1);
@@ -36,7 +36,7 @@ public class ThermalExpansionIntegration {
             fluxCapacitorResonant = new ItemStack(fluxCapacitorItem, 1, 4);
         }
 
-        Item teMaterialsItem = Item.REGISTRY.getObject(new ResourceLocation("thermalfoundation", "material"));
+        Item teMaterialsItem = ObjectHelper.getItemByName("thermalfoundation", "material");
         if (teMaterialsItem != null) {
             redstoneServo = new ItemStack(teMaterialsItem, 1, 512);
             redstoneReceptionCoil = new ItemStack(teMaterialsItem, 1, 513);

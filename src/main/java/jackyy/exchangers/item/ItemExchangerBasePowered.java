@@ -1,11 +1,11 @@
 package jackyy.exchangers.item;
 
 import cofh.core.item.IEnchantableItem;
-import cofh.redstoneflux.api.IEnergyContainerItem;
-import cofh.redstoneflux.util.EnergyContainerItemWrapper;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.registry.ModConfig;
-import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.capability.FEItemStackCapability;
+import jackyy.gunpowderlib.capability.FEStorageCapability;
+import jackyy.gunpowderlib.capability.IFEContainer;
 import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.gunpowderlib.helper.KeyHelper;
 import jackyy.gunpowderlib.helper.NBTHelper;
@@ -28,11 +28,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-@Optional.InterfaceList(value = {
-        @Optional.Interface(iface = "cofh.redstoneflux.api.IEnergyContainerItem", modid = "redstoneflux"),
-        @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
-})
-public class ItemExchangerBasePowered extends ItemExchangerBase implements IEnergyContainerItem, IEnchantableItem {
+@Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
+public class ItemExchangerBasePowered extends ItemExchangerBase implements IFEContainer, IEnchantableItem {
 
     public ItemExchangerBasePowered() {
         setMaxDamage(1);
@@ -41,24 +38,27 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
     @GameRegistry.ObjectHolder("cofhcore:holding")
     public static final Enchantment holding = null;
 
-	@Override
-	public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
-		return NBTHelper.receiveEnergy(container, energy, getMaxEnergyStored(container), simulate);
-	}
+    @Override
+    public int receiveEnergy(ItemStack container, int energy, boolean simulate) {
+        return EnergyHelper.receiveEnergy(container, energy, simulate);
+    }
 
-	@Override
-	public int extractEnergy(ItemStack container, int energy, boolean simulate) {
-		return NBTHelper.extractEnergy(container, energy, simulate);
-	}
+    @Override
+    public int extractEnergy(ItemStack container, int energy, boolean simulate) {
+        return EnergyHelper.extractEnergy(container, energy, simulate);
+    }
 
-	@Override
-	public int getEnergyStored(ItemStack container) {
-		return NBTHelper.getEnergyStored(container);
-	}
+    @Override
+    public int getEnergyStored(ItemStack container) {
+        if (container.getTagCompound() == null || !container.getTagCompound().hasKey(EnergyHelper.ENERGY_NBT)) {
+            return 0;
+        }
+        return Math.min(NBTHelper.getInt(container, EnergyHelper.ENERGY_NBT), getMaxEnergyStored(container));
+    }
 
     @Override
     public int getMaxEnergyStored(ItemStack container) {
-	    if (ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore")) {
+        if (ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore")) {
             int enchant = EnchantmentHelper.getEnchantmentLevel(holding, container);
             return getMaxEnergy() + getMaxEnergy() * enchant / 2;
         }
@@ -66,32 +66,29 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
     }
 
     @Override
-	public boolean showDurabilityBar(ItemStack stack) {
-		return true;
-	}
+    public boolean showDurabilityBar(ItemStack stack) {
+        return true;
+    }
 
-	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
-		if (stack.getTagCompound() == null) {
-			EnergyHelper.setDefaultEnergyTag(stack, 0);
-		}
-		return 1D - ((double) stack.getTagCompound().getInteger("Energy") / (double) getMaxEnergyStored(stack));
-	}
-
-	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
-		super.addInformation(stack, world, tooltip, flag);
-		if (!Loader.isModLoaded("redstoneflux")) {
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.redstone_flux_warning"));
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack) {
+        if (stack.getTagCompound() == null) {
+            EnergyHelper.setDefaultEnergyTag(stack, 0);
         }
+        return 1D - ((double) stack.getTagCompound().getInteger("Energy") / (double) getMaxEnergyStored(stack));
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+        super.addInformation(stack, world, tooltip, flag);
         if (KeyHelper.isShiftKeyDown()) {
-            tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " RF");
+            tooltip.add(StringHelper.formatNumber(getEnergyStored(stack)) + " / " + StringHelper.formatNumber(getMaxEnergyStored(stack)) + " " + ModConfig.misc.energyUnit);
         }
-	}
+    }
 
-	@Override @SideOnly(Side.CLIENT)
+    @Override @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-	    if (isInCreativeTab(tab)) {
+        if (isInCreativeTab(tab)) {
             if (checkLoaded()) {
                 ItemStack empty = new ItemStack(this);
                 ExchangerHandler.setDefaultTagCompound(empty);
@@ -104,19 +101,19 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IEner
         }
     }
 
-	@Override
-	public boolean isPowered() {
-		return true;
-	}
+    @Override
+    public boolean isPowered() {
+        return true;
+    }
 
     /* CAPABILITIES */
-    @Override @Optional.Method(modid = "redstoneflux")
+    @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt) {
-        return new EnergyContainerItemWrapper(stack, this);
+        return new FEItemStackCapability(new FEStorageCapability(this, stack));
     }
 
     /* HOLDING ENCHANT */
-    @Override
+    @Override @Optional.Method(modid = "cofhcore")
     public boolean canEnchant(ItemStack stack, Enchantment enchantment) {
         return ModConfig.misc.holdingEnchantment && Loader.isModLoaded("cofhcore") && enchantment == holding;
     }

@@ -1,7 +1,7 @@
 package jackyy.exchangers.proxy;
 
 import jackyy.exchangers.handler.EventsHandler;
-import jackyy.exchangers.handler.network.PacketHandler;
+import jackyy.exchangers.handler.network.NetworkHandler;
 import jackyy.exchangers.integration.BetterWithModsIntegration;
 import jackyy.exchangers.registry.ModItems;
 import jackyy.exchangers.registry.ModRecipes;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent e) {
-        PacketHandler.registerMessages(Reference.MODID);
+        NetworkHandler.registerMessages(Reference.MODID);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventsHandler());
         if (Loader.isModLoaded(Reference.BWM)) {

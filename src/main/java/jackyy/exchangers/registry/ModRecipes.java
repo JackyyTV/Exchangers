@@ -382,7 +382,7 @@ public class ModRecipes {
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Reference.MODID + ":melodic_exchanger_easy"), null, new ItemStack(ModItems.melodicExchanger),
                                 "MLM", "MCM", "M#M",
-                                'M', "ingotMelodicAlloy", 'L', EnderIOEndergyIntegration.melodicCapacitor, '#', EnderIOIntegration.telepadBlock, 'C', ModItems.eioEndergyExchangerCoreT3
+                                'M', "ingotMelodicAlloy", 'L', EnderIOEndergyIntegration.melodicCapacitor, '#', EnderIOIntegration.enderResonator, 'C', ModItems.eioEndergyExchangerCoreT3
                         );
                         GameRegistry.addShapedRecipe(
                                 new ResourceLocation(Reference.MODID + ":stellar_exchanger_easy"), null, new ItemStack(ModItems.stellarExchanger),
@@ -420,7 +420,7 @@ public class ModRecipes {
                         new ShapedCopyNBTRecipe(
                                 e, new ResourceLocation(Reference.MODID + ":melodic_exchanger_normal"), new ItemStack(ModItems.melodicExchanger), new ItemStack(ModItems.crystallineExchanger),
                                 "MCM", "LXL", "M#M",
-                                'M', "ingotMelodicAlloy", '#', EnderIOIntegration.telepadBlock, 'L', EnderIOEndergyIntegration.melodicCapacitor, 'C', ModItems.eioEndergyExchangerCoreT3, 'X', ModItems.crystallineExchanger
+                                'M', "ingotMelodicAlloy", '#', EnderIOIntegration.enderResonator, 'L', EnderIOEndergyIntegration.melodicCapacitor, 'C', ModItems.eioEndergyExchangerCoreT3, 'X', ModItems.crystallineExchanger
                         );
                         new ShapedCopyNBTRecipe(
                                 e, new ResourceLocation(Reference.MODID + ":stellar_exchanger_normal"), new ItemStack(ModItems.stellarExchanger), new ItemStack(ModItems.melodicExchanger),
@@ -458,7 +458,7 @@ public class ModRecipes {
                         new ShapedCopyNBTRecipe(
                                 e, new ResourceLocation(Reference.MODID + ":melodic_exchanger_hard"), new ItemStack(ModItems.melodicExchanger), new ItemStack(ModItems.crystallineExchanger),
                                 "MLM", "CXC", "M#M",
-                                'M', "ingotMelodicAlloy", '#', EnderIOIntegration.telepadBlock, 'L', EnderIOEndergyIntegration.melodicCapacitor, 'C', ModItems.eioEndergyExchangerCoreT3, 'X', ModItems.crystallineExchanger
+                                'M', "ingotMelodicAlloy", '#', EnderIOIntegration.enderResonator, 'L', EnderIOEndergyIntegration.melodicCapacitor, 'C', ModItems.eioEndergyExchangerCoreT3, 'X', ModItems.crystallineExchanger
                         );
                         new ShapedCopyNBTRecipe(
                                 e, new ResourceLocation(Reference.MODID + ":stellar_exchanger_hard"), new ItemStack(ModItems.stellarExchanger), new ItemStack(ModItems.melodicExchanger),

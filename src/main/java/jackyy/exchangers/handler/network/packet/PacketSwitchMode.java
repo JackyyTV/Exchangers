@@ -1,4 +1,4 @@
-package jackyy.exchangers.handler.network;
+package jackyy.exchangers.handler.network.packet;
 
 import io.netty.buffer.ByteBuf;
 import jackyy.exchangers.handler.ExchangerHandler;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketToggleForceDropItemsMode implements IMessage, IMessageHandler<PacketToggleForceDropItemsMode, IMessage> {
+public class PacketSwitchMode implements IMessage, IMessageHandler<PacketSwitchMode, IMessage> {
 
     @Override
     public void fromBytes(ByteBuf buf) { }
@@ -17,14 +17,14 @@ public class PacketToggleForceDropItemsMode implements IMessage, IMessageHandler
     @Override
     public void toBytes(ByteBuf buf) { }
 
-    public PacketToggleForceDropItemsMode() { }
+    public PacketSwitchMode() { }
 
     @Override
-    public IMessage onMessage(PacketToggleForceDropItemsMode message, MessageContext context) {
+    public IMessage onMessage(PacketSwitchMode message, MessageContext context) {
         EntityPlayerMP playerMP = context.getServerHandler().player;
         ItemStack heldItem = playerMP.getHeldItemMainhand();
         if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
-            ExchangerHandler.toggleForceDropItems(playerMP, heldItem);
+            ExchangerHandler.switchMode(playerMP, heldItem);
         }
         return null;
     }

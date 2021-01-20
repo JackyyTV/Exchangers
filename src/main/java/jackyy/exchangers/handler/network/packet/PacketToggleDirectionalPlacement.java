@@ -1,4 +1,4 @@
-package jackyy.exchangers.handler.network;
+package jackyy.exchangers.handler.network.packet;
 
 import io.netty.buffer.ByteBuf;
 import jackyy.exchangers.handler.ExchangerHandler;
@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketSwitchRange implements IMessage, IMessageHandler<PacketSwitchRange, IMessage> {
+public class PacketToggleDirectionalPlacement implements IMessage, IMessageHandler<PacketToggleDirectionalPlacement, IMessage> {
 
     @Override
     public void fromBytes(ByteBuf buf) { }
@@ -17,14 +17,14 @@ public class PacketSwitchRange implements IMessage, IMessageHandler<PacketSwitch
     @Override
     public void toBytes(ByteBuf buf) { }
 
-    public PacketSwitchRange() { }
+    public PacketToggleDirectionalPlacement() { }
 
     @Override
-    public IMessage onMessage(PacketSwitchRange message, MessageContext context) {
+    public IMessage onMessage(PacketToggleDirectionalPlacement message, MessageContext context) {
         EntityPlayerMP playerMP = context.getServerHandler().player;
         ItemStack heldItem = playerMP.getHeldItemMainhand();
         if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
-            ExchangerHandler.switchRange(playerMP, heldItem);
+            ExchangerHandler.toggleDirectionalPlacement(playerMP, heldItem);
         }
         return null;
     }

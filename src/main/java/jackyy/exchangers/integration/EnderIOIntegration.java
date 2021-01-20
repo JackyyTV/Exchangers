@@ -16,7 +16,7 @@ public class EnderIOIntegration {
     public static ItemStack capacitorBank;
     public static ItemStack capacitorBankVibrant;
     public static ItemStack enhancedWirelessChargingAntenna;
-    public static ItemStack telepadBlock;
+    public static ItemStack enderResonator;
     public static ItemStack dimensionalTransceiver;
     public static ItemStack basicCapacitor;
     public static ItemStack doubleLayerCapacitor;
@@ -46,8 +46,9 @@ public class EnderIOIntegration {
             octadicCapacitor = new ItemStack(capacitorItem, 1, 2);
         }
 
+        enderResonator = ObjectHelper.getItemStackByName(Reference.EIO, "item_material", 1, 43);
+
         enhancedWirelessChargingAntenna = ObjectHelper.getBlockStackByName(Reference.EIO, "block_enhanced_wireless_charger", 1, 0);
-        telepadBlock = ObjectHelper.getBlockStackByName(Reference.EIO, "block_tele_pad", 1, 0);
         dimensionalTransceiver = ObjectHelper.getBlockStackByName(Reference.EIO, "block_transceiver", 1, 0);
 
         pulsatingCrystal = "itemPulsatingCrystal";

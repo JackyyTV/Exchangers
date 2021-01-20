@@ -9,7 +9,7 @@ public class EventsHandler {
 
     /**
      * This exists to remap all the item IDs so they match with 1.10 and 1.11
-     * Will be removed on 1.13
+     * Will be removed on Exchangers 3.0
      */
     @SubscribeEvent
     public void onMissingMappings(RegistryEvent.MissingMappings<Item> event) {

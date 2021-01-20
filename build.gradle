@@ -2,15 +2,12 @@ buildscript {
   repositories {
     jcenter()
     maven { url = "http://files.minecraftforge.net/maven" }
-    maven { url = "https://plugins.gradle.org/m2/" }
   }
   dependencies {
     classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    classpath 'com.wynprice.cursemaven:CurseMaven:2.+'
   }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'com.wynprice.cursemaven'
 
 version = "${mc_version}-${mod_version}"
 group = "jackyy.exchangers"
@@ -37,11 +34,15 @@ repositories {
   }
   maven {
     name = "Hwyla Maven"
-    url = "https://tehnut.info/maven"
+    url = "https://maven.tehnut.info"
   }
   maven {
     name = "CoFH Maven"
     url = "http://maven.covers1624.net"
+  }
+  maven {
+    name = "Curse Maven"
+    url = "https://www.cursemaven.com"
   }
 }
 
@@ -50,8 +51,8 @@ dependencies {
   deobfCompile "mcp.mobius.waila:Hwyla:1.8.26-B41_1.12.2"
   deobfCompile "cofh:RedstoneFlux:1.12-2.+:universal"
   deobfCompile "cofh:CoFHCore:1.12.2-4.+:universal"
-  deobfCompile "curse.maven:gunpowderlib:2852431"
-  deobfCompile "curse.maven:better-with-mods:2885221"
+  deobfCompile "curse.maven:gunpowderlib-356646:3168863" //1.12.2-1.1
+  deobfCompile "curse.maven:better-with-mods-246760:2965308" //1.12-2.3.23
 }
 
 processResources {

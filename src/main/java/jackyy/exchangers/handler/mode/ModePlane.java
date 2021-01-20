@@ -1,6 +1,8 @@
 package jackyy.exchangers.handler.mode;
 
 import jackyy.exchangers.handler.ExchangerHandler;
+import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.helper.StringHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ExchangerModePlane {
+public class ModePlane {
 
     public static void invoke(Set<BlockPos> coordinates, int range, World world, EnumFacing sideHit, BlockPos pos, IBlockState centerState) {
         List<BlockPos> possibleLocs = new ArrayList<>();
@@ -41,6 +43,10 @@ public class ExchangerModePlane {
             }
             index++;
         } while (index < possibleLocs.size());
+    }
+
+    public static String getDisplayName() {
+        return StringHelper.localize(Reference.MODID, "mode.plane");
     }
 
     private static void getConnectedBlocksUD(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, IBlockState centerState, int range, boolean side) {

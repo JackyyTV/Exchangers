@@ -1,8 +1,8 @@
 package jackyy.exchangers.handler;
 
-import jackyy.exchangers.handler.mode.ExchangerModeHorizontalCol;
-import jackyy.exchangers.handler.mode.ExchangerModePlane;
-import jackyy.exchangers.handler.mode.ExchangerModeVerticalCol;
+import jackyy.exchangers.handler.mode.ModeHorizontalCol;
+import jackyy.exchangers.handler.mode.ModePlane;
+import jackyy.exchangers.handler.mode.ModeVerticalCol;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfig;
 import jackyy.exchangers.util.Reference;
@@ -47,34 +47,42 @@ import java.util.Set;
 
 public class ExchangerHandler {
 
-    public static final String[] modeSwitchList = new String[] {
+    public static final String[] rangeList = new String[] {
             "1x1", "3x3", "5x5", "7x7", "9x9",
             "11x11", "13x13", "15x15", "17x17",
-            "19x19", "21x21", "23x23", "25x25" };
+            "19x19", "21x21", "23x23", "25x25"
+    };
 
     public static void setDefaultTagCompound(ItemStack stack) {
-        if (stack.getTagCompound() == null) {
+        if (!stack.hasTagCompound()) {
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setTag("blockstate", new NBTTagCompound());
-            NBTUtil.writeBlockState(compound.getCompoundTag("blockstate"), Blocks.AIR.getDefaultState());
-            compound.setInteger("exmode", 0);
-            compound.setInteger("range", 0);
-            compound.setBoolean("forceDropItems", false);
-            compound.setBoolean("directionalPlacement", false);
             stack.setTagCompound(compound);
-        } else {
-            if (!NBTHelper.getTag(stack).hasKey("blockstate")) {
-                NBTHelper.getTag(stack).setTag("blockstate", new NBTTagCompound());
-                NBTUtil.writeBlockState(NBTHelper.getTag(stack).getCompoundTag("blockstate"), Blocks.AIR.getDefaultState());
-            } else if (!NBTHelper.getTag(stack).hasKey("exmode")) {
-                NBTHelper.getTag(stack).setInteger("exmode", 0);
-            } else if (!NBTHelper.getTag(stack).hasKey("range")) {
-                NBTHelper.getTag(stack).setInteger("range", 0);
-            } else if (!NBTHelper.getTag(stack).hasKey("forceDropItems")) {
-                NBTHelper.getTag(stack).setBoolean("forceDropItems", false);
-            } else if (!NBTHelper.getTag(stack).hasKey("directionalPlacement")) {
-                NBTHelper.getTag(stack).setBoolean("directionalPlacement", false);
-            }
+        }
+        Set<String> keySet = NBTHelper.getTag(stack).getKeySet();
+        if (!keySet.contains("blockstate")) {
+            NBTHelper.getTag(stack).setTag("blockstate", new NBTTagCompound());
+            NBTUtil.writeBlockState(NBTHelper.getTag(stack).getCompoundTag("blockstate"), Blocks.AIR.getDefaultState());
+        }
+        if (!keySet.contains("mode")) {
+            NBTHelper.getTag(stack).setInteger("mode", 0);
+        }
+        if (!keySet.contains("range")) {
+            NBTHelper.getTag(stack).setInteger("range", 0);
+        }
+        if (!keySet.contains("forceDropItems")) {
+            NBTHelper.getTag(stack).setBoolean("forceDropItems", false);
+        }
+        if (!keySet.contains("directionalPlacement")) {
+            NBTHelper.getTag(stack).setBoolean("directionalPlacement", false);
+        }
+        if (!keySet.contains("fuzzyPlacement")) {
+            NBTHelper.getTag(stack).setBoolean("fuzzyPlacement", false);
+        }
+        if (!keySet.contains("fuzzyPlacementChance")) {
+            NBTHelper.getTag(stack).setInteger("fuzzyPlacementChance", 100);
+        }
+        if (!keySet.contains("voidItems")) {
+            NBTHelper.getTag(stack).setBoolean("voidItems", false);
         }
     }
 
@@ -108,16 +116,15 @@ public class ExchangerHandler {
         return ((ItemExchangerBase) stack.getItem()).isPowered();
     }
 
-    public static void switchRange(EntityPlayer player, ItemStack stack) {
+    public static void switchRange(ItemStack stack, boolean decrease) {
         setDefaultTagCompound(stack);
         int rangeSwitch = NBTHelper.getTag(stack).getInteger("range");
-        if (player.isSneaking()) {
+        if (decrease) {
             rangeSwitch--;
         } else {
             rangeSwitch++;
         }
-        ItemStack heldItem = player.getHeldItemMainhand();
-        if (!heldItem.isEmpty()) {
+        if (!stack.isEmpty()) {
             if (rangeSwitch > getExRange(stack)) {
                 rangeSwitch = 0;
             } else if (rangeSwitch < 0) {
@@ -129,30 +136,29 @@ public class ExchangerHandler {
 
     public static void switchMode(EntityPlayer player, ItemStack stack) {
         setDefaultTagCompound(stack);
-        int mode = NBTHelper.getTag(stack).getInteger("exmode");
+        int mode = NBTHelper.getTag(stack).getInteger("mode");
         if (player.isSneaking()) {
             mode--;
         } else {
             mode++;
         }
-        ItemStack heldItem = player.getHeldItemMainhand();
-        if (!heldItem.isEmpty()) {
+        if (!stack.isEmpty()) {
             if (mode > 2) {
                 mode = 0;
             } else if (mode < 0) {
                 mode = 2;
             }
         }
-        NBTHelper.getTag(stack).setInteger("exmode", mode);
+        NBTHelper.getTag(stack).setInteger("mode", mode);
         switch (mode) {
             case 0:
-                ChatHelper.msgPlayerRaw(player, StringHelper.localize(Reference.MODID, "msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize(Reference.MODID, "mode.plane"));
+                ChatHelper.msgPlayerRaw(player, StringHelper.localize(Reference.MODID, "msg.mode", TextFormatting.GREEN + ModePlane.getDisplayName()));
                 break;
             case 1:
-                ChatHelper.msgPlayerRaw(player, StringHelper.localize(Reference.MODID, "msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize(Reference.MODID, "mode.horizontal"));
+                ChatHelper.msgPlayerRaw(player, StringHelper.localize(Reference.MODID, "msg.mode", TextFormatting.GREEN + ModeHorizontalCol.getDisplayName()));
                 break;
             case 2:
-                ChatHelper.msgPlayerRaw(player, StringHelper.localize(Reference.MODID, "msg.mode") + " " + TextFormatting.GREEN + TextFormatting.ITALIC + StringHelper.localize(Reference.MODID, "mode.vertical"));
+                ChatHelper.msgPlayerRaw(player, StringHelper.localize(Reference.MODID, "msg.mode", TextFormatting.GREEN + ModeVerticalCol.getDisplayName()));
                 break;
         }
     }
@@ -160,8 +166,7 @@ public class ExchangerHandler {
     public static void toggleForceDropItems(EntityPlayer player, ItemStack stack) {
         setDefaultTagCompound(stack);
         boolean toggle = NBTHelper.getTag(stack).getBoolean("forceDropItems");
-        ItemStack heldItem = player.getHeldItemMainhand();
-        if (!heldItem.isEmpty()) {
+        if (!stack.isEmpty()) {
             toggle = !toggle;
         }
         NBTHelper.getTag(stack).setBoolean("forceDropItems", toggle);
@@ -171,12 +176,40 @@ public class ExchangerHandler {
     public static void toggleDirectionalPlacement(EntityPlayer player, ItemStack stack) {
         setDefaultTagCompound(stack);
         boolean toggle = NBTHelper.getTag(stack).getBoolean("directionalPlacement");
-        ItemStack heldItem = player.getHeldItemMainhand();
-        if (!heldItem.isEmpty()) {
+        if (!stack.isEmpty()) {
             toggle = !toggle;
         }
         NBTHelper.getTag(stack).setBoolean("directionalPlacement", toggle);
         ChatHelper.msgPlayer(player, Reference.MODID, toggle ? "msg.directional_placement.on" : "msg.directional_placement.off");
+    }
+
+    public static void toggleFuzzyPlacement(EntityPlayer player, ItemStack stack) {
+        setDefaultTagCompound(stack);
+        boolean toggle = NBTHelper.getTag(stack).getBoolean("fuzzyPlacement");
+        if (!stack.isEmpty()) {
+            toggle = !toggle;
+        }
+        NBTHelper.getTag(stack).setBoolean("fuzzyPlacement", toggle);
+        ChatHelper.msgPlayer(player, Reference.MODID, toggle ? "msg.fuzzy_placement.on" : "msg.fuzzy_placement.off");
+    }
+
+    public static void setFuzzyPlacementChance(ItemStack stack, int chance) {
+        setDefaultTagCompound(stack);
+        int currentChance = NBTHelper.getTag(stack).getInteger("fuzzyPlacementChance");
+        if (!stack.isEmpty()) {
+            currentChance = chance;
+        }
+        NBTHelper.getTag(stack).setInteger("fuzzyPlacementChance", currentChance);
+    }
+
+    public static void toggleVoidItems(EntityPlayer player, ItemStack stack) {
+        setDefaultTagCompound(stack);
+        boolean toggle = NBTHelper.getTag(stack).getBoolean("voidItems");
+        if (!stack.isEmpty()) {
+            toggle = !toggle;
+        }
+        NBTHelper.getTag(stack).setBoolean("voidItems", toggle);
+        ChatHelper.msgPlayer(player, Reference.MODID, toggle ? "msg.void_items.on" : "msg.void_items.off");
     }
 
     public static boolean isWhitelisted(World world, BlockPos pos) {
@@ -199,7 +232,8 @@ public class ExchangerHandler {
 
     @SuppressWarnings("deprecation")
     public static void placeBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side) {
-        IBlockState state = NBTUtil.readBlockState(NBTHelper.getTag(stack).getCompoundTag("blockstate"));
+        NBTTagCompound tag = NBTHelper.getTag(stack);
+        IBlockState state = NBTUtil.readBlockState(tag.getCompoundTag("blockstate"));
         Block block = state.getBlock();
         IBlockState oldState = world.getBlockState(pos);
         Block oldblock = oldState.getBlock();
@@ -226,23 +260,34 @@ public class ExchangerHandler {
             return;
         }
 
-        Set<BlockPos> coordinates = findSuitableBlocks(stack, world, player, side, pos, oldState);
+        Set<BlockPos> suitableBlocks = findSuitableBlocks(stack, world, player, side, pos, oldState);
+        Set<BlockPos> toBePlaced = new HashSet<>();
         boolean notEnough = false;
         world.captureBlockSnapshots = false;
 
-        for (BlockPos coordinate : coordinates) {
+        for (BlockPos blockPos : suitableBlocks) {
+            if (tag.getBoolean("fuzzyPlacement")) {
+                if (new Random().nextInt(100) < tag.getInteger("fuzzyPlacementChance")) {
+                    toBePlaced.add(blockPos);
+                }
+            } else {
+                toBePlaced = suitableBlocks;
+            }
+        }
+
+        for (BlockPos coordinate : toBePlaced) {
             BlockEvent.PlaceEvent event = new BlockEvent.PlaceEvent(BlockSnapshot.getBlockSnapshot(world, coordinate, 3), Blocks.AIR.getDefaultState(), player, player.getActiveHand());
-            if (!NBTHelper.getTag(player.getHeldItemMainhand()).getBoolean("directionalPlacement")) {
+            if (!tag.getBoolean("directionalPlacement")) {
                 world.setBlockState(coordinate, state, 3);
             }
-            if (NBTHelper.getTag(player.getHeldItemMainhand()).getBoolean("directionalPlacement")) {
+            if (tag.getBoolean("directionalPlacement")) {
                 Vec3d vec = player.getLookVec();
-                IBlockState placeState = block.getStateForPlacement(world, pos, side, ((float)vec.x), ((float)vec.y), ((float)vec.z), block.getItem(world, pos, state).getMetadata(), player, player.getActiveHand());
+                IBlockState placeState = block.getStateForPlacement(world, pos, side, ((float) vec.x), ((float) vec.y), ((float) vec.z), block.getItem(world, pos, state).getMetadata(), player, player.getActiveHand());
                 world.setBlockState(coordinate, placeState, 3);
             }
             if (!MinecraftForge.EVENT_BUS.post(event)) {
                 if (consumeItemInInventory(Item.getItemFromBlock(block), block.getItem(world, pos, state).getMetadata(), player.inventory, player)) {
-                    if (!player.capabilities.isCreativeMode && !getExIsCreative(stack)) {
+                    if (!player.capabilities.isCreativeMode && !getExIsCreative(stack) && !tag.getBoolean("voidItems")) {
                         if (ModConfig.misc.doExchangersSilkTouch || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                             ItemStack oldblockItem;
                             if (oldblock.canSilkHarvest(world, pos, oldState, player) && !(oldblock instanceof IShearable)) {
@@ -263,8 +308,8 @@ public class ExchangerHandler {
                         }
                         if (!getExIsPowered(stack)) {
                             stack.damageItem(1, player);
-                        } else if (NBTHelper.getTag(stack).getInteger("Energy") >= getPerBlockEnergy(stack)) {
-                            NBTHelper.getTag(stack).setInteger("Energy", NBTHelper.getTag(stack).getInteger("Energy") - getPerBlockEnergy(stack));
+                        } else if (tag.getInteger("Energy") >= getPerBlockEnergy(stack)) {
+                            tag.setInteger("Energy", tag.getInteger("Energy") - getPerBlockEnergy(stack));
                         }
                         player.openContainer.detectAndSendChanges();
                     }
@@ -311,17 +356,17 @@ public class ExchangerHandler {
     public static Set<BlockPos> findSuitableBlocks(ItemStack stack, World world, EntityPlayer player, EnumFacing sideHit, BlockPos pos, IBlockState centerState) {
         Set<BlockPos> coordinates = new HashSet<>();
         int range = NBTHelper.getTag(stack).getInteger("range");
-        int mode = NBTHelper.getTag(stack).getInteger("exmode");
+        int mode = NBTHelper.getTag(stack).getInteger("mode");
 
         switch (mode) {
             case 0:
-                ExchangerModePlane.invoke(coordinates, range, world, sideHit, pos, centerState);
+                ModePlane.invoke(coordinates, range, world, sideHit, pos, centerState);
                 break;
             case 1:
-                ExchangerModeHorizontalCol.invoke(coordinates, range, world, player, sideHit, pos, centerState);
+                ModeHorizontalCol.invoke(coordinates, range, world, player, sideHit, pos, centerState);
                 break;
             case 2:
-                ExchangerModeVerticalCol.invoke(coordinates, range, world, player, sideHit, pos, centerState);
+                ModeVerticalCol.invoke(coordinates, range, world, player, sideHit, pos, centerState);
                 break;
         }
 

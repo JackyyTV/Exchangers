@@ -1,7 +1,9 @@
 package jackyy.exchangers.handler;
 
-import jackyy.exchangers.client.Keys;
+import jackyy.exchangers.client.gui.ExchangersGuiScreen;
+import jackyy.exchangers.client.keybind.Keys;
 import jackyy.exchangers.handler.network.*;
+import jackyy.exchangers.handler.network.packet.*;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.item.special.ItemCreativeExchanger;
 import jackyy.gunpowderlib.helper.NBTHelper;
@@ -23,6 +25,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -53,7 +56,7 @@ public class ClientEventsHandler {
 
         ItemStack stack = player.getHeldItemMainhand();
 
-        if (NBTHelper.getTag(stack) != null) {
+        if (NBTHelper.hasTag(stack)) {
             ScaledResolution scaledresolution = new ScaledResolution(mc);
             int w = scaledresolution.getScaledWidth();
             int h = scaledresolution.getScaledHeight();
@@ -62,12 +65,12 @@ public class ClientEventsHandler {
             GlStateManager.disableDepth();
             GlStateManager.disableRescaleNormal();
 
-            String exchangeMode = ExchangerHandler.modeSwitchList[NBTHelper.getTag(stack).getInteger("range")];
-            double scale = exchangeMode.length() > 2 ? 1 : 1;
-            double swidth = mc.fontRenderer.getStringWidth(exchangeMode) * scale;
+            String exchangeRange = ExchangerHandler.rangeList[NBTHelper.getTag(stack).getInteger("range")];
+            double scale = exchangeRange.length() > 2 ? 1 : 1;
+            double swidth = mc.fontRenderer.getStringWidth(exchangeRange) * scale;
             GlStateManager.translate((w / 2 - 2 - swidth), h / 2 - 4, 0);
             GlStateManager.scale(scale, scale, 1);
-            mc.fontRenderer.drawStringWithShadow(exchangeMode, 0, 0, 0xFFFFFF);
+            mc.fontRenderer.drawStringWithShadow(exchangeRange, 0, 0, 0xFFFFFF);
 
             GlStateManager.enableRescaleNormal();
             GlStateManager.popMatrix();
@@ -166,14 +169,22 @@ public class ClientEventsHandler {
 
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (Keys.RANGE_SWITCH_KEY.isPressed()) {
-            PacketHandler.INSTANCE.sendToServer(new PacketSwitchRange());
-        } else if (Keys.MODE_SWITCH_KEY.isPressed()) {
-            PacketHandler.INSTANCE.sendToServer(new PacketSwitchMode());
-        } else if (Keys.FORCE_DROP_ITEMS_KEY.isPressed()) {
-            PacketHandler.INSTANCE.sendToServer(new PacketToggleForceDropItemsMode());
-        } else if (Keys.Directional_PLACEMENT_KEY.isPressed()) {
-            PacketHandler.INSTANCE.sendToServer(new PacketToggleDirectionalPlacement());
+        EntityPlayer player = FMLClientHandler.instance().getClient().player;
+        ItemStack heldItem = player.getHeldItemMainhand();
+        if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
+            if (Keys.OPEN_GUI_KEY.isPressed()) {
+                mc.displayGuiScreen(new ExchangersGuiScreen());
+            } else if (Keys.RANGE_SWITCH_KEY.isPressed()) {
+                NetworkHandler.INSTANCE.sendToServer(new PacketSwitchRange());
+            } else if (Keys.MODE_SWITCH_KEY.isPressed()) {
+                NetworkHandler.INSTANCE.sendToServer(new PacketSwitchMode());
+            } else if (Keys.FORCE_DROP_ITEMS_KEY.isPressed()) {
+                NetworkHandler.INSTANCE.sendToServer(new PacketToggleForceDropItems());
+            } else if (Keys.DIRECTIONAL_PLACEMENT_KEY.isPressed()) {
+                NetworkHandler.INSTANCE.sendToServer(new PacketToggleDirectionalPlacement());
+            } else if (Keys.FUZZY_PLACEMENT_KEY.isPressed()) {
+                NetworkHandler.INSTANCE.sendToServer(new PacketToggleFuzzyPlacement());
+            }
         }
     }
 

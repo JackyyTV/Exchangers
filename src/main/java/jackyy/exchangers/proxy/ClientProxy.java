@@ -1,6 +1,6 @@
 package jackyy.exchangers.proxy;
 
-import jackyy.exchangers.client.Keys;
+import jackyy.exchangers.client.keybind.Keys;
 import jackyy.exchangers.handler.ClientEventsHandler;
 import jackyy.exchangers.registry.ModItems;
 import net.minecraftforge.client.event.ModelRegistryEvent;

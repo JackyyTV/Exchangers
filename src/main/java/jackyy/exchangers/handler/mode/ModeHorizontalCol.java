@@ -1,6 +1,8 @@
 package jackyy.exchangers.handler.mode;
 
 import jackyy.exchangers.handler.ExchangerHandler;
+import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.helper.StringHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
@@ -9,7 +11,7 @@ import net.minecraft.world.World;
 
 import java.util.Set;
 
-public class ExchangerModeHorizontalCol {
+public class ModeHorizontalCol {
 
     public static void invoke(Set<BlockPos> coordinates, int range, World world, EntityPlayer player, EnumFacing sideHit, BlockPos pos, IBlockState centerState) {
         int x = pos.getX();
@@ -48,6 +50,10 @@ public class ExchangerModeHorizontalCol {
                     ExchangerHandler.checkAndAddBlock(world, new BlockPos(x, y, dz), centerState, coordinates);
                 }
         }
+    }
+
+    public static String getDisplayName() {
+        return StringHelper.localize(Reference.MODID, "mode.horizontal");
     }
 
 }

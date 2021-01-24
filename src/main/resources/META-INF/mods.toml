@@ -30,7 +30,7 @@ Block Exchangers.
 [[dependencies.exchangers]]
     modId="gunpowderlib"
     mandatory=true
-    versionRange="[1.16.4-1.2,)"
+    versionRange="[1.16.4-1.2.1,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.exchangers]]

@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:ender_io_endergy_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "enderioendergy"
+    },
+    {
+      "type": "exchangers:ender_io_endergy_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "S#S",
+    "SCS",
+    "SDS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/stellar_alloy"
+    },
+    "#": {
+      "item": "enderio:item_capacitor_stellar"
+    },
+    "D": {
+      "item": "enderio:block_dimensional_transceiver"
+    },
+    "C": {
+      "item": "exchangers:eio_exchanger_core_tier3"
+    }
+  },
+  "result": {
+    "item": "exchangers:stellar_exchanger"
+  }
+}

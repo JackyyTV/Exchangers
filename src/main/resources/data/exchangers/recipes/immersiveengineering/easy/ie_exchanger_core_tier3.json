@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:immersive_engineering_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "immersiveengineering"
+    },
+    {
+      "type": "exchangers:immersive_engineering_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "SHS",
+    "HBH",
+    "SHS"
+  ],
+  "key": {
+    "S": {
+      "item": "immersiveengineering:wirecoil_steel"
+    },
+    "H": {
+      "item": "immersiveengineering:heavy_engineering"
+    },
+    "B": {
+      "item": "immersiveengineering:biodiesel_bucket"
+    }
+  },
+  "result": {
+    "item": "exchangers:ie_exchanger_core_tier3"
+  }
+}

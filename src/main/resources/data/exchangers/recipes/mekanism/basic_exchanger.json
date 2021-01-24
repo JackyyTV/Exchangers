@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:mekanism_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "mekanism"
+    }
+  ],
+  "pattern": [
+    "BTB",
+    "BCB",
+    "BTB"
+  ],
+  "key": {
+    "B": {
+      "tag": "forge:circuits/basic"
+    },
+    "T": {
+      "item": "mekanism:energy_tablet"
+    },
+    "C": {
+      "item": "exchangers:mekanism_exchanger_core_tier1"
+    }
+  },
+  "result": {
+    "item": "exchangers:basic_exchanger"
+  }
+}

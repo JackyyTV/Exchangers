@@ -1,37 +1,31 @@
 package jackyy.exchangers.item.enderio;
 
 import jackyy.exchangers.item.ItemCoreBase;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.ModList;
 
 public class ItemEIOExchangerCoreT2 extends ItemCoreBase {
 
-    public ItemEIOExchangerCoreT2() {
-        setRegistryName(Reference.MODID + ":eio_exchanger_core_tier2");
-        setTranslationKey(Reference.MODID + ".eio_exchanger_core_tier2");
+    private static boolean loaded;
+    static {
+        try {
+            loaded = ModConfigs.CONFIG.enderIOModule.get();
+        } catch (NullPointerException exception) {
+            loaded = DefaultValues.enderIOModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemEIOExchangerCoreT2() {
+        super(new Properties().rarity(Rarity.RARE));
+        setRegistryName(Reference.MODID, "eio_exchanger_core_tier2");
     }
 
     @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Reference.EIO);
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+        return loaded && ModList.get().isLoaded(Reference.EIO);
     }
 
 }

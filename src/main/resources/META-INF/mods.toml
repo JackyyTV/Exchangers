@@ -1,0 +1,83 @@
+modLoader="javafml"
+loaderVersion="[35,)"
+license="LGPLv3"
+issueTrackerURL="https://github.com/JackyyTV/Exchangers/issues"
+
+[[mods]]
+modId="exchangers"
+version="1.16.5-3.0"
+displayName="Exchangers"
+displayURL="https://github.com/JackyyTV/Exchangers"
+logoFile="logo.png"
+credits="ThatGamerBlue, ColossalPercy, JCOnline and many other people that helped the development of this mod!"
+authors="Jackyy, TurkeyDev"
+description='''
+Block Exchangers.
+'''
+
+[[dependencies.exchangers]]
+    modId="forge"
+    mandatory=true
+    versionRange="[35,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16,1.17)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="gunpowderlib"
+    mandatory=true
+    versionRange="[1.16.4-1.2,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="cofh_core"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="thermal"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="thermal_innovation"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="enderio"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="enderioendergy"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="mekanism"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="immersiveengineering"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.exchangers]]
+    modId="betterwithmods"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"

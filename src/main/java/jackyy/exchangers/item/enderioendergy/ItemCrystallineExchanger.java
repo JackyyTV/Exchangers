@@ -1,42 +1,58 @@
 package jackyy.exchangers.item.enderioendergy;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.ModList;
 
 public class ItemCrystallineExchanger extends ItemExchangerBasePowered {
 
-    public ItemCrystallineExchanger() {
-        setRegistryName(Reference.MODID + ":crystalline_exchanger");
-        setTranslationKey(Reference.MODID + ".crystalline_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.crystallineMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.crystallinePerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.crystallineMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.crystallineMaxRange.get();
+            loaded = ModConfigs.CONFIG.enderIOEndergyModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.crystallineMaxEnergy;
+            perBlockUse = DefaultValues.crystallinePerBlockUse;
+            harvestLevel = DefaultValues.crystallineMaxHarvestLevel;
+            range = DefaultValues.crystallineMaxRange;
+            loaded = DefaultValues.enderIOEndergyModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemCrystallineExchanger() {
+        super(new Properties().rarity(Rarity.RARE));
+        setRegistryName(Reference.MODID, "crystalline_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.enderIOEndergyTweaks.crystallineMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.enderIOEndergyTweaks.crystallinePerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.enderIOEndergyModule && Loader.isModLoaded(Reference.EIO_ENDERGY);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -45,18 +61,8 @@ public class ItemCrystallineExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.enderIOEndergyTweaks.crystallineMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.enderIOEndergyTweaks.crystallineMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.EIO_ENDERGY);
     }
 
 }

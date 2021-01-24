@@ -1,42 +1,58 @@
 package jackyy.exchangers.item.mekanism;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.ModList;
 
 public class ItemUltimateExchanger extends ItemExchangerBasePowered {
 
-    public ItemUltimateExchanger() {
-        setRegistryName(Reference.MODID + ":ultimate_exchanger");
-        setTranslationKey(Reference.MODID + ".ultimate_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.ultimateMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.ultimatePerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.ultimateMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.ultimateMaxRange.get();
+            loaded = ModConfigs.CONFIG.mekanismModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.ultimateMaxEnergy;
+            perBlockUse = DefaultValues.ultimatePerBlockUse;
+            harvestLevel = DefaultValues.ultimateMaxHarvestLevel;
+            range = DefaultValues.ultimateMaxRange;
+            loaded = DefaultValues.mekanismModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemUltimateExchanger() {
+        super(new Properties().rarity(Rarity.EPIC));
+        setRegistryName(Reference.MODID, "ultimate_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.mekanismTweaks.ultimateMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.mekanismTweaks.ultimatePerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.mekanismModule && Loader.isModLoaded(Reference.MEK);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -45,18 +61,8 @@ public class ItemUltimateExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.mekanismTweaks.ultimateMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.mekanismTweaks.ultimateMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.MEK);
     }
 
 }

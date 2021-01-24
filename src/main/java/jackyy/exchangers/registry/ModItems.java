@@ -6,7 +6,7 @@ import jackyy.exchangers.item.immersiveengineering.*;
 import jackyy.exchangers.item.mekanism.*;
 import jackyy.exchangers.item.special.ItemCreativeExchanger;
 import jackyy.exchangers.item.special.ItemTuberousExchanger;
-import jackyy.exchangers.item.thermalexpansion.*;
+import jackyy.exchangers.item.thermal.*;
 import jackyy.exchangers.item.vanilla.*;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -54,9 +54,9 @@ public class ModItems {
     public static ItemReinforcedExchanger reinforcedExchanger = new ItemReinforcedExchanger();
     public static ItemSignalumExchanger signalumExchanger = new ItemSignalumExchanger();
     public static ItemResonantExchanger resonantExchanger = new ItemResonantExchanger();
-    public static ItemTEExchangerCoreT1 teExchangerCoreT1 = new ItemTEExchangerCoreT1();
-    public static ItemTEExchangerCoreT2 teExchangerCoreT2 = new ItemTEExchangerCoreT2();
-    public static ItemTEExchangerCoreT3 teExchangerCoreT3 = new ItemTEExchangerCoreT3();
+    public static ItemThermalExchangerCoreT1 teExchangerCoreT1 = new ItemThermalExchangerCoreT1();
+    public static ItemThermalExchangerCoreT2 teExchangerCoreT2 = new ItemThermalExchangerCoreT2();
+    public static ItemThermalExchangerCoreT3 teExchangerCoreT3 = new ItemThermalExchangerCoreT3();
 
     public static ItemBasicExchanger basicExchanger = new ItemBasicExchanger();
     public static ItemAdvancedExchanger advancedExchanger = new ItemAdvancedExchanger();
@@ -136,69 +136,6 @@ public class ModItems {
                 ieExchangerCoreT2,
                 ieExchangerCoreT3
         );
-    }
-
-    public static void initModels() {
-        //Special Exchangers
-        tuberousExchanger.initModel();
-        creativeExchanger.initModel();
-        //Vanilla Exchangers
-        woodenExchanger.initModel();
-        stoneExchanger.initModel();
-        goldenExchanger.initModel();
-        ironExchanger.initModel();
-        diamondExchanger.initModel();
-        emeraldExchanger.initModel();
-        obsidianExchanger.initModel();
-        endExchanger.initModel();
-        exchangerCoreT1.initModel();
-        exchangerCoreT2.initModel();
-        exchangerCoreT3.initModel();
-        //Ender IO Exchangers
-        conductiveIronExchanger.initModel();
-        pulsatingIronExchanger.initModel();
-        electricalSteelExchanger.initModel();
-        energeticExchanger.initModel();
-        darkSteelExchanger.initModel();
-        vibrantExchanger.initModel();
-        endSteelExchanger.initModel();
-        eioExchangerCoreT1.initModel();
-        eioExchangerCoreT2.initModel();
-        eioExchangerCoreT3.initModel();
-        //Ender IO Endergy Exchangers
-        crudeSteelExchanger.initModel();
-        energeticSilverExchanger.initModel();
-        vividExchanger.initModel();
-        crystallineExchanger.initModel();
-        melodicExchanger.initModel();
-        stellarExchanger.initModel();
-        eioEndergyExchangerCoreT1.initModel();
-        eioEndergyExchangerCoreT2.initModel();
-        eioEndergyExchangerCoreT3.initModel();
-        //Thermal Expansion Exchangers
-        leadstoneExchanger.initModel();
-        hardenedExchanger.initModel();
-        reinforcedExchanger.initModel();
-        signalumExchanger.initModel();
-        resonantExchanger.initModel();
-        teExchangerCoreT1.initModel();
-        teExchangerCoreT2.initModel();
-        teExchangerCoreT3.initModel();
-        //Mekanism Exchangers
-        basicExchanger.initModel();
-        advancedExchanger.initModel();
-        eliteExchanger.initModel();
-        ultimateExchanger.initModel();
-        mekanismExchangerCoreT1.initModel();
-        mekanismExchangerCoreT2.initModel();
-        mekanismExchangerCoreT3.initModel();
-        //Immersive Engineering Exchangers
-        lvExchanger.initModel();
-        mvExchanger.initModel();
-        hvExchanger.initModel();
-        ieExchangerCoreT1.initModel();
-        ieExchangerCoreT2.initModel();
-        ieExchangerCoreT3.initModel();
     }
 
 }

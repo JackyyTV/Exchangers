@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:immersive_engineering_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "immersiveengineering"
+    },
+    {
+      "type": "exchangers:immersive_engineering_recipes_type", "value": "normal"
+    }
+  ],
+  "pattern": [
+    "SCS",
+    "MXM",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:sheetmetals/electrum"
+    },
+    "M": {
+      "item": "immersiveengineering:capacitor_mv"
+    },
+    "C": {
+      "item": "exchangers:ie_exchanger_core_tier2"
+    },
+    "X": {
+      "item": "exchangers:lv_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:mv_exchanger"
+  }
+}

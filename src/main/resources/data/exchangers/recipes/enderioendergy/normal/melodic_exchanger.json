@@ -1,0 +1,39 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:ender_io_endergy_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "enderioendergy"
+    },
+    {
+      "type": "exchangers:ender_io_endergy_recipes_type", "value": "normal"
+    }
+  ],
+  "pattern": [
+    "MCM",
+    "LXL",
+    "M#M"
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:ingots/melodic_alloy"
+    },
+    "L": {
+      "item": "enderio:item_capacitor_melodic"
+    },
+    "#": {
+      "item": "enderio:item_ender_resonator"
+    },
+    "C": {
+      "item": "exchangers:eio_exchanger_core_tier3"
+    },
+    "X": {
+      "item": "exchangers:crystalline_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:melodic_exchanger"
+  }
+}

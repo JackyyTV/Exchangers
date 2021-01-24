@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:ender_io_endergy_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "enderioendergy"
+    },
+    {
+      "type": "exchangers:ender_io_endergy_recipes_type", "value": "hard"
+    }
+  ],
+  "pattern": [
+    "PVP",
+    "CLC",
+    "PVP"
+  ],
+  "key": {
+    "P": {
+      "item": "enderio:block_holy_fog"
+    },
+    "V": {
+      "tag": "forge:ingots/vivid_alloy"
+    },
+    "L": {
+      "item": "enderio:liquid_sunshine_bucket"
+    },
+    "C": {
+      "item": "exchangers:eio_exchanger_core_tier1"
+    }
+  },
+  "result": {
+    "item": "exchangers:eio_exchanger_core_tier2"
+  }
+}

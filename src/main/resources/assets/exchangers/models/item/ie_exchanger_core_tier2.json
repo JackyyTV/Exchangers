@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/immersiveengineering/ie_exchanger_core_tier2"
+        "layer0": "exchangers:item/immersiveengineering/ie_exchanger_core_tier2"
     }
 }

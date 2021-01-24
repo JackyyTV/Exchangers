@@ -1,30 +1,31 @@
 package jackyy.exchangers.item;
 
+import jackyy.exchangers.util.ILoadable;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ItemCoreBase extends Item {
+public class ItemCoreBase extends Item implements ILoadable {
 
-    public ItemCoreBase() {
-        setMaxStackSize(16);
-        setCreativeTab(Reference.TAB);
+    public ItemCoreBase(Properties props) {
+        super(props.group(Reference.TAB).maxStackSize(16));
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (isInCreativeTab(tab)) {
+    @OnlyIn(Dist.CLIENT)
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (isInGroup(group)) {
             if (checkLoaded()) {
-                list.add(new ItemStack(this));
+                items.add(new ItemStack(this));
             }
         }
     }
 
+    @Override
     public boolean checkLoaded() {
         return true;
     }

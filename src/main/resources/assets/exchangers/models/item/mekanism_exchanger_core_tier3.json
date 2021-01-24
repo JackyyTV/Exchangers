@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/mekanism/mekanism_exchanger_core_tier3"
+        "layer0": "exchangers:item/mekanism/mekanism_exchanger_core_tier3"
     }
 }

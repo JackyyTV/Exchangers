@@ -3,9 +3,10 @@ package jackyy.exchangers.handler.mode;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.util.Reference;
 import jackyy.gunpowderlib.helper.StringHelper;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 public class ModePlane {
 
-    public static void invoke(Set<BlockPos> coordinates, int range, World world, EnumFacing sideHit, BlockPos pos, IBlockState centerState) {
+    public static void invoke(Set<BlockPos> coordinates, int range, World world, Direction sideHit, BlockPos pos, BlockState centerState) {
         List<BlockPos> possibleLocs = new ArrayList<>();
         possibleLocs.add(pos);
         int index = 0;
@@ -45,44 +46,44 @@ public class ModePlane {
         } while (index < possibleLocs.size());
     }
 
-    public static String getDisplayName() {
+    public static IFormattableTextComponent getDisplayName() {
         return StringHelper.localize(Reference.MODID, "mode.plane");
     }
 
-    private static void getConnectedBlocksUD(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, IBlockState centerState, int range, boolean side) {
+    private static void getConnectedBlocksUD(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, BlockState centerState, int range, boolean side) {
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 BlockPos newPos = currentPos.add(x, 0, y);
                 if (!isLocationContained(possibleLocs, newPos))
                     if (newPos.getX() <= centerPos.getX() + range && newPos.getX() >= centerPos.getX() - range)
                         if (newPos.getZ() <= centerPos.getZ() + range && newPos.getZ() >= centerPos.getZ() - range)
-                            if (!world.getBlockState(newPos.add(0, side ? 1 : -1, 0)).isFullBlock() && checkBlock(world, newPos, centerState))
+                            if (!world.getBlockState(newPos.add(0, side ? 1 : -1, 0)).isSolid() && checkBlock(world, newPos, centerState))
                                 possibleLocs.add(newPos);
             }
         }
     }
 
-    private static void getConnectedBlocksNS(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, IBlockState centerState, int range, boolean side) {
+    private static void getConnectedBlocksNS(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, BlockState centerState, int range, boolean side) {
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 BlockPos newPos = currentPos.add(x, y, 0);
                 if (!isLocationContained(possibleLocs, newPos))
                     if (newPos.getX() <= centerPos.getX() + range && newPos.getX() >= centerPos.getX() - range)
                         if (newPos.getY() <= centerPos.getY() + range && newPos.getY() >= centerPos.getY() - range)
-                            if (!world.getBlockState(newPos.add(0, 0, side ? 1 : -1)).isFullBlock() && checkBlock(world, newPos, centerState))
+                            if (!world.getBlockState(newPos.add(0, 0, side ? 1 : -1)).isSolid() && checkBlock(world, newPos, centerState))
                                 possibleLocs.add(newPos);
             }
         }
     }
 
-    private static void getConnectedBlocksEW(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, IBlockState centerState, int range, boolean side) {
+    private static void getConnectedBlocksEW(List<BlockPos> possibleLocs, World world, BlockPos currentPos, BlockPos centerPos, BlockState centerState, int range, boolean side) {
         for (int x = -1; x < 2; x++) {
             for (int y = -1; y < 2; y++) {
                 BlockPos newPos = currentPos.add(0, x, y);
                 if (!isLocationContained(possibleLocs, newPos))
                     if (newPos.getY() <= centerPos.getY() + range && newPos.getY() >= centerPos.getY() - range)
                         if (newPos.getZ() <= centerPos.getZ() + range && newPos.getZ() >= centerPos.getZ() - range)
-                            if (!world.getBlockState(newPos.add(side ? 1 : -1, 0, 0)).isFullBlock() && checkBlock(world, newPos, centerState))
+                            if (!world.getBlockState(newPos.add(side ? 1 : -1, 0, 0)).isSolid() && checkBlock(world, newPos, centerState))
                                 possibleLocs.add(newPos);
             }
         }
@@ -95,8 +96,8 @@ public class ModePlane {
         return false;
     }
 
-    private static boolean checkBlock(World world, BlockPos pos, IBlockState centerState) {
-        IBlockState state = world.getBlockState(pos);
+    private static boolean checkBlock(World world, BlockPos pos, BlockState centerState) {
+        BlockState state = world.getBlockState(pos);
         return state == centerState;
     }
 

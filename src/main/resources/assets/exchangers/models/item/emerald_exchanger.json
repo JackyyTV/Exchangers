@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/vanilla/emerald_exchanger"
+        "layer0": "exchangers:item/vanilla/emerald_exchanger"
     }
 }

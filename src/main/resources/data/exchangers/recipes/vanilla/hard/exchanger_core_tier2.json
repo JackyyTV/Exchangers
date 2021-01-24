@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    },
+    {
+      "type": "exchangers:vanilla_recipes_type", "value": "hard"
+    }
+  ],
+  "pattern": [
+    "ILI",
+    "CEC",
+    "ILI"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "L": {
+      "tag": "forge:gems/lapis"
+    },
+    "C": {
+      "item": "exchangers:exchanger_core_tier1"
+    }
+  },
+  "result": {
+    "item": "exchangers:exchanger_core_tier2"
+  }
+}

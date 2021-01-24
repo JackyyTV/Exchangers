@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:mekanism_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "mekanism"
+    },
+    {
+      "type": "exchangers:mekanism_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "UTU",
+    "UCU",
+    "UTU"
+  ],
+  "key": {
+    "U": {
+      "tag": "forge:circuits/ultimate"
+    },
+    "T": {
+      "item": "mekanism:portable_teleporter"
+    },
+    "C": {
+      "item": "exchangers:mekanism_exchanger_core_tier3"
+    }
+  },
+  "result": {
+    "item": "exchangers:ultimate_exchanger"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:immersive_engineering_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "immersiveengineering"
+    },
+    {
+      "type": "exchangers:immersive_engineering_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "SHS",
+    "SCS",
+    "SHS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:sheetmetals/steel"
+    },
+    "H": {
+      "item": "immersiveengineering:capacitor_hv"
+    },
+    "C": {
+      "item": "exchangers:ie_exchanger_core_tier3"
+    }
+  },
+  "result": {
+    "item": "exchangers:hv_exchanger"
+  }
+}

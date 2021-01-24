@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    },
+    {
+      "type": "exchangers:vanilla_recipes_type", "value": "hard"
+    }
+  ],
+  "pattern": [
+    "GEG",
+    "CXC",
+    "GEG"
+  ],
+  "key": {
+    "G": {
+      "tag": "forge:ingots/gold"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "exchangers:exchanger_core_tier2"
+    },
+    "X": {
+      "item": "exchangers:stone_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:golden_exchanger"
+  }
+}

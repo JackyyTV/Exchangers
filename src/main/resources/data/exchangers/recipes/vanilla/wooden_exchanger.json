@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    }
+  ],
+  "pattern": [
+    "WEW",
+    "WCW",
+    "WEW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:logs"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "exchangers:exchanger_core_tier1"
+    }
+  },
+  "result": {
+    "item": "exchangers:wooden_exchanger"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    },
+    {
+      "type": "exchangers:vanilla_recipes_type", "value": "hard"
+    }
+  ],
+  "pattern": [
+    "MEM",
+    "CXC",
+    "MEM"
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:gems/emerald"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "exchangers:exchanger_core_tier3"
+    },
+    "X": {
+      "item": "exchangers:diamond_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:emerald_exchanger"
+  }
+}

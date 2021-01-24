@@ -1,0 +1,42 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:thermal_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "thermal"
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "thermal_innovation"
+    },
+    {
+      "type": "exchangers:thermal_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "IUI",
+    "RCR",
+    "IFI"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/invar"
+    },
+    "U": {
+      "item": "thermal:upgrade_augment_1"
+    },
+    "R": {
+      "item": "thermal:rf_coil"
+    },
+    "F": {
+      "item": "thermal:flux_capacitor"
+    },
+    "C": {
+      "item": "exchangers:thermal_exchanger_core_tier1"
+    }
+  },
+  "result": {
+    "item": "exchangers:hardened_exchanger"
+  }
+}

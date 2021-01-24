@@ -1,42 +1,58 @@
 package jackyy.exchangers.item.enderio;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.ModList;
 
 public class ItemVibrantExchanger extends ItemExchangerBasePowered {
 
-    public ItemVibrantExchanger() {
-        setRegistryName(Reference.MODID + ":vibrant_exchanger");
-        setTranslationKey(Reference.MODID + ".vibrant_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.vibrantMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.vibrantPerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.vibrantMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.vibrantMaxRange.get();
+            loaded = ModConfigs.CONFIG.enderIOModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.vibrantMaxEnergy;
+            perBlockUse = DefaultValues.vibrantPerBlockUse;
+            harvestLevel = DefaultValues.vibrantMaxHarvestLevel;
+            range = DefaultValues.vibrantMaxRange;
+            loaded = DefaultValues.enderIOModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemVibrantExchanger() {
+        super(new Properties().rarity(Rarity.EPIC));
+        setRegistryName(Reference.MODID, "vibrant_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.enderIOTweaks.vibrantMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.enderIOTweaks.vibrantPerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Reference.EIO);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -45,18 +61,8 @@ public class ItemVibrantExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.enderIOTweaks.vibrantMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.enderIOTweaks.vibrantMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.EIO);
     }
 
 }

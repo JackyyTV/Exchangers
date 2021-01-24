@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/enderio/electrical_steel_exchanger"
+        "layer0": "exchangers:item/enderio/electrical_steel_exchanger"
     }
 }

@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    },
+    {
+      "type": "exchangers:vanilla_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "SEP",
+    "PCS",
+    "SEP"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:end_stones"
+    },
+    "P": {
+      "item": "minecraft:purpur_block"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "exchangers:exchanger_core_tier3"
+    }
+  },
+  "result": {
+    "item": "exchangers:end_exchanger"
+  }
+}

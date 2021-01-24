@@ -1,73 +1,131 @@
+import net.minecraftforge.gradle.common.task.SignJar             
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
 buildscript {
-  repositories {
-    jcenter()
-    maven { url = "http://files.minecraftforge.net/maven" }
-  }
-  dependencies {
-    classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-  }
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+    }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
 
 version = "${mc_version}-${mod_version}"
-group = "jackyy.exchangers"
-archivesBaseName = "Exchangers"
+group = 'jackyy.exchangers'
+archivesBaseName = 'Exchangers'
 
-sourceCompatibility = targetCompatibility = "1.8"
-compileJava {
-  sourceCompatibility = targetCompatibility = "1.8"
-}
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-  version = "${forge_version}"
-  runDir = "run"
-  mappings = "${mappings_version}"
-
-  replace '@FINGERPRINT@', project.findProperty('signSHA1')
-  replaceIn "Exchangers.java"
+    mappings channel: "${mappings_channel}", version: "${mappings_version}"
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            if (project.hasProperty('mcUUID')) {
+                args '--uuid', project.getProperty('mcUUID')
+            }
+            if (project.hasProperty('mcUsername')) {
+                args '--username', project.getProperty('mcUsername')
+            }
+            if (project.hasProperty('mcAccessToken')) {
+                args '--accessToken', project.getProperty('mcAccessToken')
+            }
+            mods {
+                exchangers {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                exchangers {
+                    source sourceSets.main
+                }
+            }
+        }
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'exchangers', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            mods {
+                exchangers {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
 }
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
   maven {
-    name = "JEI Maven"
-    url = "http://dvs1.progwml6.com/files/maven"
+    name = 'JEI Maven'
+    url = 'http://dvs1.progwml6.com/files/maven'
+    content {
+        includeGroup 'mezz.jei'
+    }
   }
   maven {
-    name = "Hwyla Maven"
-    url = "https://maven.tehnut.info"
+    name = 'HWYLA Maven'
+    url 'https://maven.tehnut.info'
+    content {
+        includeGroup 'mcp.mobius.waila'
+    }
   }
   maven {
-    name = "CoFH Maven"
-    url = "http://maven.covers1624.net"
-  }
-  maven {
-    name = "Curse Maven"
-    url = "https://www.cursemaven.com"
+    name = 'Curse Maven'
+    url = 'https://www.cursemaven.com'
+    content {
+        includeGroup 'curse.maven'
+    }
   }
 }
 
 dependencies {
-  deobfCompile "mezz.jei:jei_1.12.2:+"
-  deobfCompile "mcp.mobius.waila:Hwyla:1.8.26-B41_1.12.2"
-  deobfCompile "cofh:RedstoneFlux:1.12-2.+:universal"
-  deobfCompile "cofh:CoFHCore:1.12.2-4.+:universal"
-  deobfCompile "curse.maven:gunpowderlib-356646:3168863" //1.12.2-1.1
-  deobfCompile "curse.maven:better-with-mods-246760:2965308" //1.12-2.3.23
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    
+    compile fg.deobf("mezz.jei:jei-1.16.4:+")
+    compile fg.deobf("mcp.mobius.waila:Hwyla:1.10.11-B78_1.16.2")
+
+    implementation fg.deobf("curse.maven:gunpowderlib-356646:3177362") //1.16.5-1.2.1
+
+    runtimeOnly fg.deobf("curse.maven:mekanism-268560:3134211") //1.16.4-10.0.18.445
+    runtimeOnly fg.deobf("curse.maven:cofh_core-69162:3155824") //1.16.3-1.1.6
+    runtimeOnly fg.deobf("curse.maven:thermal_foundation-222880:3155830") //1.16.3-1.1.6
+    runtimeOnly fg.deobf("curse.maven:thermal_innovation-291737:3156588") //1.16.3-1.1.7
+    runtimeOnly fg.deobf("curse.maven:thermal_expansion-69163:3155832") //1.16.3-1.1.6
 }
 
-processResources {
-  inputs.property "version", project.version
-  inputs.property "mcversion", project.minecraft.version
-  from(sourceSets.main.resources.srcDirs) {
-    include 'mcmod.info'
-    expand 'version':project.version, 'mcversion':project.minecraft.version
-  }
-  from(sourceSets.main.resources.srcDirs) {
-    exclude 'mcmod.info'
-  }
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "Exchangers",
+            "Specification-Version": "${project.mc_version}-${project.mod_version}",
+            "Specification-Vendor": "Jackyy",
+            "Implementation-Title": "Exchangers",
+            "Implementation-Version": "${project.mc_version}-${project.mod_version}",
+            "Implementation-Vendor" :"Jackyy",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
 }
 
-task signJar(type: SignJar, dependsOn: reobfJar) {
+jar.finalizedBy('reobfJar') 
+
+task signJar(type: SignJar, dependsOn: jar) {
   onlyIf {
     project.hasProperty('keyStore')
   }

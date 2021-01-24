@@ -1,30 +1,47 @@
 package jackyy.exchangers.item.vanilla;
 
 import jackyy.exchangers.item.ItemExchangerBase;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.common.Tags;
 
 public class ItemEndExchanger extends ItemExchangerBase {
 
-    public ItemEndExchanger() {
-        setRegistryName(Reference.MODID + ":end_exchanger");
-        setTranslationKey(Reference.MODID + ".end_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.endMaxDmg);
+    private static int dmg;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            dmg = ModConfigs.CONFIG.endMaxDmg.get();
+            harvestLevel = ModConfigs.CONFIG.endMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.endMaxRange.get();
+            loaded = ModConfigs.CONFIG.vanillaModule.get();
+        } catch (NullPointerException exception) {
+            dmg = DefaultValues.endMaxDmg;
+            harvestLevel = DefaultValues.endMaxHarvestLevel;
+            range = DefaultValues.endMaxRange;
+            loaded = DefaultValues.vanillaModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemEndExchanger() {
+        super(new Properties().defaultMaxDamage(dmg).rarity(Rarity.EPIC));
+        setRegistryName(Reference.MODID, "end_exchanger");
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -33,31 +50,13 @@ public class ItemEndExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.vanillaTweaks.endMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.vanillaTweaks.endMaxRange;
-    }
-
-    @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.vanillaModule;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
+        return loaded;
     }
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        NonNullList<ItemStack> list = NonNullList.create();
-        list.add(new ItemStack(Blocks.PURPUR_BLOCK));
-        return OreDictionary.containsMatch(false, OreDictionary.getOres("endstone"), repair)
-                || OreDictionary.containsMatch(false, list, repair);
+        return Tags.Items.END_STONES.contains(repair.getItem()) || repair.equals(new ItemStack(Blocks.PURPUR_BLOCK));
     }
 
 }

@@ -1,0 +1,39 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:ender_io_endergy_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "enderioendergy"
+    },
+    {
+      "type": "exchangers:ender_io_endergy_recipes_type", "value": "hard"
+    }
+  ],
+  "pattern": [
+    "A#A",
+    "CXC",
+    "ATA"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/crystalline_alloy"
+    },
+    "T": {
+      "item": "enderio:item_capacitor_totemic"
+    },
+    "#": {
+      "item": "enderio:item_capacitor_crystalline"
+    },
+    "C": {
+      "item": "exchangers:eio_exchanger_core_tier2"
+    },
+    "X": {
+      "item": "exchangers:vivid_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:crystalline_exchanger"
+  }
+}

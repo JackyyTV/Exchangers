@@ -1,41 +1,57 @@
 package jackyy.exchangers.item.immersiveengineering;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.ModList;
 
 public class ItemLVExchanger extends ItemExchangerBasePowered {
 
-    public ItemLVExchanger() {
-        setRegistryName(Reference.MODID + ":lv_exchanger");
-        setTranslationKey(Reference.MODID + ".lv_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.lvMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.lvPerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.lvMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.lvMaxRange.get();
+            loaded = ModConfigs.CONFIG.immersiveEngineeringModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.lvMaxEnergy;
+            perBlockUse = DefaultValues.lvPerBlockUse;
+            harvestLevel = DefaultValues.lvMaxHarvestLevel;
+            range = DefaultValues.lvMaxRange;
+            loaded = DefaultValues.immersiveEngineeringModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemLVExchanger() {
+        super(new Properties().rarity(Reference.RARITY_TIER1));
+        setRegistryName(Reference.MODID, "lv_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.immersiveEngineeringTweaks.lvMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.immersiveEngineeringTweaks.lvPerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.immersiveEngineeringModule && Loader.isModLoaded(Reference.IE);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -44,18 +60,8 @@ public class ItemLVExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.immersiveEngineeringTweaks.lvMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.immersiveEngineeringTweaks.lvMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return Reference.TIER_1;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.IE);
     }
 
 }

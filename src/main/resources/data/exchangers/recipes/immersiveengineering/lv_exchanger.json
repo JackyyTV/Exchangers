@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:immersive_engineering_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "immersiveengineering"
+    }
+  ],
+  "pattern": [
+    "SLS",
+    "SCS",
+    "SLS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:sheetmetals/copper"
+    },
+    "L": {
+      "item": "immersiveengineering:capacitor_lv"
+    },
+    "C": {
+      "item": "exchangers:ie_exchanger_core_tier1"
+    }
+  },
+  "result": {
+    "item": "exchangers:lv_exchanger"
+  }
+}

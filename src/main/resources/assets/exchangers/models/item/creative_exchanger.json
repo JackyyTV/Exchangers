@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/special/creative_exchanger"
+        "layer0": "exchangers:item/special/creative_exchanger"
     }
 }

@@ -1,42 +1,58 @@
 package jackyy.exchangers.item.immersiveengineering;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.ModList;
 
 public class ItemHVExchanger extends ItemExchangerBasePowered {
 
-    public ItemHVExchanger() {
-        setRegistryName(Reference.MODID + ":hv_exchanger");
-        setTranslationKey(Reference.MODID + ".hv_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.hvMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.hvPerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.hvMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.hvMaxRange.get();
+            loaded = ModConfigs.CONFIG.immersiveEngineeringModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.hvMaxEnergy;
+            perBlockUse = DefaultValues.hvPerBlockUse;
+            harvestLevel = DefaultValues.hvMaxHarvestLevel;
+            range = DefaultValues.hvMaxRange;
+            loaded = DefaultValues.immersiveEngineeringModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemHVExchanger() {
+        super(new Properties().rarity(Rarity.EPIC));
+        setRegistryName(Reference.MODID, "hv_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.immersiveEngineeringTweaks.hvMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.immersiveEngineeringTweaks.hvPerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.immersiveEngineeringModule && Loader.isModLoaded(Reference.IE);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -45,18 +61,8 @@ public class ItemHVExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.immersiveEngineeringTweaks.hvMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.immersiveEngineeringTweaks.hvMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.IE);
     }
 
 }

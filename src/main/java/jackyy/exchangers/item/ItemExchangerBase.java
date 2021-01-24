@@ -5,125 +5,137 @@ import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.handler.mode.ModeHorizontalCol;
 import jackyy.exchangers.handler.mode.ModePlane;
 import jackyy.exchangers.handler.mode.ModeVerticalCol;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.IExchanger;
+import jackyy.exchangers.util.ILoadable;
 import jackyy.exchangers.util.Reference;
 import jackyy.gunpowderlib.helper.KeyHelper;
 import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Enchantments;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class ItemExchangerBase extends Item implements IExchanger {
+public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
 
-    public ItemExchangerBase() {
-        setMaxStackSize(1);
-        setCreativeTab(Reference.TAB);
+    public ItemExchangerBase(Properties props) {
+        super(props.group(Reference.TAB));
     }
 
     @Override
-	public boolean showDurabilityBar(ItemStack stack) {
-		return stack.isItemDamaged();
-	}
+    public boolean showDurabilityBar(ItemStack stack) {
+        return stack.isDamaged();
+    }
 
-	@Override
+    @Override
     public boolean isPowered() {
         return false;
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote) {
+    public ActionResultType onItemUse(ItemUseContext context) {
+        World world = context.getWorld();
+        PlayerEntity player = context.getPlayer();
+        BlockPos pos = context.getPos();
+        Direction side = context.getFace();
+        if (!world.isRemote && player != null) {
             if (player.isSneaking()) {
                 ExchangerHandler.selectBlock(player.getHeldItemMainhand(), player, world, pos);
             } else {
-                ExchangerHandler.placeBlock(player.getHeldItemMainhand(), player, world, pos, side);
+                ExchangerHandler.placeBlock(player.getHeldItemMainhand(), player, world, pos, side, context);
             }
         }
-        return EnumActionResult.SUCCESS;
+        return ActionResultType.SUCCESS;
     }
 
     @Override
-    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
 
         ExchangerHandler.setDefaultTagCompound(stack);
-        NBTTagCompound compound = NBTHelper.getTag(stack);
-        IBlockState state = NBTUtil.readBlockState(compound.getCompoundTag("blockstate"));
+        CompoundNBT compound = NBTHelper.getTag(stack);
+        BlockState state = NBTUtil.readBlockState(compound.getCompound("blockstate"));
         Block block = state.getBlock();
-        int mode = compound.getInteger("mode");
+        int mode = compound.getInt("mode");
 
         if (!KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.getShiftText(Reference.MODID));
         }
         if (KeyHelper.isShiftKeyDown()) {
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.selected_block", (block == Blocks.AIR ? TextFormatting.RED + StringHelper.localize(Reference.MODID, "tooltip.selected_block.none") + TextFormatting.WHITE : TextFormatting.GREEN + ExchangerHandler.getBlockName(block, state.getBlock().getMetaFromState(state)) + TextFormatting.WHITE)));
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.current_range", TextFormatting.GREEN + ExchangerHandler.rangeList[compound.getInteger("range")] + TextFormatting.WHITE));
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.max_range", TextFormatting.GREEN + ExchangerHandler.rangeList[getMaxRange()] + TextFormatting.WHITE));
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.max_harvest_level", TextFormatting.GREEN + StringHelper.formatHarvestLevel(Reference.MODID, getHarvestLevel()) + TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.selected_block", (block == Blocks.AIR ? StringHelper.localize(Reference.MODID, "tooltip.selected_block.none").mergeStyle(TextFormatting.RED) : ExchangerHandler.getBlockName(block).mergeStyle(TextFormatting.GREEN))).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_range", TextFormatting.GREEN + ExchangerHandler.rangeList[compound.getInt("range")]).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_range", new StringTextComponent(ExchangerHandler.rangeList[getMaxRange()]).mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_harvest_level", StringHelper.formatHarvestLevel(Reference.MODID, getHarvestLevel()).mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
             switch (mode) {
                 case 0:
-                    tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.current_mode", TextFormatting.GREEN + ModePlane.getDisplayName()) );
+                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModePlane.getDisplayName().mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
                     break;
                 case 1:
-                    tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.current_mode", TextFormatting.GREEN + ModeHorizontalCol.getDisplayName()));
+                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeHorizontalCol.getDisplayName().mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
                     break;
                 case 2:
-                    tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.current_mode", TextFormatting.GREEN + ModeVerticalCol.getDisplayName()));
+                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeVerticalCol.getDisplayName().mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
                     break;
             }
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.silk_touch", Reference.getStateString(ModConfig.misc.doExchangersSilkTouch)));
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.force_drop_items", Reference.getStateString(compound.getBoolean("forceDropItems"))));
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.directional_placement", Reference.getStateString(compound.getBoolean("directionalPlacement"))));
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement", Reference.getStateString(compound.getBoolean("fuzzyPlacement"))));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.silk_touch", Reference.getStateString(ModConfigs.CONFIG.doExchangersSilkTouch.get())).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.force_drop_items", Reference.getStateString(compound.getBoolean("forceDropItems"))).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.directional_placement", Reference.getStateString(compound.getBoolean("directionalPlacement"))).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement", Reference.getStateString(compound.getBoolean("fuzzyPlacement"))).mergeStyle(TextFormatting.WHITE));
         }
         if (!KeyHelper.isCtrlKeyDown()) {
             tooltip.add(StringHelper.getCtrlText(Reference.MODID));
         }
         if (KeyHelper.isCtrlKeyDown()) {
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.extra1"));
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.extra2"));
-            tooltip.add(TextFormatting.WHITE + StringHelper.localize(Reference.MODID, "tooltip.extra3", TextFormatting.GREEN + Keys.OPEN_GUI_KEY.getDisplayName() + TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra1").mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra2").mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra3", new TranslationTextComponent(Keys.OPEN_GUI_KEY.getKey().toString()).mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
         }
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.getTierText(Reference.MODID, getTier()));
             if (!isPowered()) {
-                tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getItemDamage()) + " / " + StringHelper.formatNumber(stack.getMaxDamage()) + " " + StringHelper.localize(Reference.MODID, "tooltip.durability"));
+                tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamage()).appendString(" / ").append(StringHelper.formatNumber(stack.getMaxDamage())).appendString(" ").append(StringHelper.localize(Reference.MODID, "tooltip.durability")));
             }
         }
     }
 
-    @Override @SideOnly(Side.CLIENT)
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list) {
-        if (isInCreativeTab(tab)) {
+    @Override @OnlyIn(Dist.CLIENT)
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (isInGroup(group)) {
             if (checkLoaded()) {
-                list.add(new ItemStack(this));
+                items.add(new ItemStack(this));
             }
         }
     }
 
-    @Override @SideOnly(Side.CLIENT)
+    @Override
+    public boolean checkLoaded() {
+        return true;
+    }
+
+    @Override @OnlyIn(Dist.CLIENT)
     public boolean hasEffect(ItemStack stack) {
         return false;
     }
@@ -135,10 +147,12 @@ public class ItemExchangerBase extends Item implements IExchanger {
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.FORTUNE
-                || enchantment == Enchantments.SILK_TOUCH
-                || enchantment == Enchantments.UNBREAKING
-                || enchantment == Enchantments.MENDING;
+        /*
+        TODO add back fortune enchant support
+        return enchantment == Enchantments.FORTUNE || enchantment == Enchantments.SILK_TOUCH
+                || enchantment == Enchantments.UNBREAKING || enchantment == Enchantments.MENDING;
+        */
+        return enchantment == Enchantments.SILK_TOUCH || enchantment == Enchantments.UNBREAKING || enchantment == Enchantments.MENDING;
     }
 
 }

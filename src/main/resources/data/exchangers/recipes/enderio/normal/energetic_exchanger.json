@@ -1,0 +1,39 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:ender_io_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "enderio"
+    },
+    {
+      "type": "exchangers:ender_io_recipes_type", "value": "normal"
+    }
+  ],
+  "pattern": [
+    "ACA",
+    "DXD",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/energetic_alloy"
+    },
+    "B": {
+      "item": "enderio:capacitor_bank"
+    },
+    "D": {
+      "item": "enderio:double_layer_capacitor"
+    },
+    "C": {
+      "item": "exchangers:eio_exchanger_core_tier2"
+    },
+    "X": {
+      "item": "exchangers:electrical_steel_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:energetic_exchanger"
+  }
+}

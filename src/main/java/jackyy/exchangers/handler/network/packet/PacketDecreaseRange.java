@@ -1,32 +1,33 @@
 package jackyy.exchangers.handler.network.packet;
 
-import io.netty.buffer.ByteBuf;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.item.ItemExchangerBase;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
 
-public class PacketDecreaseRange implements IMessage, IMessageHandler<PacketDecreaseRange, IMessage> {
+import java.util.function.Supplier;
 
-    @Override
-    public void fromBytes(ByteBuf buf) { }
-
-    @Override
-    public void toBytes(ByteBuf buf) { }
+public class PacketDecreaseRange {
 
     public PacketDecreaseRange() { }
 
-    @Override
-    public IMessage onMessage(PacketDecreaseRange message, MessageContext context) {
-        EntityPlayerMP playerMP = context.getServerHandler().player;
-        ItemStack heldItem = playerMP.getHeldItemMainhand();
-        if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
-            ExchangerHandler.switchRange(heldItem, true);
-        }
-        return null;
+    public PacketDecreaseRange(PacketBuffer buffer) { }
+
+    public void toBytes(PacketBuffer buffer) { }
+
+    public void handle(Supplier<NetworkEvent.Context> context) {
+        context.get().enqueueWork(() -> {
+            ServerPlayerEntity player = context.get().getSender();
+            if (player != null) {
+                ItemStack heldItem = player.getHeldItemMainhand();
+                if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
+                    ExchangerHandler.switchRange(heldItem, true);
+                }
+            }
+        });
+        context.get().setPacketHandled(true);
     }
 
 }

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/mekanism/basic_exchanger"
+        "layer0": "exchangers:item/mekanism/basic_exchanger"
     }
 }

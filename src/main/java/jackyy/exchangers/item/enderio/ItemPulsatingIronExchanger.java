@@ -1,41 +1,57 @@
 package jackyy.exchangers.item.enderio;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.ModList;
 
 public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
 
-    public ItemPulsatingIronExchanger() {
-        setRegistryName(Reference.MODID + ":pulsating_iron_exchanger");
-        setTranslationKey(Reference.MODID + ".pulsating_iron_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.pulsatingMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.pulsatingPerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.pulsatingMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.pulsatingMaxRange.get();
+            loaded = ModConfigs.CONFIG.enderIOModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.pulsatingMaxEnergy;
+            perBlockUse = DefaultValues.pulsatingPerBlockUse;
+            harvestLevel = DefaultValues.pulsatingMaxHarvestLevel;
+            range = DefaultValues.pulsatingMaxRange;
+            loaded = DefaultValues.enderIOModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemPulsatingIronExchanger() {
+        super(new Properties().rarity(Reference.RARITY_TIER1));
+        setRegistryName(Reference.MODID, "pulsating_iron_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.enderIOTweaks.pulsatingMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.enderIOTweaks.pulsatingPerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Reference.EIO);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -44,18 +60,8 @@ public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.enderIOTweaks.pulsatingMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.enderIOTweaks.pulsatingMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return Reference.TIER_1;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.EIO);
     }
 
 }

@@ -1,0 +1,39 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:ender_io_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "enderio"
+    },
+    {
+      "type": "exchangers:ender_io_recipes_type", "value": "hard"
+    }
+  ],
+  "pattern": [
+    "SVS",
+    "CXC",
+    "SOS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:ingots/dark_steel"
+    },
+    "O": {
+      "item": "enderio:octadic_capacitor"
+    },
+    "V": {
+      "item": "enderio:vibrant_crystal"
+    },
+    "C": {
+      "item": "exchangers:eio_exchanger_core_tier3"
+    },
+    "X": {
+      "item": "exchangers:energetic_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:dark_steel_exchanger"
+  }
+}

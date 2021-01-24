@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    },
+    {
+      "type": "exchangers:vanilla_recipes_type", "value": "normal"
+    }
+  ],
+  "pattern": [
+    "DCD",
+    "EXE",
+    "DDD"
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "exchangers:exchanger_core_tier3"
+    },
+    "X": {
+      "item": "exchangers:iron_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:diamond_exchanger"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:immersive_engineering_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "immersiveengineering"
+    },
+    {
+      "type": "exchangers:immersive_engineering_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "ESE",
+    "SBS",
+    "ESE"
+  ],
+  "key": {
+    "E": {
+      "item": "immersiveengineering:wirecoil_electrum"
+    },
+    "S": {
+      "item": "immersiveengineering:component_steel"
+    },
+    "B": {
+      "item": "immersiveengineering:plantoil_bucket"
+    }
+  },
+  "result": {
+    "item": "exchangers:ie_exchanger_core_tier2"
+  }
+}

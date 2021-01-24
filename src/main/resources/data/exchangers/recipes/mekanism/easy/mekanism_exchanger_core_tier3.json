@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:mekanism_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "mekanism"
+    },
+    {
+      "type": "exchangers:mekanism_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "OIO",
+    "IAI",
+    "OIO"
+  ],
+  "key": {
+    "O": {
+      "tag": "forge:dusts/refined_obsidian"
+    },
+    "I": {
+      "tag": "forge:ingots/refined_obsidian"
+    },
+    "A": {
+      "tag": "forge:alloys/ultimate"
+    }
+  },
+  "result": {
+    "item": "exchangers:mekanism_exchanger_core_tier3"
+  }
+}

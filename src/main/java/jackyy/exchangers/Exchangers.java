@@ -1,38 +1,57 @@
 package jackyy.exchangers;
 
-import jackyy.exchangers.proxy.CommonProxy;
+import jackyy.exchangers.client.keybind.Keys;
+import jackyy.exchangers.handler.ClientEventsHandler;
+import jackyy.exchangers.handler.CommonEventsHandler;
+import jackyy.exchangers.handler.network.NetworkHandler;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.registry.ModItems;
+import jackyy.exchangers.registry.crafting.ModCrafting;
 import jackyy.exchangers.util.Reference;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(modid = Reference.MODID, version = Reference.VERSION, name = Reference.MODNAME, dependencies = Reference.DEPENDS, certificateFingerprint = "@FINGERPRINT@", acceptedMinecraftVersions = Reference.MCVERSION, useMetadata = true)
+@Mod(Reference.MODID)
 public class Exchangers {
 
-    @SidedProxy(serverSide = Reference.COMMON_PROXY, clientSide = Reference.CLIENT_PROXY)
-    public static CommonProxy proxy;
-
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent e) {
-        proxy.preInit(e);
+    public Exchangers() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC, Reference.MODNAME + ".toml");
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        ModCrafting.registerConditions();
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent e) {
-        proxy.init(e);
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        /*
+        TODO add Better With Mods integration back when possible
+        if (ModList.get().isLoaded(Reference.BWM)) {
+            MinecraftForge.EVENT_BUS.register(new BetterWithModsIntegration());
+        }
+        */
+        MinecraftForge.EVENT_BUS.register(new CommonEventsHandler());
+        NetworkHandler.registerMessages();
     }
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent e) {
-        proxy.postInit(e);
+    private void clientSetup(final FMLClientSetupEvent event) {
+        MinecraftForge.EVENT_BUS.register(new ClientEventsHandler());
+        Keys.init();
     }
 
-    @Mod.EventHandler
-    public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-        Reference.LOGGER.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been modified. This will NOT be supported by the mod author!");
+    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents {
+        @SubscribeEvent
+        public static void onItemRegistry(RegistryEvent.Register<Item> event) {
+            ModItems.init(event);
+        }
     }
 
 }

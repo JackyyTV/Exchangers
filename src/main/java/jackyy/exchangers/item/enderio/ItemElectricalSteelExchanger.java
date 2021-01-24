@@ -1,42 +1,58 @@
 package jackyy.exchangers.item.enderio;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.ModList;
 
 public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
 
-    public ItemElectricalSteelExchanger() {
-        setRegistryName(Reference.MODID + ":electrical_steel_exchanger");
-        setTranslationKey(Reference.MODID + ".electrical_steel_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.electricalSteelMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.electricalSteelPerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.electricalSteelMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.electricalSteelMaxRange.get();
+            loaded = ModConfigs.CONFIG.enderIOModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.electricalSteelMaxEnergy;
+            perBlockUse = DefaultValues.electricalSteelPerBlockUse;
+            harvestLevel = DefaultValues.electricalSteelMaxHarvestLevel;
+            range = DefaultValues.electricalSteelMaxRange;
+            loaded = DefaultValues.enderIOModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemElectricalSteelExchanger() {
+        super(new Properties().rarity(Rarity.RARE));
+        setRegistryName(Reference.MODID, "electrical_steel_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.enderIOTweaks.electricalSteelMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.enderIOTweaks.electricalSteelPerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Reference.EIO);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -45,18 +61,8 @@ public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.enderIOTweaks.electricalSteelMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.enderIOTweaks.electricalSteelMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.EIO);
     }
 
 }

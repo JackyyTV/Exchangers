@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/immersiveengineering/hv_exchanger"
+        "layer0": "exchangers:item/immersiveengineering/hv_exchanger"
     }
 }

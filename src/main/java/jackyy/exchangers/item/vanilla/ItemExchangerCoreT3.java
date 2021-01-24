@@ -1,36 +1,30 @@
 package jackyy.exchangers.item.vanilla;
 
 import jackyy.exchangers.item.ItemCoreBase;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
 
 public class ItemExchangerCoreT3 extends ItemCoreBase {
 
-    public ItemExchangerCoreT3() {
-        setRegistryName(Reference.MODID + ":exchanger_core_tier3");
-        setTranslationKey(Reference.MODID + ".exchanger_core_tier3");
+    private static boolean loaded;
+    static {
+        try {
+            loaded = ModConfigs.CONFIG.vanillaModule.get();
+        } catch (NullPointerException exception) {
+            loaded = DefaultValues.vanillaModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemExchangerCoreT3() {
+        super(new Properties().rarity(Rarity.EPIC));
+        setRegistryName(Reference.MODID, "exchanger_core_tier3");
     }
 
     @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.vanillaModule;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
+        return loaded;
     }
 
 }

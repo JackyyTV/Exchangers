@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:mekanism_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "mekanism"
+    },
+    {
+      "type": "exchangers:mekanism_recipes_type", "value": "normal"
+    }
+  ],
+  "pattern": [
+    "ACA",
+    "TXT",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:circuits/advanced"
+    },
+    "T": {
+      "item": "mekanism:energy_tablet"
+    },
+    "C": {
+      "item": "exchangers:mekanism_exchanger_core_tier2"
+    },
+    "X": {
+      "item": "exchangers:basic_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:advanced_exchanger"
+  }
+}

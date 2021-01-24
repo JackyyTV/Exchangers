@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    },
+    {
+      "type": "exchangers:vanilla_recipes_type", "value": "normal"
+    }
+  ],
+  "pattern": [
+    "OCO",
+    "EXE",
+    "OOO"
+  ],
+  "key": {
+    "O": {
+      "tag": "forge:obsidian"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "exchangers:exchanger_core_tier3"
+    },
+    "X": {
+      "item": "exchangers:emerald_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:obsidian_exchanger"
+  }
+}

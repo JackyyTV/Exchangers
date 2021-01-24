@@ -1,42 +1,58 @@
 package jackyy.exchangers.item.enderioendergy;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.ModList;
 
 public class ItemMelodicExchanger extends ItemExchangerBasePowered {
 
-    public ItemMelodicExchanger() {
-        setRegistryName(Reference.MODID + ":melodic_exchanger");
-        setTranslationKey(Reference.MODID + ".melodic_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.melodicMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.melodicPerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.melodicMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.melodicMaxRange.get();
+            loaded = ModConfigs.CONFIG.enderIOEndergyModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.melodicMaxEnergy;
+            perBlockUse = DefaultValues.melodicPerBlockUse;
+            harvestLevel = DefaultValues.melodicMaxHarvestLevel;
+            range = DefaultValues.melodicMaxRange;
+            loaded = DefaultValues.enderIOEndergyModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemMelodicExchanger() {
+        super(new Properties().rarity(Rarity.EPIC));
+        setRegistryName(Reference.MODID, "melodic_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.enderIOEndergyTweaks.melodicMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.enderIOEndergyTweaks.melodicPerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.enderIOEndergyModule && Loader.isModLoaded(Reference.EIO_ENDERGY);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -45,18 +61,8 @@ public class ItemMelodicExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.enderIOEndergyTweaks.melodicMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.enderIOEndergyTweaks.melodicMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.EPIC;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.EIO_ENDERGY);
     }
 
 }

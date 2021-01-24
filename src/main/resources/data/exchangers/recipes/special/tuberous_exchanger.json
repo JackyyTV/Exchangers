@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:special_module", "enabled": true
+    }
+  ],
+  "pattern": [
+    "PGP",
+    "PEP",
+    "PGP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:potato"
+    },
+    "G": {
+      "tag": "forge:nuggets/gold"
+    },
+    "E": {
+      "tag": "forge:ender_pearls"
+    }
+  },
+  "result": {
+    "item": "exchangers:tuberous_exchanger"
+  }
+}

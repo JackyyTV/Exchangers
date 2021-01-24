@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:mekanism_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "mekanism"
+    }
+  ],
+  "pattern": [
+    "OSO",
+    "SAS",
+    "OSO"
+  ],
+  "key": {
+    "O": {
+      "tag": "forge:ingots/osmium"
+    },
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "A": {
+      "tag": "forge:alloys/advanced"
+    }
+  },
+  "result": {
+    "item": "exchangers:mekanism_exchanger_core_tier1"
+  }
+}

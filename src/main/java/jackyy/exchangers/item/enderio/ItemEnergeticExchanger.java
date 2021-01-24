@@ -1,42 +1,58 @@
 package jackyy.exchangers.item.enderio;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.ModList;
 
 public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
 
-    public ItemEnergeticExchanger() {
-        setRegistryName(Reference.MODID + ":energetic_exchanger");
-        setTranslationKey(Reference.MODID + ".energetic_exchanger");
+    private static int energy;
+    private static int perBlockUse;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            energy = ModConfigs.CONFIG.energeticMaxEnergy.get();
+            perBlockUse = ModConfigs.CONFIG.energeticPerBlockUse.get();
+            harvestLevel = ModConfigs.CONFIG.energeticMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.energeticMaxRange.get();
+            loaded = ModConfigs.CONFIG.enderIOModule.get();
+        } catch (NullPointerException exception) {
+            energy = DefaultValues.energeticMaxEnergy;
+            perBlockUse = DefaultValues.energeticPerBlockUse;
+            harvestLevel = DefaultValues.energeticMaxHarvestLevel;
+            range = DefaultValues.energeticMaxRange;
+            loaded = DefaultValues.enderIOModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemEnergeticExchanger() {
+        super(new Properties().rarity(Rarity.RARE));
+        setRegistryName(Reference.MODID, "energetic_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfig.enderIOTweaks.energeticMaxEnergy;
+        return energy;
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfig.enderIOTweaks.energeticPerBlockUse;
+        return perBlockUse;
     }
 
     @Override
-    public boolean checkLoaded() {
-        return ModConfig.modules.enderIOModule && Loader.isModLoaded(Reference.EIO);
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -45,18 +61,8 @@ public class ItemEnergeticExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.enderIOTweaks.energeticMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.enderIOTweaks.energeticMaxRange;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+    public boolean checkLoaded() {
+        return loaded && ModList.get().isLoaded(Reference.EIO);
     }
 
 }

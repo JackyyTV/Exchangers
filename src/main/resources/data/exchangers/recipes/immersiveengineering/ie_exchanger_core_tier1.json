@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:immersive_engineering_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "immersiveengineering"
+    }
+  ],
+  "pattern": [
+    "CIC",
+    "IBI",
+    "CIC"
+  ],
+  "key": {
+    "C": {
+      "item": "immersiveengineering:wirecoil_copper"
+    },
+    "I": {
+      "item": "immersiveengineering:component_iron"
+    },
+    "B": {
+      "item": "immersiveengineering:creosote_bucket"
+    }
+  },
+  "result": {
+    "item": "exchangers:ie_exchanger_core_tier1"
+  }
+}

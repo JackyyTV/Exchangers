@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    },
+    {
+      "type": "exchangers:vanilla_recipes_type", "value": "normal"
+    }
+  ],
+  "pattern": [
+    "DED",
+    "BCB",
+    "DED"
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "E": {
+      "tag": "forge:gems/emerald"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "C": {
+      "item": "exchangers:exchanger_core_tier2"
+    }
+  },
+  "result": {
+    "item": "exchangers:exchanger_core_tier3"
+  }
+}

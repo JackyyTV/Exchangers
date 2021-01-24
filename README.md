@@ -35,11 +35,6 @@ If you would like to set up the workspace yourself to submit PRs of features add
     - SSH: `git clone git@github.com:JackyyTV/Exchangers.git`
     - Or, use the GitHub desktop app to clone the repo via GUI interface.
 
-2. Setting up the workspace, depending on what you need.
-    - Decompiled source: `gradlew setupDecompWorkspace`
-    - Obfuscated source: `gradlew setupDevWorkspace`
-    - CI server: `gradlew setupCIWorkspace`
+2. Setting up the workspace, simply import the project to the IDE of your choice, then run `gradlew genEclipseRuns` or `gradlew genIntellijRuns` depending on the need.
 
-3. Either use `gradlew build` to build the jar file (Output is in `build/libs`), or setup the IDE if you are going to modify any codes. Both IntelliJ IDEA and Eclipse are included below since they're more popular IDEs.
-    - IntelliJ IDEA: Do `gradlew idea`, open the `.ipr` file and import the gradle file, then execute the `genIntellijRuns` task in the "Gradle" tab.
-    - Eclipse: Do `gradlew eclipse` and open the directory as project.
+3. Either use `gradlew build` to build the jar file (Output is in `build/libs`), or proceed in the IDE if you are going to modify any codes.

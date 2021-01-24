@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/enderio/conductive_iron_exchanger"
+        "layer0": "exchangers:item/enderio/conductive_iron_exchanger"
     }
 }

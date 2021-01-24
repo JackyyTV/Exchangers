@@ -30,8 +30,4 @@ public interface IExchanger {
         return false;
     }
 
-    default boolean checkLoaded() {
-        return true;
-    }
-
 }

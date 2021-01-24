@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:ender_io_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "enderio"
+    },
+    {
+      "type": "exchangers:ender_io_recipes_type", "value": "hard"
+    }
+  ],
+  "pattern": [
+    "PSP",
+    "CDC",
+    "PSP"
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:powders/pulsating"
+    },
+    "S": {
+      "tag": "forge:ingots/electrical_steel"
+    },
+    "D": {
+      "item": "enderio:dew_of_the_void_bucket"
+    },
+    "C": {
+      "item": "exchangers:eio_exchanger_core_tier1"
+    }
+  },
+  "result": {
+    "item": "exchangers:eio_exchanger_core_tier2"
+  }
+}

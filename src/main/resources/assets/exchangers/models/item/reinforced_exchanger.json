@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "exchangers:items/thermalexpansion/reinforced_exchanger"
+        "layer0": "exchangers:item/thermal/reinforced_exchanger"
     }
 }

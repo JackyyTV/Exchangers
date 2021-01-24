@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:vanilla_module", "enabled": true
+    }
+  ],
+  "pattern": [
+    "WRW",
+    "RPR",
+    "WRW"
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:dyes/red"
+    },
+    "W": {
+      "tag": "minecraft:logs"
+    },
+    "P": {
+      "tag": "forge:ender_pearls"
+    }
+  },
+  "result": {
+    "item": "exchangers:exchanger_core_tier1"
+  }
+}

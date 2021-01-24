@@ -1,28 +1,46 @@
 package jackyy.exchangers.item.vanilla;
 
 import jackyy.exchangers.item.ItemExchangerBase;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.common.Tags;
 
 public class ItemGoldenExchanger extends ItemExchangerBase {
 
-    public ItemGoldenExchanger() {
-        setRegistryName(Reference.MODID + ":golden_exchanger");
-        setTranslationKey(Reference.MODID + ".golden_exchanger");
-        setMaxDamage(ModConfig.vanillaTweaks.goldenMaxDmg);
+    private static int dmg;
+    private static int harvestLevel;
+    private static int range;
+    private static boolean loaded;
+    static {
+        try {
+            dmg = ModConfigs.CONFIG.goldenMaxDmg.get();
+            harvestLevel = ModConfigs.CONFIG.goldenMaxHarvestLevel.get();
+            range = ModConfigs.CONFIG.goldenMaxRange.get();
+            loaded = ModConfigs.CONFIG.vanillaModule.get();
+        } catch (NullPointerException exception) {
+            dmg = DefaultValues.goldenMaxDmg;
+            harvestLevel = DefaultValues.goldenMaxHarvestLevel;
+            range = DefaultValues.goldenMaxRange;
+            loaded = DefaultValues.vanillaModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemGoldenExchanger() {
+        super(new Properties().defaultMaxDamage(dmg).rarity(Rarity.RARE));
+        setRegistryName(Reference.MODID, "golden_exchanger");
+    }
+
+    @Override
+    public int getHarvestLevel() {
+        return harvestLevel;
+    }
+
+    @Override
+    public int getMaxRange() {
+        return range;
     }
 
     @Override
@@ -31,28 +49,13 @@ public class ItemGoldenExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return ModConfig.vanillaTweaks.goldenMaxHarvestLevel;
-    }
-
-    @Override
-    public int getMaxRange() {
-        return ModConfig.vanillaTweaks.goldenMaxRange;
-    }
-
-    @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.vanillaModule;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+        return loaded;
     }
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return OreDictionary.containsMatch(false, OreDictionary.getOres("ingotGold"), repair);
+        return Tags.Items.INGOTS_GOLD.contains(repair.getItem());
     }
 
 }

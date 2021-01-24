@@ -1,44 +1,42 @@
 package jackyy.exchangers.item.special;
 
 import jackyy.exchangers.item.ItemExchangerBase;
-import jackyy.exchangers.registry.ModConfig;
+import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
 import jackyy.gunpowderlib.helper.KeyHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.item.Rarity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.IRarity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
 public class ItemTuberousExchanger extends ItemExchangerBase {
 
-    public ItemTuberousExchanger() {
-        setRegistryName(Reference.MODID + ":tuberous_exchanger");
-        setTranslationKey(Reference.MODID + ".tuberous_exchanger");
-        setMaxDamage(1);
+    private static boolean loaded;
+    static {
+        try {
+            loaded = ModConfigs.CONFIG.specialModule.get();
+        } catch (NullPointerException exception) {
+            loaded = DefaultValues.specialModule;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    public ItemTuberousExchanger() {
+        super(new Properties().defaultMaxDamage(1).rarity(Rarity.UNCOMMON));
+        setRegistryName(Reference.MODID, "tuberous_exchanger");
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
         super.addInformation(stack, world, tooltip, flag);
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.tuberous_exchanger.warning"));
@@ -46,24 +44,20 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public ActionResultType onItemUse(ItemUseContext context) {
+        PlayerEntity player = context.getPlayer();
         if (player != null) {
-            player.getHeldItem(hand).setCount(0);
+            player.getHeldItemMainhand().setCount(0);
             player.attackEntityFrom(new EntityDamageSource("tuberous_exchanger", player), Float.MAX_VALUE);
-            player.world.createExplosion(player, player.posX, player.posY, player.posZ, 1.0F, false);
-            return EnumActionResult.SUCCESS;
+            player.world.createExplosion(player, player.getPosX(), player.getPosY(), player.getPosZ(), 1.0F, Explosion.Mode.NONE);
+            return ActionResultType.SUCCESS;
         }
-        return EnumActionResult.FAIL;
+        return ActionResultType.FAIL;
     }
 
     @Override
     public boolean checkLoaded() {
-        return ModConfig.modules.specialModule;
-    }
-
-    @Override
-    public IRarity getForgeRarity(ItemStack stack) {
-        return EnumRarity.UNCOMMON;
+        return loaded;
     }
 
 }

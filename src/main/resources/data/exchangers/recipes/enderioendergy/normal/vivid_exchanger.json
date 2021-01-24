@@ -1,0 +1,39 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:ender_io_endergy_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "enderioendergy"
+    },
+    {
+      "type": "exchangers:ender_io_endergy_recipes_type", "value": "normal"
+    }
+  ],
+  "pattern": [
+    "VCV",
+    "SXS",
+    "V#V"
+  ],
+  "key": {
+    "V": {
+      "tag": "forge:ingots/vivid_alloy"
+    },
+    "S": {
+      "item": "enderio:item_capacitor_energetic_silver"
+    },
+    "#": {
+      "item": "enderio:item_capacitor_vivid"
+    },
+    "C": {
+      "item": "exchangers:eio_exchanger_core_tier2"
+    },
+    "X": {
+      "item": "exchangers:energetic_silver_exchanger"
+    }
+  },
+  "result": {
+    "item": "exchangers:vivid_exchanger"
+  }
+}

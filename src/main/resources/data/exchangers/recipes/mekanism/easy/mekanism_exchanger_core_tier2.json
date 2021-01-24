@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:mekanism_module", "enabled": true
+    },
+    {
+      "type": "forge:mod_loaded", "modid": "mekanism"
+    },
+    {
+      "type": "exchangers:mekanism_recipes_type", "value": "easy"
+    }
+  ],
+  "pattern": [
+    "DGD",
+    "GAG",
+    "DGD"
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:dusts/diamond"
+    },
+    "G": {
+      "tag": "forge:ingots/refined_glowstone"
+    },
+    "A": {
+      "tag": "forge:alloys/elite"
+    }
+  },
+  "result": {
+    "item": "exchangers:mekanism_exchanger_core_tier2"
+  }
+}

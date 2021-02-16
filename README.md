@@ -1,7 +1,7 @@
 # Exchangers
 [![Downloads](http://cf.way2muchnoise.eu/full_exchangers_downloads.svg)](https://minecraft.curseforge.com/projects/exchangers) [![MCVersion](http://cf.way2muchnoise.eu/versions/exchangers.svg)](https://minecraft.curseforge.com/projects/exchangers)
 
-[![GitHub issues](https://img.shields.io/github/issues/JackyyTV/Exchangers.svg)](https://github.com/JackyyTV/Exchangers/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/JackyyTV/Exchangers.svg)](https://github.com/JackyyTV/Exchangers/pulls) [![license](https://img.shields.io/github/license/JackyyTV/Exchangers.svg)](../dev-1.12/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/JackyyTV/Exchangers.svg)](https://github.com/JackyyTV/Exchangers/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/JackyyTV/Exchangers.svg)](https://github.com/JackyyTV/Exchangers/pulls)
 
 [![Logo](https://i.gyazo.com/00a2bbe43870bb032e19e1399fa72411.png)](https://minecraft.curseforge.com/projects/exchangers)
 

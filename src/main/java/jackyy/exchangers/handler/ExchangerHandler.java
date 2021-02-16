@@ -12,14 +12,11 @@ import jackyy.gunpowderlib.helper.StringHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,10 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import java.util.HashSet;
 import java.util.List;
@@ -86,11 +80,11 @@ public class ExchangerHandler {
         }
     }
 
-    private static int getExPerBlockUse(ItemStack stack) {
+    public static int getExPerBlockUse(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).getPerBlockUse();
     }
 
-    private static int getPerBlockEnergy(ItemStack stack) {
+    public static int getPerBlockEnergy(ItemStack stack) {
         if (ModConfig.misc.unbreakingPoweredExchangers) {
             int level = MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack), 0, 10);
             if (new Random().nextInt(2 + level) >= 2) {
@@ -100,19 +94,19 @@ public class ExchangerHandler {
         return getExPerBlockUse(stack);
     }
 
-    private static int getExHarvestLevel(ItemStack stack) {
+    public static int getExHarvestLevel(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).getHarvestLevel();
     }
 
-    private static int getExRange(ItemStack stack) {
+    public static int getExRange(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).getMaxRange();
     }
 
-    private static boolean getExIsCreative(ItemStack stack) {
+    public static boolean getExIsCreative(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).isCreative();
     }
 
-    private static boolean getExIsPowered(ItemStack stack) {
+    public static boolean getExIsPowered(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).isPowered();
     }
 
@@ -286,24 +280,24 @@ public class ExchangerHandler {
                 world.setBlockState(coordinate, placeState, 3);
             }
             if (!MinecraftForge.EVENT_BUS.post(event)) {
-                if (consumeItemInInventory(Item.getItemFromBlock(block), block.getItem(world, pos, state).getMetadata(), player.inventory, player)) {
+                if (ItemHandler.consumeItemInInventory(Item.getItemFromBlock(block), block.getItem(world, pos, state).getMetadata(), player.inventory, player)) {
                     if (!player.capabilities.isCreativeMode && !getExIsCreative(stack) && !tag.getBoolean("voidItems")) {
                         if (ModConfig.misc.doExchangersSilkTouch || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                             ItemStack oldblockItem;
                             if (oldblock.canSilkHarvest(world, pos, oldState, player) && !(oldblock instanceof IShearable)) {
-                                oldblockItem = getSilkTouchDrop(oldState);
+                                oldblockItem = ItemHandler.getSilkTouchDrop(oldState);
                             } else {
                                 oldblockItem = oldblock.getPickBlock(oldState, null, world, pos, player);
                             }
                             if (oldblockItem.getItem().equals(Items.AIR)) {
                                 oldblockItem = oldblock.getPickBlock(oldState, null, world, pos, player);
                             }
-                            giveItem(world, player, oldblockItem);
+                            ItemHandler.giveItem(world, player, oldblockItem);
                         } else {
                             int fortuneLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
                             List<ItemStack> oldblockItems = oldblock.getDrops(world, pos, oldState, fortuneLevel);
                             for (ItemStack oldblockItem : oldblockItems) {
-                                giveItem(world, player, oldblockItem);
+                                ItemHandler.giveItem(world, player, oldblockItem);
                             }
                         }
                         if (!getExIsPowered(stack)) {
@@ -377,77 +371,6 @@ public class ExchangerHandler {
         IBlockState state = world.getBlockState(pos);
         if (state == centerState)
             coordinates.add(pos);
-    }
-
-    private static boolean consumeItemInInventory(Item item, int meta, InventoryPlayer playerInv, EntityPlayer player) {
-        if (player.capabilities.isCreativeMode || getExIsCreative(player.getHeldItemMainhand())) {
-            return true;
-        }
-        int i = findItem(item, meta, playerInv);
-        if (i < 0) {
-            IItemHandler inv = findItemHolder(playerInv);
-            if (inv == null)
-                return false;
-            i = findItemInContainer(item, meta, inv);
-            if (i < 0)
-                return false;
-            ItemStack extracted = inv.extractItem(i, 1, false);
-            return !extracted.isEmpty();
-        } else {
-            playerInv.decrStackSize(i, 1);
-        }
-        return true;
-    }
-
-    private static int findItem(Item item, int meta, IInventory inv) {
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (!stack.isEmpty() && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private static int findItemInContainer(Item item, int meta, IItemHandler inv) {
-        for (int i = 0; i < inv.getSlots(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (!stack.isEmpty() && (stack.getItem() == item) && (meta == stack.getItemDamage())) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private static IItemHandler findItemHolder(IInventory inv) {
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (!stack.isEmpty() && stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null) && !stack.hasCapability(CapabilityEnergy.ENERGY, null)) {
-                return stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            }
-        }
-        return null;
-    }
-
-    private static ItemStack getSilkTouchDrop(IBlockState state) {
-        Block block = state.getBlock();
-        Item item = Item.getItemFromBlock(block);
-        int i = 0;
-        if (item.getHasSubtypes()) {
-            i = block.getMetaFromState(state);
-        }
-        return new ItemStack(item, 1, i);
-    }
-
-    private static void giveItem(World world, EntityPlayer player, ItemStack oldStack) {
-        EntityItem entityItem = new EntityItem(world, player.posX, player.posY, player.posZ, oldStack);
-        if (NBTHelper.getTag(player.getHeldItemMainhand()).getBoolean("forceDropItems")) {
-            world.spawnEntity(entityItem);
-        } else {
-            if (!player.inventory.addItemStackToInventory(oldStack)) {
-                world.spawnEntity(entityItem);
-            }
-        }
     }
 
     public static String getBlockName(Block block, int meta) {

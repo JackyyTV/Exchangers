@@ -2,7 +2,7 @@ package jackyy.exchangers.handler;
 
 import jackyy.exchangers.client.gui.ExchangersGuiScreen;
 import jackyy.exchangers.client.keybind.Keys;
-import jackyy.exchangers.handler.network.*;
+import jackyy.exchangers.handler.network.NetworkHandler;
 import jackyy.exchangers.handler.network.packet.*;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.item.special.ItemCreativeExchanger;

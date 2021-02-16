@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BetterWithModsIntegration {
 
-    @SubscribeEvent @Deprecated
+    @SubscribeEvent @SuppressWarnings("deprecation")
     @Optional.Method(modid = Reference.BWM)
     public void onPlace(BlockEvent.PlaceEvent event) {
         World world = event.getWorld();

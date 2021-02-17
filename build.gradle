@@ -103,7 +103,7 @@ dependencies {
     implementation fg.deobf("curse.maven:gunpowderlib-356646:3198017") //1.16.5-1.2.2
 
     runtimeOnly fg.deobf("curse.maven:mekanism-268560:3134211") //1.16.4-10.0.18.445
-    implementation fg.deobf("curse.maven:cofh_core-69162:3155824") //1.16.3-1.1.6
+    runtimeOnly fg.deobf("curse.maven:cofh_core-69162:3155824") //1.16.3-1.1.6
     runtimeOnly fg.deobf("curse.maven:thermal_foundation-222880:3155830") //1.16.3-1.1.6
     runtimeOnly fg.deobf("curse.maven:thermal_innovation-291737:3156588") //1.16.3-1.1.7
     runtimeOnly fg.deobf("curse.maven:thermal_expansion-69163:3155832") //1.16.3-1.1.6

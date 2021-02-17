@@ -29,10 +29,9 @@ public class CommonEventsHandler {
                 }
                 if (input.getItem() instanceof ItemExchangerBase) {
                     CompoundNBT tags = NBTHelper.getTag(input).copy();
-                    ItemStack crafted = output.copy();
-                    crafted.setTag(tags);
-                    if (crafted.isDamaged()) {
-                        crafted.setDamage(0);
+                    output.setTag(tags);
+                    if (output.isDamaged()) {
+                        output.setDamage(0);
                     }
                     break;
                 }

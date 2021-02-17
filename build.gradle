@@ -140,7 +140,7 @@ task signJar(type: SignJar, dependsOn: jar) {
 build.dependsOn signJar
 
 task sourcesJar(type: Jar) {
-  from sourceSets.main.allJava
+  from sourceSets.main.allSource
   classifier = 'sources'
 }
 

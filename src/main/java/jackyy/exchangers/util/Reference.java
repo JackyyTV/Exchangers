@@ -2,13 +2,13 @@ package jackyy.exchangers.util;
 
 import jackyy.exchangers.registry.ModItems;
 import jackyy.gunpowderlib.helper.StringHelper;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraftforge.registries.ObjectHolder;
 
 public final class Reference {
 
@@ -32,8 +32,6 @@ public final class Reference {
 
     public static final Rarity RARITY_TIER1 = Rarity.create(MODID + "_rarity_tier1", TextFormatting.GREEN);
 
-    public static final Logger LOGGER = LogManager.getLogger(MODNAME);
-
     public static final String KEY_PREFIX = "key.exchangers.";
     public static final String KEY_CATEGORY = "key.categories.exchangers";
 
@@ -42,5 +40,8 @@ public final class Reference {
                 ? StringHelper.localize(Reference.MODID, "tooltip.state.enabled").mergeStyle(TextFormatting.GREEN)
                 : StringHelper.localize(Reference.MODID, "tooltip.state.disabled").mergeStyle(TextFormatting.RED);
     }
+
+    @ObjectHolder("cofh_core:holding")
+    public static final Enchantment holdingEnchant = null;
 
 }

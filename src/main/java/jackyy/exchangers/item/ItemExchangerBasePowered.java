@@ -2,6 +2,7 @@ package jackyy.exchangers.item;
 
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.Reference;
 import jackyy.gunpowderlib.capability.FEItemStackCapability;
 import jackyy.gunpowderlib.capability.FEStorageCapability;
 import jackyy.gunpowderlib.capability.IFEContainer;
@@ -24,7 +25,6 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.ModList;
 
 import java.util.List;
-import java.util.Map;
 
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IFEContainer {
 
@@ -50,12 +50,8 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     @Override
     public int getMaxEnergyStored(ItemStack container) {
         if (ModConfigs.CONFIG.holdingEnchantment.get() && ModList.get().isLoaded("cofh_core")) {
-            Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(container);
-            for (Map.Entry<Enchantment, Integer> entry : enchants.entrySet()) {
-                if (entry.getKey().getName().equals("enchantment.cofh_core.holding")) {
-                    return getMaxEnergy() + getMaxEnergy() * entry.getValue() / 2;
-                }
-            }
+            int enchant = EnchantmentHelper.getEnchantmentLevel(Reference.holdingEnchant, container);
+            return getMaxEnergy() + getMaxEnergy() * enchant / 2;
         }
         return getMaxEnergy();
     }
@@ -108,16 +104,14 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
 
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-        return new FEItemStackCapability(new FEStorageCapability(this, stack));
+        return new FEItemStackCapability<>(new FEStorageCapability(this, stack));
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        /*
-        TODO add back fortune enchant support
-        return enchantment == Enchantments.FORTUNE || enchantment == Enchantments.SILK_TOUCH || enchantment == Enchantments.UNBREAKING;
-        */
-        return enchantment == Enchantments.SILK_TOUCH || enchantment == Enchantments.UNBREAKING;
+        return enchantment == Enchantments.FORTUNE
+                || enchantment == Enchantments.SILK_TOUCH
+                || enchantment == Enchantments.UNBREAKING;
     }
 
 }

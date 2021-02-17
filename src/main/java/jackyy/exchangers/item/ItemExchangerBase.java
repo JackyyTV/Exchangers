@@ -141,18 +141,19 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
     }
 
     @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public int getItemEnchantability() {
         return 20;
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        /*
-        TODO add back fortune enchant support
         return enchantment == Enchantments.FORTUNE || enchantment == Enchantments.SILK_TOUCH
                 || enchantment == Enchantments.UNBREAKING || enchantment == Enchantments.MENDING;
-        */
-        return enchantment == Enchantments.SILK_TOUCH || enchantment == Enchantments.UNBREAKING || enchantment == Enchantments.MENDING;
     }
 
 }

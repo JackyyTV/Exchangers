@@ -15,12 +15,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.item.Items;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameters;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -30,6 +32,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -37,11 +40,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IForgeShearable;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import java.util.HashSet;
 import java.util.List;
@@ -88,11 +89,11 @@ public class ExchangerHandler {
         }
     }
 
-    private static int getExPerBlockUse(ItemStack stack) {
+    public static int getExPerBlockUse(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).getPerBlockUse();
     }
 
-    private static int getPerBlockEnergy(ItemStack stack) {
+    public static int getPerBlockEnergy(ItemStack stack) {
         if (ModConfigs.CONFIG.unbreakingPoweredExchangers.get()) {
             int level = MathHelper.clamp(EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, stack), 0, 10);
             if (new Random().nextInt(2 + level) >= 2) {
@@ -102,19 +103,19 @@ public class ExchangerHandler {
         return getExPerBlockUse(stack);
     }
 
-    private static int getExHarvestLevel(ItemStack stack) {
+    public static int getExHarvestLevel(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).getHarvestLevel();
     }
 
-    private static int getExRange(ItemStack stack) {
+    public static int getExRange(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).getMaxRange();
     }
 
-    private static boolean getExIsCreative(ItemStack stack) {
+    public static boolean getExIsCreative(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).isCreative();
     }
 
-    private static boolean getExIsPowered(ItemStack stack) {
+    public static boolean getExIsPowered(ItemStack stack) {
         return ((ItemExchangerBase) stack.getItem()).isPowered();
     }
 
@@ -215,7 +216,7 @@ public class ExchangerHandler {
     }
 
     public static boolean isWhitelisted(World world, BlockPos pos) {
-        for (String block : ModConfigs.CONFIG.blocksWhitelist.get()) {
+        for (String block : ModConfigs.CONFIG.blocksWhitelist.get().trim().split(";")) {
             if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
                 return true;
             }
@@ -224,7 +225,7 @@ public class ExchangerHandler {
     }
 
     public static boolean isBlacklisted(World world, BlockPos pos) {
-        for (String block : ModConfigs.CONFIG.blocksBlacklist.get()) {
+        for (String block : ModConfigs.CONFIG.blocksBlacklist.get().trim().split(";")) {
             if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
                 return true;
             }
@@ -293,28 +294,40 @@ public class ExchangerHandler {
                 }
             }
             if (!MinecraftForge.EVENT_BUS.post(event)) {
-                if (consumeItemInInventory(block.asItem(), player.inventory, player)) {
+                if (ItemHandler.consumeItemInInventory(block.asItem(), player.inventory, player)) {
                     if (!player.isCreative()&& !getExIsCreative(stack) && !tag.getBoolean("voidItems")) {
                         if (ModConfigs.CONFIG.doExchangersSilkTouch.get() || EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
                             ItemStack oldblockItem;
                             if (!(oldblock instanceof IForgeShearable)) {
-                                oldblockItem = getSilkTouchDrop(oldState);
+                                oldblockItem = ItemHandler.getSilkTouchDrop(oldState);
                             } else {
                                 oldblockItem = oldblock.getPickBlock(oldState, null, world, pos, player);
                             }
                             if (oldblockItem.getItem().equals(Items.AIR)) {
                                 oldblockItem = oldblock.getPickBlock(oldState, null, world, pos, player);
                             }
-                            giveItem(world, player, oldblockItem);
+                            ItemHandler.giveItem(world, player, oldblockItem);
                         } else {
-                            /*
-                            TODO add back fortune enchant support
+                            ServerWorld serverWorld = (ServerWorld) world;
+                            ToolType harvestTool = oldState.getHarvestTool();
+                            ItemStack tool;
+                            if (harvestTool == ToolType.PICKAXE) {
+                                tool = new ItemStack(Items.NETHERITE_PICKAXE);
+                            } else if (harvestTool == ToolType.AXE) {
+                                tool = new ItemStack(Items.NETHERITE_AXE);
+                            } else if (harvestTool == ToolType.SHOVEL) {
+                                tool = new ItemStack(Items.NETHERITE_SHOVEL);
+                            } else {
+                                tool = new ItemStack(Items.STICK);
+                            }
                             int fortuneLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
-                            List<ItemStack> oldblockItems = oldblock.getDrops(world, pos, oldState, fortuneLevel);
-                            */
-                            List<ItemStack> oldblockItems = Block.getDrops(oldState, (ServerWorld) world, pos, null);
+                            tool.addEnchantment(Enchantments.FORTUNE, fortuneLevel);
+                            LootContext.Builder builder = new LootContext.Builder(serverWorld).withRandom(serverWorld.rand)
+                                    .withParameter(LootParameters.field_237457_g_, Vector3d.copyCentered(pos))
+                                    .withParameter(LootParameters.TOOL, tool);
+                            List<ItemStack> oldblockItems = oldState.getDrops(builder);
                             for (ItemStack oldblockItem : oldblockItems) {
-                                giveItem(world, player, oldblockItem);
+                                ItemHandler.giveItem(world, player, oldblockItem);
                             }
                         }
                         if (!getExIsPowered(stack)) {
@@ -386,74 +399,6 @@ public class ExchangerHandler {
         BlockState state = world.getBlockState(pos);
         if (state == centerState)
             coordinates.add(pos);
-    }
-
-    private static boolean consumeItemInInventory(Item item, PlayerInventory playerInv, PlayerEntity player) {
-        if (player.isCreative() || getExIsCreative(player.getHeldItemMainhand())) {
-            return true;
-        }
-        int i = findItem(item, playerInv);
-        if (i < 0) {
-            IItemHandler inv = findItemHolder(playerInv);
-            if (inv == null)
-                return false;
-            i = findItemInContainer(item, inv);
-            if (i < 0)
-                return false;
-            ItemStack extracted = inv.extractItem(i, 1, false);
-            return !extracted.isEmpty();
-        } else {
-            playerInv.decrStackSize(i, 1);
-        }
-        return true;
-    }
-
-    private static int findItem(Item item, IInventory inv) {
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (!stack.isEmpty() && (stack.getItem() == item)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private static int findItemInContainer(Item item, IItemHandler inv) {
-        for (int i = 0; i < inv.getSlots(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (!stack.isEmpty() && (stack.getItem() == item)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private static IItemHandler findItemHolder(IInventory inv) {
-        for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            IItemHandler cap = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
-            if (!stack.isEmpty() && cap != null && !stack.getCapability(CapabilityEnergy.ENERGY, null).isPresent()) {
-                return cap;
-            }
-        }
-        return null;
-    }
-
-    private static ItemStack getSilkTouchDrop(BlockState state) {
-        Block block = state.getBlock();
-        Item item = block.asItem();
-        return new ItemStack(item, 1);
-    }
-
-    private static void giveItem(World world, PlayerEntity player, ItemStack oldStack) {
-        ItemEntity entityItem = new ItemEntity(world, player.getPosX(), player.getPosY(), player.getPosZ(), oldStack);
-        if (NBTHelper.getTag(player.getHeldItemMainhand()).getBoolean("forceDropItems")) {
-            world.addEntity(entityItem);
-        } else {
-            if (!player.inventory.addItemStackToInventory(oldStack)) {
-                world.addEntity(entityItem);
-            }
-        }
     }
 
     public static IFormattableTextComponent getBlockName(Block block) {

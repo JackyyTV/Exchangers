@@ -1,13 +1,10 @@
 package jackyy.exchangers.registry;
 
-import com.google.common.collect.ImmutableList;
 import jackyy.exchangers.util.DefaultValues;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class ModConfigs {
 
@@ -158,8 +155,8 @@ public class ModConfigs {
         public final ForgeConfigSpec.ConfigValue<? extends String> mekanismRecipesType;
         public final ForgeConfigSpec.ConfigValue<? extends String> immersiveEngineeringRecipesType;
 
-        public final ForgeConfigSpec.ConfigValue<List<? extends String>> blocksWhitelist;
-        public final ForgeConfigSpec.ConfigValue<List<? extends String>> blocksBlacklist;
+        public final ForgeConfigSpec.ConfigValue<? extends String> blocksWhitelist;
+        public final ForgeConfigSpec.ConfigValue<? extends String> blocksBlacklist;
         public final ForgeConfigSpec.BooleanValue holdingEnchantment;
         public final ForgeConfigSpec.BooleanValue unbreakingPoweredExchangers;
         public final ForgeConfigSpec.BooleanValue doExchangersSilkTouch;
@@ -664,16 +661,18 @@ public class ModConfigs {
                     .comment(
                             "Certain blocks might be blacklisted by Exchangers if they're Tile Entities.",
                             "Put a list of block registry names that you wish to be whitelisted from Exchangers.",
-                            "(e.g. thermal:energy_cell)"
+                            "Separate each entry with semicolon.",
+                            "(e.g. \"tconstruct:seared;thermal:energy_cell;minecraft:conduit\")"
                     )
-                    .define("blocksWhitelist", Collections.singletonList("tconstruct:seared"));
+                    .define("blocksWhitelist", "tconstruct:seared");
             blocksBlacklist = builder
                     .comment(
                             "Put a list of block registry names that you wish to be blacklisted from Exchangers.",
                             "Note: Blacklisting a block will prevent it from being selected or being exchanged.",
-                            "(e.g. minecraft:grass)"
+                            "Separate each entry with semicolon.",
+                            "(e.g. \"minecraft:grass;minecraft:cake;minecraft:dragon_egg\")"
                     )
-                    .define("blocksBlacklist", ImmutableList.of());
+                    .define("blocksBlacklist", "");
             holdingEnchantment = builder
                     .comment(
                             "If true, allows the Holding Enchantment from CoFH Core to be used on Powered Exchangers",

@@ -86,7 +86,9 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if (isInGroup(group)) {
             if (checkLoaded()) {
-                super.fillItemGroup(group, items);
+                ItemStack empty = new ItemStack(this);
+                ExchangerHandler.setDefaultTagCompound(empty);
+                items.add(empty);
                 ItemStack full = new ItemStack(this);
                 ExchangerHandler.setDefaultTagCompound(full);
                 EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));

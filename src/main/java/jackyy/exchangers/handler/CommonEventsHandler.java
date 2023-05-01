@@ -47,12 +47,12 @@ public class CommonEventsHandler {
             int holdingLevel = EnchantmentHelper.getEnchantmentLevel(Reference.holdingEnchant, left);
             if (left.getItem() instanceof ItemExchangerBasePowered && right.getItem() instanceof EnchantedBookItem && holdingLevel == 0) {
                 ListNBT enchantments = EnchantedBookItem.getEnchantments(right);
-                for (int j = 0; j < enchantments.size(); ++j) {
-                    CompoundNBT nbtRight = enchantments.getCompound(j);
-                    ResourceLocation idRight = ResourceLocation.tryCreate(nbtRight.getString("id"));
-                    if (idRight != null && idRight.equals(new ResourceLocation("cofh_core", "holding"))) {
+                for (int i = 0; i < enchantments.size(); ++i) {
+                    CompoundNBT nbt = enchantments.getCompound(i);
+                    ResourceLocation id = ResourceLocation.tryCreate(nbt.getString("id"));
+                    if (id != null && id.equals(new ResourceLocation("cofh_core", "holding"))) {
                         ItemStack enchanted = left.copy();
-                        int lvl = nbtRight.getInt("lvl");
+                        int lvl = nbt.getInt("lvl");
                         enchanted.addEnchantment(Reference.holdingEnchant, lvl);
                         event.setOutput(enchanted);
                         event.setCost(lvl);

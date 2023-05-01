@@ -18,7 +18,7 @@ public class ToggleButton extends Button {
     }
 
     @Override @SuppressWarnings("deprecation")
-    public void renderButton(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderWidget(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
         FontRenderer fontrenderer = minecraft.fontRenderer;
         minecraft.getTextureManager().bindTexture(WIDGETS_LOCATION);

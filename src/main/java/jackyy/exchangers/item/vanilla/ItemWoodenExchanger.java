@@ -9,37 +9,18 @@ import net.minecraft.tags.ItemTags;
 
 public class ItemWoodenExchanger extends ItemExchangerBase {
 
-    private static int dmg;
-    private static int harvestLevel;
-    private static int range;
-    private static boolean loaded;
-    static {
-        try {
-            dmg = ModConfigs.CONFIG.woodenMaxDmg.get();
-            harvestLevel = ModConfigs.CONFIG.woodenMaxHarvestLevel.get();
-            range = ModConfigs.CONFIG.woodenMaxRange.get();
-            loaded = ModConfigs.CONFIG.vanillaModule.get();
-        } catch (NullPointerException exception) {
-            dmg = DefaultValues.woodenMaxDmg;
-            harvestLevel = DefaultValues.woodenMaxHarvestLevel;
-            range = DefaultValues.woodenMaxRange;
-            loaded = DefaultValues.vanillaModule;
-        }
-    }
-
     public ItemWoodenExchanger() {
-        super(new Properties().defaultMaxDamage(dmg).rarity(Reference.RARITY_TIER1));
-        setRegistryName(Reference.MODID, "wooden_exchanger");
+        super(new Properties().defaultMaxDamage(DefaultValues.woodenMaxDmg).rarity(Reference.RARITY_TIER1));
     }
 
     @Override
     public int getHarvestLevel() {
-        return harvestLevel;
+        return ModConfigs.CONFIG.woodenMaxHarvestLevel.get();
     }
 
     @Override
     public int getMaxRange() {
-        return range;
+        return ModConfigs.CONFIG.woodenMaxRange.get();
     }
 
     @Override
@@ -49,7 +30,7 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return loaded;
+        return ModConfigs.CONFIG.vanillaModule.get();
     }
 
     @Override

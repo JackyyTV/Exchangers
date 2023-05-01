@@ -2,57 +2,34 @@ package jackyy.exchangers.item.mekanism;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.ModList;
 
 public class ItemUltimateExchanger extends ItemExchangerBasePowered {
 
-    private static int energy;
-    private static int perBlockUse;
-    private static int harvestLevel;
-    private static int range;
-    private static boolean loaded;
-    static {
-        try {
-            energy = ModConfigs.CONFIG.ultimateMaxEnergy.get();
-            perBlockUse = ModConfigs.CONFIG.ultimatePerBlockUse.get();
-            harvestLevel = ModConfigs.CONFIG.ultimateMaxHarvestLevel.get();
-            range = ModConfigs.CONFIG.ultimateMaxRange.get();
-            loaded = ModConfigs.CONFIG.mekanismModule.get();
-        } catch (NullPointerException exception) {
-            energy = DefaultValues.ultimateMaxEnergy;
-            perBlockUse = DefaultValues.ultimatePerBlockUse;
-            harvestLevel = DefaultValues.ultimateMaxHarvestLevel;
-            range = DefaultValues.ultimateMaxRange;
-            loaded = DefaultValues.mekanismModule;
-        }
-    }
-
     public ItemUltimateExchanger() {
         super(new Properties().rarity(Rarity.EPIC));
-        setRegistryName(Reference.MODID, "ultimate_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return energy;
+        return ModConfigs.CONFIG.ultimateMaxEnergy.get();
     }
 
     @Override
     public int getPerBlockUse() {
-        return perBlockUse;
+        return ModConfigs.CONFIG.ultimatePerBlockUse.get();
     }
 
     @Override
     public int getHarvestLevel() {
-        return harvestLevel;
+        return ModConfigs.CONFIG.ultimateMaxHarvestLevel.get();
     }
 
     @Override
     public int getMaxRange() {
-        return range;
+        return ModConfigs.CONFIG.ultimateMaxRange.get();
     }
 
     @Override
@@ -62,7 +39,7 @@ public class ItemUltimateExchanger extends ItemExchangerBasePowered {
 
     @Override
     public boolean checkLoaded() {
-        return loaded && ModList.get().isLoaded(Reference.MEK);
+        return ModConfigs.CONFIG.mekanismModule.get()  && ModList.get().isLoaded(Reference.MEK);
     }
 
 }

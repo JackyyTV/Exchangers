@@ -2,57 +2,34 @@ package jackyy.exchangers.item.enderio;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.ModList;
 
 public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
 
-    private static int energy;
-    private static int perBlockUse;
-    private static int harvestLevel;
-    private static int range;
-    private static boolean loaded;
-    static {
-        try {
-            energy = ModConfigs.CONFIG.darkSteelMaxEnergy.get();
-            perBlockUse = ModConfigs.CONFIG.darkSteelPerBlockUse.get();
-            harvestLevel = ModConfigs.CONFIG.darkSteelMaxHarvestLevel.get();
-            range = ModConfigs.CONFIG.darkSteelMaxRange.get();
-            loaded = ModConfigs.CONFIG.enderIOModule.get();
-        } catch (NullPointerException exception) {
-            energy = DefaultValues.darkSteelMaxEnergy;
-            perBlockUse = DefaultValues.darkSteelPerBlockUse;
-            harvestLevel = DefaultValues.darkSteelMaxHarvestLevel;
-            range = DefaultValues.darkSteelMaxRange;
-            loaded = DefaultValues.enderIOModule;
-        }
-    }
-
     public ItemDarkSteelExchanger() {
         super(new Properties().rarity(Rarity.EPIC));
-        setRegistryName(Reference.MODID, "dark_steel_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return energy;
+        return ModConfigs.CONFIG.darkSteelMaxEnergy.get();
     }
 
     @Override
     public int getPerBlockUse() {
-        return perBlockUse;
+        return ModConfigs.CONFIG.darkSteelPerBlockUse.get();
     }
 
     @Override
     public int getHarvestLevel() {
-        return harvestLevel;
+        return ModConfigs.CONFIG.darkSteelMaxHarvestLevel.get();
     }
 
     @Override
     public int getMaxRange() {
-        return range;
+        return ModConfigs.CONFIG.darkSteelMaxRange.get();
     }
 
     @Override
@@ -62,7 +39,7 @@ public class ItemDarkSteelExchanger extends ItemExchangerBasePowered {
 
     @Override
     public boolean checkLoaded() {
-        return loaded && ModList.get().isLoaded(Reference.EIO);
+        return ModConfigs.CONFIG.enderIOModule.get() && ModList.get().isLoaded(Reference.EIO);
     }
 
 }

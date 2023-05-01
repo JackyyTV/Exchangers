@@ -8,134 +8,79 @@ import jackyy.exchangers.item.special.ItemCreativeExchanger;
 import jackyy.exchangers.item.special.ItemTuberousExchanger;
 import jackyy.exchangers.item.thermal.*;
 import jackyy.exchangers.item.vanilla.*;
+import jackyy.exchangers.util.Reference;
 import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModItems {
 
-    public static ItemTuberousExchanger tuberousExchanger = new ItemTuberousExchanger();
-    public static ItemCreativeExchanger creativeExchanger = new ItemCreativeExchanger();
+    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
 
-    public static ItemWoodenExchanger woodenExchanger = new ItemWoodenExchanger();
-    public static ItemStoneExchanger stoneExchanger = new ItemStoneExchanger();
-    public static ItemGoldenExchanger goldenExchanger = new ItemGoldenExchanger();
-    public static ItemIronExchanger ironExchanger = new ItemIronExchanger();
-    public static ItemDiamondExchanger diamondExchanger = new ItemDiamondExchanger();
-    public static ItemEmeraldExchanger emeraldExchanger = new ItemEmeraldExchanger();
-    public static ItemObsidianExchanger obsidianExchanger = new ItemObsidianExchanger();
-    public static ItemEndExchanger endExchanger = new ItemEndExchanger();
-    public static ItemExchangerCoreT1 exchangerCoreT1 = new ItemExchangerCoreT1();
-    public static ItemExchangerCoreT2 exchangerCoreT2 = new ItemExchangerCoreT2();
-    public static ItemExchangerCoreT3 exchangerCoreT3 = new ItemExchangerCoreT3();
+    public static final RegistryObject<Item> TUBEROUS_EXCHANGER = ITEMS.register("tuberous_exchanger", ItemTuberousExchanger::new);
+    public static final RegistryObject<Item> CREATIVE_EXCHANGER = ITEMS.register("creative_exchanger", ItemCreativeExchanger::new);
 
-    public static ItemConductiveIronExchanger conductiveIronExchanger = new ItemConductiveIronExchanger();
-    public static ItemPulsatingIronExchanger pulsatingIronExchanger = new ItemPulsatingIronExchanger();
-    public static ItemElectricalSteelExchanger electricalSteelExchanger = new ItemElectricalSteelExchanger();
-    public static ItemEnergeticExchanger energeticExchanger = new ItemEnergeticExchanger();
-    public static ItemDarkSteelExchanger darkSteelExchanger = new ItemDarkSteelExchanger();
-    public static ItemVibrantExchanger vibrantExchanger = new ItemVibrantExchanger();
-    public static ItemEndSteelExchanger endSteelExchanger = new ItemEndSteelExchanger();
-    public static ItemEIOExchangerCoreT1 eioExchangerCoreT1 = new ItemEIOExchangerCoreT1();
-    public static ItemEIOExchangerCoreT2 eioExchangerCoreT2 = new ItemEIOExchangerCoreT2();
-    public static ItemEIOExchangerCoreT3 eioExchangerCoreT3 = new ItemEIOExchangerCoreT3();
+    public static final RegistryObject<Item> WOODEN_EXCHANGER = ITEMS.register("wooden_exchanger", ItemWoodenExchanger::new);
+    public static final RegistryObject<Item> STONE_EXCHANGER = ITEMS.register("stone_exchanger", ItemStoneExchanger::new);
+    public static final RegistryObject<Item> GOLDEN_EXCHANGER = ITEMS.register("golden_exchanger", ItemGoldenExchanger::new);
+    public static final RegistryObject<Item> IRON_EXCHANGER = ITEMS.register("iron_exchanger", ItemIronExchanger::new);
+    public static final RegistryObject<Item> DIAMOND_EXCHANGER = ITEMS.register("diamond_exchanger", ItemDiamondExchanger::new);
+    public static final RegistryObject<Item> EMERALD_EXCHANGER = ITEMS.register("emerald_exchanger", ItemEmeraldExchanger::new);
+    public static final RegistryObject<Item> OBSIDIAN_EXCHANGER = ITEMS.register("obsidian_exchanger", ItemObsidianExchanger::new);
+    public static final RegistryObject<Item> END_EXCHANGER = ITEMS.register("end_exchanger", ItemEndExchanger::new);
+    public static final RegistryObject<Item> EXCHANGER_CORE_TIER1 = ITEMS.register("exchanger_core_tier1", ItemExchangerCoreT1::new);
+    public static final RegistryObject<Item> EXCHANGER_CORE_TIER2 = ITEMS.register("exchanger_core_tier2", ItemExchangerCoreT2::new);
+    public static final RegistryObject<Item> EXCHANGER_CORE_TIER3 = ITEMS.register("exchanger_core_tier3", ItemExchangerCoreT3::new);
 
-    public static ItemCrudeSteelExchanger crudeSteelExchanger = new ItemCrudeSteelExchanger();
-    public static ItemEnergeticSilverExchanger energeticSilverExchanger = new ItemEnergeticSilverExchanger();
-    public static ItemVividExchanger vividExchanger = new ItemVividExchanger();
-    public static ItemCrystallineExchanger crystallineExchanger = new ItemCrystallineExchanger();
-    public static ItemMelodicExchanger melodicExchanger = new ItemMelodicExchanger();
-    public static ItemStellarExchanger stellarExchanger = new ItemStellarExchanger();
-    public static ItemEIOEndergyExchangerCoreT1 eioEndergyExchangerCoreT1 = new ItemEIOEndergyExchangerCoreT1();
-    public static ItemEIOEndergyExchangerCoreT2 eioEndergyExchangerCoreT2 = new ItemEIOEndergyExchangerCoreT2();
-    public static ItemEIOEndergyExchangerCoreT3 eioEndergyExchangerCoreT3 = new ItemEIOEndergyExchangerCoreT3();
+    public static final RegistryObject<Item> CONDUCTIVE_IRON_EXCHANGER = ITEMS.register("conductive_iron_exchanger", ItemConductiveIronExchanger::new);
+    public static final RegistryObject<Item> PULSATING_IRON_EXCHANGER = ITEMS.register("pulsating_iron_exchanger", ItemPulsatingIronExchanger::new);
+    public static final RegistryObject<Item> ELECTRICAL_STEEL_EXCHANGER = ITEMS.register("electrical_steel_exchanger", ItemElectricalSteelExchanger::new);
+    public static final RegistryObject<Item> ENERGETIC_EXCHANGER = ITEMS.register("energetic_exchanger", ItemEnergeticExchanger::new);
+    public static final RegistryObject<Item> DARK_STEEL_EXCHANGER = ITEMS.register("dark_steel_exchanger", ItemDarkSteelExchanger::new);
+    public static final RegistryObject<Item> VIBRANT_EXCHANGER = ITEMS.register("vibrant_exchanger", ItemVibrantExchanger::new);
+    public static final RegistryObject<Item> END_STEEL_EXCHANGER = ITEMS.register("end_steel_exchanger", ItemEndSteelExchanger::new);
+    public static final RegistryObject<Item> EIO_EXCHANGER_CORE_TIER1 = ITEMS.register("eio_exchanger_core_tier1", ItemEIOExchangerCoreT1::new);
+    public static final RegistryObject<Item> EIO_EXCHANGER_CORE_TIER2 = ITEMS.register("eio_exchanger_core_tier2", ItemEIOExchangerCoreT2::new);
+    public static final RegistryObject<Item> EIO_EXCHANGER_CORE_TIER3 = ITEMS.register("eio_exchanger_core_tier3", ItemEIOExchangerCoreT3::new);
 
-    public static ItemLeadstoneExchanger leadstoneExchanger = new ItemLeadstoneExchanger();
-    public static ItemHardenedExchanger hardenedExchanger = new ItemHardenedExchanger();
-    public static ItemReinforcedExchanger reinforcedExchanger = new ItemReinforcedExchanger();
-    public static ItemSignalumExchanger signalumExchanger = new ItemSignalumExchanger();
-    public static ItemResonantExchanger resonantExchanger = new ItemResonantExchanger();
-    public static ItemThermalExchangerCoreT1 teExchangerCoreT1 = new ItemThermalExchangerCoreT1();
-    public static ItemThermalExchangerCoreT2 teExchangerCoreT2 = new ItemThermalExchangerCoreT2();
-    public static ItemThermalExchangerCoreT3 teExchangerCoreT3 = new ItemThermalExchangerCoreT3();
+    public static final RegistryObject<Item> CRUDE_STEEL_EXCHANGER = ITEMS.register("crude_steel_exchanger", ItemCrudeSteelExchanger::new);
+    public static final RegistryObject<Item> ENERGETIC_SILVER_EXCHANGER = ITEMS.register("energetic_silver_exchanger", ItemEnergeticSilverExchanger::new);
+    public static final RegistryObject<Item> VIVID_EXCHANGER = ITEMS.register("vivid_exchanger", ItemVividExchanger::new);
+    public static final RegistryObject<Item> CRYSTALLINE_EXCHANGER = ITEMS.register("crystalline_exchanger", ItemCrystallineExchanger::new);
+    public static final RegistryObject<Item> MELODIC_EXCHANGER = ITEMS.register("melodic_exchanger", ItemMelodicExchanger::new);
+    public static final RegistryObject<Item> STELLAR_EXCHANGER = ITEMS.register("stellar_exchanger", ItemStellarExchanger::new);
+    public static final RegistryObject<Item> EIO_ENDERGY_EXCHANGER_CORE_TIER1 = ITEMS.register("eio_endergy_exchanger_core_tier1", ItemEIOEndergyExchangerCoreT1::new);
+    public static final RegistryObject<Item> EIO_ENDERGY_EXCHANGER_CORE_TIER2 = ITEMS.register("eio_endergy_exchanger_core_tier2", ItemEIOEndergyExchangerCoreT2::new);
+    public static final RegistryObject<Item> EIO_ENDERGY_EXCHANGER_CORE_TIER3 = ITEMS.register("eio_endergy_exchanger_core_tier3", ItemEIOEndergyExchangerCoreT3::new);
 
-    public static ItemBasicExchanger basicExchanger = new ItemBasicExchanger();
-    public static ItemAdvancedExchanger advancedExchanger = new ItemAdvancedExchanger();
-    public static ItemEliteExchanger eliteExchanger = new ItemEliteExchanger();
-    public static ItemUltimateExchanger ultimateExchanger = new ItemUltimateExchanger();
-    public static ItemMekanismExchangerCoreT1 mekanismExchangerCoreT1 = new ItemMekanismExchangerCoreT1();
-    public static ItemMekanismExchangerCoreT2 mekanismExchangerCoreT2 = new ItemMekanismExchangerCoreT2();
-    public static ItemMekanismExchangerCoreT3 mekanismExchangerCoreT3 = new ItemMekanismExchangerCoreT3();
+    public static final RegistryObject<Item> LEADSTONE_EXCHANGER = ITEMS.register("leadstone_exchanger", ItemLeadstoneExchanger::new);
+    public static final RegistryObject<Item> HARDENED_EXCHANGER = ITEMS.register("hardened_exchanger", ItemHardenedExchanger::new);
+    public static final RegistryObject<Item> REINFORCED_EXCHANGER = ITEMS.register("reinforced_exchanger", ItemReinforcedExchanger::new);
+    public static final RegistryObject<Item> SIGNALUM_EXCHANGER = ITEMS.register("signalum_exchanger", ItemSignalumExchanger::new);
+    public static final RegistryObject<Item> RESONANT_EXCHANGER = ITEMS.register("resonant_exchanger", ItemResonantExchanger::new);
+    public static final RegistryObject<Item> THERMAL_EXCHANGER_CORE_TIER1 = ITEMS.register("thermal_exchanger_core_tier1", ItemThermalExchangerCoreT1::new);
+    public static final RegistryObject<Item> THERMAL_EXCHANGER_CORE_TIER2 = ITEMS.register("thermal_exchanger_core_tier2", ItemThermalExchangerCoreT2::new);
+    public static final RegistryObject<Item> THERMAL_EXCHANGER_CORE_TIER3 = ITEMS.register("thermal_exchanger_core_tier3", ItemThermalExchangerCoreT3::new);
 
-    public static ItemLVExchanger lvExchanger = new ItemLVExchanger();
-    public static ItemMVExchanger mvExchanger = new ItemMVExchanger();
-    public static ItemHVExchanger hvExchanger = new ItemHVExchanger();
-    public static ItemIEExchangerCoreT1 ieExchangerCoreT1 = new ItemIEExchangerCoreT1();
-    public static ItemIEExchangerCoreT2 ieExchangerCoreT2 = new ItemIEExchangerCoreT2();
-    public static ItemIEExchangerCoreT3 ieExchangerCoreT3 = new ItemIEExchangerCoreT3();
+    public static final RegistryObject<Item> BASIC_EXCHANGER = ITEMS.register("basic_exchanger", ItemBasicExchanger::new);
+    public static final RegistryObject<Item> ADVANCED_EXCHANGER = ITEMS.register("advanced_exchanger", ItemAdvancedExchanger::new);
+    public static final RegistryObject<Item> ELITE_EXCHANGER = ITEMS.register("elite_exchanger", ItemEliteExchanger::new);
+    public static final RegistryObject<Item> ULTIMATE_EXCHANGER = ITEMS.register("ultimate_exchanger", ItemUltimateExchanger::new);
+    public static final RegistryObject<Item> MEKANISM_EXCHANGER_CORE_TIER1 = ITEMS.register("mekanism_exchanger_core_tier1", ItemMekanismExchangerCoreT1::new);
+    public static final RegistryObject<Item> MEKANISM_EXCHANGER_CORE_TIER2 = ITEMS.register("mekanism_exchanger_core_tier2", ItemMekanismExchangerCoreT2::new);
+    public static final RegistryObject<Item> MEKANISM_EXCHANGER_CORE_TIER3 = ITEMS.register("mekanism_exchanger_core_tier3", ItemMekanismExchangerCoreT3::new);
 
-    public static void init(RegistryEvent.Register<Item> e) {
-        e.getRegistry().registerAll(
-                //Special Exchangers
-                tuberousExchanger,
-                creativeExchanger,
-                //Vanilla Exchangers
-                woodenExchanger,
-                stoneExchanger,
-                goldenExchanger,
-                ironExchanger,
-                diamondExchanger,
-                emeraldExchanger,
-                obsidianExchanger,
-                endExchanger,
-                exchangerCoreT1,
-                exchangerCoreT2,
-                exchangerCoreT3,
-                //Ender IO Exchangers
-                conductiveIronExchanger,
-                pulsatingIronExchanger,
-                electricalSteelExchanger,
-                energeticExchanger,
-                darkSteelExchanger,
-                vibrantExchanger,
-                endSteelExchanger,
-                eioExchangerCoreT1,
-                eioExchangerCoreT2,
-                eioExchangerCoreT3,
-                //Ender IO Endergy Exchangers
-                crudeSteelExchanger,
-                energeticSilverExchanger,
-                vividExchanger,
-                crystallineExchanger,
-                melodicExchanger,
-                stellarExchanger,
-                eioEndergyExchangerCoreT1,
-                eioEndergyExchangerCoreT2,
-                eioEndergyExchangerCoreT3,
-                //Thermal Expansion Exchangers
-                leadstoneExchanger,
-                hardenedExchanger,
-                reinforcedExchanger,
-                signalumExchanger,
-                resonantExchanger,
-                teExchangerCoreT1,
-                teExchangerCoreT2,
-                teExchangerCoreT3,
-                //Mekanism Exchangers
-                basicExchanger,
-                advancedExchanger,
-                eliteExchanger,
-                ultimateExchanger,
-                mekanismExchangerCoreT1,
-                mekanismExchangerCoreT2,
-                mekanismExchangerCoreT3,
-                //Immersive Engineering Exchangers
-                lvExchanger,
-                mvExchanger,
-                hvExchanger,
-                ieExchangerCoreT1,
-                ieExchangerCoreT2,
-                ieExchangerCoreT3
-        );
+    public static final RegistryObject<Item> LV_EXCHANGER = ITEMS.register("lv_exchanger", ItemLVExchanger::new);
+    public static final RegistryObject<Item> MV_EXCHANGER = ITEMS.register("mv_exchanger", ItemMVExchanger::new);
+    public static final RegistryObject<Item> HV_EXCHANGER = ITEMS.register("hv_exchanger", ItemHVExchanger::new);
+    public static final RegistryObject<Item> IE_EXCHANGER_CORE_TIER1 = ITEMS.register("ie_exchanger_core_tier1", ItemIEExchangerCoreT1::new);
+    public static final RegistryObject<Item> IE_EXCHANGER_CORE_TIER2 = ITEMS.register("ie_exchanger_core_tier2", ItemIEExchangerCoreT2::new);
+    public static final RegistryObject<Item> IE_EXCHANGER_CORE_TIER3 = ITEMS.register("ie_exchanger_core_tier3", ItemIEExchangerCoreT3::new);
+
+    public static void init() {
+        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
 }

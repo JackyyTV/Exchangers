@@ -76,7 +76,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
             tooltip.add(
                     StringHelper.formatNumber(getEnergyStored(stack))
                             .appendString(" / ")
-                            .append(StringHelper.formatNumber(getMaxEnergyStored(stack)))
+                            .appendSibling(StringHelper.formatNumber(getMaxEnergyStored(stack)))
                             .appendString(" " + ModConfigs.CONFIG.energyUnit.get())
             );
         }
@@ -86,9 +86,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if (isInGroup(group)) {
             if (checkLoaded()) {
-                ItemStack empty = new ItemStack(this);
-                ExchangerHandler.setDefaultTagCompound(empty);
-                items.add(empty);
+                super.fillItemGroup(group, items);
                 ItemStack full = new ItemStack(this);
                 ExchangerHandler.setDefaultTagCompound(full);
                 EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));

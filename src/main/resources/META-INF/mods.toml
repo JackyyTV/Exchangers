@@ -1,11 +1,11 @@
 modLoader="javafml"
 loaderVersion="[35,)"
-license="LGPLv3"
+license="Jacky's Minecraft Mods License"
 issueTrackerURL="https://github.com/JackyyTV/Exchangers/issues"
 
 [[mods]]
 modId="exchangers"
-version="1.16.5-3.0.2"
+version="1.16.5-3.1"
 displayName="Exchangers"
 displayURL="https://github.com/JackyyTV/Exchangers"
 logoFile="logo.png"

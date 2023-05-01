@@ -3,44 +3,24 @@ package jackyy.exchangers.item.vanilla;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.DefaultValues;
-import jackyy.exchangers.util.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.common.Tags;
 
 public class ItemObsidianExchanger extends ItemExchangerBase {
 
-    private static int dmg;
-    private static int harvestLevel;
-    private static int range;
-    private static boolean loaded;
-    static {
-        try {
-            dmg = ModConfigs.CONFIG.obsidianMaxDmg.get();
-            harvestLevel = ModConfigs.CONFIG.obsidianMaxHarvestLevel.get();
-            range = ModConfigs.CONFIG.obsidianMaxRange.get();
-            loaded = ModConfigs.CONFIG.vanillaModule.get();
-        } catch (NullPointerException exception) {
-            dmg = DefaultValues.obsidianMaxDmg;
-            harvestLevel = DefaultValues.obsidianMaxHarvestLevel;
-            range = DefaultValues.obsidianMaxRange;
-            loaded = DefaultValues.vanillaModule;
-        }
-    }
-
     public ItemObsidianExchanger() {
-        super(new Properties().defaultMaxDamage(dmg).rarity(Rarity.EPIC));
-        setRegistryName(Reference.MODID, "obsidian_exchanger");
+        super(new Properties().defaultMaxDamage(DefaultValues.obsidianMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override
     public int getHarvestLevel() {
-        return harvestLevel;
+        return ModConfigs.CONFIG.obsidianMaxHarvestLevel.get();
     }
 
     @Override
     public int getMaxRange() {
-        return range;
+        return ModConfigs.CONFIG.obsidianMaxRange.get();
     }
 
     @Override
@@ -50,7 +30,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return loaded;
+        return ModConfigs.CONFIG.vanillaModule.get();
     }
 
     @Override

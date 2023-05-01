@@ -2,7 +2,6 @@ package jackyy.exchangers.item.special;
 
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
 import jackyy.gunpowderlib.helper.KeyHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
@@ -21,18 +20,8 @@ import java.util.List;
 
 public class ItemTuberousExchanger extends ItemExchangerBase {
 
-    private static boolean loaded;
-    static {
-        try {
-            loaded = ModConfigs.CONFIG.specialModule.get();
-        } catch (NullPointerException exception) {
-            loaded = DefaultValues.specialModule;
-        }
-    }
-
     public ItemTuberousExchanger() {
         super(new Properties().defaultMaxDamage(1).rarity(Rarity.UNCOMMON));
-        setRegistryName(Reference.MODID, "tuberous_exchanger");
     }
 
     @Override
@@ -57,7 +46,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return loaded;
+        return ModConfigs.CONFIG.specialModule.get();
     }
 
 }

@@ -18,28 +18,20 @@ public class ModConfigs {
         public final ForgeConfigSpec.BooleanValue immersiveEngineeringModule;
         public final ForgeConfigSpec.BooleanValue specialModule;
 
-        public final ForgeConfigSpec.IntValue woodenMaxDmg;
         public final ForgeConfigSpec.IntValue woodenMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue woodenMaxRange;
-        public final ForgeConfigSpec.IntValue stoneMaxDmg;
         public final ForgeConfigSpec.IntValue stoneMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue stoneMaxRange;
-        public final ForgeConfigSpec.IntValue goldenMaxDmg;
         public final ForgeConfigSpec.IntValue goldenMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue goldenMaxRange;
-        public final ForgeConfigSpec.IntValue ironMaxDmg;
         public final ForgeConfigSpec.IntValue ironMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue ironMaxRange;
-        public final ForgeConfigSpec.IntValue diamondMaxDmg;
         public final ForgeConfigSpec.IntValue diamondMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue diamondMaxRange;
-        public final ForgeConfigSpec.IntValue emeraldMaxDmg;
         public final ForgeConfigSpec.IntValue emeraldMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue emeraldMaxRange;
-        public final ForgeConfigSpec.IntValue obsidianMaxDmg;
         public final ForgeConfigSpec.IntValue obsidianMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue obsidianMaxRange;
-        public final ForgeConfigSpec.IntValue endMaxDmg;
         public final ForgeConfigSpec.IntValue endMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue endMaxRange;
 
@@ -189,9 +181,6 @@ public class ModConfigs {
             builder.pop();
 
             builder.push("vanilla_tweaks");
-            woodenMaxDmg = builder
-                    .comment("Set the durability for Wooden Exchanger")
-                    .defineInRange("woodenExchangerMaxDamage", DefaultValues.woodenMaxDmg, 1, Integer.MAX_VALUE);
             woodenMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Wooden Exchanger")
                     .defineInRange("woodenExchangerMaxHarvestLevel", DefaultValues.woodenMaxHarvestLevel, 0, Integer.MAX_VALUE);
@@ -199,9 +188,6 @@ public class ModConfigs {
                     .comment("Set the max range for Wooden Exchanger")
                     .defineInRange("woodenExchangerMaxRange", DefaultValues.woodenMaxRange, 0, 12);
 
-            stoneMaxDmg = builder
-                    .comment("Set the durability for Stone Exchanger")
-                    .defineInRange("stoneExchangerMaxDamage", DefaultValues.stoneMaxDmg, 1, Integer.MAX_VALUE);
             stoneMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Stone Exchanger")
                     .defineInRange("stoneExchangerMaxHarvestLevel", DefaultValues.stoneMaxHarvestLevel, 0, Integer.MAX_VALUE);
@@ -209,9 +195,6 @@ public class ModConfigs {
                     .comment("Set the max range for Stone Exchanger")
                     .defineInRange("stoneExchangerMaxRange", DefaultValues.stoneMaxRange, 0, 12);
 
-            goldenMaxDmg = builder
-                    .comment("Set the durability for Golden Exchanger")
-                    .defineInRange("goldenExchangerMaxDamage", DefaultValues.goldenMaxDmg, 1, Integer.MAX_VALUE);
             goldenMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Golden Exchanger")
                     .defineInRange("goldenExchangerMaxHarvestLevel", DefaultValues.goldenMaxHarvestLevel, 0, Integer.MAX_VALUE);
@@ -219,9 +202,6 @@ public class ModConfigs {
                     .comment("Set the max range for Golden Exchanger")
                     .defineInRange("goldenExchangerMaxRange", DefaultValues.goldenMaxRange, 0, 12);
 
-            ironMaxDmg = builder
-                    .comment("Set the durability for Iron Exchanger")
-                    .defineInRange("ironExchangerMaxDamage", DefaultValues.ironMaxDmg, 1, Integer.MAX_VALUE);
             ironMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Iron Exchanger")
                     .defineInRange("ironExchangerMaxHarvestLevel", DefaultValues.ironMaxHarvestLevel, 0, Integer.MAX_VALUE);
@@ -229,9 +209,6 @@ public class ModConfigs {
                     .comment("Set the max range for Iron Exchanger")
                     .defineInRange("ironExchangerMaxRange", DefaultValues.ironMaxRange, 0, 12);
 
-            diamondMaxDmg = builder
-                    .comment("Set the durability for Diamond Exchanger")
-                    .defineInRange("diamondExchangerMaxDamage", DefaultValues.diamondMaxDmg, 1, Integer.MAX_VALUE);
             diamondMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Diamond Exchanger")
                     .defineInRange("diamondExchangerMaxHarvestLevel", DefaultValues.diamondMaxHarvestLevel, 0, Integer.MAX_VALUE);
@@ -239,9 +216,6 @@ public class ModConfigs {
                     .comment("Set the max range for Diamond Exchanger")
                     .defineInRange("diamondExchangerMaxRange", DefaultValues.diamondMaxRange, 0, 12);
 
-            emeraldMaxDmg = builder
-                    .comment("Set the durability for Emerald Exchanger")
-                    .defineInRange("emeraldExchangerMaxDamage", DefaultValues.emeraldMaxDmg, 1, Integer.MAX_VALUE);
             emeraldMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Emerald Exchanger")
                     .defineInRange("emeraldExchangerMaxHarvestLevel", DefaultValues.emeraldMaxHarvestLevel, 0, Integer.MAX_VALUE);
@@ -249,9 +223,6 @@ public class ModConfigs {
                     .comment("Set the max range for Emerald Exchanger")
                     .defineInRange("emeraldExchangerMaxRange", DefaultValues.emeraldMaxRange, 0, 12);
 
-            obsidianMaxDmg = builder
-                    .comment("Set the durability for Obsidian Exchanger")
-                    .defineInRange("obsidianExchangerMaxDamage", DefaultValues.obsidianMaxDmg, 1, Integer.MAX_VALUE);
             obsidianMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Obsidian Exchanger")
                     .defineInRange("obsidianExchangerMaxHarvestLevel", DefaultValues.obsidianMaxHarvestLevel, 0, Integer.MAX_VALUE);
@@ -259,9 +230,6 @@ public class ModConfigs {
                     .comment("Set the max range for Obsidian Exchanger")
                     .defineInRange("obsidianExchangerMaxRange", DefaultValues.obsidianMaxRange, 0, 12);
 
-            endMaxDmg = builder
-                    .comment("Set the durability for End Exchanger")
-                    .defineInRange("endExchangerMaxDamage", DefaultValues.endMaxDmg, 1, Integer.MAX_VALUE);
             endMaxHarvestLevel = builder
                     .comment("Set the max harvest level for End Exchanger")
                     .defineInRange("endExchangerMaxHarvestLevel", DefaultValues.endMaxHarvestLevel, 0, Integer.MAX_VALUE);

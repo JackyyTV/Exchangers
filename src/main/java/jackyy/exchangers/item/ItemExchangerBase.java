@@ -116,7 +116,7 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.getTierText(Reference.MODID, getTier()));
             if (!isPowered()) {
-                tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamage()).appendString(" / ").append(StringHelper.formatNumber(stack.getMaxDamage())).appendString(" ").append(StringHelper.localize(Reference.MODID, "tooltip.durability")));
+                tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamage()).appendString(" / ").appendSibling(StringHelper.formatNumber(stack.getMaxDamage())).appendString(" ").appendSibling(StringHelper.localize(Reference.MODID, "tooltip.durability")));
             }
         }
     }

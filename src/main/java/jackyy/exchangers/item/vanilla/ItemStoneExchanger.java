@@ -9,37 +9,18 @@ import net.minecraftforge.common.Tags;
 
 public class ItemStoneExchanger extends ItemExchangerBase {
 
-    private static int dmg;
-    private static int harvestLevel;
-    private static int range;
-    private static boolean loaded;
-    static {
-        try {
-            dmg = ModConfigs.CONFIG.stoneMaxDmg.get();
-            harvestLevel = ModConfigs.CONFIG.stoneMaxHarvestLevel.get();
-            range = ModConfigs.CONFIG.stoneMaxRange.get();
-            loaded = ModConfigs.CONFIG.vanillaModule.get();
-        } catch (NullPointerException exception) {
-            dmg = DefaultValues.stoneMaxDmg;
-            harvestLevel = DefaultValues.stoneMaxHarvestLevel;
-            range = DefaultValues.stoneMaxRange;
-            loaded = DefaultValues.vanillaModule;
-        }
-    }
-
     public ItemStoneExchanger() {
-        super(new Properties().defaultMaxDamage(dmg).rarity(Reference.RARITY_TIER1));
-        setRegistryName(Reference.MODID, "stone_exchanger");
+        super(new Properties().defaultMaxDamage(DefaultValues.stoneMaxDmg).rarity(Reference.RARITY_TIER1));
     }
 
     @Override
     public int getHarvestLevel() {
-        return harvestLevel;
+        return ModConfigs.CONFIG.stoneMaxHarvestLevel.get();
     }
 
     @Override
     public int getMaxRange() {
-        return range;
+        return ModConfigs.CONFIG.stoneMaxRange.get();
     }
 
     @Override
@@ -49,7 +30,7 @@ public class ItemStoneExchanger extends ItemExchangerBase {
 
     @Override
     public boolean checkLoaded() {
-        return loaded;
+        return ModConfigs.CONFIG.vanillaModule.get();
     }
 
     @Override

@@ -323,7 +323,7 @@ public class ExchangerHandler {
                             int fortuneLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
                             tool.addEnchantment(Enchantments.FORTUNE, fortuneLevel);
                             LootContext.Builder builder = new LootContext.Builder(serverWorld).withRandom(serverWorld.rand)
-                                    .withParameter(LootParameters.field_237457_g_, Vector3d.copyCentered(pos))
+                                    .withParameter(LootParameters.ORIGIN, Vector3d.copyCentered(pos))
                                     .withParameter(LootParameters.TOOL, tool);
                             List<ItemStack> oldblockItems = oldState.getDrops(builder);
                             for (ItemStack oldblockItem : oldblockItems) {

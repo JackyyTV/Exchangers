@@ -29,7 +29,7 @@ public class ImageButtonExt extends ImageButton {
     }
 
     public ImageButtonExt(int x, int y, int width, int height, int xTexStart, int yTexStart, int altTextureOffset, int altTextureOffset2, ResourceLocation resourceLocation, int textureWidth, int textureHeight, Button.IPressable onPress, ITextComponent title) {
-        this(x, y, width, height, xTexStart, yTexStart, altTextureOffset, altTextureOffset2, resourceLocation, textureWidth, textureHeight, onPress, field_238486_s_, title);
+        this(x, y, width, height, xTexStart, yTexStart, altTextureOffset, altTextureOffset2, resourceLocation, textureWidth, textureHeight, onPress, EMPTY_TOOLTIP, title);
     }
 
     public ImageButtonExt(int x, int y, int width, int height, int xTexStart, int yTexStart, int altTextureOffset, int altTextureOffset2, ResourceLocation resourceLocation, int textureWidth, int textureHeight, Button.IPressable onPress, Button.ITooltip onTooltip, ITextComponent title) {
@@ -44,7 +44,7 @@ public class ImageButtonExt extends ImageButton {
     }
 
     @Override
-    public void renderButton(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderWidget(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindTexture(this.resourceLocation);
         int i = this.yTexStart;

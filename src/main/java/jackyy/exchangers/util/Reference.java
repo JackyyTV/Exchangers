@@ -26,7 +26,7 @@ public final class Reference {
     public static final ItemGroup TAB = new ItemGroup(MODID) {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModItems.obsidianExchanger);
+            return new ItemStack(ModItems.OBSIDIAN_EXCHANGER.get());
         }
     };
 

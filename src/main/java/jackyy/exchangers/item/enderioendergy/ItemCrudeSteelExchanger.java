@@ -2,56 +2,33 @@ package jackyy.exchangers.item.enderioendergy;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
 import net.minecraftforge.fml.ModList;
 
 public class ItemCrudeSteelExchanger extends ItemExchangerBasePowered {
 
-    private static int energy;
-    private static int perBlockUse;
-    private static int harvestLevel;
-    private static int range;
-    private static boolean loaded;
-    static {
-        try {
-            energy = ModConfigs.CONFIG.crudeSteelMaxEnergy.get();
-            perBlockUse = ModConfigs.CONFIG.crudeSteelPerBlockUse.get();
-            harvestLevel = ModConfigs.CONFIG.crudeSteelMaxHarvestLevel.get();
-            range = ModConfigs.CONFIG.crudeSteelMaxRange.get();
-            loaded = ModConfigs.CONFIG.enderIOEndergyModule.get();
-        } catch (NullPointerException exception) {
-            energy = DefaultValues.crudeSteelMaxEnergy;
-            perBlockUse = DefaultValues.crudeSteelPerBlockUse;
-            harvestLevel = DefaultValues.crudeSteelMaxHarvestLevel;
-            range = DefaultValues.crudeSteelMaxRange;
-            loaded = DefaultValues.enderIOEndergyModule;
-        }
-    }
-
     public ItemCrudeSteelExchanger() {
         super(new Properties().rarity(Reference.RARITY_TIER1));
-        setRegistryName(Reference.MODID, "crude_steel_exchanger");
     }
 
     @Override
     public int getMaxEnergy() {
-        return energy;
+        return ModConfigs.CONFIG.crudeSteelMaxEnergy.get();
     }
 
     @Override
     public int getPerBlockUse() {
-        return perBlockUse;
+        return ModConfigs.CONFIG.crudeSteelPerBlockUse.get();
     }
 
     @Override
     public int getHarvestLevel() {
-        return harvestLevel;
+        return ModConfigs.CONFIG.crudeSteelMaxHarvestLevel.get();
     }
 
     @Override
     public int getMaxRange() {
-        return range;
+        return ModConfigs.CONFIG.crudeSteelMaxRange.get();
     }
 
     @Override
@@ -61,7 +38,7 @@ public class ItemCrudeSteelExchanger extends ItemExchangerBasePowered {
 
     @Override
     public boolean checkLoaded() {
-        return loaded && ModList.get().isLoaded(Reference.EIO_ENDERGY);
+        return ModConfigs.CONFIG.enderIOEndergyModule.get() && ModList.get().isLoaded(Reference.EIO_ENDERGY);
     }
 
 }

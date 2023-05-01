@@ -17,7 +17,7 @@ public class RenderTypeExt extends RenderType {
 
     static {
         BLOCK_OUTLINES = makeType(Reference.MODID + "_block_outlines", DefaultVertexFormats.POSITION_COLOR, 1, 256, State.getBuilder()
-                .line(new LineState(OptionalDouble.of(4.0d))).layer(field_239235_M_).transparency(TRANSLUCENT_TRANSPARENCY)
+                .line(new LineState(OptionalDouble.of(4.0d))).layer(NO_LAYERING).transparency(TRANSLUCENT_TRANSPARENCY)
                 .texture(NO_TEXTURE).depthTest(DEPTH_ALWAYS).cull(CULL_DISABLED).lightmap(LIGHTMAP_DISABLED).writeMask(COLOR_WRITE)
                 .build(false)
         );

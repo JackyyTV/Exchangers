@@ -1,7 +1,6 @@
 package jackyy.exchangers.registry.crafting.condition.module;
 
 import com.google.gson.JsonObject;
-import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.Reference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;

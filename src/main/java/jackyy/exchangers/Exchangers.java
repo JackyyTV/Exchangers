@@ -8,10 +8,7 @@ import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.registry.ModItems;
 import jackyy.exchangers.registry.crafting.ModCrafting;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -23,11 +20,11 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class Exchangers {
 
     public Exchangers() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC, Reference.MODNAME + ".toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModConfigs.SPEC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         ModCrafting.registerConditions();
-        MinecraftForge.EVENT_BUS.register(this);
+        ModItems.init();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -44,14 +41,6 @@ public class Exchangers {
     private void clientSetup(final FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new ClientEventsHandler());
         Keys.init();
-    }
-
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onItemRegistry(RegistryEvent.Register<Item> event) {
-            ModItems.init(event);
-        }
     }
 
 }

@@ -61,7 +61,7 @@ public class ClientEventsHandler {
             String exchangeRange = ExchangerHandler.rangeList[NBTHelper.getTag(stack).getInt("range")];
             float scale = exchangeRange.length() > 2 ? 1 : 1;
             float swidth = mc.fontRenderer.getStringWidth(exchangeRange) * scale;
-            matrixStack.translate((w / 2 - 2 - swidth), h / 2 - 4, 0);
+            matrixStack.translate(((double) w / 2 - 2 - swidth), (double) h / 2 - 4, 0);
             matrixStack.scale(scale, scale, 1);
             mc.fontRenderer.drawStringWithShadow(event.getMatrixStack(), exchangeRange, 0, 0, 0xFFFFFF);
             matrixStack.pop();

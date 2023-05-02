@@ -9,11 +9,11 @@ import jackyy.exchangers.item.special.ItemTuberousExchanger;
 import jackyy.exchangers.item.thermal.*;
 import jackyy.exchangers.item.vanilla.*;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
 

@@ -2,7 +2,7 @@ package jackyy.exchangers.registry.crafting.condition.module;
 
 import com.google.gson.JsonObject;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
@@ -20,14 +20,14 @@ public class ConditionEnderIOEndergyModule implements ICondition {
         return ID;
     }
 
-    @Override
+    @Override @Deprecated
     public boolean test() {
         //return ModConfigs.CONFIG.enderIOEndergyModule.get() == value;
         //Disabled recipes for now until Ender IO Endergy gets ported
         return false;
     }
 
-    public static final IConditionSerializer<ConditionEnderIOEndergyModule> SERIALIZER = new IConditionSerializer<ConditionEnderIOEndergyModule>() {
+    public static final IConditionSerializer<ConditionEnderIOEndergyModule> SERIALIZER = new IConditionSerializer<>() {
         @Override
         public void write(JsonObject json, ConditionEnderIOEndergyModule condition) {
             json.addProperty("enabled", condition.value);

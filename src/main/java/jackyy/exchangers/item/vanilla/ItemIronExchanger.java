@@ -3,14 +3,14 @@ package jackyy.exchangers.item.vanilla;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.DefaultValues;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.Tags;
 
 public class ItemIronExchanger extends ItemExchangerBase {
 
     public ItemIronExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.ironMaxDmg).rarity(Rarity.RARE));
+        super(new Properties().durability(DefaultValues.ironMaxDmg).rarity(Rarity.RARE));
     }
 
     @Override
@@ -34,8 +34,8 @@ public class ItemIronExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return Tags.Items.INGOTS_IRON.contains(repair.getItem());
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return repair.is(Tags.Items.INGOTS_IRON);
     }
 
 }

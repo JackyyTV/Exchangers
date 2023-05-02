@@ -12,28 +12,28 @@ import jackyy.exchangers.util.Reference;
 import jackyy.gunpowderlib.helper.KeyHelper;
 import jackyy.gunpowderlib.helper.NBTHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -42,11 +42,11 @@ import java.util.List;
 public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
 
     public ItemExchangerBase(Properties props) {
-        super(props.group(Reference.TAB));
+        super(props.tab(Reference.TAB));
     }
 
     @Override
-    public boolean showDurabilityBar(ItemStack stack) {
+    public boolean isBarVisible(ItemStack stack) {
         return stack.isDamaged();
     }
 
@@ -56,28 +56,28 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        PlayerEntity player = context.getPlayer();
-        BlockPos pos = context.getPos();
-        Direction side = context.getFace();
-        if (!world.isRemote && player != null) {
-            if (player.isSneaking()) {
-                ExchangerHandler.selectBlock(player.getHeldItemMainhand(), player, world, pos);
+    public InteractionResult useOn(UseOnContext context) {
+        Level world = context.getLevel();
+        Player player = context.getPlayer();
+        BlockPos pos = context.getClickedPos();
+        Direction side = context.getClickedFace();
+        if (!world.isClientSide() && player != null) {
+            if (player.isCrouching()) {
+                ExchangerHandler.selectBlock(player.getMainHandItem(), player, world, pos);
             } else {
-                ExchangerHandler.placeBlock(player.getHeldItemMainhand(), player, world, pos, side, context);
+                ExchangerHandler.placeBlock(player.getMainHandItem(), player, world, pos, side, context);
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-        super.addInformation(stack, world, tooltip, flag);
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag advanced) {
+        super.appendHoverText(stack, world, tooltip, advanced);
 
         ExchangerHandler.setDefaultTagCompound(stack);
-        CompoundNBT compound = NBTHelper.getTag(stack);
-        BlockState state = NBTUtil.readBlockState(compound.getCompound("blockstate"));
+        CompoundTag compound = NBTHelper.getTag(stack);
+        BlockState state = NbtUtils.readBlockState(compound.getCompound("blockstate"));
         Block block = state.getBlock();
         int mode = compound.getInt("mode");
 
@@ -85,45 +85,45 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
             tooltip.add(StringHelper.getShiftText(Reference.MODID));
         }
         if (KeyHelper.isShiftKeyDown()) {
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.selected_block", (block == Blocks.AIR ? StringHelper.localize(Reference.MODID, "tooltip.selected_block.none").mergeStyle(TextFormatting.RED) : ExchangerHandler.getBlockName(block).mergeStyle(TextFormatting.GREEN))).mergeStyle(TextFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_range", TextFormatting.GREEN + ExchangerHandler.rangeList[compound.getInt("range")]).mergeStyle(TextFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_range", new StringTextComponent(ExchangerHandler.rangeList[getMaxRange()]).mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_harvest_level", StringHelper.formatHarvestLevel(Reference.MODID, getHarvestLevel()).mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.selected_block", (block == Blocks.AIR ? StringHelper.localize(Reference.MODID, "tooltip.selected_block.none").withStyle(ChatFormatting.RED) : ExchangerHandler.getBlockName(block).withStyle(ChatFormatting.GREEN))).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_range", ChatFormatting.GREEN + ExchangerHandler.rangeList[compound.getInt("range")]).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_range", new TextComponent(ExchangerHandler.rangeList[getMaxRange()]).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_harvest_level", StringHelper.formatHarvestLevel(Reference.MODID, getHarvestLevel()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
             switch (mode) {
                 case 0:
-                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModePlane.getDisplayName().mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
+                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModePlane.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
                     break;
                 case 1:
-                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeHorizontalCol.getDisplayName().mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
+                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeHorizontalCol.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
                     break;
                 case 2:
-                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeVerticalCol.getDisplayName().mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
+                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeVerticalCol.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
                     break;
             }
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.silk_touch", Reference.getStateString(ModConfigs.CONFIG.doExchangersSilkTouch.get())).mergeStyle(TextFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.force_drop_items", Reference.getStateString(compound.getBoolean("forceDropItems"))).mergeStyle(TextFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.directional_placement", Reference.getStateString(compound.getBoolean("directionalPlacement"))).mergeStyle(TextFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement", Reference.getStateString(compound.getBoolean("fuzzyPlacement"))).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.silk_touch", Reference.getStateString(ModConfigs.CONFIG.doExchangersSilkTouch.get())).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.force_drop_items", Reference.getStateString(compound.getBoolean("forceDropItems"))).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.directional_placement", Reference.getStateString(compound.getBoolean("directionalPlacement"))).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement", Reference.getStateString(compound.getBoolean("fuzzyPlacement"))).withStyle(ChatFormatting.WHITE));
         }
         if (!KeyHelper.isCtrlKeyDown()) {
             tooltip.add(StringHelper.getCtrlText(Reference.MODID));
         }
         if (KeyHelper.isCtrlKeyDown()) {
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra1").mergeStyle(TextFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra2").mergeStyle(TextFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra3", new TranslationTextComponent(Keys.OPEN_GUI_KEY.getKey().toString()).mergeStyle(TextFormatting.GREEN)).mergeStyle(TextFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra1").withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra2").withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra3", new TranslatableComponent(Keys.OPEN_GUI_KEY.getKey().toString()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
         }
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.getTierText(Reference.MODID, getTier()));
             if (!isPowered()) {
-                tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamage()).appendString(" / ").appendSibling(StringHelper.formatNumber(stack.getMaxDamage())).appendString(" ").appendSibling(StringHelper.localize(Reference.MODID, "tooltip.durability")));
+                tooltip.add(StringHelper.formatNumber(stack.getMaxDamage() - stack.getDamageValue()).append(" / ").append(StringHelper.formatNumber(stack.getMaxDamage())).append(" ").append(StringHelper.localize(Reference.MODID, "tooltip.durability")));
             }
         }
     }
 
     @Override @OnlyIn(Dist.CLIENT)
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        if (allowdedIn(group)) {
             if (checkLoaded()) {
                 items.add(new ItemStack(this));
             }
@@ -136,7 +136,7 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
     }
 
     @Override @OnlyIn(Dist.CLIENT)
-    public boolean hasEffect(ItemStack stack) {
+    public boolean isFoil(ItemStack stack) {
         return false;
     }
 
@@ -146,13 +146,13 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
     }
 
     @Override
-    public int getItemEnchantability() {
+    public int getEnchantmentValue() {
         return 20;
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.FORTUNE || enchantment == Enchantments.SILK_TOUCH
+        return enchantment == Enchantments.BLOCK_FORTUNE || enchantment == Enchantments.SILK_TOUCH
                 || enchantment == Enchantments.UNBREAKING || enchantment == Enchantments.MENDING;
     }
 

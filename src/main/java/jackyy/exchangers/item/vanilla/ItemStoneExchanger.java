@@ -4,13 +4,13 @@ import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags;
 
 public class ItemStoneExchanger extends ItemExchangerBase {
 
     public ItemStoneExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.stoneMaxDmg).rarity(Reference.RARITY_TIER1));
+        super(new Properties().durability(DefaultValues.stoneMaxDmg).rarity(Reference.RARITY_TIER1));
     }
 
     @Override
@@ -34,8 +34,8 @@ public class ItemStoneExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return Tags.Items.STONE.contains(repair.getItem());
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return repair.is(Tags.Items.STONE);
     }
 
 }

@@ -2,12 +2,12 @@ package jackyy.exchangers.item.special;
 
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
-import net.minecraft.item.Rarity;
+import net.minecraft.world.item.Rarity;
 
 public class ItemCreativeExchanger extends ItemExchangerBase {
 
     public ItemCreativeExchanger() {
-        super(new Properties().defaultMaxDamage(9001).rarity(Rarity.EPIC));
+        super(new Properties().durability(9001).rarity(Rarity.EPIC));
     }
 
     @Override

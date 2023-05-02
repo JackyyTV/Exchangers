@@ -3,7 +3,7 @@ package jackyy.exchangers.item.enderioendergy;
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.item.Rarity;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.fml.ModList;
 
 public class ItemMelodicExchanger extends ItemExchangerBasePowered {

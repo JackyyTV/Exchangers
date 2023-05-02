@@ -3,7 +3,7 @@ package jackyy.exchangers.item.enderio;
 import jackyy.exchangers.item.ItemCoreBase;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.item.Rarity;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.fml.ModList;
 
 public class ItemEIOExchangerCoreT2 extends ItemCoreBase {

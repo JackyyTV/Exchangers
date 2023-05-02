@@ -1,12 +1,11 @@
 package jackyy.exchangers.handler.network.packet;
 
-import io.netty.buffer.ByteBuf;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.item.ItemExchangerBase;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -18,19 +17,19 @@ public class PacketSetFuzzyPlacementChance {
         this.chance = chance;
     }
 
-    public PacketSetFuzzyPlacementChance(ByteBuf buffer) {
+    public PacketSetFuzzyPlacementChance(FriendlyByteBuf buffer) {
         chance = buffer.readInt();
     }
 
-    public void toBytes(PacketBuffer buffer) {
+    public void toBytes(FriendlyByteBuf buffer) {
         buffer.writeInt(chance);
     }
 
     public static void handle(PacketSetFuzzyPlacementChance message, Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
-            ServerPlayerEntity player = context.get().getSender();
+            ServerPlayer player = context.get().getSender();
             if (player != null) {
-                ItemStack heldItem = player.getHeldItemMainhand();
+                ItemStack heldItem = player.getMainHandItem();
                 if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
                     ExchangerHandler.setFuzzyPlacementChance(heldItem, message.chance);
                 }

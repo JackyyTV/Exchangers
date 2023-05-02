@@ -3,15 +3,15 @@ package jackyy.exchangers.item.vanilla;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.DefaultValues;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 
 public class ItemEndExchanger extends ItemExchangerBase {
 
     public ItemEndExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.endMaxDmg).rarity(Rarity.EPIC));
+        super(new Properties().durability(DefaultValues.endMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -35,8 +35,8 @@ public class ItemEndExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return Tags.Items.END_STONES.contains(repair.getItem()) || repair.equals(new ItemStack(Blocks.PURPUR_BLOCK));
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return repair.is(Tags.Items.END_STONES) || repair.equals(new ItemStack(Blocks.PURPUR_BLOCK));
     }
 
 }

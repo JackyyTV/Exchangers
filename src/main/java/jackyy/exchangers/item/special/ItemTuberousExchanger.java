@@ -5,43 +5,43 @@ import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.Reference;
 import jackyy.gunpowderlib.helper.KeyHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.item.Rarity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
 
 import java.util.List;
 
 public class ItemTuberousExchanger extends ItemExchangerBase {
 
     public ItemTuberousExchanger() {
-        super(new Properties().defaultMaxDamage(1).rarity(Rarity.UNCOMMON));
+        super(new Properties().durability(1).rarity(Rarity.UNCOMMON));
     }
 
     @Override
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-        super.addInformation(stack, world, tooltip, flag);
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag advanced) {
+        super.appendHoverText(stack, world, tooltip, advanced);
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.tuberous_exchanger.warning"));
         }
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        PlayerEntity player = context.getPlayer();
+    public InteractionResult useOn(UseOnContext context) {
+        Player player = context.getPlayer();
         if (player != null) {
-            player.getHeldItemMainhand().setCount(0);
-            player.attackEntityFrom(new EntityDamageSource("tuberous_exchanger", player), Float.MAX_VALUE);
-            player.world.createExplosion(player, player.getPosX(), player.getPosY(), player.getPosZ(), 1.0F, Explosion.Mode.NONE);
-            return ActionResultType.SUCCESS;
+            player.getMainHandItem().setCount(0);
+            player.hurt(new EntityDamageSource("tuberous_exchanger", player), Float.MAX_VALUE);
+            player.level.explode(player, player.getX(), player.getY(), player.getZ(), 1.0F, Explosion.BlockInteraction.NONE);
+            return InteractionResult.SUCCESS;
         }
-        return ActionResultType.FAIL;
+        return InteractionResult.FAIL;
     }
 
     @Override

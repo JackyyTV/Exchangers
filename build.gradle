@@ -18,7 +18,7 @@ version = "${mc_version}-${mod_version}"
 group = 'jackyy.exchangers'
 archivesBaseName = "${mod_name}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -37,6 +37,7 @@ minecraft {
             if (project.hasProperty('mcAccessToken')) {
                 args '--accessToken', project.getProperty('mcAccessToken')
             }
+			property 'forge.enabledGameTestNamespaces', 'exchangers'
             mods {
                 exchangers {
                     source sourceSets.main
@@ -47,6 +48,18 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+			property 'forge.enabledGameTestNamespaces', 'exchangers'
+            mods {
+                exchangers {
+                    source sourceSets.main
+                }
+            }
+        }
+		gameTestServer {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'exchangers'
             mods {
                 exchangers {
                     source sourceSets.main
@@ -89,17 +102,17 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
-    implementation fg.deobf("mezz.jei:jei-1.16.5:+")
-    implementation fg.deobf("curse.maven:hwyla-253449:3033593") //1.10.11-B78_1.16.2
+    implementation fg.deobf("mezz.jei:jei-1.18.2:+")
+    implementation fg.deobf("curse.maven:jade-324717:4082408") //1.18.2-5.2.6
 
-    implementation fg.deobf("curse.maven:gunpowderlib-356646:4515267") //1.16.5-1.2.3
+    implementation fg.deobf("curse.maven:gunpowderlib-356646:4515715") //1.18.2-2.0.1
 
-    runtimeOnly fg.deobf("curse.maven:mekanism-268560:3659389") //1.16.5-10.1.2.457
-    //runtimeOnly fg.deobf("curse.maven:immersive_engineering-231951:3809596") //1.16.5-5.1.0-148
-    runtimeOnly fg.deobf("curse.maven:cofh_core-69162:4022663") //1.16.5-1.5.2.22
-    runtimeOnly fg.deobf("curse.maven:thermal_foundation-222880:4022666") //1.16.5-1.5.2.30
-    runtimeOnly fg.deobf("curse.maven:thermal_innovation-291737:3788896") //1.16.5-1.5.0.4
-    runtimeOnly fg.deobf("curse.maven:thermal_expansion-69163:4063134") //1.16.5-1.5.2.16
+    runtimeOnly fg.deobf("curse.maven:mekanism-268560:3875976") //1.18.2-10.2.5.465
+    //runtimeOnly fg.deobf("curse.maven:immersive_engineering-231951:4412849") //1.18.2-8.4.0-161
+    runtimeOnly fg.deobf("curse.maven:cofh_core-69162:4385215") //1.18.2-9.2.1.39
+    runtimeOnly fg.deobf("curse.maven:thermal_foundation-222880:4382339") //1.18.2-9.2.0.46
+    runtimeOnly fg.deobf("curse.maven:thermal_innovation-291737:4382344") //1.18.2-9.2.0.17
+    runtimeOnly fg.deobf("curse.maven:thermal_expansion-69163:4382343") //1.18.2-9.2.0.20
 }
 
 jar {

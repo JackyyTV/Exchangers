@@ -3,14 +3,14 @@ package jackyy.exchangers.item.vanilla;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.DefaultValues;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.Tags;
 
 public class ItemObsidianExchanger extends ItemExchangerBase {
 
     public ItemObsidianExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.obsidianMaxDmg).rarity(Rarity.EPIC));
+        super(new Properties().durability(DefaultValues.obsidianMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -34,8 +34,8 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return Tags.Items.OBSIDIAN.contains(repair.getItem());
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return repair.is(Tags.Items.OBSIDIAN);
     }
 
 }

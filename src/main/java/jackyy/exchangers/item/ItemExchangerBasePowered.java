@@ -9,16 +9,17 @@ import jackyy.gunpowderlib.capability.IFEContainer;
 import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.gunpowderlib.helper.KeyHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -29,7 +30,7 @@ import java.util.List;
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IFEContainer {
 
     public ItemExchangerBasePowered(Properties props) {
-        super(props.defaultMaxDamage(1));
+        super(props.durability(1));
     }
 
     @Override
@@ -50,41 +51,46 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     @Override
     public int getMaxEnergyStored(ItemStack container) {
         if (ModConfigs.CONFIG.holdingEnchantment.get() && ModList.get().isLoaded("cofh_core")) {
-            int enchant = EnchantmentHelper.getEnchantmentLevel(Reference.holdingEnchant, container);
+            int enchant = EnchantmentHelper.getItemEnchantmentLevel(Reference.holdingEnchant, container);
             return getMaxEnergy() + getMaxEnergy() * enchant / 2;
         }
         return getMaxEnergy();
     }
 
     @Override
-    public boolean showDurabilityBar(ItemStack stack) {
+    public boolean isBarVisible(ItemStack stack) {
         return true;
     }
 
     @Override
-    public double getDurabilityForDisplay(ItemStack stack) {
+    public int getBarWidth(ItemStack stack) {
         if (stack.getTag() == null) {
             EnergyHelper.setDefaultEnergyTag(stack, 0);
         }
-        return 1D - ((double) stack.getTag().getInt(EnergyHelper.ENERGY_NBT) / (double) getMaxEnergyStored(stack));
+        return (int) Math.round(13.0D * getEnergyStored(stack) / (double) getMaxEnergyStored(stack));
     }
 
     @Override
-    public void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
-        super.addInformation(stack, world, tooltip, flag);
+    public int getBarColor(ItemStack stack) {
+        return Mth.hsvToRgb(1 / 3.0F, 1.0F, 1.0F);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, world, tooltip, flag);
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(
                     StringHelper.formatNumber(getEnergyStored(stack))
-                            .appendString(" / ")
-                            .appendSibling(StringHelper.formatNumber(getMaxEnergyStored(stack)))
-                            .appendString(" " + ModConfigs.CONFIG.energyUnit.get())
+                            .append(" / ")
+                            .append(StringHelper.formatNumber(getMaxEnergyStored(stack)))
+                            .append(" " + ModConfigs.CONFIG.energyUnit.get())
             );
         }
     }
 
     @Override @OnlyIn(Dist.CLIENT)
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
+        if (allowdedIn(tab)) {
             if (checkLoaded()) {
                 ItemStack empty = new ItemStack(this);
                 ExchangerHandler.setDefaultTagCompound(empty);
@@ -103,13 +109,13 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
         return new FEItemStackCapability<>(new FEStorageCapability(this, stack));
     }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.FORTUNE
+        return enchantment == Enchantments.BLOCK_FORTUNE
                 || enchantment == Enchantments.SILK_TOUCH
                 || enchantment == Enchantments.UNBREAKING;
     }

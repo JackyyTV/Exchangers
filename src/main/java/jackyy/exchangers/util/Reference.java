@@ -2,12 +2,12 @@ package jackyy.exchangers.util;
 
 import jackyy.exchangers.registry.ModItems;
 import jackyy.gunpowderlib.helper.StringHelper;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.registries.ObjectHolder;
 
 public final class Reference {
@@ -23,22 +23,22 @@ public final class Reference {
     public static final String IE = "immersiveengineering";
     public static final String BWM = "betterwithmods";
 
-    public static final ItemGroup TAB = new ItemGroup(MODID) {
+    public static final CreativeModeTab TAB = new CreativeModeTab(MODID) {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(ModItems.OBSIDIAN_EXCHANGER.get());
         }
     };
 
-    public static final Rarity RARITY_TIER1 = Rarity.create(MODID + "_rarity_tier1", TextFormatting.GREEN);
+    public static final Rarity RARITY_TIER1 = Rarity.create(MODID + "_rarity_tier1", ChatFormatting.GREEN);
 
     public static final String KEY_PREFIX = "key.exchangers.";
     public static final String KEY_CATEGORY = "key.categories.exchangers";
 
-    public static IFormattableTextComponent getStateString(boolean condition) {
+    public static MutableComponent getStateString(boolean condition) {
         return condition
-                ? StringHelper.localize(Reference.MODID, "tooltip.state.enabled").mergeStyle(TextFormatting.GREEN)
-                : StringHelper.localize(Reference.MODID, "tooltip.state.disabled").mergeStyle(TextFormatting.RED);
+                ? StringHelper.localize(Reference.MODID, "tooltip.state.enabled").withStyle(ChatFormatting.GREEN)
+                : StringHelper.localize(Reference.MODID, "tooltip.state.disabled").withStyle(ChatFormatting.RED);
     }
 
     @ObjectHolder("cofh_core:holding")

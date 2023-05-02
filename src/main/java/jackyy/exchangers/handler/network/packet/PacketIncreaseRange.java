@@ -2,10 +2,10 @@ package jackyy.exchangers.handler.network.packet;
 
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.item.ItemExchangerBase;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -13,15 +13,15 @@ public class PacketIncreaseRange {
 
     public PacketIncreaseRange() { }
 
-    public PacketIncreaseRange(PacketBuffer buffer) { }
+    public PacketIncreaseRange(FriendlyByteBuf buffer) { }
 
-    public void toBytes(PacketBuffer buffer) { }
+    public void toBytes(FriendlyByteBuf buffer) { }
 
     public void handle(Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
-            ServerPlayerEntity player = context.get().getSender();
+            ServerPlayer player = context.get().getSender();
             if (player != null) {
-                ItemStack heldItem = player.getHeldItemMainhand();
+                ItemStack heldItem = player.getMainHandItem();
                 if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
                     ExchangerHandler.switchRange(heldItem, false);
                 }

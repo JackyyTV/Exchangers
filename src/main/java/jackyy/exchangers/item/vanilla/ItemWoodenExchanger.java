@@ -4,13 +4,13 @@ import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
 
 public class ItemWoodenExchanger extends ItemExchangerBase {
 
     public ItemWoodenExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.woodenMaxDmg).rarity(Reference.RARITY_TIER1));
+        super(new Properties().durability(DefaultValues.woodenMaxDmg).rarity(Reference.RARITY_TIER1));
     }
 
     @Override
@@ -34,8 +34,8 @@ public class ItemWoodenExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return ItemTags.LOGS.contains(repair.getItem());
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return repair.is(ItemTags.LOGS);
     }
 
 }

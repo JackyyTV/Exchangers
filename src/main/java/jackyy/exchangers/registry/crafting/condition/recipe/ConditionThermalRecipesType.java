@@ -3,7 +3,7 @@ package jackyy.exchangers.registry.crafting.condition.recipe;
 import com.google.gson.JsonObject;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
@@ -26,7 +26,7 @@ public class ConditionThermalRecipesType implements ICondition {
         return ModConfigs.CONFIG.thermalRecipesType.get().equals(value);
     }
 
-    public static final IConditionSerializer<ConditionThermalRecipesType> SERIALIZER = new IConditionSerializer<ConditionThermalRecipesType>() {
+    public static final IConditionSerializer<ConditionThermalRecipesType> SERIALIZER = new IConditionSerializer<>() {
         @Override
         public void write(JsonObject json, ConditionThermalRecipesType condition) {
             json.addProperty("value", condition.value);

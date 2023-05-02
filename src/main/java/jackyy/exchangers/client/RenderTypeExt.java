@@ -1,9 +1,9 @@
 package jackyy.exchangers.client;
 
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import jackyy.exchangers.util.Reference;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexFormat;
 
 import java.util.OptionalDouble;
 
@@ -11,17 +11,16 @@ public class RenderTypeExt extends RenderType {
 
     public static final RenderType BLOCK_OUTLINES;
 
-    public RenderTypeExt(String nameIn, VertexFormat formatIn, int drawModeIn, int bufferSizeIn, boolean useDelegateIn, boolean needsSortingIn, Runnable setupTaskIn, Runnable clearTaskIn) {
+    public RenderTypeExt(String nameIn, VertexFormat formatIn, VertexFormat.Mode drawModeIn, int bufferSizeIn, boolean useDelegateIn, boolean needsSortingIn, Runnable setupTaskIn, Runnable clearTaskIn) {
         super(nameIn, formatIn, drawModeIn, bufferSizeIn, useDelegateIn, needsSortingIn, setupTaskIn, clearTaskIn);
     }
 
     static {
-        BLOCK_OUTLINES = makeType(Reference.MODID + "_block_outlines", DefaultVertexFormats.POSITION_COLOR, 1, 256, State.getBuilder()
-                .line(new LineState(OptionalDouble.of(4.0d))).layer(NO_LAYERING).transparency(TRANSLUCENT_TRANSPARENCY)
-                .texture(NO_TEXTURE).depthTest(DEPTH_ALWAYS).cull(CULL_DISABLED).lightmap(LIGHTMAP_DISABLED).writeMask(COLOR_WRITE)
-                .build(false)
+        BLOCK_OUTLINES = create(Reference.MODID + "_block_outlines", DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.LINES, 256, false, false, RenderType.CompositeState.builder()
+                .setShaderState(ShaderStateShard.RENDERTYPE_LINES_SHADER).setLineState(new LineStateShard(OptionalDouble.of(4.0d))).setLayeringState(NO_LAYERING).setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                .setTextureState(NO_TEXTURE).setDepthTestState(NO_DEPTH_TEST).setCullState(NO_CULL).setLightmapState(NO_LIGHTMAP).setWriteMaskState(COLOR_WRITE)
+                .createCompositeState(false)
         );
     }
-
 
 }

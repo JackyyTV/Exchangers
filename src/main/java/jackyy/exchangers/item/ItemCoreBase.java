@@ -2,23 +2,23 @@ package jackyy.exchangers.item;
 
 import jackyy.exchangers.util.ILoadable;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemCoreBase extends Item implements ILoadable {
 
     public ItemCoreBase(Properties props) {
-        super(props.group(Reference.TAB).maxStackSize(16));
+        super(props.tab(Reference.TAB).stacksTo(16));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
+        if (allowdedIn(tab)) {
             if (checkLoaded()) {
                 items.add(new ItemStack(this));
             }

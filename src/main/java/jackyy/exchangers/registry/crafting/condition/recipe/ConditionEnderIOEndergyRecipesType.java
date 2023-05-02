@@ -3,7 +3,7 @@ package jackyy.exchangers.registry.crafting.condition.recipe;
 import com.google.gson.JsonObject;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
@@ -21,12 +21,12 @@ public class ConditionEnderIOEndergyRecipesType implements ICondition {
         return ID;
     }
 
-    @Override
+    @Override @Deprecated
     public boolean test() {
         return ModConfigs.CONFIG.enderIOEndergyRecipesType.get().equals(value);
     }
 
-    public static final IConditionSerializer<ConditionEnderIOEndergyRecipesType> SERIALIZER = new IConditionSerializer<ConditionEnderIOEndergyRecipesType>() {
+    public static final IConditionSerializer<ConditionEnderIOEndergyRecipesType> SERIALIZER = new IConditionSerializer<>() {
         @Override
         public void write(JsonObject json, ConditionEnderIOEndergyRecipesType condition) {
             json.addProperty("value", condition.value);

@@ -1,6 +1,7 @@
 package jackyy.exchangers.client.gui;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import jackyy.exchangers.client.keybind.Keys;
 import jackyy.exchangers.handler.ExchangerHandler;
@@ -17,6 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -74,13 +76,13 @@ public class ExchangersGuiScreen extends Screen {
                 button -> NetworkHandler.sendToServer(new PacketToggleFuzzyPlacement()));
         voidItemsButton = new ToggleButton(relativeX + 140, relativeY + 66, 20, 20, new TextComponent("\u2A37"),
                 button -> NetworkHandler.sendToServer(new PacketToggleVoidItems()));
-        this.addWidget(decreaseRangeButton);
-        this.addWidget(increaseRangeButton);
-        this.addWidget(modeSwitchButton);
-        this.addWidget(forceDropItemsButton);
-        this.addWidget(directionalPlacementButton);
-        this.addWidget(fuzzyPlacementButton);
-        this.addWidget(voidItemsButton);
+        this.addRenderableWidget(decreaseRangeButton);
+        this.addRenderableWidget(increaseRangeButton);
+        this.addRenderableWidget(modeSwitchButton);
+        this.addRenderableWidget(forceDropItemsButton);
+        this.addRenderableWidget(directionalPlacementButton);
+        this.addRenderableWidget(fuzzyPlacementButton);
+        this.addRenderableWidget(voidItemsButton);
         fuzzyPlacementChanceField = new EditBox(this.font, relativeX + 92, relativeY + 108, 26, 16, TextComponent.EMPTY);
         fuzzyPlacementChanceField.setMaxLength(3);
         fuzzyPlacementChanceField.setValue(chance);
@@ -95,7 +97,9 @@ public class ExchangersGuiScreen extends Screen {
         this.renderBackground(matrixStack);
         int relativeX = (this.width - W) / 2;
         int relativeY = (this.height - H) / 2;
-        mc.getTextureManager().bindForSetup(GUI_IMAGE);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, GUI_IMAGE);
         this.blit(matrixStack, relativeX, relativeY, 0, 0, W, H);
         this.itemRenderer.renderAndDecorateItem(stack, relativeX + 82, relativeY + 8);
         int range = tag.getInt("range");

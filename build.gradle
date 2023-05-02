@@ -37,7 +37,7 @@ minecraft {
             if (project.hasProperty('mcAccessToken')) {
                 args '--accessToken', project.getProperty('mcAccessToken')
             }
-			property 'forge.enabledGameTestNamespaces', 'exchangers'
+            property 'forge.enabledGameTestNamespaces', 'exchangers'
             mods {
                 exchangers {
                     source sourceSets.main
@@ -48,14 +48,14 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-			property 'forge.enabledGameTestNamespaces', 'exchangers'
+            property 'forge.enabledGameTestNamespaces', 'exchangers'
             mods {
                 exchangers {
                     source sourceSets.main
                 }
             }
         }
-		gameTestServer {
+        gameTestServer {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'

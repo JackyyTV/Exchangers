@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
@@ -15,11 +16,12 @@ public class ToggleButton extends Button {
         super(x, y, width, height, title, pressedAction);
     }
 
-    @Override @SuppressWarnings("deprecation")
+    @Override
     public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
         Font fontrenderer = minecraft.font;
-        minecraft.getTextureManager().getTexture(WIDGETS_LOCATION);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.alpha);
         int i = this.getYImage(this.isHoveredOrFocused() || this.toggled);
         RenderSystem.enableBlend();

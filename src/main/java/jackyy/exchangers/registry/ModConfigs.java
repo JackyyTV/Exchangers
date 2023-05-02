@@ -181,19 +181,24 @@ public class ModConfigs {
             builder.pop();
 
             builder.push("vanilla_tweaks");
+
             woodenMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Wooden Exchanger")
                     .defineInRange("woodenExchangerMaxHarvestLevel", DefaultValues.woodenMaxHarvestLevel, 0, Integer.MAX_VALUE);
+
             woodenMaxRange = builder
                     .comment("Set the max range for Wooden Exchanger")
                     .defineInRange("woodenExchangerMaxRange", DefaultValues.woodenMaxRange, 0, 12);
 
+
             stoneMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Stone Exchanger")
                     .defineInRange("stoneExchangerMaxHarvestLevel", DefaultValues.stoneMaxHarvestLevel, 0, Integer.MAX_VALUE);
+
             stoneMaxRange = builder
                     .comment("Set the max range for Stone Exchanger")
                     .defineInRange("stoneExchangerMaxRange", DefaultValues.stoneMaxRange, 0, 12);
+
 
             goldenMaxHarvestLevel = builder
                     .comment("Set the max harvest level for Golden Exchanger")

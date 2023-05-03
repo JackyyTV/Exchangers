@@ -62,7 +62,7 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
         BlockPos pos = context.getClickedPos();
         Direction side = context.getClickedFace();
         if (!world.isClientSide() && player != null) {
-            if (player.isCrouching()) {
+            if (player.isShiftKeyDown()) {
                 ExchangerHandler.selectBlock(player.getMainHandItem(), player, world, pos);
             } else {
                 ExchangerHandler.placeBlock(player.getMainHandItem(), player, world, pos, side, context);

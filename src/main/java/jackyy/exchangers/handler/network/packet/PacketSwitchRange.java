@@ -23,7 +23,7 @@ public class PacketSwitchRange {
             if (player != null) {
                 ItemStack heldItem = player.getMainHandItem();
                 if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
-                    ExchangerHandler.switchRange(heldItem, player.isCrouching());
+                    ExchangerHandler.switchRange(heldItem, player.isShiftKeyDown());
                 }
             }
         });

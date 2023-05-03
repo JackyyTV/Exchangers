@@ -19,7 +19,7 @@ public class ModeHorizontalCol {
         int y = pos.getY();
         int z = pos.getZ();
         int rangeX, rangeZ;
-        Direction facing = player.getMotionDirection();
+        Direction facing = player.getDirection();
         switch (facing) {
             case SOUTH, NORTH -> {
                 rangeX = range;

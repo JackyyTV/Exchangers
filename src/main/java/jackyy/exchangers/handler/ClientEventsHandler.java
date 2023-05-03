@@ -87,10 +87,10 @@ public class ClientEventsHandler {
                     Set<BlockPos> blocks = ExchangerHandler.findSuitableBlocks(stack, player.getLevel(), player, mouseOverBlock.getDirection(), pos, state);
                     PoseStack matrixStack = event.getPoseStack();
                     MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
-                    if ((player.isCrouching() && ((world.getBlockEntity(pos) != null && !ExchangerHandler.isWhitelisted(world, pos))
+                    if ((player.isShiftKeyDown() && ((world.getBlockEntity(pos) != null && !ExchangerHandler.isWhitelisted(world, pos))
                             || ExchangerHandler.isBlacklisted(world, pos) || (!(stack.getItem() instanceof ItemCreativeExchanger) && blockHardness < -0.1f)))) {
                         renderExchangerRange(matrixStack, bufferSource, blocks, 1.0f, 0.1f, 0.1f, 1.0f);
-                    } else if (player.isCrouching()) {
+                    } else if (player.isShiftKeyDown()) {
                         renderExchangerRange(matrixStack, bufferSource, blocks, 0.1f, 1.0f, 0.1f, 1.0f);
                     } else {
                         renderExchangerRange(matrixStack, bufferSource, blocks, 1.0f, 1.0f, 1.0f, 1.0f);

@@ -145,7 +145,7 @@ public class ExchangerHandler {
     public static void switchMode(Player player, ItemStack stack) {
         setDefaultTagCompound(stack);
         int mode = NBTHelper.getTag(stack).getInt("mode");
-        if (player.isCrouching()) {
+        if (player.isShiftKeyDown()) {
             mode--;
         } else {
             mode++;
@@ -324,6 +324,7 @@ public class ExchangerHandler {
                                 tool = new ItemStack(Items.STICK);
                             }
                             int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack);
+                            tool.enchant(Enchantments.BLOCK_FORTUNE, fortuneLevel);
                             LootContext.Builder builder = new LootContext.Builder(serverWorld).withRandom(serverWorld.random)
                                     .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
                                     .withParameter(LootContextParams.TOOL, tool);

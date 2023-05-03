@@ -14,8 +14,13 @@ public class ItemEmeraldExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public int getHarvestLevel() {
+    public String getHarvestLevel() {
         return ModConfigs.CONFIG.emeraldMaxHarvestLevel.get();
+    }
+
+    @Override
+    public String getDefaultHarvestLevel() {
+        return DefaultValues.emeraldMaxHarvestLevel;
     }
 
     @Override

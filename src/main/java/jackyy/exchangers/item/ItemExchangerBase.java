@@ -88,18 +88,14 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.selected_block", (block == Blocks.AIR ? StringHelper.localize(Reference.MODID, "tooltip.selected_block.none").withStyle(ChatFormatting.RED) : ExchangerHandler.getBlockName(block).withStyle(ChatFormatting.GREEN))).withStyle(ChatFormatting.WHITE));
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_range", ChatFormatting.GREEN + ExchangerHandler.rangeList[compound.getInt("range")]).withStyle(ChatFormatting.WHITE));
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_range", new TextComponent(ExchangerHandler.rangeList[getMaxRange()]).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
-            //TODO Fix harvest level support
-            //tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_harvest_level", StringHelper.formatHarvestLevel(Reference.MODID, getHarvestLevel()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_harvest_level", StringHelper.formatHarvestLevel(getHarvestLevel()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
             switch (mode) {
-                case 0:
-                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModePlane.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
-                    break;
-                case 1:
-                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeHorizontalCol.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
-                    break;
-                case 2:
-                    tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeVerticalCol.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
-                    break;
+                case 0 ->
+                        tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModePlane.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
+                case 1 ->
+                        tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeHorizontalCol.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
+                case 2 ->
+                        tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeVerticalCol.getDisplayName().withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
             }
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.silk_touch", Reference.getStateString(ModConfigs.CONFIG.doExchangersSilkTouch.get())).withStyle(ChatFormatting.WHITE));
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.force_drop_items", Reference.getStateString(compound.getBoolean("forceDropItems"))).withStyle(ChatFormatting.WHITE));

@@ -147,7 +147,7 @@ public class ClientEventsHandler {
             ItemStack heldItem = player.getMainHandItem();
             if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
                 if (Keys.OPEN_GUI_KEY.isDown()) {
-                    mc.pushGuiLayer(new ExchangersGuiScreen());
+                    mc.setScreen(new ExchangersGuiScreen());
                 } else if (Keys.RANGE_SWITCH_KEY.isDown()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSwitchRange());
                 } else if (Keys.MODE_SWITCH_KEY.isDown()) {

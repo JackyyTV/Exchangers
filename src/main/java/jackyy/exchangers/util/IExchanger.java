@@ -6,8 +6,12 @@ public interface IExchanger {
         return 0;
     }
 
-    default int getHarvestLevel() {
-        return 0;
+    default String getHarvestLevel() {
+        return "minecraft:wood";
+    }
+
+    default String getDefaultHarvestLevel() {
+        return "minecraft:wood";
     }
 
     default int getMaxRange() {

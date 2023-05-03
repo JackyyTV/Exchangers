@@ -27,6 +27,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -41,6 +42,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IForgeShearable;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.world.BlockEvent;
 
@@ -103,8 +105,11 @@ public class ExchangerHandler {
         return getExPerBlockUse(stack);
     }
 
-    public static int getExHarvestLevel(ItemStack stack) {
-        return ((ItemExchangerBase) stack.getItem()).getHarvestLevel();
+    public static Tier getExHarvestLevel(ItemStack stack) {
+        ItemExchangerBase exchanger = ((ItemExchangerBase) stack.getItem());
+        Tier tier = TierSortingRegistry.byName(new ResourceLocation(exchanger.getHarvestLevel()));
+        Tier defaultTier = TierSortingRegistry.byName(new ResourceLocation(exchanger.getDefaultHarvestLevel()));
+        return tier == null ? defaultTier : tier;
     }
 
     public static int getExRange(ItemStack stack) {
@@ -255,14 +260,10 @@ public class ExchangerHandler {
             } else if (getExIsPowered(stack) && NBTHelper.getTag(stack).getInt(EnergyHelper.ENERGY_NBT) < getPerBlockEnergy(stack)) {
                 ChatHelper.msgPlayer(player, Reference.MODID, "error.out_of_power");
                 return;
-            }
-            /*
-            TODO Fix harvest level support
-            else if (!TierSortingRegistry.isCorrectTierForDrops(TierSortingRegistry.getSortedTiers().get(getExHarvestLevel(stack)), oldState)) {
+            } else if (!TierSortingRegistry.isCorrectTierForDrops(getExHarvestLevel(stack), oldState)) {
                 ChatHelper.msgPlayer(player, Reference.MODID, "error.low_harvest_level");
                 return;
             }
-            */
         }
 
         Set<BlockPos> suitableBlocks = findSuitableBlocks(stack, world, player, side, pos, oldState);

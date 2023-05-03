@@ -9,13 +9,16 @@
     }
   ],
   "pattern": [
-    "OEO",
+    "NEN",
     "CXC",
     "OEO"
   ],
   "key": {
     "O": {
       "tag": "forge:obsidian"
+    },
+    "N": {
+      "tag": "forge:ingots/netherite"
     },
     "E": {
       "item": "minecraft:ender_eye"

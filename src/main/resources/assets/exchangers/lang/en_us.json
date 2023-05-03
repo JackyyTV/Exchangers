@@ -58,17 +58,6 @@
     "exchangers.tooltip.directional_placement": "Directional Placement mode is %s.",
     "exchangers.tooltip.fuzzy_placement": "Fuzzy Placement mode is %s.",
 
-    "_comment": "Harvest Levels",
-    "exchangers.harvest_level.0": "Stone",
-    "exchangers.harvest_level.1": "Iron",
-    "exchangers.harvest_level.2": "Diamond",
-    "exchangers.harvest_level.3": "Obsidian",
-    "exchangers.harvest_level.4": "Netherite",
-    "exchangers.harvest_level.5": "Netherite+",
-    "exchangers.harvest_level.6": "Netherite++",
-    "exchangers.harvest_level.7": "Netherite+++",
-    "exchangers.harvest_level.2147483647": "§d§kOver 9000",
-
     "_comment": "Messages",
     "exchangers.error.invalid_block.te": "§cError: Invalid block! (Tile Entities)",
     "exchangers.error.invalid_block.unbreakable": "§cError: Invalid block! (Unbreakable Blocks)",

@@ -14,8 +14,13 @@ public class ItemIronExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public int getHarvestLevel() {
+    public String getHarvestLevel() {
         return ModConfigs.CONFIG.ironMaxHarvestLevel.get();
+    }
+
+    @Override
+    public String getDefaultHarvestLevel() {
+        return DefaultValues.ironMaxHarvestLevel;
     }
 
     @Override

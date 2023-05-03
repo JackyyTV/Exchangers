@@ -16,8 +16,13 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
     }
 
     @Override
-    public int getHarvestLevel() {
-        return Integer.MAX_VALUE;
+    public String getHarvestLevel() {
+        return "minecraft:netherite";
+    }
+
+    @Override
+    public String getDefaultHarvestLevel() {
+        return "minecraft:netherite";
     }
 
     @Override

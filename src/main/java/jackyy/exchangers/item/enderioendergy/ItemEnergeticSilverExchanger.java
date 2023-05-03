@@ -2,6 +2,7 @@ package jackyy.exchangers.item.enderioendergy;
 
 import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
 import net.minecraftforge.fml.ModList;
 
@@ -22,8 +23,13 @@ public class ItemEnergeticSilverExchanger extends ItemExchangerBasePowered {
     }
 
     @Override
-    public int getHarvestLevel() {
+    public String getHarvestLevel() {
         return ModConfigs.CONFIG.energeticSilverMaxHarvestLevel.get();
+    }
+
+    @Override
+    public String getDefaultHarvestLevel() {
+        return DefaultValues.energeticSilverMaxHarvestLevel;
     }
 
     @Override

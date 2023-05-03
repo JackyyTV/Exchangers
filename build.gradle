@@ -105,7 +105,7 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei-1.18.2:+")
     implementation fg.deobf("curse.maven:jade-324717:4082408") //1.18.2-5.2.6
 
-    implementation fg.deobf("curse.maven:gunpowderlib-356646:4515715") //1.18.2-2.0.1
+    implementation fg.deobf("curse.maven:gunpowderlib-356646:4519423") //1.18.2-2.0.2
 
     runtimeOnly fg.deobf("curse.maven:mekanism-268560:3875976") //1.18.2-10.2.5.465
     //runtimeOnly fg.deobf("curse.maven:immersive_engineering-231951:4412849") //1.18.2-8.4.0-161

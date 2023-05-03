@@ -1,6 +1,5 @@
 package jackyy.exchangers.handler.network.packet;
 
-import io.netty.buffer.ByteBuf;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.item.ItemExchangerBase;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -18,7 +17,7 @@ public class PacketSetFuzzyPlacementChance {
         this.chance = chance;
     }
 
-    public PacketSetFuzzyPlacementChance(ByteBuf buffer) {
+    public PacketSetFuzzyPlacementChance(PacketBuffer buffer) {
         chance = buffer.readInt();
     }
 

@@ -9,8 +9,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 
 public class ToggleButton extends Button {
-
-    public String text;
     private boolean toggled;
 
     public ToggleButton(int x, int y, int width, int height, ITextComponent title, Button.IPressable pressedAction) {

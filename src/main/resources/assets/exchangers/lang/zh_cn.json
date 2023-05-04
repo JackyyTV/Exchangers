@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab",
-    "itemGroup.exchangers": "方块交换器",
+    "item_group.exchangers.main_creative_tab": "方块交换器",
 
     "_comment": "Key Bindings",
     "key.categories.exchangers": "方块交换器",

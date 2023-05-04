@@ -1,6 +1,5 @@
 package jackyy.exchangers.item;
 
-import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.Reference;
 import jackyy.gunpowderlib.capability.FEItemStackCapability;
@@ -9,19 +8,14 @@ import jackyy.gunpowderlib.capability.IFEContainer;
 import jackyy.gunpowderlib.helper.EnergyHelper;
 import jackyy.gunpowderlib.helper.KeyHelper;
 import jackyy.gunpowderlib.helper.StringHelper;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.ModList;
 
@@ -51,7 +45,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     @Override
     public int getMaxEnergyStored(ItemStack container) {
         if (ModConfigs.CONFIG.holdingEnchantment.get() && ModList.get().isLoaded("cofh_core")) {
-            int enchant = EnchantmentHelper.getItemEnchantmentLevel(Reference.holdingEnchant, container);
+            int enchant = container.getEnchantmentLevel(Reference.holdingEnchant);
             return getMaxEnergy() + getMaxEnergy() * enchant / 2;
         }
         return getMaxEnergy();
@@ -85,21 +79,6 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
                             .append(StringHelper.formatNumber(getMaxEnergyStored(stack)))
                             .append(" " + ModConfigs.CONFIG.energyUnit.get())
             );
-        }
-    }
-
-    @Override @OnlyIn(Dist.CLIENT)
-    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (allowdedIn(tab)) {
-            if (checkLoaded()) {
-                ItemStack empty = new ItemStack(this);
-                ExchangerHandler.setDefaultTagCompound(empty);
-                items.add(empty);
-                ItemStack full = new ItemStack(this);
-                ExchangerHandler.setDefaultTagCompound(full);
-                EnergyHelper.setDefaultEnergyTag(full, getMaxEnergyStored(full));
-                items.add(full);
-            }
         }
     }
 

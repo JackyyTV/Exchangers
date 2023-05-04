@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab",
-    "itemGroup.exchangers": "Wymieniacze",
+    "item_group.exchangers.main_creative_tab": "Wymieniacze",
 
     "_comment": "Key Bindings",
     "key.categories.exchangers": "Wymieniacze",

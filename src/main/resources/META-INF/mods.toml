@@ -1,11 +1,11 @@
 modLoader="javafml"
-loaderVersion="[40,)"
+loaderVersion="[45,)"
 license="Jacky's Minecraft Mods License"
 issueTrackerURL="https://github.com/JackyyTV/Exchangers/issues"
 
 [[mods]]
 modId="exchangers"
-version="1.18.2-3.2"
+version="1.19.4-3.3"
 displayName="Exchangers"
 displayURL="https://github.com/JackyyTV/Exchangers"
 logoFile="logo.png"
@@ -18,19 +18,19 @@ Block Exchangers.
 [[dependencies.exchangers]]
     modId="forge"
     mandatory=true
-    versionRange="[40,)"
+    versionRange="[45,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.exchangers]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,1.19)"
+    versionRange="[1.19,1.20)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.exchangers]]
     modId="gunpowderlib"
     mandatory=true
-    versionRange="[1.18.2-2.0.2,)"
+    versionRange="[1.19.4-2.1,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.exchangers]]

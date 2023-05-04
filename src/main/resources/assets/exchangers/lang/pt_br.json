@@ -1,6 +1,6 @@
 {
     "_comment": "Creative Tab",
-    "itemGroup.exchangers": "Exchangers",
+    "item_group.exchangers.main_creative_tab": "Exchangers",
 
     "_comment": "Key Bindings",
     "key.categories.exchangers": "Exchangers",

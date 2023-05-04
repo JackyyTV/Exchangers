@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix4f;
 import jackyy.exchangers.client.RenderTypeExt;
 import jackyy.exchangers.client.gui.ExchangersGuiScreen;
 import jackyy.exchangers.client.keybind.Keys;
@@ -17,7 +16,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -28,9 +29,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.client.gui.overlay.GuiOverlayManager;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.joml.Matrix4f;
 
 import java.util.Set;
 
@@ -40,8 +44,8 @@ public class ClientEventsHandler {
     private static Minecraft mc = Minecraft.getInstance();
 
     @SubscribeEvent
-    public void onGameOverlayRender(RenderGameOverlayEvent event) {
-        if (event.isCancelable() || event.getType() != RenderGameOverlayEvent.ElementType.LAYER
+    public void onGameOverlayRender(RenderGuiOverlayEvent event) {
+        if (event.isCancelable() || event.getOverlay() != GuiOverlayManager.findOverlay(new ResourceLocation("experience_bar"))
                 || !(mc.getCameraEntity() instanceof Player player)) {
             return;
         }
@@ -54,7 +58,7 @@ public class ClientEventsHandler {
             Window mainWindow = mc.getWindow();
             int w = mainWindow.getGuiScaledWidth();
             int h = mainWindow.getGuiScaledHeight();
-            PoseStack matrixStack = event.getMatrixStack();
+            PoseStack matrixStack = event.getPoseStack();
             matrixStack.pushPose();
             RenderSystem.disableDepthTest();
             String exchangeRange = ExchangerHandler.rangeList[NBTHelper.getTag(stack).getInt("range")];
@@ -62,7 +66,7 @@ public class ClientEventsHandler {
             float swidth = mc.font.width(exchangeRange) * scale;
             matrixStack.translate(((double) w / 2 - 2 - swidth), (double) h / 2 - 4, 0);
             matrixStack.scale(scale, scale, 1);
-            mc.font.drawShadow(event.getMatrixStack(), exchangeRange, 0, 0, 0xFFFFFF);
+            mc.font.drawShadow(event.getPoseStack(), exchangeRange, 0, 0, 0xFFFFFF);
             matrixStack.popPose();
             RenderSystem.enableDepthTest();
         }
@@ -79,7 +83,7 @@ public class ClientEventsHandler {
                 BlockState state = world.getBlockState(pos);
                 ItemStack stack = player.getMainHandItem();
                 if (!stack.isEmpty() && stack.getItem() instanceof ItemExchangerBase && stack.getTag() != null && !state.isAir()) {
-                    BlockState exState = NbtUtils.readBlockState(NBTHelper.getTag(stack).getCompound("blockstate"));
+                    BlockState exState = NbtUtils.readBlockState(world.holderLookup(Registries.BLOCK), NBTHelper.getTag(stack).getCompound("blockstate"));
                     float blockHardness = state.getDestroySpeed(world, pos);
                     if (exState == state) {
                         return;
@@ -141,7 +145,7 @@ public class ClientEventsHandler {
     }
 
     @SubscribeEvent
-    public void onKeyInput(InputEvent.KeyInputEvent event) {
+    public void onKeyInput(InputEvent.Key event) {
         Player player = mc.player;
         if (player != null) {
             ItemStack heldItem = player.getMainHandItem();
@@ -161,6 +165,11 @@ public class ClientEventsHandler {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public void registerKeys(RegisterKeyMappingsEvent event) {
+        Keys.init(event);
     }
 
 }

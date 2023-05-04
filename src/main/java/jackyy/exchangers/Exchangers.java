@@ -1,6 +1,5 @@
 package jackyy.exchangers;
 
-import jackyy.exchangers.client.keybind.Keys;
 import jackyy.exchangers.handler.ClientEventsHandler;
 import jackyy.exchangers.handler.CommonEventsHandler;
 import jackyy.exchangers.handler.network.NetworkHandler;
@@ -40,7 +39,6 @@ public class Exchangers {
 
     private void clientSetup(final FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new ClientEventsHandler());
-        Keys.init();
     }
 
 }

@@ -12,11 +12,6 @@
     "key.exchangers.fuzzy_placement_mode_toggle": "Fuzzy Placement Mode Toggle",
     "key.exchangers.void_items_mode_toggle": "Void Items Mode Toggle",
 
-    "_comment": "Death",
-    "death.attack.tuberous_exchanger": "%1$s tried to operate a potato exchanger",
-    "death.attack.tuberous_exchanger.player": "%1$s tried to operate a potato exchanger",
-    "death.attack.tuberous_exchanger.item": "%1$s tried to operate a potato exchanger",
-
     "_comment": "GUI",
     "screen.exchangers.exchanger_gui.title": "Exchanger GUI",
     "exchangers.tooltip.decrease_range_button": "Decrease Range",

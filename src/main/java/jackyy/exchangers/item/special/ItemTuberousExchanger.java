@@ -35,7 +35,7 @@ public class ItemTuberousExchanger extends ItemExchangerBase {
         Player player = context.getPlayer();
         if (player != null) {
             player.getMainHandItem().setCount(0);
-            player.hurt(player.damageSources().generic(), Float.MAX_VALUE);
+            player.hurt(player.damageSources().magic(), Float.MAX_VALUE);
             player.level.explode(player, player.getX(), player.getY(), player.getZ(), 1.0F, Level.ExplosionInteraction.NONE);
             return InteractionResult.SUCCESS;
         }

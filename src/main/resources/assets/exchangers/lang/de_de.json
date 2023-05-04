@@ -6,11 +6,6 @@
     "key.categories.exchangers": "Austauscher",
     "key.exchangers.range_switch": "Austauscher Modus",
 
-    "_comment": "Death",
-    "death.attack.tuberous_exchanger": "%1$s versuchte einene Kartoffel Austauscher zu verwenden",
-    "death.attack.tuberous_exchanger.player": "%1$s versuchte einene Kartoffel Austauscher zu verwenden",
-    "death.attack.tuberous_exchanger.item": "%1$s versuchte einene Kartoffel Austauscher zu verwenden",
-
     "_comment": "Tooltips",
     "exchangers.tooltip.durability": "Haltbarkeit",
     "exchangers.tooltip.tier": "Stufe %d",

@@ -6,11 +6,6 @@
     "key.categories.exchangers": "方块交换器",
     "key.exchangers.range_switch": "变更交换器范围",
 
-    "_comment": "Death",
-    "death.attack.tuberous_exchanger": "%1$s天真的试图让一个马铃薯交换器工作",
-    "death.attack.tuberous_exchanger.player": "%1$s天真的试图让一个马铃薯交换器工作",
-    "death.attack.tuberous_exchanger.item": "%1$s天真的试图让一个马铃薯交换器工作",
-
     "_comment": "Tooltips",
     "exchangers.tooltip.durability": "耐久值",
     "exchangers.tooltip.tier": "交换器等级%d",

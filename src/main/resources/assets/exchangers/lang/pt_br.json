@@ -6,11 +6,6 @@
     "key.categories.exchangers": "Exchangers",
     "key.exchangers.range_switch": "Alternar entre modos",
 
-    "_comment": "Death",
-    "death.attack.tuberous_exchanger": "%1$s Tentou operar um Alterador de Batata",
-    "death.attack.tuberous_exchanger.player": "%1$s Tentou operar um Alterador de Batata",
-    "death.attack.tuberous_exchanger.item": "%1$s Tentou operar um Alterador de Batata",
-
     "_comment": "Tooltips",
     "exchangers.tooltip.durability": "Durabilidade",
     "exchangers.tooltip.tier": "Nível %d",

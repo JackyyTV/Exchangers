@@ -141,7 +141,7 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
     }
 
     @Override
-    public int getEnchantmentValue() {
+    public int getEnchantmentValue(ItemStack stack) {
         return 20;
     }
 

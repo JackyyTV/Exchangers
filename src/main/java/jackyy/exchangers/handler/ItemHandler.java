@@ -10,8 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 
 public class ItemHandler {
@@ -63,8 +62,8 @@ public class ItemHandler {
         NonNullList<IItemHandler> containers = NonNullList.create();
         for (int i = 0; i < inv.getContainerSize(); i++) {
             ItemStack stack = inv.getItem(i);
-            IItemHandler container = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).orElse(null);
-            if (!stack.isEmpty() && container != null && !stack.getCapability(CapabilityEnergy.ENERGY, null).isPresent()) {
+            IItemHandler container = stack.getCapability(ForgeCapabilities.ITEM_HANDLER, null).orElse(null);
+            if (!stack.isEmpty() && container != null && !stack.getCapability(ForgeCapabilities.ENERGY, null).isPresent()) {
                 containers.add(container);
             }
         }

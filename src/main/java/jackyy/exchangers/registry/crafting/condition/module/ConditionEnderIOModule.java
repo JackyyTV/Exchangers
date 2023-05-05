@@ -20,8 +20,8 @@ public class ConditionEnderIOModule implements ICondition {
         return ID;
     }
 
-    @Override @Deprecated
-    public boolean test() {
+    @Override
+    public boolean test(IContext context) {
         //return ModConfigs.CONFIG.enderIOModule.get() == value;
         //Disabled recipes for now until Ender IO gets ported
         return false;

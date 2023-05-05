@@ -21,8 +21,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
@@ -50,7 +48,7 @@ public class ExchangersGuiScreen extends Screen {
     private EditBox fuzzyPlacementChanceField;
 
     public ExchangersGuiScreen() {
-        super(new TranslatableComponent("screen.exchangers.exchanger_gui.title"));
+        super(Component.translatable("screen.exchangers.exchanger_gui.title"));
         this.width = W;
         this.height = H;
     }
@@ -66,15 +64,15 @@ public class ExchangersGuiScreen extends Screen {
                 button -> NetworkHandler.sendToServer(new PacketDecreaseRange()));
         increaseRangeButton = new ImageButtonExt(relativeX + 116, relativeY + 31, 10, 15, 190, 0, 15, 30, GUI_IMAGE,
                 button -> NetworkHandler.sendToServer(new PacketIncreaseRange()));
-        modeSwitchButton = new ToggleButton(relativeX + 20, relativeY + 66, 20, 20, new TextComponent("\u29C8"),
+        modeSwitchButton = new ToggleButton(relativeX + 20, relativeY + 66, 20, 20, Component.literal("\u29C8"),
                 button -> NetworkHandler.sendToServer(new PacketSwitchMode()));
-        forceDropItemsButton = new ToggleButton(relativeX + 60, relativeY + 66, 20, 20, new TextComponent("\u2B0A"),
+        forceDropItemsButton = new ToggleButton(relativeX + 60, relativeY + 66, 20, 20, Component.literal("\u2B0A"),
                 button -> NetworkHandler.sendToServer(new PacketToggleForceDropItems()));
-        directionalPlacementButton = new ToggleButton(relativeX + 100, relativeY + 66, 20, 20, new TextComponent("\u2927"),
+        directionalPlacementButton = new ToggleButton(relativeX + 100, relativeY + 66, 20, 20, Component.literal("\u2927"),
                 button -> NetworkHandler.sendToServer(new PacketToggleDirectionalPlacement()));
-        fuzzyPlacementButton = new ToggleButton(relativeX + 52, relativeY + 106, 20, 20, new TextComponent("\u224B"),
+        fuzzyPlacementButton = new ToggleButton(relativeX + 52, relativeY + 106, 20, 20, Component.literal("\u224B"),
                 button -> NetworkHandler.sendToServer(new PacketToggleFuzzyPlacement()));
-        voidItemsButton = new ToggleButton(relativeX + 140, relativeY + 66, 20, 20, new TextComponent("\u2A37"),
+        voidItemsButton = new ToggleButton(relativeX + 140, relativeY + 66, 20, 20, Component.literal("\u2A37"),
                 button -> NetworkHandler.sendToServer(new PacketToggleVoidItems()));
         this.addRenderableWidget(decreaseRangeButton);
         this.addRenderableWidget(increaseRangeButton);
@@ -83,7 +81,7 @@ public class ExchangersGuiScreen extends Screen {
         this.addRenderableWidget(directionalPlacementButton);
         this.addRenderableWidget(fuzzyPlacementButton);
         this.addRenderableWidget(voidItemsButton);
-        fuzzyPlacementChanceField = new EditBox(this.font, relativeX + 92, relativeY + 108, 26, 16, TextComponent.EMPTY);
+        fuzzyPlacementChanceField = new EditBox(this.font, relativeX + 92, relativeY + 108, 26, 16, Component.empty());
         fuzzyPlacementChanceField.setMaxLength(3);
         fuzzyPlacementChanceField.setValue(chance);
     }

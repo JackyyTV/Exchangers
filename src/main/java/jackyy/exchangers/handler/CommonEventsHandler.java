@@ -10,7 +10,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -44,7 +43,7 @@ public class CommonEventsHandler {
         if (ModConfigs.CONFIG.holdingEnchantment.get() && ModList.get().isLoaded("cofh_core")) {
             ItemStack left = event.getLeft();
             ItemStack right = event.getRight();
-            int holdingLevel = EnchantmentHelper.getItemEnchantmentLevel(Reference.holdingEnchant, left);
+            int holdingLevel = left.getEnchantmentLevel(Reference.holdingEnchant);
             if (left.getItem() instanceof ItemExchangerBasePowered && right.getItem() instanceof EnchantedBookItem && holdingLevel == 0) {
                 ListTag enchantments = EnchantedBookItem.getEnchantments(right);
                 for (int i = 0; i < enchantments.size(); ++i) {

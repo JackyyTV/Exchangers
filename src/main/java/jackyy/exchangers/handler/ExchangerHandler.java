@@ -15,8 +15,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -30,7 +30,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -44,7 +43,7 @@ import net.minecraftforge.common.IForgeShearable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.common.util.BlockSnapshot;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 
 import java.util.HashSet;
 import java.util.List;
@@ -97,7 +96,7 @@ public class ExchangerHandler {
 
     public static int getPerBlockEnergy(ItemStack stack) {
         if (ModConfigs.CONFIG.unbreakingPoweredExchangers.get()) {
-            int level = Mth.clamp(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, stack), 0, 10);
+            int level = Mth.clamp(stack.getEnchantmentLevel(Enchantments.UNBREAKING), 0, 10);
             if (new Random().nextInt(2 + level) >= 2) {
                 return 0;
             }
@@ -219,7 +218,7 @@ public class ExchangerHandler {
 
     public static boolean isWhitelisted(Level world, BlockPos pos) {
         for (String block : ModConfigs.CONFIG.blocksWhitelist.get().trim().split(";")) {
-            if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
+            if (world.getBlockState(pos).getBlockHolder().is(new ResourceLocation(block))) {
                 return true;
             }
         }
@@ -228,7 +227,7 @@ public class ExchangerHandler {
 
     public static boolean isBlacklisted(Level world, BlockPos pos) {
         for (String block : ModConfigs.CONFIG.blocksBlacklist.get().trim().split(";")) {
-            if (world.getBlockState(pos).getBlock().getRegistryName().equals(new ResourceLocation(block))) {
+            if (world.getBlockState(pos).getBlockHolder().is(new ResourceLocation(block))) {
                 return true;
             }
         }
@@ -300,7 +299,7 @@ public class ExchangerHandler {
             if (!MinecraftForge.EVENT_BUS.post(event)) {
                 if (ItemHandler.consumeItemInInventory(block.asItem(), player.getInventory(), player)) {
                     if (!player.isCreative()&& !getExIsCreative(stack) && !tag.getBoolean("voidItems")) {
-                        if (ModConfigs.CONFIG.doExchangersSilkTouch.get() || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) > 0) {
+                        if (ModConfigs.CONFIG.doExchangersSilkTouch.get() || stack.getEnchantmentLevel(Enchantments.SILK_TOUCH) > 0) {
                             ItemStack oldblockItem;
                             if (!(oldblock instanceof IForgeShearable)) {
                                 oldblockItem = ItemHandler.getSilkTouchDrop(oldState);
@@ -323,7 +322,7 @@ public class ExchangerHandler {
                             } else {
                                 tool = new ItemStack(Items.STICK);
                             }
-                            int fortuneLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.BLOCK_FORTUNE, stack);
+                            int fortuneLevel = stack.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
                             tool.enchant(Enchantments.BLOCK_FORTUNE, fortuneLevel);
                             LootContext.Builder builder = new LootContext.Builder(serverWorld).withRandom(serverWorld.random)
                                     .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
@@ -407,7 +406,7 @@ public class ExchangerHandler {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        return new TextComponent("Unable to fetch block name.");
+        return Component.literal("Unable to fetch block name.");
     }
 
 }

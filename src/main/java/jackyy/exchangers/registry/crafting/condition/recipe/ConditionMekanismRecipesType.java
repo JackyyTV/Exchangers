@@ -21,8 +21,8 @@ public class ConditionMekanismRecipesType implements ICondition {
         return ID;
     }
 
-    @Override @Deprecated
-    public boolean test() {
+    @Override
+    public boolean test(IContext context) {
         return ModConfigs.CONFIG.mekanismRecipesType.get().equals(value);
     }
 

@@ -41,7 +41,7 @@ public final class Reference {
                 : StringHelper.localize(Reference.MODID, "tooltip.state.disabled").withStyle(ChatFormatting.RED);
     }
 
-    @ObjectHolder("cofh_core:holding")
+    @ObjectHolder(registryName="enchantment", value="cofh_core:holding")
     public static final Enchantment holdingEnchant = null;
 
 }

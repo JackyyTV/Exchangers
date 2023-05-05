@@ -17,7 +17,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -51,7 +50,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     @Override
     public int getMaxEnergyStored(ItemStack container) {
         if (ModConfigs.CONFIG.holdingEnchantment.get() && ModList.get().isLoaded("cofh_core")) {
-            int enchant = EnchantmentHelper.getItemEnchantmentLevel(Reference.holdingEnchant, container);
+            int enchant = container.getEnchantmentLevel(Reference.holdingEnchant);
             return getMaxEnergy() + getMaxEnergy() * enchant / 2;
         }
         return getMaxEnergy();
@@ -90,7 +89,7 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
 
     @Override @OnlyIn(Dist.CLIENT)
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (allowdedIn(tab)) {
+        if (allowedIn(tab)) {
             if (checkLoaded()) {
                 ItemStack empty = new ItemStack(this);
                 ExchangerHandler.setDefaultTagCompound(empty);

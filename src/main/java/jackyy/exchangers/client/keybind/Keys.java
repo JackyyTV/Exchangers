@@ -5,7 +5,7 @@ import jackyy.exchangers.util.Reference;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import org.lwjgl.glfw.GLFW;
 
 @OnlyIn(Dist.CLIENT)
@@ -23,14 +23,14 @@ public class Keys {
         return new KeyMapping(Reference.KEY_PREFIX + name, ExchangersKeyConflictContext.INSTANCE, InputConstants.Type.KEYSYM, keyCode, Reference.KEY_CATEGORY);
     }
 
-    public static void init() {
-        ClientRegistry.registerKeyBinding(OPEN_GUI_KEY);
-        ClientRegistry.registerKeyBinding(RANGE_SWITCH_KEY);
-        ClientRegistry.registerKeyBinding(MODE_SWITCH_KEY);
-        ClientRegistry.registerKeyBinding(FORCE_DROP_ITEMS_KEY);
-        ClientRegistry.registerKeyBinding(DIRECTIONAL_PLACEMENT_KEY);
-        ClientRegistry.registerKeyBinding(FUZZY_PLACEMENT_KEY);
-        ClientRegistry.registerKeyBinding(VOID_ITEMS_KEY);
+    public static void init(RegisterKeyMappingsEvent event) {
+        event.register(OPEN_GUI_KEY);
+        event.register(RANGE_SWITCH_KEY);
+        event.register(MODE_SWITCH_KEY);
+        event.register(FORCE_DROP_ITEMS_KEY);
+        event.register(DIRECTIONAL_PLACEMENT_KEY);
+        event.register(FUZZY_PLACEMENT_KEY);
+        event.register(VOID_ITEMS_KEY);
     }
 
 }

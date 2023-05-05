@@ -22,7 +22,7 @@ public class ConditionThermalRecipesType implements ICondition {
     }
 
     @Override
-    public boolean test() {
+    public boolean test(IContext context) {
         return ModConfigs.CONFIG.thermalRecipesType.get().equals(value);
     }
 

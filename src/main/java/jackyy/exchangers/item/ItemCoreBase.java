@@ -18,7 +18,7 @@ public class ItemCoreBase extends Item implements ILoadable {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (allowdedIn(tab)) {
+        if (allowedIn(tab)) {
             if (checkLoaded()) {
                 items.add(new ItemStack(this));
             }

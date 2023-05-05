@@ -19,8 +19,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -87,7 +85,7 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.selected_block", (block == Blocks.AIR ? StringHelper.localize(Reference.MODID, "tooltip.selected_block.none").withStyle(ChatFormatting.RED) : ExchangerHandler.getBlockName(block).withStyle(ChatFormatting.GREEN))).withStyle(ChatFormatting.WHITE));
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.current_range", ChatFormatting.GREEN + ExchangerHandler.rangeList[compound.getInt("range")]).withStyle(ChatFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_range", new TextComponent(ExchangerHandler.rangeList[getMaxRange()]).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_range", Component.literal(ExchangerHandler.rangeList[getMaxRange()]).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.max_harvest_level", StringHelper.formatHarvestLevel(getHarvestLevel()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
             switch (mode) {
                 case 0 ->
@@ -108,7 +106,7 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
         if (KeyHelper.isCtrlKeyDown()) {
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra1").withStyle(ChatFormatting.WHITE));
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra2").withStyle(ChatFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra3", new TranslatableComponent(Keys.OPEN_GUI_KEY.getKey().toString()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra3", Component.translatable(Keys.OPEN_GUI_KEY.getKey().toString()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
         }
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.getTierText(Reference.MODID, getTier()));
@@ -120,7 +118,7 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
 
     @Override @OnlyIn(Dist.CLIENT)
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        if (allowdedIn(group)) {
+        if (allowedIn(group)) {
             if (checkLoaded()) {
                 items.add(new ItemStack(this));
             }

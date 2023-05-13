@@ -106,7 +106,7 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
         if (KeyHelper.isCtrlKeyDown()) {
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra1").withStyle(ChatFormatting.WHITE));
             tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra2").withStyle(ChatFormatting.WHITE));
-            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra3", Component.translatable(Keys.OPEN_GUI_KEY.getKey().toString()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
+            tooltip.add(StringHelper.localize(Reference.MODID, "tooltip.extra3", Component.translatable(Keys.OPEN_GUI_KEY.get().getKey().toString()).withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.WHITE));
         }
         if (KeyHelper.isShiftKeyDown()) {
             tooltip.add(StringHelper.getTierText(Reference.MODID, getTier()));

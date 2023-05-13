@@ -197,7 +197,7 @@ public class ExchangersGuiScreen extends Screen {
                 }
             }
         } else {
-            if (GLFW.GLFW_KEY_ESCAPE == keyCode || Keys.OPEN_GUI_KEY.getKey().getValue() == keyCode || mc.options.keyInventory.getKey().getValue() == keyCode) {
+            if (GLFW.GLFW_KEY_ESCAPE == keyCode || Keys.OPEN_GUI_KEY.get().getKey().getValue() == keyCode || mc.options.keyInventory.getKey().getValue() == keyCode) {
                 this.onClose();
                 return true;
             }

@@ -29,7 +29,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -144,26 +143,21 @@ public class ClientEventsHandler {
         if (player != null) {
             ItemStack heldItem = player.getMainHandItem();
             if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
-                if (Keys.OPEN_GUI_KEY.isDown()) {
+                if (Keys.OPEN_GUI_KEY.get().isDown()) {
                     mc.setScreen(new ExchangersGuiScreen());
-                } else if (Keys.RANGE_SWITCH_KEY.isDown()) {
+                } else if (Keys.RANGE_SWITCH_KEY.get().isDown()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSwitchRange());
-                } else if (Keys.MODE_SWITCH_KEY.isDown()) {
+                } else if (Keys.MODE_SWITCH_KEY.get().isDown()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketSwitchMode());
-                } else if (Keys.FORCE_DROP_ITEMS_KEY.isDown()) {
+                } else if (Keys.FORCE_DROP_ITEMS_KEY.get().isDown()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketToggleForceDropItems());
-                } else if (Keys.DIRECTIONAL_PLACEMENT_KEY.isDown()) {
+                } else if (Keys.DIRECTIONAL_PLACEMENT_KEY.get().isDown()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketToggleDirectionalPlacement());
-                } else if (Keys.FUZZY_PLACEMENT_KEY.isDown()) {
+                } else if (Keys.FUZZY_PLACEMENT_KEY.get().isDown()) {
                     NetworkHandler.INSTANCE.sendToServer(new PacketToggleFuzzyPlacement());
                 }
             }
         }
-    }
-
-    @SubscribeEvent
-    public void registerKeys(RegisterKeyMappingsEvent event) {
-        Keys.init(event);
     }
 
 }

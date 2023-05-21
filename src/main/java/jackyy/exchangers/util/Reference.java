@@ -21,6 +21,7 @@ public final class Reference {
     public static final String BWM = "betterwithmods";
 
     public static final Rarity RARITY_TIER1 = Rarity.create(MODID + "_rarity_tier1", ChatFormatting.GREEN);
+    public static final Rarity RARITY_BEE = Rarity.create(MODID + "_rarity_bee", ChatFormatting.GOLD);
 
     public static final String KEY_PREFIX = "key.exchangers.";
     public static final String KEY_CATEGORY = "key.categories.exchangers";

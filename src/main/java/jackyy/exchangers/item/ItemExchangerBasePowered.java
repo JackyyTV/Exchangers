@@ -24,7 +24,7 @@ import java.util.List;
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IFEContainer {
 
     public ItemExchangerBasePowered(Properties props) {
-        super(props.durability(1));
+        super(props.stacksTo(1));
     }
 
     @Override
@@ -96,7 +96,8 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return enchantment == Enchantments.BLOCK_FORTUNE
                 || enchantment == Enchantments.SILK_TOUCH
-                || enchantment == Enchantments.UNBREAKING;
+                || enchantment == Enchantments.UNBREAKING
+                || enchantment == Reference.holdingEnchant;
     }
 
 }

@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/JackyyTV/Exchangers/issues"
 
 [[mods]]
 modId="exchangers"
-version="1.19.4-3.3.1"
+version="1.19.4-3.3.2"
 displayName="Exchangers"
 displayURL="https://github.com/JackyyTV/Exchangers"
 logoFile="logo.png"
@@ -24,7 +24,7 @@ Block Exchangers.
 [[dependencies.exchangers]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19,1.20)"
+    versionRange="[1.19.4,1.20)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.exchangers]]

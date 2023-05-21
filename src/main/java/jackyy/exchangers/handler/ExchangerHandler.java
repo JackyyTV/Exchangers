@@ -45,6 +45,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashSet;
 import java.util.List;
@@ -400,14 +401,15 @@ public class ExchangerHandler {
 
     public static MutableComponent getBlockName(Block block) {
         ItemStack stack = new ItemStack(block, 1);
-        MutableComponent name;
-        try {
-            name = stack.getDisplayName().plainCopy();
-            return name;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        MutableComponent name = stack.getHoverName().copy();
+        if (name.toString().isEmpty()) {
+            if (ForgeRegistries.BLOCKS.getKey(block) != null) {
+                name = Component.literal(ForgeRegistries.BLOCKS.getKey(block).toString());
+            } else {
+                name = StringHelper.localize(Reference.MODID, "tooltip.selected_block.error");
+            }
         }
-        return Component.literal("Unable to fetch block name.");
+        return name;
     }
 
 }

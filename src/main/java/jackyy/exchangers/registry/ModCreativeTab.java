@@ -4,6 +4,7 @@ import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.item.ItemCoreBase;
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.util.Reference;
+import jackyy.gunpowderlib.helper.EnergyHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -32,6 +33,12 @@ public class ModCreativeTab {
                                         ItemStack stack = new ItemStack(itemToAdd);
                                         ExchangerHandler.setDefaultTagCompound(stack);
                                         output.accept(stack);
+                                        if (((ItemExchangerBase) itemToAdd).isPowered()) {
+                                            ItemStack full = new ItemStack(itemToAdd);
+                                            ExchangerHandler.setDefaultTagCompound(full);
+                                            EnergyHelper.setDefaultEnergyTag(full, EnergyHelper.getMaxEnergyStored(full));
+                                            output.accept(full);
+                                        }
                                     }
                                 } else if (itemToAdd instanceof ItemCoreBase) {
                                     if (((ItemCoreBase) itemToAdd).checkLoaded()) {

@@ -84,15 +84,15 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
+        name = 'ModMaven'
+        url = 'https://modmaven.dev'
+    }
+    maven {
         name = 'JEI Maven'
         url = 'https://dvs1.progwml6.com/files/maven'
         content {
             includeGroup 'mezz.jei'
         }
-    }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.dev"
     }
     maven {
         name = 'Curse Maven'
@@ -111,7 +111,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:gunpowderlib-356646:4523832") //1.19.2-2.1
 
-    runtimeOnly fg.deobf("curse.maven:mekanism-268560:4385637") //1.19.2-10.3.8.477
+    runtimeOnly fg.deobf("mekanism:Mekanism:1.19.2-+")
     //runtimeOnly fg.deobf("curse.maven:immersive_engineering-231951:4478894") //1.19.2-9.2.1-164
     runtimeOnly fg.deobf("curse.maven:cofh_core-69162:4385216") //1.19.2-10.2.1.40
     runtimeOnly fg.deobf("curse.maven:thermal_foundation-222880:4382373") //1.19.2-10.2.0.47

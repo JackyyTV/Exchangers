@@ -4,6 +4,7 @@ import jackyy.exchangers.item.enderio.*;
 import jackyy.exchangers.item.enderioendergy.*;
 import jackyy.exchangers.item.immersiveengineering.*;
 import jackyy.exchangers.item.mekanism.*;
+import jackyy.exchangers.item.special.ItemBeeExchanger;
 import jackyy.exchangers.item.special.ItemCreativeExchanger;
 import jackyy.exchangers.item.special.ItemTuberousExchanger;
 import jackyy.exchangers.item.thermal.*;
@@ -17,7 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
 
-    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
 
     public static final RegistryObject<Item> WOODEN_EXCHANGER = ITEMS.register("wooden_exchanger", ItemWoodenExchanger::new);
     public static final RegistryObject<Item> STONE_EXCHANGER = ITEMS.register("stone_exchanger", ItemStoneExchanger::new);
@@ -32,6 +33,7 @@ public class ModItems {
     public static final RegistryObject<Item> EXCHANGER_CORE_TIER3 = ITEMS.register("exchanger_core_tier3", ItemExchangerCoreT3::new);
 
     public static final RegistryObject<Item> TUBEROUS_EXCHANGER = ITEMS.register("tuberous_exchanger", ItemTuberousExchanger::new);
+    public static final RegistryObject<Item> BEE_EXCHANGER = ITEMS.register("bee_exchanger", ItemBeeExchanger::new);
     public static final RegistryObject<Item> CREATIVE_EXCHANGER = ITEMS.register("creative_exchanger", ItemCreativeExchanger::new);
 
     public static final RegistryObject<Item> CONDUCTIVE_IRON_EXCHANGER = ITEMS.register("conductive_iron_exchanger", ItemConductiveIronExchanger::new);

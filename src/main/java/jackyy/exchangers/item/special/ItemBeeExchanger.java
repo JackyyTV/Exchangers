@@ -61,7 +61,7 @@ public class ItemBeeExchanger extends ItemExchangerBase {
                     SoundEvents.BEEHIVE_WORK, SoundSource.BLOCKS, 1.0F, 1F);
             if (!player.isShiftKeyDown()) {
                 Bee bee = new Bee(EntityType.BEE, world);
-                bee.setPos(pos.getX(), pos.getY(), pos.getZ());
+                bee.setPos(player.getX(), player.getY(), player.getZ());
                 if (world.random.nextInt(5) + 1 == 5) {
                     world.addFreshEntity(bee);
                 }

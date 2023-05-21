@@ -33,10 +33,6 @@ repositories {
         url = "https://dvs1.progwml6.com/files/maven"
     }
     maven {
-        name = "Ender IO Maven"
-        url = "https://maven.tterrag.com"
-    }
-    maven {
         name = "CoFH Maven"
         url = "https://maven.covers1624.net"
     }

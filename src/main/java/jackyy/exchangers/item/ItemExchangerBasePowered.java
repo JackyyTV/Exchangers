@@ -31,10 +31,6 @@ import java.util.List;
 @Optional.Interface(iface = "cofh.core.item.IEnchantableItem", modid = "cofhcore")
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IFEContainer, IEnchantableItem {
 
-    public ItemExchangerBasePowered() {
-        setMaxDamage(1);
-    }
-
     @GameRegistry.ObjectHolder("cofhcore:holding")
     public static final Enchantment holding = null;
 

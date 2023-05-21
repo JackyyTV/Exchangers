@@ -375,14 +375,15 @@ public class ExchangerHandler {
 
     public static String getBlockName(Block block, int meta) {
         ItemStack stack = new ItemStack(block, 1, meta);
-        String name;
-        try {
-            name = stack.getDisplayName();
-            return name;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        String name = stack.getDisplayName();
+        if (name.isEmpty()) {
+            if (block.getRegistryName() != null) {
+                name = block.getRegistryName().toString();
+            } else {
+                name = StringHelper.localize(Reference.MODID, "tooltip.selected_block.error");
+            }
         }
-        return "Unable to fetch block name.";
+        return name;
     }
 
 }

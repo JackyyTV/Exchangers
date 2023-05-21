@@ -31,6 +31,7 @@ exchangers.tooltip.extra3=Use %s to open the GUI.
 exchangers.tooltip.tuberous_exchanger.warning=§c§oClever! But not exchangeable.
 exchangers.tooltip.selected_block=Selected Block: %s
 exchangers.tooltip.selected_block.none=None
+exchangers.tooltip.selected_block.error=Unable to fetch block name
 exchangers.tooltip.current_range=Current Range: %s
 exchangers.tooltip.max_range=Maximum Range: %s
 exchangers.tooltip.max_harvest_level=Maximum Harvest Level: %s

@@ -1,11 +1,11 @@
 buildscript {
-  repositories {
-    jcenter()
-    maven { url = "http://files.minecraftforge.net/maven" }
-  }
-  dependencies {
-    classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-  }
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
@@ -15,77 +15,87 @@ archivesBaseName = "Exchangers"
 
 sourceCompatibility = targetCompatibility = "1.8"
 compileJava {
-  sourceCompatibility = targetCompatibility = "1.8"
+    sourceCompatibility = targetCompatibility = "1.8"
 }
 
 minecraft {
-  version = "${forge_version}"
-  runDir = "run"
-  mappings = "${mappings_version}"
+    version = "${mc_version}-${forge_version}"
+    runDir = "run"
+    mappings = "${mappings_channel}_${mappings_version}"
 
-  replace '@FINGERPRINT@', project.findProperty('signSHA1')
-  replaceIn "Exchangers.java"
+    replace '@FINGERPRINT@', project.findProperty('signSHA1')
+    replaceIn "Exchangers.java"
 }
 
 repositories {
-  maven {
-    name = "JEI Maven"
-    url = "http://dvs1.progwml6.com/files/maven"
-  }
-  maven {
-    name = "Hwyla Maven"
-    url = "https://maven.tehnut.info"
-  }
-  maven {
-    name = "CoFH Maven"
-    url = "http://maven.covers1624.net"
-  }
-  maven {
-    name = "Curse Maven"
-    url = "https://www.cursemaven.com"
-  }
+    maven {
+        name = "JEI Maven"
+        url = "https://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        name = "Ender IO Maven"
+        url = "https://maven.tterrag.com"
+    }
+    maven {
+        name = "CoFH Maven"
+        url = "https://maven.covers1624.net"
+    }
+    maven {
+        name = "Curse Maven"
+        url = "https://www.cursemaven.com"
+    }
 }
 
 dependencies {
-  deobfCompile "mezz.jei:jei_1.12.2:+"
-  deobfCompile "mcp.mobius.waila:Hwyla:1.8.26-B41_1.12.2"
-  deobfCompile "cofh:RedstoneFlux:1.12-2.+:universal"
-  deobfCompile "cofh:CoFHCore:1.12.2-4.+:universal"
-  deobfCompile "curse.maven:gunpowderlib-356646:3168863" //1.12.2-1.1
-  deobfCompile "curse.maven:better-with-mods-246760:2965308" //1.12-2.3.23
+    deobfCompile "mezz.jei:jei_1.12.2:+"
+    deobfCompile "curse.maven:hwyla-253449:2568751" //1.8.26-B41_1.12.2
+
+    deobfCompile "cofh:RedstoneFlux:1.12-2.+:universal"
+    deobfCompile "cofh:CoFHCore:1.12.2-4.+:universal"
+
+    deobfCompile "curse.maven:gunpowderlib-356646:3168863" //1.12.2-1.1
+    deobfCompile "curse.maven:better_with_mods-246760:3289033" //1.12-2.3.24
+
+    runtime "curse.maven:mekanism-268560:2835175" //1.12.2-9.8.3.390
+    runtime "curse.maven:immersive_engineering-231951:2974106" //0.12-98
+    runtime "codechicken:CodeChickenLib:1.12.2-+:universal"
+    runtime "cofh:CoFHWorld:1.12.2-+:universal"
+    runtime "curse.maven:thermal_foundation-222880:2926428" //1.12.2-2.6.7.1
+    runtime "curse.maven:thermal_innovation-291737:2920441" //1.12.2-0.3.6.1
+    runtime "curse.maven:thermal_expansion-69163:2926431" //1.12.2-5.5.7.1
 }
 
 processResources {
-  inputs.property "version", project.version
-  inputs.property "mcversion", project.minecraft.version
-  from(sourceSets.main.resources.srcDirs) {
-    include 'mcmod.info'
-    expand 'version':project.version, 'mcversion':project.minecraft.version
-  }
-  from(sourceSets.main.resources.srcDirs) {
-    exclude 'mcmod.info'
-  }
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
 }
 
 task signJar(type: SignJar, dependsOn: reobfJar) {
-  onlyIf {
-    project.hasProperty('keyStore')
-  }
-  keyStore = project.findProperty('keyStore')
-  alias = project.findProperty('keyStoreAlias')
-  storePass = project.findProperty('keyStorePass')
-  keyPass = project.findProperty('keyStoreKeyPass')
-  inputFile = jar.archivePath
-  outputFile = jar.archivePath
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
 }
 
 build.dependsOn signJar
 
 task deobfJar(type: Jar) {
-  from sourceSets.main.output
-  classifier = 'deobf'
+    from sourceSets.main.output
+    classifier = 'deobf'
 }
 
 artifacts {
-  archives deobfJar
+    archives deobfJar
 }

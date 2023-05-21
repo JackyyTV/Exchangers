@@ -400,14 +400,15 @@ public class ExchangerHandler {
 
     public static MutableComponent getBlockName(Block block) {
         ItemStack stack = new ItemStack(block, 1);
-        MutableComponent name;
-        try {
-            name = stack.getDisplayName().plainCopy();
-            return name;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        MutableComponent name = stack.getHoverName().copy();
+        if (name.toString().isEmpty()) {
+            if (block.getRegistryName() != null) {
+                name = new TextComponent(block.getRegistryName().toString());
+            } else {
+                name = StringHelper.localize(Reference.MODID, "tooltip.selected_block.error");
+            }
         }
-        return new TextComponent("Unable to fetch block name.");
+        return name;
     }
 
 }

@@ -2,12 +2,13 @@ package jackyy.exchangers.item.special;
 
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import net.minecraft.world.item.Rarity;
 
 public class ItemCreativeExchanger extends ItemExchangerBase {
 
     public ItemCreativeExchanger() {
-        super(new Properties().durability(9001).rarity(Rarity.EPIC));
+        super(new Properties().durability(DefaultValues.creativeMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -17,17 +18,17 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
 
     @Override
     public String getHarvestLevel() {
-        return "minecraft:netherite";
+        return DefaultValues.creativeMaxHarvestLevel;
     }
 
     @Override
     public String getDefaultHarvestLevel() {
-        return "minecraft:netherite";
+        return DefaultValues.creativeMaxHarvestLevel;
     }
 
     @Override
     public int getMaxRange() {
-        return 12;
+        return DefaultValues.creativeMaxRange;
     }
 
     @Override

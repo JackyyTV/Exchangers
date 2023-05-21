@@ -35,6 +35,13 @@ public final class DefaultValues {
     public static String endMaxHarvestLevel = "minecraft:netherite";
     public static int endMaxRange = 7;
 
+    public static int creativeMaxDmg = 9001;
+    public static String creativeMaxHarvestLevel = "minecraft:netherite";
+    public static int creativeMaxRange = 12;
+    public static int beeMaxDmg = 420;
+    public static String beeMaxHarvestLevel = "minecraft:iron";
+    public static int beeMaxRange = 3;
+
     public static int conductiveMaxEnergy = 50000;
     public static int conductivePerBlockUse = 50;
     public static String conductiveMaxHarvestLevel = "minecraft:stone";

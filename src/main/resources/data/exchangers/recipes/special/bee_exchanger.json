@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "conditions": [
+    {
+      "type": "exchangers:special_module", "enabled": true
+    }
+  ],
+  "pattern": [
+    "HIH",
+    "HEH",
+    "HBH"
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:honeycomb_block"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "B": {
+      "item": "minecraft:honey_bottle"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "exchangers:bee_exchanger"
+  }
+}

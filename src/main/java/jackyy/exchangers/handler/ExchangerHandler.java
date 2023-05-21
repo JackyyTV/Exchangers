@@ -403,14 +403,15 @@ public class ExchangerHandler {
 
     public static IFormattableTextComponent getBlockName(Block block) {
         ItemStack stack = new ItemStack(block, 1);
-        IFormattableTextComponent name;
-        try {
-            name = stack.getDisplayName().copyRaw();
-            return name;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        IFormattableTextComponent name = stack.getDisplayName().deepCopy();
+        if (name.toString().isEmpty()) {
+            if (block.getRegistryName() != null) {
+                name = new StringTextComponent(block.getRegistryName().toString());
+            } else {
+                name = StringHelper.localize(Reference.MODID, "tooltip.selected_block.error");
+            }
         }
-        return new StringTextComponent("Unable to fetch block name.");
+        return name;
     }
 
 }

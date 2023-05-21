@@ -10,7 +10,7 @@ import net.minecraftforge.common.Tags;
 public class ItemEmeraldExchanger extends ItemExchangerBase {
 
     public ItemEmeraldExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.emeraldMaxDmg).rarity(Rarity.EPIC));
+        super(new Properties().maxDamage(DefaultValues.emeraldMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override

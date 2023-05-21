@@ -11,7 +11,7 @@ import net.minecraftforge.common.Tags;
 public class ItemEndExchanger extends ItemExchangerBase {
 
     public ItemEndExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.endMaxDmg).rarity(Rarity.EPIC));
+        super(new Properties().maxDamage(DefaultValues.endMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override

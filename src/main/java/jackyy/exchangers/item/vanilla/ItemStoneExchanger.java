@@ -10,7 +10,7 @@ import net.minecraftforge.common.Tags;
 public class ItemStoneExchanger extends ItemExchangerBase {
 
     public ItemStoneExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.stoneMaxDmg).rarity(Reference.RARITY_TIER1));
+        super(new Properties().maxDamage(DefaultValues.stoneMaxDmg).rarity(Reference.RARITY_TIER1));
     }
 
     @Override

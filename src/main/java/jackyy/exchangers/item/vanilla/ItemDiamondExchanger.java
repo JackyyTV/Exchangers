@@ -10,7 +10,7 @@ import net.minecraftforge.common.Tags;
 public class ItemDiamondExchanger extends ItemExchangerBase {
 
     public ItemDiamondExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.diamondMaxDmg).rarity(Rarity.EPIC));
+        super(new Properties().maxDamage(DefaultValues.diamondMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override

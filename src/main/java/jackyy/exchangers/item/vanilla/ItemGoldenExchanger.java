@@ -10,7 +10,7 @@ import net.minecraftforge.common.Tags;
 public class ItemGoldenExchanger extends ItemExchangerBase {
 
     public ItemGoldenExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.goldenMaxDmg).rarity(Rarity.RARE));
+        super(new Properties().maxDamage(DefaultValues.goldenMaxDmg).rarity(Rarity.RARE));
     }
 
     @Override

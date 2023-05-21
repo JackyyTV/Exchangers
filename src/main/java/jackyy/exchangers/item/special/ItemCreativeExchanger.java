@@ -2,12 +2,13 @@ package jackyy.exchangers.item.special;
 
 import jackyy.exchangers.item.ItemExchangerBase;
 import jackyy.exchangers.registry.ModConfigs;
+import jackyy.exchangers.util.DefaultValues;
 import net.minecraft.item.Rarity;
 
 public class ItemCreativeExchanger extends ItemExchangerBase {
 
     public ItemCreativeExchanger() {
-        super(new Properties().defaultMaxDamage(9001).rarity(Rarity.EPIC));
+        super(new Properties().maxDamage(DefaultValues.creativeMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -17,12 +18,12 @@ public class ItemCreativeExchanger extends ItemExchangerBase {
 
     @Override
     public int getHarvestLevel() {
-        return Integer.MAX_VALUE;
+        return DefaultValues.creativeMaxHarvestLevel;
     }
 
     @Override
     public int getMaxRange() {
-        return 12;
+        return DefaultValues.creativeMaxRange;
     }
 
     @Override

@@ -10,7 +10,7 @@ import net.minecraftforge.common.Tags;
 public class ItemIronExchanger extends ItemExchangerBase {
 
     public ItemIronExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.ironMaxDmg).rarity(Rarity.RARE));
+        super(new Properties().maxDamage(DefaultValues.ironMaxDmg).rarity(Rarity.RARE));
     }
 
     @Override

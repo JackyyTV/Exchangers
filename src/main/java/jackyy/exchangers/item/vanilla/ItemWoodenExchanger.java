@@ -10,7 +10,7 @@ import net.minecraft.tags.ItemTags;
 public class ItemWoodenExchanger extends ItemExchangerBase {
 
     public ItemWoodenExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.woodenMaxDmg).rarity(Reference.RARITY_TIER1));
+        super(new Properties().maxDamage(DefaultValues.woodenMaxDmg).rarity(Reference.RARITY_TIER1));
     }
 
     @Override

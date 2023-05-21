@@ -29,7 +29,7 @@ import java.util.List;
 public class ItemExchangerBasePowered extends ItemExchangerBase implements IFEContainer {
 
     public ItemExchangerBasePowered(Properties props) {
-        super(props.defaultMaxDamage(1));
+        super(props.maxStackSize(1));
     }
 
     @Override
@@ -111,7 +111,8 @@ public class ItemExchangerBasePowered extends ItemExchangerBase implements IFECo
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
         return enchantment == Enchantments.FORTUNE
                 || enchantment == Enchantments.SILK_TOUCH
-                || enchantment == Enchantments.UNBREAKING;
+                || enchantment == Enchantments.UNBREAKING
+                || enchantment == Reference.holdingEnchant;
     }
 
 }

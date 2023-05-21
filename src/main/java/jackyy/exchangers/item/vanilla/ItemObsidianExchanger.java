@@ -10,7 +10,7 @@ import net.minecraftforge.common.Tags;
 public class ItemObsidianExchanger extends ItemExchangerBase {
 
     public ItemObsidianExchanger() {
-        super(new Properties().defaultMaxDamage(DefaultValues.obsidianMaxDmg).rarity(Rarity.EPIC));
+        super(new Properties().maxDamage(DefaultValues.obsidianMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override

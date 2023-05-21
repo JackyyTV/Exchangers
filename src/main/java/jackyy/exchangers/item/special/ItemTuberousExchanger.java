@@ -21,7 +21,7 @@ import java.util.List;
 public class ItemTuberousExchanger extends ItemExchangerBase {
 
     public ItemTuberousExchanger() {
-        super(new Properties().defaultMaxDamage(1).rarity(Rarity.UNCOMMON));
+        super(new Properties().maxDamage(1).rarity(Rarity.UNCOMMON));
     }
 
     @Override

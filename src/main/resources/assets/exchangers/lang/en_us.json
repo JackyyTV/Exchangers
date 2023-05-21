@@ -46,8 +46,10 @@
     "exchangers.tooltip.extra2": "Right click on a block to exchange.",
     "exchangers.tooltip.extra3": "Use %s to open the GUI.",
     "exchangers.tooltip.tuberous_exchanger.warning": "§c§oClever! But not exchangeable.",
+    "exchangers.tooltip.bee_exchanger.flavor_text": "§6§oBee happy! :)",
     "exchangers.tooltip.selected_block": "Selected Block: %s",
     "exchangers.tooltip.selected_block.none": "None",
+    "exchangers.tooltip.selected_block.error": "Unable to fetch block name",
     "exchangers.tooltip.current_range": "Current Range: %s",
     "exchangers.tooltip.max_range": "Maximum Range: %s",
     "exchangers.tooltip.max_harvest_level": "Maximum Harvest Level: %s",
@@ -121,6 +123,7 @@
 
     "_comment": "Special Exchangers",
     "item.exchangers.tuberous_exchanger": "Tuberous Exchanger",
+    "item.exchangers.bee_exchanger": "Bee Exchanger",
     "item.exchangers.creative_exchanger": "Creative Exchanger",
 
     "_comment": "Vanilla Exchangers",

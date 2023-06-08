@@ -37,7 +37,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IForgeShearable;
@@ -326,7 +326,7 @@ public class ExchangerHandler {
                             }
                             int fortuneLevel = stack.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
                             tool.enchant(Enchantments.BLOCK_FORTUNE, fortuneLevel);
-                            LootContext.Builder builder = new LootContext.Builder(serverWorld).withRandom(serverWorld.random)
+                            LootParams.Builder builder = new LootParams.Builder(serverWorld)
                                     .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
                                     .withParameter(LootContextParams.TOOL, tool);
                             List<ItemStack> oldblockItems = oldState.getDrops(builder);

@@ -1,33 +1,29 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-    }
-}
 plugins {
     id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
 }
-apply plugin: 'net.minecraftforge.gradle'
 
 import net.minecraftforge.gradle.common.tasks.SignJar
 
 version = "${mc_version}-${mod_version}"
-group = 'jackyy.exchangers'
-archivesBaseName = "${mod_name}"
+group = "jackyy.${mod_id}"
+base {
+    archivesName = jar_name
+}
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: "${mappings_channel}", version: "${mappings_version}"
+    mappings channel: mappings_channel, version: mappings_version
+    copyIdeResources = true
     runs {
         client {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', mod_id
             if (project.hasProperty('mcUUID')) {
                 args '--uuid', project.getProperty('mcUUID')
             }
@@ -37,9 +33,8 @@ minecraft {
             if (project.hasProperty('mcAccessToken')) {
                 args '--accessToken', project.getProperty('mcAccessToken')
             }
-            property 'forge.enabledGameTestNamespaces', 'exchangers'
             mods {
-                exchangers {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -48,9 +43,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'exchangers'
+            property 'forge.enabledGameTestNamespaces', mod_id
             mods {
-                exchangers {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -59,9 +54,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'exchangers'
+            property 'forge.enabledGameTestNamespaces', mod_id
             mods {
-                exchangers {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -70,9 +65,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'exchangers', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods {
-                exchangers {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -84,15 +79,15 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     maven {
-        name = 'ModMaven'
-        url = 'https://modmaven.dev'
-    }
-    maven {
         name = 'JEI Maven'
         url = 'https://dvs1.progwml6.com/files/maven'
         content {
             includeGroup 'mezz.jei'
         }
+    }
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
     }
     maven {
         name = 'Curse Maven'
@@ -106,29 +101,47 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
-    implementation fg.deobf("mezz.jei:jei-1.19.4-forge:+")
-    //implementation fg.deobf("curse.maven:jade-324717:4538674") //1.19.4-10.3.0
-    implementation fg.deobf("curse.maven:theoneprobe-245211:4442439") //1.19.4-8.0.0
+    //implementation fg.deobf("mezz.jei:jei-1.20-forge:+")
+    //implementation fg.deobf("curse.maven:jade-324717:")
+    //implementation fg.deobf("curse.maven:theoneprobe-245211:")
 
-    implementation fg.deobf("curse.maven:gunpowderlib-356646:4519993") //1.19.4-2.1
+    implementation fg.deobf("curse.maven:gunpowderlib-356646:4573505") //1.20-2.2
 
     //runtimeOnly fg.deobf("curse.maven:mekanism-268560:")
-    //runtimeOnly fg.deobf("curse.maven:immersive_engineering-231951:4535969") //1.19.4-9.4.0-166
+    //runtimeOnly fg.deobf("curse.maven:immersive_engineering-231951:")
     //runtimeOnly fg.deobf("curse.maven:cofh_core-69162:")
     //runtimeOnly fg.deobf("curse.maven:thermal_foundation-222880:")
     //runtimeOnly fg.deobf("curse.maven:thermal_innovation-291737:")
     //runtimeOnly fg.deobf("curse.maven:thermal_expansion-69163:")
 }
 
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+def replaceProperties = [
+        mc_version: mc_version, mc_version_range: mc_version_range,
+        forge_version: forge_version, forge_version_range: forge_version_range,
+        loader_version_range: loader_version_range,
+        mod_id: mod_id, mod_name: mod_name, jar_name: jar_name,
+        mod_license: mod_license, mod_version: mod_version,
+        mod_authors: mod_authors, mod_description: mod_description
+]
+
+processResources {
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
+    filesMatching(resourceTargets) {
+        expand replaceProperties
+    }
+}
+
 jar {
     manifest {
         attributes([
-                "Specification-Title": "${mod_name}",
-                "Specification-Version": "${project.mc_version}-${project.mod_version}",
-                "Specification-Vendor": "Jackyy",
-                "Implementation-Title": "${mod_name}",
-                "Implementation-Version": "${project.mc_version}-${project.mod_version}",
-                "Implementation-Vendor" :"Jackyy",
+                "Specification-Title": jar_name,
+                "Specification-Version": "${mc_version}-${mod_version}",
+                "Specification-Vendor": mod_authors,
+                "Implementation-Title": jar_name,
+                "Implementation-Version": "${mc_version}-${mod_version}",
+                "Implementation-Vendor": mod_authors,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -138,27 +151,27 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-jar.finalizedBy('reobfJar')
-
 task signJar(type: SignJar, dependsOn: jar) {
     keyStore = project.findProperty('keyStore')
     alias = project.findProperty('keyStoreAlias')
     storePass = project.findProperty('keyStorePass')
     keyPass = project.findProperty('keyStoreKeyPass')
-    inputFile = jar.archivePath
-    outputFile = jar.archivePath
+    inputFile = jar.archiveFile
+    outputFile = jar.archiveFile
 }
 
 build.dependsOn signJar
 
+jar.finalizedBy('reobfJar')
+
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
+    archiveClassifier.set("sources")
 }
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
-    classifier = 'deobf'
+    archiveClassifier.set("deobf")
 }
 
 artifacts {

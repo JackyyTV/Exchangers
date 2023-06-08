@@ -1,8 +1,7 @@
 package jackyy.exchangers.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +37,7 @@ public class ImageButtonExt extends ImageButton {
     }
 
     @Override
-    public void renderWidget(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         RenderSystem.setShaderTexture(0, this.resourceLocation);
         int i = this.yTexStart;
         if (this.isHovered() && !this.disabled) {
@@ -47,7 +46,7 @@ public class ImageButtonExt extends ImageButton {
             i += this.yDiffText2;
         }
         RenderSystem.enableDepthTest();
-        GuiComponent.blit(matrixStack, this.getX(), this.getY(), (float)this.xTexStart, (float)i, this.width, this.height, this.textureWidth, this.textureHeight);
+        guiGraphics.blit(this.resourceLocation, this.getX(), this.getY(), (float)this.xTexStart, (float)i, this.width, this.height, this.textureWidth, this.textureHeight);
     }
 
     public void setButtonDisabled(boolean disable) {

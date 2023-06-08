@@ -2,7 +2,6 @@ package jackyy.exchangers.client.gui;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import jackyy.exchangers.client.keybind.Keys;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.handler.mode.ModeHorizontalCol;
@@ -16,7 +15,7 @@ import jackyy.gunpowderlib.helper.StringHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -26,7 +25,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 
-import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
@@ -85,28 +83,31 @@ public class ExchangersGuiScreen extends Screen {
         fuzzyPlacementChanceField = new EditBox(this.font, relativeX + 92, relativeY + 108, 26, 16, Component.empty());
         fuzzyPlacementChanceField.setMaxLength(3);
         fuzzyPlacementChanceField.setValue(chance);
+        fuzzyPlacementChanceField.setHint(Component.literal("100"));
+        fuzzyPlacementChanceField.setFocused(false);
+        fuzzyPlacementChanceField.setCanLoseFocus(true);
+        this.addRenderableWidget(fuzzyPlacementChanceField);
     }
 
     @Override
-    public void render(@Nonnull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         Font fontRenderer = mc.font;
         ItemStack stack = mc.player.getMainHandItem();
         ItemExchangerBase exchanger = (ItemExchangerBase) stack.getItem();
         CompoundTag tag = stack.getTag();
-        this.renderBackground(matrixStack);
+        this.renderBackground(guiGraphics);
         int relativeX = (this.width - W) / 2;
         int relativeY = (this.height - H) / 2;
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, GUI_IMAGE);
-        GuiComponent.blit(matrixStack, relativeX, relativeY, 0, 0, W, H);
-        this.itemRenderer.renderAndDecorateItem(matrixStack, stack, relativeX + 82, relativeY + 8);
+        guiGraphics.blit(GUI_IMAGE, relativeX, relativeY, 0, 0, W, H);
+        guiGraphics.renderItem(stack, relativeX + 82, relativeY + 8);
         int range = tag.getInt("range");
         String exchangeRange = ExchangerHandler.rangeList[range];
-        fontRenderer.drawShadow(matrixStack, exchangeRange, relativeX + 90 - fontRenderer.width(exchangeRange) / 2.0f, relativeY + 34, -1);
-        fuzzyPlacementChanceField.render(matrixStack, mouseX, mouseY, partialTicks);
-        fontRenderer.drawShadow(matrixStack, "%", relativeX + 121, relativeY + 112, -1);
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        guiGraphics.drawString(fontRenderer, exchangeRange, relativeX + 90 - fontRenderer.width(exchangeRange) / 2.0f, relativeY + 34, -1, true);
+        guiGraphics.drawString(fontRenderer, "%", relativeX + 121, relativeY + 112, -1, true);
+        super.render(guiGraphics, mouseX, mouseY, partialTicks);
         decreaseRangeButton.setButtonDisabled(range == 0);
         increaseRangeButton.setButtonDisabled(range == exchanger.getMaxRange());
         forceDropItemsButton.setButtonToggled(tag.getBoolean("forceDropItems"));
@@ -114,72 +115,75 @@ public class ExchangersGuiScreen extends Screen {
         fuzzyPlacementButton.setButtonToggled(tag.getBoolean("fuzzyPlacement"));
         voidItemsButton.setButtonToggled(tag.getBoolean("voidItems"));
         if (decreaseRangeButton.isHovered()) {
-            drawToolTip(matrixStack, Collections.singletonList(StringHelper.localize(Reference.MODID, "tooltip.decrease_range_button")), mouseX, mouseY);
+            drawToolTip(guiGraphics, Collections.singletonList(StringHelper.localize(Reference.MODID, "tooltip.decrease_range_button")), mouseX, mouseY);
         }
         if (increaseRangeButton.isHovered()) {
-            drawToolTip(matrixStack, Collections.singletonList(StringHelper.localize(Reference.MODID, "tooltip.increase_range_button")), mouseX, mouseY);
+            drawToolTip(guiGraphics, Collections.singletonList(StringHelper.localize(Reference.MODID, "tooltip.increase_range_button")), mouseX, mouseY);
         }
         if (modeSwitchButton.isHovered()) {
             int mode = tag.getInt("mode");
             switch (mode) {
                 case 0 ->
-                        drawToolTip(matrixStack, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.mode_switch_button"),
+                        drawToolTip(guiGraphics, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.mode_switch_button"),
                                 StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModePlane.getDisplayName().withStyle(ChatFormatting.GREEN))), mouseX, mouseY);
                 case 1 ->
-                        drawToolTip(matrixStack, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.mode_switch_button"),
+                        drawToolTip(guiGraphics, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.mode_switch_button"),
                                 StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeHorizontalCol.getDisplayName().withStyle(ChatFormatting.GREEN))), mouseX, mouseY);
                 case 2 ->
-                        drawToolTip(matrixStack, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.mode_switch_button"),
+                        drawToolTip(guiGraphics, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.mode_switch_button"),
                                 StringHelper.localize(Reference.MODID, "tooltip.current_mode", ModeVerticalCol.getDisplayName().withStyle(ChatFormatting.GREEN))), mouseX, mouseY);
             }
         }
         if (forceDropItemsButton.isHovered()) {
-            drawToolTip(matrixStack, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.force_drop_items_button_name"),
+            drawToolTip(guiGraphics, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.force_drop_items_button_name"),
                     StringHelper.localize(Reference.MODID, "tooltip.force_drop_items_button_desc"),
                     StringHelper.localize(Reference.MODID, "tooltip.state", Reference.getStateString(tag.getBoolean("forceDropItems")))), mouseX, mouseY);
         }
         if (directionalPlacementButton.isHovered()) {
-            drawToolTip(matrixStack, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.directional_placement_button_name"),
+            drawToolTip(guiGraphics, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.directional_placement_button_name"),
                     StringHelper.localize(Reference.MODID, "tooltip.directional_placement_button_desc"),
                     StringHelper.localize(Reference.MODID, "tooltip.state", Reference.getStateString(tag.getBoolean("directionalPlacement")))), mouseX, mouseY);
         }
         if (fuzzyPlacementButton.isHovered()) {
-            drawToolTip(matrixStack, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement_button_name"),
+            drawToolTip(guiGraphics, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement_button_name"),
                     StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement_button_desc"),
                     StringHelper.localize(Reference.MODID, "tooltip.state", Reference.getStateString(tag.getBoolean("fuzzyPlacement")))), mouseX, mouseY);
         }
         if (voidItemsButton.isHovered()) {
-            drawToolTip(matrixStack, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.void_items_button_name"),
+            drawToolTip(guiGraphics, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.void_items_button_name"),
                     StringHelper.localize(Reference.MODID, "tooltip.void_items_button_desc"),
                     StringHelper.localize(Reference.MODID, "tooltip.state", Reference.getStateString(tag.getBoolean("voidItems")))), mouseX, mouseY);
         }
         if (fuzzyPlacementChanceField.isMouseOver(mouseX, mouseY)) {
-            drawToolTip(matrixStack, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement_chance_box_name"),
+            drawToolTip(guiGraphics, ImmutableList.of(StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement_chance_box_name"),
                     StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement_chance_box_desc")), mouseX, mouseY
             );
         }
     }
 
-    private void drawToolTip(PoseStack matrixStack, List<Component> tooltips, int x, int y) {
+    private void drawToolTip(GuiGraphics guiGraphics, List<Component> tooltips, int x, int y) {
         Screen screen = mc.screen;
         if (screen == null) {
             return;
         }
-        screen.renderTooltip(matrixStack, tooltips, ItemStack.EMPTY.getTooltipImage(), x, y, font);
+        guiGraphics.renderTooltip(font, tooltips, ItemStack.EMPTY.getTooltipImage(), x, y);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        fuzzyPlacementChanceField.mouseClicked(mouseX, mouseY, button);
-        if (!fuzzyPlacementChanceField.isFocused()) {
+        if (fuzzyPlacementChanceField.isFocused()) {
+            if (!fuzzyPlacementChanceField.mouseClicked(mouseX, mouseY, button)) {
+                fuzzyPlacementChanceField.setFocused(false);
+                parseFuzzyPlacementChance(fuzzyPlacementChanceField, 1, 100);
+            }
+        } else {
             if (!fuzzyPlacementChanceField.getValue().isEmpty()) {
                 parseFuzzyPlacementChance(fuzzyPlacementChanceField, 1, 100);
-                return super.mouseClicked(mouseX, mouseY, button);
             } else {
                 fuzzyPlacementChanceField.setValue(chance);
             }
         }
-        return false;
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     @Override
@@ -190,11 +194,9 @@ public class ExchangersGuiScreen extends Screen {
         }
         if (fuzzyPlacementChanceField.isFocused()) {
             if (GLFW.GLFW_KEY_ESCAPE == keyCode || GLFW.GLFW_KEY_ENTER == keyCode || GLFW.GLFW_KEY_KP_ENTER == keyCode) {
-                if (!fuzzyPlacementChanceField.getValue().isEmpty()) {
-                    fuzzyPlacementChanceField.setFocused(false);
-                    parseFuzzyPlacementChance(fuzzyPlacementChanceField, 1, 100);
-                    return true;
-                }
+                fuzzyPlacementChanceField.setFocused(false);
+                parseFuzzyPlacementChance(fuzzyPlacementChanceField, 1, 100);
+                return true;
             }
         } else {
             if (GLFW.GLFW_KEY_ESCAPE == keyCode || Keys.OPEN_GUI_KEY.get().getKey().getValue() == keyCode || mc.options.keyInventory.getKey().getValue() == keyCode) {
@@ -212,7 +214,7 @@ public class ExchangersGuiScreen extends Screen {
                 fuzzyPlacementChanceField.charTyped(codePoint, modifiers);
             }
         }
-        return super.charTyped(codePoint, modifiers);
+        return false;
     }
 
     private void parseFuzzyPlacementChance(EditBox field, int min, int max) {

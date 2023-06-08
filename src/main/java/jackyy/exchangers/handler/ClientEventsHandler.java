@@ -14,6 +14,7 @@ import jackyy.exchangers.item.special.ItemCreativeExchanger;
 import jackyy.gunpowderlib.helper.NBTHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -51,15 +52,16 @@ public class ClientEventsHandler {
                     Font font = mc.font;
                     int w = mainWindow.getGuiScaledWidth();
                     int h = mainWindow.getGuiScaledHeight();
-                    PoseStack matrixStack = event.getPoseStack();
-                    matrixStack.pushPose();
+                    GuiGraphics guiGraphics = event.getGuiGraphics();
+                    PoseStack poseStack = guiGraphics.pose();
+                    poseStack.pushPose();
                     String exchangeRange = ExchangerHandler.rangeList[NBTHelper.getTag(stack).getInt("range")];
                     float scale = exchangeRange.length() > 2 ? 1 : 1;
                     float swidth = font.width(exchangeRange) * scale;
-                    matrixStack.translate(((double) w / 2 - 2 - swidth), (double) h / 2 - 4, 0);
-                    matrixStack.scale(scale, scale, 1);
-                    font.drawShadow(matrixStack, exchangeRange, 0, 0, 0xFFFFFF);
-                    matrixStack.popPose();
+                    poseStack.translate(((double) w / 2 - 2 - swidth), (double) h / 2 - 4, 0);
+                    poseStack.scale(scale, scale, 1);
+                    guiGraphics.drawString(font, exchangeRange, 0, 0, 0xFFFFFF, true);
+                    poseStack.popPose();
                 }
             }
         }
@@ -71,7 +73,7 @@ public class ClientEventsHandler {
             HitResult mouseOver = Minecraft.getInstance().hitResult;
             LocalPlayer player = mc.player;
             if (player != null && mouseOver instanceof BlockHitResult mouseOverBlock) {
-                Level world = player.getLevel();
+                Level world = player.level();
                 BlockPos pos = mouseOverBlock.getBlockPos();
                 BlockState state = world.getBlockState(pos);
                 ItemStack stack = player.getMainHandItem();
@@ -81,7 +83,7 @@ public class ClientEventsHandler {
                     if (exState == state) {
                         return;
                     }
-                    Set<BlockPos> blocks = ExchangerHandler.findSuitableBlocks(stack, player.getLevel(), player, mouseOverBlock.getDirection(), pos, state);
+                    Set<BlockPos> blocks = ExchangerHandler.findSuitableBlocks(stack, player.level(), player, mouseOverBlock.getDirection(), pos, state);
                     PoseStack matrixStack = event.getPoseStack();
                     MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
                     if ((player.isShiftKeyDown() && ((world.getBlockEntity(pos) != null && !ExchangerHandler.isWhitelisted(world, pos))

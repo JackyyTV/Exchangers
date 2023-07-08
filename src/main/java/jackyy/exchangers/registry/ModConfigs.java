@@ -281,10 +281,10 @@ public class ModConfigs {
             builder.push("ender_io_tweaks");
             copperAlloyMaxEnergy = builder
                     .comment("Set the energy capacity for Copper Alloy Exchanger")
-                    .defineInRange("copperAlloyMaxEnergy", DefaultValues.copperALloyMaxEnergy, 1000, Integer.MAX_VALUE);
+                    .defineInRange("copperAlloyExchangerMaxEnergy", DefaultValues.copperALloyMaxEnergy, 1000, Integer.MAX_VALUE);
             copperAlloyPerBlockUse = builder
                     .comment("Set the energy consumption per block for Copper Alloy Exchanger")
-                    .defineInRange("copperAlloyPerBlockUse", DefaultValues.copperAlloyPerBlockUse, 1, Integer.MAX_VALUE);
+                    .defineInRange("copperAlloyExchangerPerBlockUse", DefaultValues.copperAlloyPerBlockUse, 1, Integer.MAX_VALUE);
             copperAlloyMaxHarvestLevel = builder
                     .comment(
                             "Set the max harvest level for Copper Alloy Exchanger",
@@ -292,17 +292,17 @@ public class ModConfigs {
                             "For modded values, please check the tool tiers for the mod that you want to use",
                             "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
                     )
-                    .define("copperAlloyMaxHarvestLevel", DefaultValues.copperAlloyMaxHarvestLevel);
+                    .define("copperAlloyExchangerMaxHarvestLevel", DefaultValues.copperAlloyMaxHarvestLevel);
             copperAlloyMaxRange = builder
                     .comment("Set the max range for Copper Alloy Exchanger")
-                    .defineInRange("copperAlloyMaxRange", DefaultValues.copperALloyMaxRange, 0, 12);
+                    .defineInRange("copperAlloyExchangerMaxRange", DefaultValues.copperALloyMaxRange, 0, 12);
 
             conductiveMaxEnergy = builder
                     .comment("Set the energy capacity for Conductive Exchanger")
-                    .defineInRange("conductiveMaxEnergy", DefaultValues.conductiveMaxEnergy, 1000, Integer.MAX_VALUE);
+                    .defineInRange("conductiveExchangerMaxEnergy", DefaultValues.conductiveMaxEnergy, 1000, Integer.MAX_VALUE);
             conductivePerBlockUse = builder
                     .comment("Set the energy consumption per block for Conductive Exchanger")
-                    .defineInRange("conductivePerBlockUse", DefaultValues.conductivePerBlockUse, 1, Integer.MAX_VALUE);
+                    .defineInRange("conductiveExchangerPerBlockUse", DefaultValues.conductivePerBlockUse, 1, Integer.MAX_VALUE);
             conductiveMaxHarvestLevel = builder
                     .comment(
                             "Set the max harvest level for Conductive Exchanger",
@@ -310,17 +310,17 @@ public class ModConfigs {
                             "For modded values, please check the tool tiers for the mod that you want to use",
                             "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
                     )
-                    .define("conductiveMaxHarvestLevel", DefaultValues.conductiveMaxHarvestLevel);
+                    .define("conductiveExchangerMaxHarvestLevel", DefaultValues.conductiveMaxHarvestLevel);
             conductiveMaxRange = builder
                     .comment("Set the max range for Conductive Exchanger")
-                    .defineInRange("conductiveMaxRange", DefaultValues.conductiveMaxRange, 0, 12);
+                    .defineInRange("conductiveExchangerMaxRange", DefaultValues.conductiveMaxRange, 0, 12);
 
             pulsatingMaxEnergy = builder
                     .comment("Set the energy capacity for Pulsating Exchanger")
-                    .defineInRange("pulsatingMaxEnergy", DefaultValues.pulsatingMaxEnergy, 1000, Integer.MAX_VALUE);
+                    .defineInRange("pulsatingExchangerMaxEnergy", DefaultValues.pulsatingMaxEnergy, 1000, Integer.MAX_VALUE);
             pulsatingPerBlockUse = builder
                     .comment("Set the energy consumption per block for Pulsating Exchanger")
-                    .defineInRange("pulsatingPerBlockUse", DefaultValues.pulsatingPerBlockUse, 1, Integer.MAX_VALUE);
+                    .defineInRange("pulsatingExchangerPerBlockUse", DefaultValues.pulsatingPerBlockUse, 1, Integer.MAX_VALUE);
             pulsatingMaxHarvestLevel = builder
                     .comment(
                             "Set the max harvest level for Pulsating Exchanger",
@@ -328,10 +328,10 @@ public class ModConfigs {
                             "For modded values, please check the tool tiers for the mod that you want to use",
                             "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
                     )
-                    .define("pulsatingMaxHarvestLevel", DefaultValues.pulsatingMaxHarvestLevel);
+                    .define("pulsatingExchangerMaxHarvestLevel", DefaultValues.pulsatingMaxHarvestLevel);
             pulsatingMaxRange = builder
                     .comment("Set the max range for Pulsating Exchanger")
-                    .defineInRange("pulsatingMaxRange", DefaultValues.pulsatingMaxRange, 0, 12);
+                    .defineInRange("pulsatingExchangerMaxRange", DefaultValues.pulsatingMaxRange, 0, 12);
 
             energeticMaxEnergy = builder
                     .comment("Set the energy capacity for Energetic Exchanger")

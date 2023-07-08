@@ -8,29 +8,32 @@
       "type": "forge:mod_loaded", "modid": "enderio"
     },
     {
-      "type": "exchangers:ender_io_recipes_type", "value": "easy"
+      "type": "exchangers:ender_io_recipes_type", "value": "normal"
     }
   ],
   "pattern": [
-    "DBD",
-    "BVB",
-    "DBD"
+    "PCP",
+    "BXB",
+    "PDP"
   ],
   "key": {
-    "S": {
-      "tag": "forge:ingots/electrical_steel"
+    "P": {
+      "item": "enderio:pulsating_alloy_ingot"
     },
     "B": {
-      "item": "enderio:basic_capacitor_bank"
+      "item": "enderio:pulsating_crystal"
     },
     "D": {
       "item": "enderio:double_layer_capacitor"
     },
     "C": {
       "item": "exchangers:eio_exchanger_core_tier2"
+    },
+    "X": {
+      "item": "exchangers:conductive_exchanger"
     }
   },
   "result": {
-    "item": "exchangers:electrical_steel_exchanger"
+    "item": "exchangers:pulsating_exchanger"
   }
 }

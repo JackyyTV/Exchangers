@@ -59,9 +59,8 @@
     "item.exchangers.obsidian_exchanger": "Obsydianowy Wymieniacz",
 
     "_comment": "Ender IO Exchangers",
-    "item.exchangers.conductive_iron_exchanger": "Wymieniacz z Przewodzącego Żelaza",
-    "item.exchangers.pulsating_iron_exchanger": "Wymieniacz z Pulsującego Żelaza",
-    "item.exchangers.electrical_steel_exchanger": "Wymieniacz z Elektrycznej Stali",
+    "item.exchangers.conductive_exchanger": "Wymieniacz z Przewodzącego",
+    "item.exchangers.pulsating_exchanger": "Wymieniacz z Pulsującego",
     "item.exchangers.energetic_exchanger": "EnergetycznyWymieniacz",
     "item.exchangers.dark_steel_exchanger": "Wymieniacz z Ciemnej Stali",
     "item.exchangers.vibrant_exchanger": "Wibrujący Wymieniacz",

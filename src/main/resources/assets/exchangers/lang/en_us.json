@@ -121,9 +121,9 @@
     "item.exchangers.end_exchanger": "End Exchanger",
 
     "_comment": "Ender IO Exchangers",
-    "item.exchangers.conductive_iron_exchanger": "Conductive Iron Exchanger",
-    "item.exchangers.pulsating_iron_exchanger": "Pulsating Iron Exchanger",
-    "item.exchangers.electrical_steel_exchanger": "Electrical Steel Exchanger",
+    "item.exchangers.copper_alloy_exchanger": "Copper Alloy Exchanger",
+    "item.exchangers.conductive_exchanger": "Conductive Exchanger",
+    "item.exchangers.pulsating_exchanger": "Pulsating Exchanger",
     "item.exchangers.energetic_exchanger": "Energetic Exchanger",
     "item.exchangers.dark_steel_exchanger": "Dark Steel Exchanger",
     "item.exchangers.vibrant_exchanger": "Vibrant Exchanger",

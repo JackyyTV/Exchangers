@@ -35,6 +35,10 @@ public class ModConfigs {
         public final ForgeConfigSpec.ConfigValue<? extends String> endMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue endMaxRange;
 
+        public final ForgeConfigSpec.IntValue copperAlloyMaxEnergy;
+        public final ForgeConfigSpec.IntValue copperAlloyPerBlockUse;
+        public final ForgeConfigSpec.ConfigValue<? extends String> copperAlloyMaxHarvestLevel;
+        public final ForgeConfigSpec.IntValue copperAlloyMaxRange;
         public final ForgeConfigSpec.IntValue conductiveMaxEnergy;
         public final ForgeConfigSpec.IntValue conductivePerBlockUse;
         public final ForgeConfigSpec.ConfigValue<? extends String> conductiveMaxHarvestLevel;
@@ -43,10 +47,6 @@ public class ModConfigs {
         public final ForgeConfigSpec.IntValue pulsatingPerBlockUse;
         public final ForgeConfigSpec.ConfigValue<? extends String> pulsatingMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue pulsatingMaxRange;
-        public final ForgeConfigSpec.IntValue electricalSteelMaxEnergy;
-        public final ForgeConfigSpec.IntValue electricalSteelPerBlockUse;
-        public final ForgeConfigSpec.ConfigValue<? extends String> electricalSteelMaxHarvestLevel;
-        public final ForgeConfigSpec.IntValue electricalSteelMaxRange;
         public final ForgeConfigSpec.IntValue energeticMaxEnergy;
         public final ForgeConfigSpec.IntValue energeticPerBlockUse;
         public final ForgeConfigSpec.ConfigValue<? extends String> energeticMaxHarvestLevel;
@@ -279,59 +279,59 @@ public class ModConfigs {
             builder.pop();
 
             builder.push("ender_io_tweaks");
+            copperAlloyMaxEnergy = builder
+                    .comment("Set the energy capacity for Copper Alloy Exchanger")
+                    .defineInRange("copperAlloyMaxEnergy", DefaultValues.copperALloyMaxEnergy, 1000, Integer.MAX_VALUE);
+            copperAlloyPerBlockUse = builder
+                    .comment("Set the energy consumption per block for Copper Alloy Exchanger")
+                    .defineInRange("copperAlloyPerBlockUse", DefaultValues.copperAlloyPerBlockUse, 1, Integer.MAX_VALUE);
+            copperAlloyMaxHarvestLevel = builder
+                    .comment(
+                            "Set the max harvest level for Copper Alloy Exchanger",
+                            "Valid Vanilla values are: minecraft:wood, minecraft:stone, minecraft:iron, minecraft:diamond, minecraft:netherite",
+                            "For modded values, please check the tool tiers for the mod that you want to use",
+                            "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
+                    )
+                    .define("copperAlloyMaxHarvestLevel", DefaultValues.copperAlloyMaxHarvestLevel);
+            copperAlloyMaxRange = builder
+                    .comment("Set the max range for Copper Alloy Exchanger")
+                    .defineInRange("copperAlloyMaxRange", DefaultValues.copperALloyMaxRange, 0, 12);
+
             conductiveMaxEnergy = builder
-                    .comment("Set the energy capacity for Conductive Iron Exchanger")
-                    .defineInRange("conductiveIronExchangerMaxEnergy", DefaultValues.conductiveMaxEnergy, 1000, Integer.MAX_VALUE);
+                    .comment("Set the energy capacity for Conductive Exchanger")
+                    .defineInRange("conductiveMaxEnergy", DefaultValues.conductiveMaxEnergy, 1000, Integer.MAX_VALUE);
             conductivePerBlockUse = builder
-                    .comment("Set the energy consumption per block for Conductive Iron Exchanger")
-                    .defineInRange("conductiveIronExchangerPerBlockUse", DefaultValues.conductivePerBlockUse, 1, Integer.MAX_VALUE);
+                    .comment("Set the energy consumption per block for Conductive Exchanger")
+                    .defineInRange("conductivePerBlockUse", DefaultValues.conductivePerBlockUse, 1, Integer.MAX_VALUE);
             conductiveMaxHarvestLevel = builder
                     .comment(
-                            "Set the max harvest level for Conductive Iron Exchanger",
+                            "Set the max harvest level for Conductive Exchanger",
                             "Valid Vanilla values are: minecraft:wood, minecraft:stone, minecraft:iron, minecraft:diamond, minecraft:netherite",
                             "For modded values, please check the tool tiers for the mod that you want to use",
                             "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
                     )
-                    .define("conductiveIronExchangerMaxHarvestLevel", DefaultValues.conductiveMaxHarvestLevel);
+                    .define("conductiveMaxHarvestLevel", DefaultValues.conductiveMaxHarvestLevel);
             conductiveMaxRange = builder
-                    .comment("Set the max range for Conductive Iron Exchanger")
-                    .defineInRange("conductiveIronExchangerMaxRange", DefaultValues.conductiveMaxRange, 0, 12);
+                    .comment("Set the max range for Conductive Exchanger")
+                    .defineInRange("conductiveMaxRange", DefaultValues.conductiveMaxRange, 0, 12);
 
             pulsatingMaxEnergy = builder
-                    .comment("Set the energy capacity for Pulsating Iron Exchanger")
-                    .defineInRange("pulsatingIronExchangerMaxEnergy", DefaultValues.pulsatingMaxEnergy, 1000, Integer.MAX_VALUE);
+                    .comment("Set the energy capacity for Pulsating Exchanger")
+                    .defineInRange("pulsatingMaxEnergy", DefaultValues.pulsatingMaxEnergy, 1000, Integer.MAX_VALUE);
             pulsatingPerBlockUse = builder
-                    .comment("Set the energy consumption per block for Pulsating Iron Exchanger")
-                    .defineInRange("pulsatingIronExchangerPerBlockUse", DefaultValues.pulsatingPerBlockUse, 1, Integer.MAX_VALUE);
+                    .comment("Set the energy consumption per block for Pulsating Exchanger")
+                    .defineInRange("pulsatingPerBlockUse", DefaultValues.pulsatingPerBlockUse, 1, Integer.MAX_VALUE);
             pulsatingMaxHarvestLevel = builder
                     .comment(
-                            "Set the max harvest level for Pulsating Iron Exchanger",
+                            "Set the max harvest level for Pulsating Exchanger",
                             "Valid Vanilla values are: minecraft:wood, minecraft:stone, minecraft:iron, minecraft:diamond, minecraft:netherite",
                             "For modded values, please check the tool tiers for the mod that you want to use",
                             "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
                     )
-                    .define("pulsatingIronExchangerMaxHarvestLevel", DefaultValues.pulsatingMaxHarvestLevel);
+                    .define("pulsatingMaxHarvestLevel", DefaultValues.pulsatingMaxHarvestLevel);
             pulsatingMaxRange = builder
-                    .comment("Set the max range for Pulsating Iron Exchanger")
-                    .defineInRange("pulsatingIronExchangerMaxRange", DefaultValues.pulsatingMaxRange, 0, 12);
-
-            electricalSteelMaxEnergy = builder
-                    .comment("Set the energy capacity for Electrical Steel Exchanger")
-                    .defineInRange("electricalSteelExchangerMaxEnergy", DefaultValues.electricalSteelMaxEnergy, 1000, Integer.MAX_VALUE);
-            electricalSteelPerBlockUse = builder
-                    .comment("Set the energy consumption per block for Electrical Steel Exchanger")
-                    .defineInRange("electricalSteelExchangerPerBlockUse", DefaultValues.electricalSteelPerBlockUse, 1, Integer.MAX_VALUE);
-            electricalSteelMaxHarvestLevel = builder
-                    .comment(
-                            "Set the max harvest level for Electrical Steel Exchanger",
-                            "Valid Vanilla values are: minecraft:wood, minecraft:stone, minecraft:iron, minecraft:diamond, minecraft:netherite",
-                            "For modded values, please check the tool tiers for the mod that you want to use",
-                            "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
-                    )
-                    .define("electricalSteelExchangerMaxHarvestLevel", DefaultValues.electricalSteelMaxHarvestLevel);
-            electricalSteelMaxRange = builder
-                    .comment("Set the max range for Electrical Steel Exchanger")
-                    .defineInRange("electricalSteelExchangerMaxRange", DefaultValues.electricalSteelMaxRange, 0, 12);
+                    .comment("Set the max range for Pulsating Exchanger")
+                    .defineInRange("pulsatingMaxRange", DefaultValues.pulsatingMaxRange, 0, 12);
 
             energeticMaxEnergy = builder
                     .comment("Set the energy capacity for Energetic Exchanger")

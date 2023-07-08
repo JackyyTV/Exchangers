@@ -62,9 +62,9 @@
     "item.exchangers.obsidian_exchanger": "黑曜石方块交换器",
 
     "_comment": "Ender IO Exchangers",
-    "item.exchangers.conductive_iron_exchanger": "导电铁方块交换器",
-    "item.exchangers.pulsating_iron_exchanger": "脉冲铁方块交换器",
-    "item.exchangers.electrical_steel_exchanger": "磁钢方块交换器",
+    "item.exchangers.copper_alloy_exchanger": "铜合金方块交换器",
+    "item.exchangers.conductive_exchanger": "导电合金方块交换器",
+    "item.exchangers.pulsating_exchanger": "脉动合金方块交换器",
     "item.exchangers.energetic_exchanger": "充能合金方块交换器",
     "item.exchangers.dark_steel_exchanger": "玄钢方块交换器",
     "item.exchangers.vibrant_exchanger": "脉冲合金方块交换器",

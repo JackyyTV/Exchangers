@@ -12,13 +12,13 @@
     }
   ],
   "pattern": [
-    "SVS",
-    "SCS",
-    "SOS"
+    "DVD",
+    "DCD",
+    "DOD"
   ],
   "key": {
-    "S": {
-      "tag": "forge:ingots/dark_steel"
+    "D": {
+      "item": "enderio:dark_steel_ingot"
     },
     "O": {
       "item": "enderio:octadic_capacitor"

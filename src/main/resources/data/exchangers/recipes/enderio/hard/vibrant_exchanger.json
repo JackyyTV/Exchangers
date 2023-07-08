@@ -12,16 +12,16 @@
     }
   ],
   "pattern": [
-    "AEA",
+    "VEV",
     "CXC",
-    "ABA"
+    "VZV"
   ],
   "key": {
-    "A": {
-      "tag": "forge:ingots/vibrant_alloy"
+    "V": {
+      "item": "enderio:vibrant_alloy_ingot"
     },
-    "B": {
-      "item": "enderio:vibrant_capacitor_bank"
+    "Z": {
+      "item": "enderio:frank_n_zombie"
     },
     "E": {
       "item": "enderio:ender_crystal"

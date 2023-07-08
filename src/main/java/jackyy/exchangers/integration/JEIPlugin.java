@@ -1,7 +1,5 @@
 package jackyy.exchangers.integration;
 
-/*
-TODO Fix JEI Plugin
 import jackyy.exchangers.registry.ModItems;
 import jackyy.exchangers.util.Reference;
 import mezz.jei.api.IModPlugin;
@@ -55,4 +53,3 @@ public class JEIPlugin implements IModPlugin {
     };
 
 }
-*/

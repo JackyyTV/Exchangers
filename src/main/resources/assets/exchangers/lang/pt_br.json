@@ -59,9 +59,8 @@
     "item.exchangers.obsidian_exchanger": "Alterador de Obsidiana",
 
     "_comment": "Ender IO Exchangers",
-    "item.exchangers.conductive_iron_exchanger": "Alterador de Ferro Condutivo",
-    "item.exchangers.pulsating_iron_exchanger": "Alterador de Ferro Pulsante",
-    "item.exchangers.electrical_steel_exchanger": "Alterador de Aço Elétrico",
+    "item.exchangers.conductive_exchanger": "Alterador de Condutivo",
+    "item.exchangers.pulsating_exchanger": "Alterador de Pulsante",
     "item.exchangers.energetic_exchanger": "Alterador de Liga Energética",
     "item.exchangers.dark_steel_exchanger": "Alterador de Aço Negro",
     "item.exchangers.vibrant_exchanger": "Alterador de Liga Vibrante",

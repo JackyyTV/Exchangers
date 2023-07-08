@@ -12,16 +12,16 @@
     }
   ],
   "pattern": [
-    "ADA",
-    "ACA",
-    "ABA"
+    "EZE",
+    "ECE",
+    "EDE"
   ],
   "key": {
-    "A": {
-      "tag": "forge:ingots/energetic_alloy"
+    "E": {
+      "item": "enderio:energetic_alloy_ingot"
     },
-    "B": {
-      "item": "enderio:capacitor_bank"
+    "Z": {
+      "item": "enderio:zombie_electrode"
     },
     "D": {
       "item": "enderio:double_layer_capacitor"

@@ -36,9 +36,9 @@ public class ModItems {
     public static final RegistryObject<Item> BEE_EXCHANGER = ITEMS.register("bee_exchanger", ItemBeeExchanger::new);
     public static final RegistryObject<Item> CREATIVE_EXCHANGER = ITEMS.register("creative_exchanger", ItemCreativeExchanger::new);
 
-    public static final RegistryObject<Item> CONDUCTIVE_IRON_EXCHANGER = ITEMS.register("conductive_iron_exchanger", ItemConductiveIronExchanger::new);
-    public static final RegistryObject<Item> PULSATING_IRON_EXCHANGER = ITEMS.register("pulsating_iron_exchanger", ItemPulsatingIronExchanger::new);
-    public static final RegistryObject<Item> ELECTRICAL_STEEL_EXCHANGER = ITEMS.register("electrical_steel_exchanger", ItemElectricalSteelExchanger::new);
+    public static final RegistryObject<Item> COPPER_ALLOY_EXCHANGER = ITEMS.register("copper_alloy_exchanger", ItemCopperAlloyExchanger::new);
+    public static final RegistryObject<Item> CONDUCTIVE_EXCHANGER = ITEMS.register("conductive_exchanger", ItemConductiveExchanger::new);
+    public static final RegistryObject<Item> PULSATING_EXCHANGER = ITEMS.register("pulsating_exchanger", ItemPulsatingExchanger::new);
     public static final RegistryObject<Item> ENERGETIC_EXCHANGER = ITEMS.register("energetic_exchanger", ItemEnergeticExchanger::new);
     public static final RegistryObject<Item> DARK_STEEL_EXCHANGER = ITEMS.register("dark_steel_exchanger", ItemDarkSteelExchanger::new);
     public static final RegistryObject<Item> VIBRANT_EXCHANGER = ITEMS.register("vibrant_exchanger", ItemVibrantExchanger::new);

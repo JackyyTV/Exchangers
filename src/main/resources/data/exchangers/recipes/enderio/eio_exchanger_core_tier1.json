@@ -9,19 +9,19 @@
     }
   ],
   "pattern": [
-    "PCP",
+    "RCR",
     "CNC",
-    "PCP"
+    "RCR"
   ],
   "key": {
-    "P": {
-      "tag": "forge:nuggets/pulsating_iron"
+    "R": {
+      "item": "enderio:redstone_alloy_nugget"
     },
     "C": {
-      "tag": "forge:ingots/conductive_iron"
+      "item": "enderio:copper_alloy_ingot"
     },
     "N": {
-      "item": "enderio:nutrient_distillation_bucket"
+      "item": "enderio:iron_gear"
     }
   },
   "result": {

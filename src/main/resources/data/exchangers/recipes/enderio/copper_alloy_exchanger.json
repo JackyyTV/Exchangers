@@ -6,34 +6,25 @@
     },
     {
       "type": "forge:mod_loaded", "modid": "enderio"
-    },
-    {
-      "type": "exchangers:ender_io_recipes_type", "value": "normal"
     }
   ],
   "pattern": [
+    "IBI",
     "ICI",
-    "PXP",
     "IBI"
   ],
   "key": {
     "I": {
-      "tag": "forge:ingots/pulsating_iron"
-    },
-    "P": {
-      "item": "enderio:pulsating_crystal"
+      "item": "enderio:copper_alloy_ingot"
     },
     "B": {
       "item": "enderio:basic_capacitor"
     },
     "C": {
       "item": "exchangers:eio_exchanger_core_tier1"
-    },
-    "X": {
-      "item": "exchangers:conductive_iron_exchanger"
     }
   },
   "result": {
-    "item": "exchangers:pulsating_iron_exchanger"
+    "item": "exchangers:copper_alloy_exchanger"
   }
 }

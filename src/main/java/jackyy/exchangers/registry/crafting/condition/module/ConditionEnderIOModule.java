@@ -1,6 +1,7 @@
 package jackyy.exchangers.registry.crafting.condition.module;
 
 import com.google.gson.JsonObject;
+import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.Reference;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
@@ -22,9 +23,7 @@ public class ConditionEnderIOModule implements ICondition {
 
     @Override
     public boolean test(IContext context) {
-        //return ModConfigs.CONFIG.enderIOModule.get() == value;
-        //Disabled recipes for now until Ender IO gets ported
-        return false;
+        return ModConfigs.CONFIG.enderIOModule.get() == value;
     }
 
     public static final IConditionSerializer<ConditionEnderIOModule> SERIALIZER = new IConditionSerializer<>() {

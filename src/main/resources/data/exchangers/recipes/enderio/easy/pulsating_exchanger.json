@@ -8,26 +8,29 @@
       "type": "forge:mod_loaded", "modid": "enderio"
     },
     {
-      "type": "exchangers:ender_io_recipes_type", "value": "hard"
+      "type": "exchangers:ender_io_recipes_type", "value": "easy"
     }
   ],
   "pattern": [
-    "SCS",
-    "CVC",
-    "SCS"
+    "PBP",
+    "PCP",
+    "PDP"
   ],
   "key": {
-    "S": {
-      "item": "enderio:soularium_ingot"
+    "P": {
+      "item": "enderio:pulsating_alloy_ingot"
     },
-    "V": {
-      "item": "enderio:vibrant_gear"
+    "B": {
+      "item": "enderio:pulsating_crystal"
+    },
+    "D": {
+      "item": "enderio:double_layer_capacitor"
     },
     "C": {
       "item": "exchangers:eio_exchanger_core_tier2"
     }
   },
   "result": {
-    "item": "exchangers:eio_exchanger_core_tier3"
+    "item": "exchangers:pulsating_exchanger"
   }
 }

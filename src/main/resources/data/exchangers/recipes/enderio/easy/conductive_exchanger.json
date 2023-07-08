@@ -12,16 +12,16 @@
     }
   ],
   "pattern": [
-    "IPI",
+    "IGI",
     "ICI",
     "IBI"
   ],
   "key": {
     "I": {
-      "tag": "forge:ingots/pulsating_iron"
+      "item": "enderio:conductive_alloy_ingot"
     },
-    "P": {
-      "item": "enderio:pulsating_crystal"
+    "G": {
+      "item": "enderio:iron_gear"
     },
     "B": {
       "item": "enderio:basic_capacitor"
@@ -31,6 +31,6 @@
     }
   },
   "result": {
-    "item": "exchangers:pulsating_iron_exchanger"
+    "item": "exchangers:conductive_exchanger"
   }
 }

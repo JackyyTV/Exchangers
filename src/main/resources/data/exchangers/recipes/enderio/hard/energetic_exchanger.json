@@ -12,16 +12,16 @@
     }
   ],
   "pattern": [
-    "ADA",
+    "EZE",
     "CXC",
-    "ABA"
+    "EDE"
   ],
   "key": {
-    "A": {
-      "tag": "forge:ingots/energetic_alloy"
+    "E": {
+      "item": "enderio:energetic_alloy_ingot"
     },
-    "B": {
-      "item": "enderio:capacitor_bank"
+    "Z": {
+      "item": "enderio:zombie_electrode"
     },
     "D": {
       "item": "enderio:double_layer_capacitor"
@@ -30,7 +30,7 @@
       "item": "exchangers:eio_exchanger_core_tier2"
     },
     "X": {
-      "item": "exchangers:electrical_steel_exchanger"
+      "item": "exchangers:pulsating_exchanger"
     }
   },
   "result": {

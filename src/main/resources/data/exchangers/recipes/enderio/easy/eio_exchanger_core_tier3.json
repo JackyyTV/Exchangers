@@ -13,18 +13,18 @@
   ],
   "pattern": [
     "PSP",
-    "SDS",
+    "SVS",
     "PSP"
   ],
   "key": {
-    "D": {
-      "tag": "forge:ingots/dark_steel"
+    "S": {
+      "item": "enderio:soularium_ingot"
     },
-    "B": {
-      "item": "enderio:basic_capacitor"
+    "P": {
+      "item": "enderio:vibrant_powder"
     },
     "V": {
-      "item": "enderio:vapor_of_levity_bucket"
+      "item": "enderio:vibrant_gear"
     }
   },
   "result": {

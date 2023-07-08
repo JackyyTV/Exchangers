@@ -22,8 +22,8 @@ public class ConditionEnderIOEndergyModule implements ICondition {
 
     @Override
     public boolean test(IContext context) {
-        //return ModConfigs.CONFIG.enderIOEndergyModule.get() == value;
         //Disabled recipes for now until Ender IO Endergy gets ported
+        //return ModConfigs.CONFIG.enderIOEndergyModule.get() == value;
         return false;
     }
 

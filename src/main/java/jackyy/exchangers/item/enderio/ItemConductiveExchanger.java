@@ -4,43 +4,42 @@ import jackyy.exchangers.item.ItemExchangerBasePowered;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
-import net.minecraft.world.item.Rarity;
 import net.minecraftforge.fml.ModList;
 
-public class ItemElectricalSteelExchanger extends ItemExchangerBasePowered {
+public class ItemConductiveExchanger extends ItemExchangerBasePowered {
 
-    public ItemElectricalSteelExchanger() {
-        super(new Properties().rarity(Rarity.RARE));
+    public ItemConductiveExchanger() {
+        super(new Properties().rarity(Reference.RARITY_TIER1));
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfigs.CONFIG.electricalSteelMaxEnergy.get();
+        return ModConfigs.CONFIG.conductiveMaxEnergy.get();
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfigs.CONFIG.electricalSteelPerBlockUse.get();
+        return ModConfigs.CONFIG.conductivePerBlockUse.get();
     }
 
     @Override
     public String getHarvestLevel() {
-        return ModConfigs.CONFIG.electricalSteelMaxHarvestLevel.get();
+        return ModConfigs.CONFIG.conductiveMaxHarvestLevel.get();
     }
 
     @Override
     public String getDefaultHarvestLevel() {
-        return DefaultValues.electricalSteelMaxHarvestLevel;
+        return DefaultValues.conductiveMaxHarvestLevel;
     }
 
     @Override
     public int getMaxRange() {
-        return ModConfigs.CONFIG.electricalSteelMaxRange.get();
+        return ModConfigs.CONFIG.conductiveMaxRange.get();
     }
 
     @Override
     public int getTier() {
-        return 3;
+        return 2;
     }
 
     @Override

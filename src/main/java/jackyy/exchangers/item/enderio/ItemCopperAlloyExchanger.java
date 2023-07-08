@@ -6,40 +6,40 @@ import jackyy.exchangers.util.DefaultValues;
 import jackyy.exchangers.util.Reference;
 import net.minecraftforge.fml.ModList;
 
-public class ItemPulsatingIronExchanger extends ItemExchangerBasePowered {
+public class ItemCopperAlloyExchanger extends ItemExchangerBasePowered {
 
-    public ItemPulsatingIronExchanger() {
+    public ItemCopperAlloyExchanger() {
         super(new Properties().rarity(Reference.RARITY_TIER1));
     }
 
     @Override
     public int getMaxEnergy() {
-        return ModConfigs.CONFIG.pulsatingMaxEnergy.get();
+        return ModConfigs.CONFIG.copperAlloyMaxEnergy.get();
     }
 
     @Override
     public int getPerBlockUse() {
-        return ModConfigs.CONFIG.pulsatingPerBlockUse.get();
+        return ModConfigs.CONFIG.copperAlloyPerBlockUse.get();
     }
 
     @Override
     public String getHarvestLevel() {
-        return ModConfigs.CONFIG.pulsatingMaxHarvestLevel.get();
+        return ModConfigs.CONFIG.copperAlloyMaxHarvestLevel.get();
     }
 
     @Override
     public String getDefaultHarvestLevel() {
-        return DefaultValues.pulsatingMaxHarvestLevel;
+        return DefaultValues.copperAlloyMaxHarvestLevel;
     }
 
     @Override
     public int getMaxRange() {
-        return ModConfigs.CONFIG.pulsatingMaxRange.get();
+        return ModConfigs.CONFIG.copperAlloyMaxRange.get();
     }
 
     @Override
     public int getTier() {
-        return 2;
+        return 1;
     }
 
     @Override

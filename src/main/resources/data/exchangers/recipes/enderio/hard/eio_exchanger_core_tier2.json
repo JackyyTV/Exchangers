@@ -12,19 +12,19 @@
     }
   ],
   "pattern": [
-    "PSP",
+    "PEP",
     "CDC",
-    "PSP"
+    "PEP"
   ],
   "key": {
     "P": {
-      "tag": "forge:powders/pulsating"
+      "item": "enderio:pulsating_powder"
     },
-    "S": {
-      "tag": "forge:ingots/electrical_steel"
+    "E": {
+      "item": "enderio:energetic_alloy_ingot"
     },
     "D": {
-      "item": "enderio:dew_of_the_void_bucket"
+      "item": "enderio:energized_gear"
     },
     "C": {
       "item": "exchangers:eio_exchanger_core_tier1"

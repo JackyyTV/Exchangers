@@ -12,28 +12,28 @@
     }
   ],
   "pattern": [
-    "SDS",
+    "IGI",
     "CXC",
-    "SBS"
+    "IBI"
   ],
   "key": {
-    "S": {
-      "tag": "forge:ingots/electrical_steel"
+    "I": {
+      "item": "enderio:conductive_alloy_ingot"
+    },
+    "G": {
+      "item": "enderio:iron_gear"
     },
     "B": {
-      "item": "enderio:basic_capacitor_bank"
-    },
-    "D": {
-      "item": "enderio:double_layer_capacitor"
+      "item": "enderio:basic_capacitor"
     },
     "C": {
-      "item": "exchangers:eio_exchanger_core_tier2"
+      "item": "exchangers:eio_exchanger_core_tier1"
     },
     "X": {
-      "item": "exchangers:pulsating_iron_exchanger"
+      "item": "exchangers:copper_alloy_exchanger"
     }
   },
   "result": {
-    "item": "exchangers:electrical_steel_exchanger"
+    "item": "exchangers:conductive_exchanger"
   }
 }

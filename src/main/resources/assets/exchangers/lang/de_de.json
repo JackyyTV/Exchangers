@@ -59,9 +59,8 @@
     "item.exchangers.obsidian_exchanger": "Obsidian Austauscher",
 
     "_comment": "Ender IO Exchangers",
-    "item.exchangers.conductive_iron_exchanger": "Leitendes Eisen Austauscher",
-    "item.exchangers.pulsating_iron_exchanger": "Pulsierender Eisen Austauscher",
-    "item.exchangers.electrical_steel_exchanger": "Elektrischer Stahl Austauscher",
+    "item.exchangers.conductive_exchanger": "Leitendes Austauscher",
+    "item.exchangers.pulsating_exchanger": "Pulsierender Austauscher",
     "item.exchangers.energetic_exchanger": "Energetisierte Legierung Austauscher",
     "item.exchangers.dark_steel_exchanger": "Dunkelstahl Austauscher",
     "item.exchangers.vibrant_exchanger": "Dynamische Legierung Austauscher",

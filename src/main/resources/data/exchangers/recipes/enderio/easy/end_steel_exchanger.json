@@ -12,19 +12,19 @@
     }
   ],
   "pattern": [
-    "SPS",
-    "SCS",
-    "SAS"
+    "EPE",
+    "ECE",
+    "ESE"
   ],
   "key": {
-    "S": {
-      "tag": "forge:ingots/end_steel"
+    "E": {
+      "item": "enderio:end_steel_ingot"
     },
-    "A": {
-      "item": "enderio:enhanced_wireless_charging_antenna"
+    "S": {
+      "item": "enderio:weather_crystal"
     },
     "P": {
-      "item": "enderio:precient_crystal"
+      "item": "enderio:prescient_crystal"
     },
     "C": {
       "item": "exchangers:eio_exchanger_core_tier3"

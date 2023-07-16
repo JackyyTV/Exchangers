@@ -28,9 +28,12 @@ public final class DefaultValues {
     public static int emeraldMaxDmg = 8192;
     public static int emeraldMaxHarvestLevel = 4;
     public static int emeraldMaxRange = 5;
-    public static int obsidianMaxDmg = 16384;
+    public static int obsidianMaxDmg = 10240;
     public static int obsidianMaxHarvestLevel = 4;
     public static int obsidianMaxRange = 6;
+    public static int netheriteMaxDmg = 16384;
+    public static int netheriteMaxHarvestLevel = 5;
+    public static int netheriteMaxRange = 7;
     public static int endMaxDmg = 32768;
     public static int endMaxHarvestLevel = 5;
     public static int endMaxRange = 7;

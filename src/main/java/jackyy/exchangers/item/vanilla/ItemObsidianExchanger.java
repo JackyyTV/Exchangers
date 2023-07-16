@@ -25,7 +25,7 @@ public class ItemObsidianExchanger extends ItemExchangerBase {
 
     @Override
     public int getTier() {
-        return 7;
+        return 6;
     }
 
     @Override

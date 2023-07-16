@@ -17,6 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.math.BlockPos;
@@ -79,7 +80,7 @@ public class ClientEventsHandler {
             BlockPos pos = mouseOverBlock.getPos();
             BlockState state = world.getBlockState(pos);
             ItemStack stack = player.getHeldItemMainhand();
-            if (!stack.isEmpty() && stack.getItem() instanceof ItemExchangerBase && stack.getTag() != null && !state.isAir(world, pos)) {
+            if (!stack.isEmpty() && stack.getItem() instanceof ItemExchangerBase && stack.getTag() != null && !state.isAir(world, pos) && (state.getFluidState() == Fluids.EMPTY.getDefaultState())) {
                 BlockState exState = NBTUtil.readBlockState(NBTHelper.getTag(stack).getCompound("blockstate"));
                 float blockHardness = state.getBlockHardness(world, pos);
                 if (exState == state) {

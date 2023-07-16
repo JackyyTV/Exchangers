@@ -7,25 +7,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.common.Tags;
 
-public class ItemIronExchanger extends ItemExchangerBase {
+public class ItemNetheriteExchanger extends ItemExchangerBase {
 
-    public ItemIronExchanger() {
-        super(new Properties().maxDamage(DefaultValues.ironMaxDmg).rarity(Rarity.RARE));
+    public ItemNetheriteExchanger() {
+        super(new Properties().maxDamage(DefaultValues.netheriteMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override
     public int getHarvestLevel() {
-        return ModConfigs.CONFIG.ironMaxHarvestLevel.get();
+        return ModConfigs.CONFIG.netheriteMaxHarvestLevel.get();
     }
 
     @Override
     public int getMaxRange() {
-        return ModConfigs.CONFIG.ironMaxRange.get();
+        return ModConfigs.CONFIG.netheriteMaxRange.get();
     }
 
     @Override
     public int getTier() {
-        return 3;
+        return 7;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ItemIronExchanger extends ItemExchangerBase {
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return Tags.Items.INGOTS_IRON.contains(repair.getItem());
+        return Tags.Items.INGOTS_NETHERITE.contains(repair.getItem());
     }
 
 }

@@ -9,25 +9,28 @@
     }
   ],
   "pattern": [
-    "IEI",
+    "NEN",
     "CXC",
-    "IEI"
+    "SES"
   ],
   "key": {
-    "I": {
-      "tag": "forge:ingots/iron"
+    "S": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "N": {
+      "tag": "forge:ingots/netherite"
     },
     "E": {
       "item": "minecraft:ender_eye"
     },
     "C": {
-      "item": "exchangers:exchanger_core_tier2"
+      "item": "exchangers:exchanger_core_tier3"
     },
     "X": {
-      "item": "exchangers:stone_exchanger"
+      "item": "exchangers:obsidian_exchanger"
     }
   },
   "result": {
-    "item": "exchangers:iron_exchanger"
+    "item": "exchangers:netherite_exchanger"
   }
 }

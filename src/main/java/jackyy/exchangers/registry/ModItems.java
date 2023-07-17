@@ -24,9 +24,12 @@ public class ModItems {
     public static final RegistryObject<Item> STONE_EXCHANGER = ITEMS.register("stone_exchanger", ItemStoneExchanger::new);
     public static final RegistryObject<Item> GOLDEN_EXCHANGER = ITEMS.register("golden_exchanger", ItemGoldenExchanger::new);
     public static final RegistryObject<Item> IRON_EXCHANGER = ITEMS.register("iron_exchanger", ItemIronExchanger::new);
+    public static final RegistryObject<Item> COPPER_EXCHANGER = ITEMS.register("copper_exchanger", ItemCopperExchanger::new);
     public static final RegistryObject<Item> DIAMOND_EXCHANGER = ITEMS.register("diamond_exchanger", ItemDiamondExchanger::new);
     public static final RegistryObject<Item> EMERALD_EXCHANGER = ITEMS.register("emerald_exchanger", ItemEmeraldExchanger::new);
     public static final RegistryObject<Item> OBSIDIAN_EXCHANGER = ITEMS.register("obsidian_exchanger", ItemObsidianExchanger::new);
+    public static final RegistryObject<Item> AMETHYST_EXCHANGER = ITEMS.register("amethyst_exchanger", ItemAmethystExchanger::new);
+    public static final RegistryObject<Item> NETHERITE_EXCHANGER = ITEMS.register("netherite_exchanger", ItemNetheriteExchanger::new);
     public static final RegistryObject<Item> END_EXCHANGER = ITEMS.register("end_exchanger", ItemEndExchanger::new);
     public static final RegistryObject<Item> EXCHANGER_CORE_TIER1 = ITEMS.register("exchanger_core_tier1", ItemExchangerCoreT1::new);
     public static final RegistryObject<Item> EXCHANGER_CORE_TIER2 = ITEMS.register("exchanger_core_tier2", ItemExchangerCoreT2::new);

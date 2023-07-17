@@ -26,12 +26,18 @@ public class ModConfigs {
         public final ForgeConfigSpec.IntValue goldenMaxRange;
         public final ForgeConfigSpec.ConfigValue<? extends String> ironMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue ironMaxRange;
+        public final ForgeConfigSpec.ConfigValue<? extends String> copperMaxHarvestLevel;
+        public final ForgeConfigSpec.IntValue copperMaxRange;
         public final ForgeConfigSpec.ConfigValue<? extends String> diamondMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue diamondMaxRange;
         public final ForgeConfigSpec.ConfigValue<? extends String> emeraldMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue emeraldMaxRange;
         public final ForgeConfigSpec.ConfigValue<? extends String> obsidianMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue obsidianMaxRange;
+        public final ForgeConfigSpec.ConfigValue<? extends String> amethystMaxHarvestLevel;
+        public final ForgeConfigSpec.IntValue amethystMaxRange;
+        public final ForgeConfigSpec.ConfigValue<? extends String> netheriteMaxHarvestLevel;
+        public final ForgeConfigSpec.IntValue netheriteMaxRange;
         public final ForgeConfigSpec.ConfigValue<? extends String> endMaxHarvestLevel;
         public final ForgeConfigSpec.IntValue endMaxRange;
 
@@ -229,6 +235,18 @@ public class ModConfigs {
                     .comment("Set the max range for Iron Exchanger")
                     .defineInRange("ironExchangerMaxRange", DefaultValues.ironMaxRange, 0, 12);
 
+            copperMaxHarvestLevel = builder
+                    .comment(
+                            "Set the max harvest level for Copper Exchanger",
+                            "Valid Vanilla values are: minecraft:wood, minecraft:stone, minecraft:iron, minecraft:diamond, minecraft:netherite",
+                            "For modded values, please check the tool tiers for the mod that you want to use",
+                            "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
+                    )
+                    .define("copperExchangerMaxHarvestLevel", DefaultValues.copperMaxHarvestLevel);
+            copperMaxRange = builder
+                    .comment("Set the max range for Copper Exchanger")
+                    .defineInRange("copperExchangerMaxRange", DefaultValues.copperMaxRange, 0, 12);
+
             diamondMaxHarvestLevel = builder
                     .comment(
                             "Set the max harvest level for Diamond Exchanger",
@@ -264,6 +282,30 @@ public class ModConfigs {
             obsidianMaxRange = builder
                     .comment("Set the max range for Obsidian Exchanger")
                     .defineInRange("obsidianExchangerMaxRange", DefaultValues.obsidianMaxRange, 0, 12);
+
+            amethystMaxHarvestLevel = builder
+                    .comment(
+                            "Set the max harvest level for Amethyst Exchanger",
+                            "Valid Vanilla values are: minecraft:wood, minecraft:stone, minecraft:iron, minecraft:diamond, minecraft:netherite",
+                            "For modded values, please check the tool tiers for the mod that you want to use",
+                            "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
+                    )
+                    .define("amethystExchangerMaxHarvestLevel", DefaultValues.amethystMaxHarvestLevel);
+            amethystMaxRange = builder
+                    .comment("Set the max range for Amethyst Exchanger")
+                    .defineInRange("amethystExchangerMaxRange", DefaultValues.amethystMaxRange, 0, 12);
+
+            netheriteMaxHarvestLevel = builder
+                    .comment(
+                            "Set the max harvest level for Netherite Exchanger",
+                            "Valid Vanilla values are: minecraft:wood, minecraft:stone, minecraft:iron, minecraft:diamond, minecraft:netherite",
+                            "For modded values, please check the tool tiers for the mod that you want to use",
+                            "Entering an incorrect value will result in the Exchanger using the default value to prevent crashes"
+                    )
+                    .define("netheriteExchangerMaxHarvestLevel", DefaultValues.netheriteMaxHarvestLevel);
+            netheriteMaxRange = builder
+                    .comment("Set the max range for Netherite Exchanger")
+                    .defineInRange("netheriteExchangerMaxRange", DefaultValues.netheriteMaxRange, 0, 12);
 
             endMaxHarvestLevel = builder
                     .comment(

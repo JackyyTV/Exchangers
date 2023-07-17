@@ -5,6 +5,11 @@
     "_comment": "Key Bindings",
     "key.categories.exchangers": "Wymieniacze",
     "key.exchangers.range_switch": "Zmiana Trybu Wymieniaczy",
+    
+    "_comment": "Death",
+    "death.attack.tuberous_exchanger": "%1$s próbował używać ziemniaczanego wymieniacza",
+    "death.attack.tuberous_exchanger.player": "%1$s próbował używać ziemniaczanego wymieniacza",
+    "death.attack.tuberous_exchanger.item": "%1$s próbował używać ziemniaczanego wymieniacza",
 
     "_comment": "Tooltips",
     "exchangers.tooltip.durability": "Wytrzymałość",

@@ -5,33 +5,32 @@ import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.util.DefaultValues;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 
-public class ItemEndExchanger extends ItemExchangerBase {
+public class ItemNetheriteExchanger extends ItemExchangerBase {
 
-    public ItemEndExchanger() {
-        super(new Properties().durability(DefaultValues.endMaxDmg).rarity(Rarity.EPIC));
+    public ItemNetheriteExchanger() {
+        super(new Properties().durability(DefaultValues.netheriteMaxDmg).rarity(Rarity.EPIC));
     }
 
     @Override
     public String getHarvestLevel() {
-        return ModConfigs.CONFIG.endMaxHarvestLevel.get();
+        return ModConfigs.CONFIG.netheriteMaxHarvestLevel.get();
     }
 
     @Override
     public String getDefaultHarvestLevel() {
-        return DefaultValues.endMaxHarvestLevel;
+        return DefaultValues.netheriteMaxHarvestLevel;
     }
 
     @Override
     public int getMaxRange() {
-        return ModConfigs.CONFIG.endMaxRange.get();
+        return ModConfigs.CONFIG.netheriteMaxRange.get();
     }
 
     @Override
     public int getTier() {
-        return 9;
+        return 8;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class ItemEndExchanger extends ItemExchangerBase {
 
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-        return repair.is(Tags.Items.END_STONES) || repair.equals(new ItemStack(Blocks.PURPUR_BLOCK));
+        return repair.is(Tags.Items.INGOTS_NETHERITE);
     }
 
 }

@@ -5,17 +5,20 @@
       "type": "exchangers:vanilla_module", "enabled": true
     },
     {
-      "type": "exchangers:vanilla_recipes_type", "value": "hard"
+      "type": "exchangers:vanilla_recipes_type", "value": "normal"
     }
   ],
   "pattern": [
-    "OEO",
-    "CXC",
-    "OEO"
+    "SCS",
+    "EXE",
+    "SNS"
   ],
   "key": {
-    "O": {
-      "tag": "forge:obsidian"
+    "S": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "N": {
+      "tag": "forge:ingots/netherite"
     },
     "E": {
       "item": "minecraft:ender_eye"
@@ -24,10 +27,10 @@
       "item": "exchangers:exchanger_core_tier3"
     },
     "X": {
-      "item": "exchangers:emerald_exchanger"
+      "item": "exchangers:amethyst_exchanger"
     }
   },
   "result": {
-    "item": "exchangers:obsidian_exchanger"
+    "item": "exchangers:netherite_exchanger"
   }
 }

@@ -23,9 +23,17 @@
     "C": {
       "item": "exchangers:exchanger_core_tier3"
     },
-    "X": {
-      "item": "exchangers:iron_exchanger"
-    }
+    "X": [
+      {
+        "item": "exchangers:iron_exchanger"
+      },
+      {
+        "item": "exchangers:copper_exchanger"
+      },
+      {
+        "item": "exchangers:golden_exchanger"
+      }
+    ]
   },
   "result": {
     "item": "exchangers:diamond_exchanger"

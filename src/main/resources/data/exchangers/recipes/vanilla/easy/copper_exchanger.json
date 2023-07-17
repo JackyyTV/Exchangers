@@ -5,29 +5,26 @@
       "type": "exchangers:vanilla_module", "enabled": true
     },
     {
-      "type": "exchangers:vanilla_recipes_type", "value": "hard"
+      "type": "exchangers:vanilla_recipes_type", "value": "easy"
     }
   ],
   "pattern": [
     "IEI",
-    "CXC",
+    "ICI",
     "IEI"
   ],
   "key": {
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "forge:ingots/copper"
     },
     "E": {
       "item": "minecraft:ender_eye"
     },
     "C": {
       "item": "exchangers:exchanger_core_tier2"
-    },
-    "X": {
-      "item": "exchangers:stone_exchanger"
     }
   },
   "result": {
-    "item": "exchangers:iron_exchanger"
+    "item": "exchangers:copper_exchanger"
   }
 }

@@ -5,7 +5,7 @@
     "_comment": "Key Bindings",
     "key.categories.exchangers": "Austauscher",
     "key.exchangers.range_switch": "Austauscher Modus",
-
+    
     "_comment": "Death",
     "death.attack.tuberous_exchanger": "%1$s versuchte einene Kartoffel Austauscher zu verwenden",
     "death.attack.tuberous_exchanger.player": "%1$s versuchte einene Kartoffel Austauscher zu verwenden",
@@ -33,10 +33,6 @@
     "item.exchangers.exchanger_core_tier1": "Austauscher Kern (Stufe 1)",
     "item.exchangers.exchanger_core_tier2": "Austauscher Kern (Stufe 2)",
     "item.exchangers.exchanger_core_tier3": "Austauscher Kern (Stufe 3)",
-    "_comment": "Ender IO",
-    "item.exchangers.eio_exchanger_core_tier1": "Ender IO Austauscher Kern (Stufe 1)",
-    "item.exchangers.eio_exchanger_core_tier2": "Ender IO Austauscher Kern (Stufe 2)",
-    "item.exchangers.eio_exchanger_core_tier3": "Ender IO Austauscher Kern (Stufe 3)",
     "_comment": "Thermal",
     "item.exchangers.thermal_exchanger_core_tier1": "Thermal Austauscher Kern (Stufe 1)",
     "item.exchangers.thermal_exchanger_core_tier2": "Thermal Austauscher Kern (Stufe 2)",
@@ -62,14 +58,6 @@
     "item.exchangers.diamond_exchanger": "Diamant Austauscher",
     "item.exchangers.emerald_exchanger": "Smaragd Austauscher",
     "item.exchangers.obsidian_exchanger": "Obsidian Austauscher",
-
-    "_comment": "Ender IO Exchangers",
-    "item.exchangers.conductive_iron_exchanger": "Leitendes Eisen Austauscher",
-    "item.exchangers.pulsating_iron_exchanger": "Pulsierender Eisen Austauscher",
-    "item.exchangers.electrical_steel_exchanger": "Elektrischer Stahl Austauscher",
-    "item.exchangers.energetic_exchanger": "Energetisierte Legierung Austauscher",
-    "item.exchangers.dark_steel_exchanger": "Dunkelstahl Austauscher",
-    "item.exchangers.vibrant_exchanger": "Dynamische Legierung Austauscher",
 
     "_comment": "Thermal Exchangers",
     "item.exchangers.leadstone_exchanger": "Blei Austauscher",

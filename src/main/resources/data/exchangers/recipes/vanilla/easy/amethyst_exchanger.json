@@ -5,29 +5,26 @@
       "type": "exchangers:vanilla_module", "enabled": true
     },
     {
-      "type": "exchangers:vanilla_recipes_type", "value": "hard"
+      "type": "exchangers:vanilla_recipes_type", "value": "easy"
     }
   ],
   "pattern": [
-    "OEO",
-    "CXC",
-    "OEO"
+    "AEA",
+    "ACA",
+    "AEA"
   ],
   "key": {
-    "O": {
-      "tag": "forge:obsidian"
+    "A": {
+      "tag": "forge:gems/amethyst"
     },
     "E": {
       "item": "minecraft:ender_eye"
     },
     "C": {
       "item": "exchangers:exchanger_core_tier3"
-    },
-    "X": {
-      "item": "exchangers:emerald_exchanger"
     }
   },
   "result": {
-    "item": "exchangers:obsidian_exchanger"
+    "item": "exchangers:amethyst_exchanger"
   }
 }

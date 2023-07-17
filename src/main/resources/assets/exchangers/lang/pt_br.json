@@ -5,7 +5,7 @@
     "_comment": "Key Bindings",
     "key.categories.exchangers": "Exchangers",
     "key.exchangers.range_switch": "Alternar entre modos",
-
+    
     "_comment": "Death",
     "death.attack.tuberous_exchanger": "%1$s Tentou operar um Alterador de Batata",
     "death.attack.tuberous_exchanger.player": "%1$s Tentou operar um Alterador de Batata",
@@ -33,10 +33,6 @@
     "item.exchangers.exchanger_core_tier1": "Núcleo de Alteração (Nível 1)",
     "item.exchangers.exchanger_core_tier2": "Núcleo de Alteração (Nível 2)",
     "item.exchangers.exchanger_core_tier3": "Núcleo de Alteração (Nível 3)",
-    "_comment": "Ender IO",
-    "item.exchangers.eio_exchanger_core_tier1": "Núcleo de Alteração do Ender IO (Nível 1)",
-    "item.exchangers.eio_exchanger_core_tier2": "Núcleo de Alteração do Ender IO (Nível 2)",
-    "item.exchangers.eio_exchanger_core_tier3": "Núcleo de Alteração do Ender IO (Nível 3)",
     "_comment": "Thermal",
     "item.exchangers.thermal_exchanger_core_tier1": "Núcleo de Alteração do Thermal (Nível 1)",
     "item.exchangers.thermal_exchanger_core_tier2": "Núcleo de Alteração do Thermal (Nível 2)",
@@ -62,14 +58,6 @@
     "item.exchangers.diamond_exchanger": "Alterador de Diamante",
     "item.exchangers.emerald_exchanger": "Alterador de Esmeralda",
     "item.exchangers.obsidian_exchanger": "Alterador de Obsidiana",
-
-    "_comment": "Ender IO Exchangers",
-    "item.exchangers.conductive_iron_exchanger": "Alterador de Ferro Condutivo",
-    "item.exchangers.pulsating_iron_exchanger": "Alterador de Ferro Pulsante",
-    "item.exchangers.electrical_steel_exchanger": "Alterador de Aço Elétrico",
-    "item.exchangers.energetic_exchanger": "Alterador de Liga Energética",
-    "item.exchangers.dark_steel_exchanger": "Alterador de Aço Negro",
-    "item.exchangers.vibrant_exchanger": "Alterador de Liga Vibrante",
 
     "_comment": "Thermal Exchangers",
     "item.exchangers.leadstone_exchanger": "Alterador de Chumbo",

@@ -60,7 +60,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
     maven {
         name = 'ModMaven'
-        url = "https://modmaven.dev"
+        url = 'https://modmaven.dev'
     }
     maven {
         name = 'JEI Maven'

@@ -1,6 +1,8 @@
 {
-    "pack": {
-        "description": "Exchangers Resources",
-        "pack_format": 13
-    }
+  "pack": {
+    "description": {
+      "text": "${mod_name} resources"
+    },
+    "pack_format": 13
+  }
 }

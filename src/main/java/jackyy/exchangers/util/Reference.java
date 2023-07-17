@@ -12,13 +12,11 @@ public final class Reference {
     public static final String MODID = "exchangers";
     public static final String MODNAME = "Exchangers";
 
-    public static final String EIO = "enderio";
-    public static final String EIO_ENDERGY = "enderioendergy";
     public static final String THERMAL = "thermal";
     public static final String THERMAL_INNOVATION = "thermal_innovation";
     public static final String MEK = "mekanism";
     public static final String IE = "immersiveengineering";
-    public static final String BWM = "betterwithmods";
+
 
     public static final Rarity RARITY_TIER1 = Rarity.create(MODID + "_rarity_tier1", ChatFormatting.GREEN);
     public static final Rarity RARITY_BEE = Rarity.create(MODID + "_rarity_bee", ChatFormatting.GOLD);

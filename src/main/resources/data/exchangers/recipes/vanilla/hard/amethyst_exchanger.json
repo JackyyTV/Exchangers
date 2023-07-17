@@ -9,25 +9,25 @@
     }
   ],
   "pattern": [
-    "IEI",
+    "AEA",
     "CXC",
-    "IEI"
+    "AEA"
   ],
   "key": {
-    "I": {
-      "tag": "forge:ingots/iron"
+    "A": {
+      "tag": "forge:gems/amethyst"
     },
     "E": {
       "item": "minecraft:ender_eye"
     },
     "C": {
-      "item": "exchangers:exchanger_core_tier2"
+      "item": "exchangers:exchanger_core_tier3"
     },
     "X": {
-      "item": "exchangers:stone_exchanger"
+      "item": "exchangers:obsidian_exchanger"
     }
   },
   "result": {
-    "item": "exchangers:iron_exchanger"
+    "item": "exchangers:amethyst_exchanger"
   }
 }

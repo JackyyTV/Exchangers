@@ -11,14 +11,11 @@
   "pattern": [
     "OCO",
     "EXE",
-    "ONO"
+    "OOO"
   ],
   "key": {
     "O": {
       "tag": "forge:obsidian"
-    },
-    "N": {
-      "tag": "forge:ingots/netherite"
     },
     "E": {
       "item": "minecraft:ender_eye"

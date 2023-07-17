@@ -23,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -74,7 +75,7 @@ public class ClientEventsHandler {
                 BlockPos pos = mouseOverBlock.getBlockPos();
                 BlockState state = world.getBlockState(pos);
                 ItemStack stack = player.getMainHandItem();
-                if (!stack.isEmpty() && stack.getItem() instanceof ItemExchangerBase && stack.getTag() != null && !state.isAir()) {
+                if (!stack.isEmpty() && stack.getItem() instanceof ItemExchangerBase && stack.getTag() != null && !state.isAir() && (state.getFluidState() == Fluids.EMPTY.defaultFluidState())) {
                     BlockState exState = NbtUtils.readBlockState(NBTHelper.getTag(stack).getCompound("blockstate"));
                     float blockHardness = state.getDestroySpeed(world, pos);
                     if (exState == state) {

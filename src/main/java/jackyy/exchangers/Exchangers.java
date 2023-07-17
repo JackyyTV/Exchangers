@@ -27,12 +27,6 @@ public class Exchangers {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        /*
-        TODO add Better With Mods integration back when possible
-        if (ModList.get().isLoaded(Reference.BWM)) {
-            MinecraftForge.EVENT_BUS.register(new BetterWithModsIntegration());
-        }
-        */
         MinecraftForge.EVENT_BUS.register(new CommonEventsHandler());
         NetworkHandler.registerMessages();
     }

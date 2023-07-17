@@ -30,7 +30,7 @@ public class ItemDiamondExchanger extends ItemExchangerBase {
 
     @Override
     public int getTier() {
-        return 5;
+        return 4;
     }
 
     @Override

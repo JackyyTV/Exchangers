@@ -19,9 +19,9 @@
     "exchangers.tooltip.state.enabled": "启用",
     "exchangers.tooltip.state.disabled": "禁用",
     "exchangers.tooltip.tuberous_exchanger.warning": "§c§o真聪明！但并没有卵用！",
-    "exchangers.tooltip.selected_block": "§2S当前选定方块： %s",
-    "exchangers.tooltip.current_range": "§2当前更替范围： %s",
-    "exchangers.tooltip.max_range": "§2最大更替范围： %s",
+    "exchangers.tooltip.selected_block": "§2S当前选定方块：%s",
+    "exchangers.tooltip.current_range": "§2当前更替范围：%s",
+    "exchangers.tooltip.max_range": "§2最大更替范围：%s",
     "exchangers.tooltip.no_selected_block": "§4没有选定方块",
     "exchangers.tooltip.silk_touch": "§f精准采集模式已在配置里%s",
 
@@ -36,10 +36,6 @@
     "item.exchangers.exchanger_core_tier1": "交换器核心（等级 1）",
     "item.exchangers.exchanger_core_tier2": "交换器核心（等级 2）",
     "item.exchangers.exchanger_core_tier3": "交换器核心（等级 3）",
-    "_comment": "Ender IO",
-    "item.exchangers.eio_exchanger_core_tier1": "末影接口交换器核心（等级 1）",
-    "item.exchangers.eio_exchanger_core_tier2": "末影接口交换器核心（等级 2）",
-    "item.exchangers.eio_exchanger_core_tier3": "末影接口交换器核心（等级 3）",
     "_comment": "Thermal",
     "item.exchangers.thermal_exchanger_core_tier1": "热力膨胀交换器核心（等级 1）",
     "item.exchangers.thermal_exchanger_core_tier2": "热力膨胀交换器核心（等级 2）",
@@ -65,15 +61,7 @@
     "item.exchangers.diamond_exchanger": "钻石方块交换器",
     "item.exchangers.emerald_exchanger": "绿宝石方块交换器",
     "item.exchangers.obsidian_exchanger": "黑曜石方块交换器",
-
-    "_comment": "Ender IO Exchangers",
-    "item.exchangers.conductive_iron_exchanger": "导电铁方块交换器",
-    "item.exchangers.pulsating_iron_exchanger": "脉冲铁方块交换器",
-    "item.exchangers.electrical_steel_exchanger": "磁钢方块交换器",
-    "item.exchangers.energetic_exchanger": "充能合金方块交换器",
-    "item.exchangers.dark_steel_exchanger": "玄钢方块交换器",
-    "item.exchangers.vibrant_exchanger": "脉冲合金方块交换器",
-
+    
     "_comment": "Thermal Exchangers",
     "item.exchangers.leadstone_exchanger": "铅石方块交换器",
     "item.exchangers.hardened_exchanger": "硬化方块交换器",
@@ -88,7 +76,7 @@
     "item.exchangers.ultimate_exchanger": "终极方块交换器",
 
     "_comment": "Immersive Engineering Exchangers",
-    "item.exchangers.lv_exchanger": "LV方块交换器",
-    "item.exchangers.mv_exchanger": "MV方块交换器",
-    "item.exchangers.hv_exchanger": "HV方块交换器"
+    "item.exchangers.lv_exchanger": "低压方块交换器",
+    "item.exchangers.mv_exchanger": "中压方块交换器",
+    "item.exchangers.hv_exchanger": "高压方块交换器"
 }

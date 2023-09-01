@@ -21,7 +21,7 @@ public class ConditionThermalRecipesType implements ICondition {
         return ID;
     }
 
-    @Override
+    @Override @SuppressWarnings("removal")
     public boolean test() {
         return ModConfigs.CONFIG.thermalRecipesType.get().equals(value);
     }

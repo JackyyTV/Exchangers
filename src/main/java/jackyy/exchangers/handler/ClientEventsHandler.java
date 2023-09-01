@@ -147,6 +147,7 @@ public class ClientEventsHandler {
         if (player != null) {
             ItemStack heldItem = player.getMainHandItem();
             if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
+                ExchangerHandler.setDefaultTagCompound(heldItem);
                 if (Keys.OPEN_GUI_KEY.isDown()) {
                     mc.setScreen(new ExchangersGuiScreen());
                 } else if (Keys.RANGE_SWITCH_KEY.isDown()) {

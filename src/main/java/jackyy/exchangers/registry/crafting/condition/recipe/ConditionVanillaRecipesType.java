@@ -21,7 +21,7 @@ public class ConditionVanillaRecipesType implements ICondition {
         return ID;
     }
 
-    @Override @Deprecated
+    @Override @SuppressWarnings("removal")
     public boolean test() {
         return ModConfigs.CONFIG.vanillaRecipesType.get().equals(value);
     }

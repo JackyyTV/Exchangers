@@ -21,7 +21,7 @@ public class ConditionMekanismModule implements ICondition {
         return ID;
     }
 
-    @Override @Deprecated
+    @Override @SuppressWarnings("removal")
     public boolean test() {
         return ModConfigs.CONFIG.mekanismModule.get() == value;
     }

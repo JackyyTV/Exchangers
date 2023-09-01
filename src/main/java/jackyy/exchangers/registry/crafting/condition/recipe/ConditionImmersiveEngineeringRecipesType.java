@@ -21,7 +21,7 @@ public class ConditionImmersiveEngineeringRecipesType implements ICondition {
         return ID;
     }
 
-    @Override @Deprecated
+    @Override @SuppressWarnings("removal")
     public boolean test() {
         return ModConfigs.CONFIG.immersiveEngineeringRecipesType.get().equals(value);
     }

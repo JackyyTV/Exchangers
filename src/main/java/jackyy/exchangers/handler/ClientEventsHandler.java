@@ -172,6 +172,7 @@ public class ClientEventsHandler {
         EntityPlayer player = FMLClientHandler.instance().getClient().player;
         ItemStack heldItem = player.getHeldItemMainhand();
         if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
+            ExchangerHandler.setDefaultTagCompound(heldItem);
             if (Keys.OPEN_GUI_KEY.isPressed()) {
                 mc.displayGuiScreen(new ExchangersGuiScreen());
             } else if (Keys.RANGE_SWITCH_KEY.isPressed()) {

@@ -54,11 +54,13 @@ public class ItemExchangerBase extends Item implements IExchanger {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+        ItemStack mainHandStack = player.getHeldItemMainhand();
+        ExchangerHandler.setDefaultTagCompound(mainHandStack);
         if (!world.isRemote) {
             if (player.isSneaking()) {
-                ExchangerHandler.selectBlock(player.getHeldItemMainhand(), player, world, pos);
+                ExchangerHandler.selectBlock(mainHandStack, player, world, pos);
             } else {
-                ExchangerHandler.placeBlock(player.getHeldItemMainhand(), player, world, pos, side);
+                ExchangerHandler.placeBlock(mainHandStack, player, world, pos, side);
             }
         }
         return EnumActionResult.SUCCESS;

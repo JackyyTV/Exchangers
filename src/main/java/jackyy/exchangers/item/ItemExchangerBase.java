@@ -62,10 +62,12 @@ public class ItemExchangerBase extends Item implements IExchanger, ILoadable {
         BlockPos pos = context.getPos();
         Direction side = context.getFace();
         if (!world.isRemote && player != null) {
+            ItemStack mainHandStack = player.getHeldItemMainhand();
+            ExchangerHandler.setDefaultTagCompound(mainHandStack);
             if (player.isSneaking()) {
-                ExchangerHandler.selectBlock(player.getHeldItemMainhand(), player, world, pos);
+                ExchangerHandler.selectBlock(mainHandStack, player, world, pos);
             } else {
-                ExchangerHandler.placeBlock(player.getHeldItemMainhand(), player, world, pos, side, context);
+                ExchangerHandler.placeBlock(mainHandStack, player, world, pos, side, context);
             }
         }
         return ActionResultType.SUCCESS;

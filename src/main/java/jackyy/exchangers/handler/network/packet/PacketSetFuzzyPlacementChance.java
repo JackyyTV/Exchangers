@@ -5,29 +5,26 @@ import jackyy.exchangers.item.ItemExchangerBase;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 
-import java.util.function.Supplier;
-
-public class PacketSetFuzzyPlacementChance {
-
-    private int chance;
+public record PacketSetFuzzyPlacementChance(int chance) {
 
     public PacketSetFuzzyPlacementChance(int chance) {
         this.chance = chance;
     }
 
-    public PacketSetFuzzyPlacementChance(FriendlyByteBuf buffer) {
-        chance = buffer.readInt();
-    }
-
-    public void toBytes(FriendlyByteBuf buffer) {
+    public void encode(FriendlyByteBuf buffer) {
         buffer.writeInt(chance);
     }
 
-    public static void handle(PacketSetFuzzyPlacementChance message, Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> {
-            ServerPlayer player = context.get().getSender();
+    public static PacketSetFuzzyPlacementChance decode(FriendlyByteBuf buffer) {
+        int chance = buffer.readInt();
+        return new PacketSetFuzzyPlacementChance(chance);
+    }
+
+    public static void handle(PacketSetFuzzyPlacementChance message, CustomPayloadEvent.Context context) {
+        context.enqueueWork(() -> {
+            ServerPlayer player = context.getSender();
             if (player != null) {
                 ItemStack heldItem = player.getMainHandItem();
                 if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
@@ -35,7 +32,7 @@ public class PacketSetFuzzyPlacementChance {
                 }
             }
         });
-        context.get().setPacketHandled(true);
+        context.setPacketHandled(true);
     }
 
 }

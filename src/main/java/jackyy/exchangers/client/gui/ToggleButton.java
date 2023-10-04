@@ -19,24 +19,13 @@ public class ToggleButton extends Button {
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
         Font fontrenderer = minecraft.font;
-        RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, this.alpha);
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.alpha);
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
-        guiGraphics.blitNineSliced(WIDGETS_LOCATION, this.getX(), this.getY(), this.getWidth(), this.getHeight(), 20, 4, 200, 20, 0, this.getTextureY());
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        guiGraphics.blitSprite(SPRITES.get(this.active, (this.isHovered() || this.toggled)), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         int j = getFGColor();
         guiGraphics.drawCenteredString(fontrenderer, this.getMessage(), this.getX() + this.width / 2, this.getY() + (this.height - 8) / 2, j | Mth.ceil(this.alpha * 255.0F) << 24);
-    }
-
-    private int getTextureY() {
-        int i = 1;
-        if (!this.active) {
-            i = 0;
-        } else if (this.isHovered() || this.toggled) {
-            i = 2;
-        }
-        return 46 + i * 20;
     }
 
     public void setButtonToggled(boolean toggle) {

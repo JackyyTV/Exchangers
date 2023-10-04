@@ -4,39 +4,77 @@ import jackyy.exchangers.handler.network.packet.*;
 import jackyy.exchangers.util.Reference;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.network.ChannelBuilder;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.SimpleChannel;
 
 public class NetworkHandler {
-    public static SimpleChannel INSTANCE;
-    private static int packetId = 0;
-    private static final String PROTOCOL_VERSION = "1";
+    public static SimpleChannel CHANNEL = ChannelBuilder
+            .named(new ResourceLocation(Reference.MODID, "main_channel"))
+            .networkProtocolVersion(1)
+            .simpleChannel()
 
-    public static int nextID() {
-        return packetId++;
-    }
+            .messageBuilder(PacketSwitchRange.class)
+            .encoder(PacketSwitchRange::encode)
+            .decoder(PacketSwitchRange::decode)
+            .consumerNetworkThread(PacketSwitchRange::handle)
+            .add()
 
-    public static void registerMessages() {
-        INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(Reference.MODID, "main_channel"),
-                () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-        INSTANCE.registerMessage(nextID(), PacketSwitchRange.class, PacketSwitchRange::toBytes, PacketSwitchRange::new, PacketSwitchRange::handle);
-        INSTANCE.registerMessage(nextID(), PacketIncreaseRange.class, PacketIncreaseRange::toBytes, PacketIncreaseRange::new, PacketIncreaseRange::handle);
-        INSTANCE.registerMessage(nextID(), PacketDecreaseRange.class, PacketDecreaseRange::toBytes, PacketDecreaseRange::new, PacketDecreaseRange::handle);
-        INSTANCE.registerMessage(nextID(), PacketSwitchMode.class, PacketSwitchMode::toBytes, PacketSwitchMode::new, PacketSwitchMode::handle);
-        INSTANCE.registerMessage(nextID(), PacketToggleForceDropItems.class, PacketToggleForceDropItems::toBytes, PacketToggleForceDropItems::new, PacketToggleForceDropItems::handle);
-        INSTANCE.registerMessage(nextID(), PacketToggleDirectionalPlacement.class, PacketToggleDirectionalPlacement::toBytes, PacketToggleDirectionalPlacement::new, PacketToggleDirectionalPlacement::handle);
-        INSTANCE.registerMessage(nextID(), PacketToggleFuzzyPlacement.class, PacketToggleFuzzyPlacement::toBytes, PacketToggleFuzzyPlacement::new, PacketToggleFuzzyPlacement::handle);
-        INSTANCE.registerMessage(nextID(), PacketSetFuzzyPlacementChance.class, PacketSetFuzzyPlacementChance::toBytes, PacketSetFuzzyPlacementChance::new, PacketSetFuzzyPlacementChance::handle);
-        INSTANCE.registerMessage(nextID(), PacketToggleVoidItems.class, PacketToggleVoidItems::toBytes, PacketToggleVoidItems::new, PacketToggleVoidItems::handle);
-    }
+            .messageBuilder(PacketIncreaseRange.class)
+            .encoder(PacketIncreaseRange::encode)
+            .decoder(PacketIncreaseRange::decode)
+            .consumerNetworkThread(PacketIncreaseRange::handle)
+            .add()
+
+            .messageBuilder(PacketDecreaseRange.class)
+            .encoder(PacketDecreaseRange::encode)
+            .decoder(PacketDecreaseRange::decode)
+            .consumerNetworkThread(PacketDecreaseRange::handle)
+            .add()
+
+            .messageBuilder(PacketSwitchMode.class)
+            .encoder(PacketSwitchMode::encode)
+            .decoder(PacketSwitchMode::decode)
+            .consumerNetworkThread(PacketSwitchMode::handle)
+            .add()
+
+            .messageBuilder(PacketToggleForceDropItems.class)
+            .encoder(PacketToggleForceDropItems::encode)
+            .decoder(PacketToggleForceDropItems::decode)
+            .consumerNetworkThread(PacketToggleForceDropItems::handle)
+            .add()
+
+            .messageBuilder(PacketToggleDirectionalPlacement.class)
+            .encoder(PacketToggleDirectionalPlacement::encode)
+            .decoder(PacketToggleDirectionalPlacement::decode)
+            .consumerNetworkThread(PacketToggleDirectionalPlacement::handle)
+            .add()
+
+            .messageBuilder(PacketToggleFuzzyPlacement.class)
+            .encoder(PacketToggleFuzzyPlacement::encode)
+            .decoder(PacketToggleFuzzyPlacement::decode)
+            .consumerNetworkThread(PacketToggleFuzzyPlacement::handle)
+            .add()
+
+            .messageBuilder(PacketSetFuzzyPlacementChance.class)
+            .encoder(PacketSetFuzzyPlacementChance::encode)
+            .decoder(PacketSetFuzzyPlacementChance::decode)
+            .consumerNetworkThread(PacketSetFuzzyPlacementChance::handle)
+            .add()
+
+            .messageBuilder(PacketToggleVoidItems.class)
+            .encoder(PacketToggleVoidItems::encode)
+            .decoder(PacketToggleVoidItems::decode)
+            .consumerNetworkThread(PacketToggleVoidItems::handle)
+            .add();
 
     public static void sendToClient(Object packet, ServerPlayer player) {
-        INSTANCE.sendTo(packet, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+        if (CHANNEL.isRemotePresent(player.connection.getConnection()) && !player.connection.getConnection().isMemoryConnection())
+            CHANNEL.send(packet, PacketDistributor.PLAYER.with(player));
     }
 
     public static void sendToServer(Object packet) {
-        INSTANCE.sendToServer(packet);
+        CHANNEL.send(packet, PacketDistributor.SERVER.noArg());
     }
 
 }

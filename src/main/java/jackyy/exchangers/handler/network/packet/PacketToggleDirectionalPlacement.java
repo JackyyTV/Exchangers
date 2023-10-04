@@ -5,21 +5,19 @@ import jackyy.exchangers.item.ItemExchangerBase;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 
-import java.util.function.Supplier;
+public record PacketToggleDirectionalPlacement() {
 
-public class PacketToggleDirectionalPlacement {
+    public void encode(FriendlyByteBuf buffer) { }
 
-    public PacketToggleDirectionalPlacement() { }
+    public static PacketToggleDirectionalPlacement decode(FriendlyByteBuf buffer) {
+        return new PacketToggleDirectionalPlacement();
+    }
 
-    public PacketToggleDirectionalPlacement(FriendlyByteBuf buffer) { }
-
-    public void toBytes(FriendlyByteBuf buffer) { }
-
-    public void handle(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(() -> {
-            ServerPlayer player = context.get().getSender();
+    public static void handle(PacketToggleDirectionalPlacement message, CustomPayloadEvent.Context context) {
+        context.enqueueWork(() -> {
+            ServerPlayer player = context.getSender();
             if (player != null) {
                 ItemStack heldItem = player.getMainHandItem();
                 if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemExchangerBase) {
@@ -27,7 +25,7 @@ public class PacketToggleDirectionalPlacement {
                 }
             }
         });
-        context.get().setPacketHandled(true);
+        context.setPacketHandled(true);
     }
 
 }

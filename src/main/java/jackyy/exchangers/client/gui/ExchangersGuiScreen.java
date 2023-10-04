@@ -1,7 +1,6 @@
 package jackyy.exchangers.client.gui;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.systems.RenderSystem;
 import jackyy.exchangers.client.keybind.Keys;
 import jackyy.exchangers.handler.ExchangerHandler;
 import jackyy.exchangers.handler.mode.ModeHorizontalCol;
@@ -17,8 +16,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -32,6 +31,16 @@ public class ExchangersGuiScreen extends Screen {
 
     private static Minecraft mc = Minecraft.getInstance();
     private final ResourceLocation GUI_IMAGE = new ResourceLocation(Reference.MODID, "textures/gui/gui_exchanger.png");
+    private final WidgetSprites LEFT_ARROW = new WidgetSprites(
+            new ResourceLocation(Reference.MODID, "left_arrow_normal"),
+            new ResourceLocation(Reference.MODID, "left_arrow_disabled"),
+            new ResourceLocation(Reference.MODID, "left_arrow_highlighted")
+    );
+    private final WidgetSprites RIGHT_ARROW = new WidgetSprites(
+            new ResourceLocation(Reference.MODID, "right_arrow_normal"),
+            new ResourceLocation(Reference.MODID, "right_arrow_disabled"),
+            new ResourceLocation(Reference.MODID, "right_arrow_highlighted")
+    );
     private static final int W = 180;
     private static final int H = 150;
     private String chance;
@@ -59,9 +68,9 @@ public class ExchangersGuiScreen extends Screen {
         ItemStack stack = mc.player.getMainHandItem();
         CompoundTag tag = stack.getTag();
         chance = Integer.toString(tag.getInt("fuzzyPlacementChance"));
-        decreaseRangeButton = new ImageButtonExt(relativeX + 54, relativeY + 31, 10, 15, 180, 0, 15, 30, GUI_IMAGE,
+        decreaseRangeButton = new ImageButtonExt(relativeX + 54, relativeY + 31, 10, 15, LEFT_ARROW,
                 button -> NetworkHandler.sendToServer(new PacketDecreaseRange()));
-        increaseRangeButton = new ImageButtonExt(relativeX + 116, relativeY + 31, 10, 15, 190, 0, 15, 30, GUI_IMAGE,
+        increaseRangeButton = new ImageButtonExt(relativeX + 116, relativeY + 31, 10, 15, RIGHT_ARROW,
                 button -> NetworkHandler.sendToServer(new PacketIncreaseRange()));
         modeSwitchButton = new ToggleButton(relativeX + 20, relativeY + 66, 20, 20, Component.literal("\u29C8"),
                 button -> NetworkHandler.sendToServer(new PacketSwitchMode()), narration -> StringHelper.localize(Reference.MODID, "tooltip.mode_switch_button"));
@@ -91,22 +100,13 @@ public class ExchangersGuiScreen extends Screen {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        Font fontRenderer = mc.font;
         ItemStack stack = mc.player.getMainHandItem();
         ItemExchangerBase exchanger = (ItemExchangerBase) stack.getItem();
         CompoundTag tag = stack.getTag();
-        this.renderBackground(guiGraphics);
         int relativeX = (this.width - W) / 2;
         int relativeY = (this.height - H) / 2;
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GUI_IMAGE);
-        guiGraphics.blit(GUI_IMAGE, relativeX, relativeY, 0, 0, W, H);
         guiGraphics.renderItem(stack, relativeX + 82, relativeY + 8);
         int range = tag.getInt("range");
-        String exchangeRange = ExchangerHandler.rangeList[range];
-        guiGraphics.drawString(fontRenderer, exchangeRange, relativeX + 90 - fontRenderer.width(exchangeRange) / 2.0f, relativeY + 34, -1, true);
-        guiGraphics.drawString(fontRenderer, "%", relativeX + 121, relativeY + 112, -1, true);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         decreaseRangeButton.setButtonDisabled(range == 0);
         increaseRangeButton.setButtonDisabled(range == exchanger.getMaxRange());
@@ -159,6 +159,19 @@ public class ExchangersGuiScreen extends Screen {
                     StringHelper.localize(Reference.MODID, "tooltip.fuzzy_placement_chance_box_desc")), mouseX, mouseY
             );
         }
+    }
+
+    @Override
+    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        super.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
+        Font fontRenderer = mc.font;
+        int relativeX = (this.width - W) / 2;
+        int relativeY = (this.height - H) / 2;
+        guiGraphics.blit(GUI_IMAGE, relativeX, relativeY, 0, 0, W, H);
+        int range = mc.player.getMainHandItem().getTag().getInt("range");
+        String exchangeRange = ExchangerHandler.rangeList[range];
+        guiGraphics.drawString(fontRenderer, exchangeRange, relativeX + 90 - fontRenderer.width(exchangeRange) / 2.0f, relativeY + 34, -1, true);
+        guiGraphics.drawString(fontRenderer, "%", relativeX + 121, relativeY + 112, -1, true);
     }
 
     private void drawToolTip(GuiGraphics guiGraphics, List<Component> tooltips, int x, int y) {
@@ -222,15 +235,15 @@ public class ExchangersGuiScreen extends Screen {
             int value = Integer.parseInt(field.getValue());
             boolean valid = value >= min && value <= max;
             if (valid) {
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetFuzzyPlacementChance(value));
+                NetworkHandler.sendToServer(new PacketSetFuzzyPlacementChance(value));
                 this.chance = String.valueOf(value);
             } else {
-                NetworkHandler.INSTANCE.sendToServer(new PacketSetFuzzyPlacementChance(max));
+                NetworkHandler.sendToServer(new PacketSetFuzzyPlacementChance(max));
                 this.chance = String.valueOf(max);
                 field.setValue(String.valueOf(max));
             }
         } catch (NumberFormatException exception) {
-            NetworkHandler.INSTANCE.sendToServer(new PacketSetFuzzyPlacementChance(max));
+            NetworkHandler.sendToServer(new PacketSetFuzzyPlacementChance(max));
             this.chance = String.valueOf(max);
             field.setValue(String.valueOf(max));
         }

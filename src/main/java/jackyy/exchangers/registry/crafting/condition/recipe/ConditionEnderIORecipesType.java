@@ -1,46 +1,28 @@
 package jackyy.exchangers.registry.crafting.condition.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.Reference;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
-public class ConditionEnderIORecipesType implements ICondition {
+public record ConditionEnderIORecipesType(String value) implements ICondition {
 
-    public static final ResourceLocation ID = new ResourceLocation(Reference.MODID, "ender_io_recipes_type");
-    private final String value;
-
-    public ConditionEnderIORecipesType(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public ResourceLocation getID() {
-        return ID;
-    }
+    public static final Codec<ConditionEnderIORecipesType> CODEC = RecordCodecBuilder.create(
+            (b) -> b.group(Codec.STRING.fieldOf("value").forGetter(ConditionEnderIORecipesType::value)).apply(b, ConditionEnderIORecipesType::new)
+    );
 
     @Override
     public boolean test(IContext context) {
         return ModConfigs.CONFIG.enderIORecipesType.get().equals(value);
     }
 
-    public static final IConditionSerializer<ConditionEnderIORecipesType> SERIALIZER = new IConditionSerializer<>() {
-        @Override
-        public void write(JsonObject json, ConditionEnderIORecipesType condition) {
-            json.addProperty("value", condition.value);
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
+    }
 
-        @Override
-        public ConditionEnderIORecipesType read(JsonObject json) {
-            return new ConditionEnderIORecipesType(json.get("value").getAsString());
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return ID;
-        }
-    };
+    public String value() {
+        return this.value;
+    }
 
 }

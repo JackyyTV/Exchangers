@@ -1,52 +1,35 @@
 package jackyy.exchangers.client.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class ImageButtonExt extends ImageButton {
 
-    private final ResourceLocation resourceLocation;
-    private final int xTexStart;
-    private final int yTexStart;
-    private final int yDiffText;
-    private final int yDiffText2;
-    private final int textureWidth;
-    private final int textureHeight;
+    private final WidgetSprites sprites;
     private boolean disabled;
 
-    public ImageButtonExt(int x, int y, int width, int height, int xTexStart, int yTexStart, int altTextureOffset, int altTextureOffset2, ResourceLocation resourceLocation, OnPress onPress) {
-        this(x, y, width, height, xTexStart, yTexStart, altTextureOffset, altTextureOffset2, resourceLocation, 256, 256, onPress);
+    public ImageButtonExt(int x, int y, int width, int height, WidgetSprites sprites, Button.OnPress onPress) {
+        this(x, y, width, height, sprites, onPress, CommonComponents.EMPTY);
     }
 
-    public ImageButtonExt(int x, int y, int width, int height, int xTexStart, int yTexStart, int altTextureOffset, int altTextureOffset2, ResourceLocation resourceLocation, int textureWidth, int textureHeight, OnPress onPress) {
-        this(x, y, width, height, xTexStart, yTexStart, altTextureOffset, altTextureOffset2, resourceLocation, textureWidth, textureHeight, onPress, Component.empty());
+    public ImageButtonExt(int x, int y, int width, int height, WidgetSprites sprites, Button.OnPress onPress, Component title) {
+        super(x, y, width, height, sprites, onPress, title);
+        this.sprites = sprites;
     }
 
-    public ImageButtonExt(int x, int y, int width, int height, int xTexStart, int yTexStart, int altTextureOffset, int altTextureOffset2, ResourceLocation resourceLocation, int textureWidth, int textureHeight, OnPress onPress, Component title) {
-        super(x, y, width, height, xTexStart, yTexStart, altTextureOffset, resourceLocation, textureWidth, textureHeight, onPress, title);
-        this.textureWidth = textureWidth;
-        this.textureHeight = textureHeight;
-        this.xTexStart = xTexStart;
-        this.yTexStart = yTexStart;
-        this.yDiffText = altTextureOffset;
-        this.yDiffText2 = altTextureOffset2;
-        this.resourceLocation = resourceLocation;
+    public ImageButtonExt(int width, int height, WidgetSprites sprites, Button.OnPress onPress, Component title) {
+        this(0, 0, width, height, sprites, onPress, title);
     }
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        RenderSystem.setShaderTexture(0, this.resourceLocation);
-        int i = this.yTexStart;
-        if (this.isHovered() && !this.disabled) {
-            i += this.yDiffText;
-        } else if (this.disabled) {
-            i += this.yDiffText2;
-        }
-        RenderSystem.enableDepthTest();
-        guiGraphics.blit(this.resourceLocation, this.getX(), this.getY(), (float)this.xTexStart, (float)i, this.width, this.height, this.textureWidth, this.textureHeight);
+        ResourceLocation resourcelocation = this.sprites.get(this.isActive(), (this.isHovered() && !this.disabled));
+        guiGraphics.blitSprite(resourcelocation, this.getX(), this.getY(), this.width, this.height);
     }
 
     public void setButtonDisabled(boolean disable) {

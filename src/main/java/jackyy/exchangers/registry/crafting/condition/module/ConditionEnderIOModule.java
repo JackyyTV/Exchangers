@@ -1,46 +1,28 @@
 package jackyy.exchangers.registry.crafting.condition.module;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.Reference;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
-public class ConditionEnderIOModule implements ICondition {
+public record ConditionEnderIOModule(boolean enabled) implements ICondition {
 
-    public static final ResourceLocation ID = new ResourceLocation(Reference.MODID, "ender_io_module");
-    private final boolean value;
-
-    public ConditionEnderIOModule(boolean value) {
-        this.value = value;
-    }
-
-    @Override
-    public ResourceLocation getID() {
-        return ID;
-    }
+    public static final Codec<ConditionEnderIOModule> CODEC = RecordCodecBuilder.create(
+            (b) -> b.group(Codec.BOOL.fieldOf("enabled").forGetter(ConditionEnderIOModule::enabled)).apply(b, ConditionEnderIOModule::new)
+    );
 
     @Override
     public boolean test(IContext context) {
-        return ModConfigs.CONFIG.enderIOModule.get() == value;
+        return ModConfigs.CONFIG.enderIOModule.get() == enabled;
     }
 
-    public static final IConditionSerializer<ConditionEnderIOModule> SERIALIZER = new IConditionSerializer<>() {
-        @Override
-        public void write(JsonObject json, ConditionEnderIOModule condition) {
-            json.addProperty("enabled", condition.value);
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
+    }
 
-        @Override
-        public ConditionEnderIOModule read(JsonObject json) {
-            return new ConditionEnderIOModule(json.get("enabled").getAsBoolean());
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return ID;
-        }
-    };
+    public boolean enabled() {
+        return this.enabled;
+    }
 
 }

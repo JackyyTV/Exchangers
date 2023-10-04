@@ -1,46 +1,28 @@
 package jackyy.exchangers.registry.crafting.condition.module;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.Reference;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
-public class ConditionMekanismModule implements ICondition {
+public record ConditionMekanismModule(boolean enabled) implements ICondition {
 
-    public static final ResourceLocation ID = new ResourceLocation(Reference.MODID, "mekanism_module");
-    private final boolean value;
-
-    public ConditionMekanismModule(boolean value) {
-        this.value = value;
-    }
-
-    @Override
-    public ResourceLocation getID() {
-        return ID;
-    }
+    public static final Codec<ConditionMekanismModule> CODEC = RecordCodecBuilder.create(
+            (b) -> b.group(Codec.BOOL.fieldOf("enabled").forGetter(ConditionMekanismModule::enabled)).apply(b, ConditionMekanismModule::new)
+    );
 
     @Override
     public boolean test(IContext context) {
-        return ModConfigs.CONFIG.mekanismModule.get() == value;
+        return ModConfigs.CONFIG.mekanismModule.get() == enabled;
     }
 
-    public static final IConditionSerializer<ConditionMekanismModule> SERIALIZER = new IConditionSerializer<>() {
-        @Override
-        public void write(JsonObject json, ConditionMekanismModule condition) {
-            json.addProperty("enabled", condition.value);
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
+    }
 
-        @Override
-        public ConditionMekanismModule read(JsonObject json) {
-            return new ConditionMekanismModule(json.get("enabled").getAsBoolean());
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return ID;
-        }
-    };
+    public boolean enabled() {
+        return this.enabled;
+    }
 
 }

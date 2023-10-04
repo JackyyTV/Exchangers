@@ -45,7 +45,7 @@ public class ClientEventsHandler {
 
     @SubscribeEvent
     public void onGameOverlayRender(RenderGuiOverlayEvent.Post event) {
-        if (mc.player != null && mc.level != null && Minecraft.renderNames() && !mc.options.renderDebug && mc.screen == null) {
+        if (mc.player != null && mc.level != null && Minecraft.renderNames() && mc.screen == null) {
             ItemStack stack = mc.player.getMainHandItem();
             if (!stack.isEmpty() && stack.getItem() instanceof ItemExchangerBase) {
                 if (NBTHelper.hasTag(stack)) {
@@ -150,15 +150,15 @@ public class ClientEventsHandler {
                 if (Keys.OPEN_GUI_KEY.get().isDown()) {
                     mc.setScreen(new ExchangersGuiScreen());
                 } else if (Keys.RANGE_SWITCH_KEY.get().isDown()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketSwitchRange());
+                    NetworkHandler.sendToServer(new PacketSwitchRange());
                 } else if (Keys.MODE_SWITCH_KEY.get().isDown()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketSwitchMode());
+                    NetworkHandler.sendToServer(new PacketSwitchMode());
                 } else if (Keys.FORCE_DROP_ITEMS_KEY.get().isDown()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketToggleForceDropItems());
+                    NetworkHandler.sendToServer(new PacketToggleForceDropItems());
                 } else if (Keys.DIRECTIONAL_PLACEMENT_KEY.get().isDown()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketToggleDirectionalPlacement());
+                    NetworkHandler.sendToServer(new PacketToggleDirectionalPlacement());
                 } else if (Keys.FUZZY_PLACEMENT_KEY.get().isDown()) {
-                    NetworkHandler.INSTANCE.sendToServer(new PacketToggleFuzzyPlacement());
+                    NetworkHandler.sendToServer(new PacketToggleFuzzyPlacement());
                 }
             }
         }

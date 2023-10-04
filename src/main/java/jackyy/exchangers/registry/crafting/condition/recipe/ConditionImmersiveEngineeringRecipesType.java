@@ -1,46 +1,28 @@
 package jackyy.exchangers.registry.crafting.condition.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.Reference;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
-public class ConditionImmersiveEngineeringRecipesType implements ICondition {
+public record ConditionImmersiveEngineeringRecipesType(String value) implements ICondition {
 
-    public static final ResourceLocation ID = new ResourceLocation(Reference.MODID, "immersive_engineering_recipes_type");
-    private final String value;
-
-    public ConditionImmersiveEngineeringRecipesType(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public ResourceLocation getID() {
-        return ID;
-    }
+    public static final Codec<ConditionImmersiveEngineeringRecipesType> CODEC = RecordCodecBuilder.create(
+            (b) -> b.group(Codec.STRING.fieldOf("value").forGetter(ConditionImmersiveEngineeringRecipesType::value)).apply(b, ConditionImmersiveEngineeringRecipesType::new)
+    );
 
     @Override
     public boolean test(IContext context) {
         return ModConfigs.CONFIG.immersiveEngineeringRecipesType.get().equals(value);
     }
 
-    public static final IConditionSerializer<ConditionImmersiveEngineeringRecipesType> SERIALIZER = new IConditionSerializer<>() {
-        @Override
-        public void write(JsonObject json, ConditionImmersiveEngineeringRecipesType condition) {
-            json.addProperty("value", condition.value);
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
+    }
 
-        @Override
-        public ConditionImmersiveEngineeringRecipesType read(JsonObject json) {
-            return new ConditionImmersiveEngineeringRecipesType(json.get("value").getAsString());
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return ID;
-        }
-    };
+    public String value() {
+        return this.value;
+    }
 
 }

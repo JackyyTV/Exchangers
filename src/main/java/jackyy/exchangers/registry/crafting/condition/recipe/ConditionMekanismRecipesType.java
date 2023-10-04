@@ -1,46 +1,28 @@
 package jackyy.exchangers.registry.crafting.condition.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jackyy.exchangers.registry.ModConfigs;
-import jackyy.exchangers.util.Reference;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
-public class ConditionMekanismRecipesType implements ICondition {
+public record ConditionMekanismRecipesType(String value) implements ICondition {
 
-    public static final ResourceLocation ID = new ResourceLocation(Reference.MODID, "mekanism_recipes_type");
-    private final String value;
-
-    public ConditionMekanismRecipesType(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public ResourceLocation getID() {
-        return ID;
-    }
+    public static final Codec<ConditionMekanismRecipesType> CODEC = RecordCodecBuilder.create(
+            (b) -> b.group(Codec.STRING.fieldOf("value").forGetter(ConditionMekanismRecipesType::value)).apply(b, ConditionMekanismRecipesType::new)
+    );
 
     @Override
     public boolean test(IContext context) {
         return ModConfigs.CONFIG.mekanismRecipesType.get().equals(value);
     }
 
-    public static final IConditionSerializer<ConditionMekanismRecipesType> SERIALIZER = new IConditionSerializer<>() {
-        @Override
-        public void write(JsonObject json, ConditionMekanismRecipesType condition) {
-            json.addProperty("value", condition.value);
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
+    }
 
-        @Override
-        public ConditionMekanismRecipesType read(JsonObject json) {
-            return new ConditionMekanismRecipesType(json.get("value").getAsString());
-        }
-
-        @Override
-        public ResourceLocation getID() {
-            return ID;
-        }
-    };
+    public String value() {
+        return this.value;
+    }
 
 }

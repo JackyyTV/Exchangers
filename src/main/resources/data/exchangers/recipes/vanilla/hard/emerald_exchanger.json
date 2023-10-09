@@ -1,13 +1,18 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:vanilla_module", "enabled": true
-    },
-    {
-      "type": "exchangers:vanilla_recipes_type", "value": "hard"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:vanilla_module",
+        "enabled": true
+      },
+      {
+        "type": "exchangers:vanilla_recipes_type",
+        "value": "hard"
+      }
+    ]
+  },
   "pattern": [
     "MEM",
     "CXC",

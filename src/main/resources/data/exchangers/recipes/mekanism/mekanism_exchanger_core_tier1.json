@@ -1,13 +1,18 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:mekanism_module", "enabled": true
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "mekanism"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:mekanism_module",
+        "enabled": true
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "mekanism"
+      }
+    ]
+  },
   "pattern": [
     "OSO",
     "SAS",

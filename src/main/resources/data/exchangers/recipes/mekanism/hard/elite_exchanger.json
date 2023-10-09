@@ -1,16 +1,22 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:mekanism_module", "enabled": true
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "mekanism"
-    },
-    {
-      "type": "exchangers:mekanism_recipes_type", "value": "hard"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:mekanism_module",
+        "enabled": true
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "mekanism"
+      },
+      {
+        "type": "exchangers:mekanism_recipes_type",
+        "value": "hard"
+      }
+    ]
+  },
   "pattern": [
     "EPE",
     "CXC",

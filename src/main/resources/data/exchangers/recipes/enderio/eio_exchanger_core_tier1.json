@@ -1,13 +1,18 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:ender_io_module", "enabled": true
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "enderio"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:ender_io_module",
+        "enabled": true
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "enderio"
+      }
+    ]
+  },
   "pattern": [
     "RCR",
     "CNC",

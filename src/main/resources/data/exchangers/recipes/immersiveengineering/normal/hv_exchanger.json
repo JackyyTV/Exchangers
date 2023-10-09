@@ -1,16 +1,22 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:immersive_engineering_module", "enabled": true
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "immersiveengineering"
-    },
-    {
-      "type": "exchangers:immersive_engineering_recipes_type", "value": "normal"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:immersive_engineering_module",
+        "enabled": true
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "immersiveengineering"
+      },
+      {
+        "type": "exchangers:immersive_engineering_recipes_type",
+        "value": "normal"
+      }
+    ]
+  },
   "pattern": [
     "SCS",
     "HXH",

@@ -1,16 +1,22 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:ender_io_endergy_module", "enabled": true
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "enderioendergy"
-    },
-    {
-      "type": "exchangers:ender_io_endergy_recipes_type", "value": "normal"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:ender_io_endergy_module",
+        "enabled": true
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "enderioendergy"
+      },
+      {
+        "type": "exchangers:ender_io_endergy_recipes_type",
+        "value": "normal"
+      }
+    ]
+  },
   "pattern": [
     "PVP",
     "LCL",

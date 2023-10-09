@@ -9,10 +9,6 @@ import net.minecraftforge.event.network.CustomPayloadEvent;
 
 public record PacketSetFuzzyPlacementChance(int chance) {
 
-    public PacketSetFuzzyPlacementChance(int chance) {
-        this.chance = chance;
-    }
-
     public void encode(FriendlyByteBuf buffer) {
         buffer.writeInt(chance);
     }

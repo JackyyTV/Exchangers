@@ -2,6 +2,7 @@ package jackyy.exchangers;
 
 import jackyy.exchangers.handler.ClientEventsHandler;
 import jackyy.exchangers.handler.CommonEventsHandler;
+import jackyy.exchangers.handler.network.NetworkHandler;
 import jackyy.exchangers.registry.ModConfigs;
 import jackyy.exchangers.registry.ModItems;
 import jackyy.exchangers.registry.crafting.ModCrafting;
@@ -27,6 +28,7 @@ public class Exchangers {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new CommonEventsHandler());
+        NetworkHandler.registerMessages();
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {

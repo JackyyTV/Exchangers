@@ -1,16 +1,22 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:ender_io_module", "enabled": true
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "enderio"
-    },
-    {
-      "type": "exchangers:ender_io_recipes_type", "value": "easy"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:ender_io_module",
+        "enabled": true
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "enderio"
+      },
+      {
+        "type": "exchangers:ender_io_recipes_type",
+        "value": "easy"
+      }
+    ]
+  },
   "pattern": [
     "PEP",
     "EDE",

@@ -1,19 +1,26 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:thermal_module", "enabled": true
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "thermal"
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "thermal_innovation"
-    },
-    {
-      "type": "exchangers:thermal_recipes_type", "value": "easy"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:thermal_module",
+        "enabled": true
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "thermal"
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "thermal_innovation"
+      },
+      {
+        "type": "exchangers:thermal_recipes_type",
+        "value": "easy"
+      }
+    ]
+  },
   "pattern": [
     "BIB",
     "ILI",

@@ -1,10 +1,9 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:vanilla_module", "enabled": true
-    }
-  ],
+  "forge:condition": {
+    "type": "exchangers:vanilla_module",
+    "enabled": true
+  },
   "pattern": [
     "WRW",
     "RPR",

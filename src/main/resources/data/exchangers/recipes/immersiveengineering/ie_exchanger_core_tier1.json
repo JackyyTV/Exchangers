@@ -1,13 +1,18 @@
 {
   "type": "crafting_shaped",
-  "conditions": [
-    {
-      "type": "exchangers:immersive_engineering_module", "enabled": true
-    },
-    {
-      "type": "forge:mod_loaded", "modid": "immersiveengineering"
-    }
-  ],
+  "forge:condition": {
+    "type": "forge:and",
+    "values": [
+      {
+        "type": "exchangers:immersive_engineering_module",
+        "enabled": true
+      },
+      {
+        "type": "forge:mod_loaded",
+        "modid": "immersiveengineering"
+      }
+    ]
+  },
   "pattern": [
     "CIC",
     "IBI",
